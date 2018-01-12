@@ -161,6 +161,9 @@
 		383419E12008326500F00957 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				383419F82008374D00F00957 /* AcessoryViews */,
+				383419F72008373E00F00957 /* MapVC */,
+				383419F62008372300F00957 /* PrimeTVC */,
 				383419AE2008322A00F00957 /* MasterViewController.h */,
 				383419AF2008322A00F00957 /* MasterViewController.m */,
 				383419B12008322A00F00957 /* DetailViewController.h */,
@@ -205,6 +208,27 @@
 				383419EA2008348700F00957 /* Akula.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		383419F62008372300F00957 /* PrimeTVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PrimeTVC;
+			sourceTree = "<group>";
+		};
+		383419F72008373E00F00957 /* MapVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MapVC;
+			sourceTree = "<group>";
+		};
+		383419F82008374D00F00957 /* AcessoryViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AcessoryViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
