@@ -1,0 +1,649 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		383419AD2008322A00F00957 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419AC2008322A00F00957 /* AppDelegate.m */; };
+		383419B02008322A00F00957 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419AF2008322A00F00957 /* MasterViewController.m */; };
+		383419B32008322A00F00957 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419B22008322A00F00957 /* DetailViewController.m */; };
+		383419B62008322A00F00957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B42008322A00F00957 /* Main.storyboard */; };
+		383419B82008322A00F00957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383419B72008322A00F00957 /* Assets.xcassets */; };
+		383419BB2008322A00F00957 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B92008322A00F00957 /* LaunchScreen.storyboard */; };
+		383419BE2008322A00F00957 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419BD2008322A00F00957 /* main.m */; };
+		383419C82008322A00F00957 /* AkulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419C72008322A00F00957 /* AkulaTests.m */; };
+		383419D32008322A00F00957 /* AkulaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419D22008322A00F00957 /* AkulaUITests.m */; };
+		383419E52008344000F00957 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419E42008344000F00957 /* CoreData.framework */; };
+		383419EC2008348700F00957 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 383419EA2008348700F00957 /* Akula.xcdatamodeld */; };
+		383419ED2008348700F00957 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 383419EA2008348700F00957 /* Akula.xcdatamodeld */; };
+		383419F1200835A600F00957 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F0200835A600F00957 /* MapKit.framework */; };
+		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
+		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		383419C42008322A00F00957 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 383419A02008322A00F00957 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 383419A72008322A00F00957;
+			remoteInfo = Akula;
+		};
+		383419CF2008322A00F00957 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 383419A02008322A00F00957 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 383419A72008322A00F00957;
+			remoteInfo = Akula;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		383419A82008322A00F00957 /* Akula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akula.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		383419AB2008322A00F00957 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		383419AC2008322A00F00957 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		383419AE2008322A00F00957 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		383419AF2008322A00F00957 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		383419B12008322A00F00957 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		383419B22008322A00F00957 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		383419B52008322A00F00957 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		383419B72008322A00F00957 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		383419BA2008322A00F00957 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		383419BC2008322A00F00957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383419BD2008322A00F00957 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		383419C32008322A00F00957 /* AkulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AkulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		383419C72008322A00F00957 /* AkulaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AkulaTests.m; sourceTree = "<group>"; };
+		383419C92008322A00F00957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383419CE2008322A00F00957 /* AkulaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AkulaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		383419D22008322A00F00957 /* AkulaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AkulaUITests.m; sourceTree = "<group>"; };
+		383419D42008322A00F00957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383419E42008344000F00957 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		383419EB2008348700F00957 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
+		383419F0200835A600F00957 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		383419F2200835B100F00957 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		383419A52008322A00F00957 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				383419F4200835B100F00957 /* HealthKit.framework in Frameworks */,
+				383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */,
+				383419F1200835A600F00957 /* MapKit.framework in Frameworks */,
+				383419E52008344000F00957 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419C02008322A00F00957 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419CB2008322A00F00957 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3834199F2008322A00F00957 = {
+			isa = PBXGroup;
+			children = (
+				383419AA2008322A00F00957 /* Akula */,
+				383419C62008322A00F00957 /* AkulaTests */,
+				383419D12008322A00F00957 /* AkulaUITests */,
+				383419A92008322A00F00957 /* Products */,
+				383419E32008344000F00957 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+			tabWidth = 4;
+		};
+		383419A92008322A00F00957 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				383419A82008322A00F00957 /* Akula.app */,
+				383419C32008322A00F00957 /* AkulaTests.xctest */,
+				383419CE2008322A00F00957 /* AkulaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		383419AA2008322A00F00957 /* Akula */ = {
+			isa = PBXGroup;
+			children = (
+				383419EE2008348D00F00957 /* Data */,
+				383419E12008326500F00957 /* ViewControllers */,
+				383419E02008325000F00957 /* GUI */,
+				383419E22008327F00F00957 /* ApplicationSupport */,
+				383419BC2008322A00F00957 /* Info.plist */,
+			);
+			path = Akula;
+			sourceTree = "<group>";
+		};
+		383419C62008322A00F00957 /* AkulaTests */ = {
+			isa = PBXGroup;
+			children = (
+				383419C72008322A00F00957 /* AkulaTests.m */,
+				383419C92008322A00F00957 /* Info.plist */,
+			);
+			path = AkulaTests;
+			sourceTree = "<group>";
+		};
+		383419D12008322A00F00957 /* AkulaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				383419D22008322A00F00957 /* AkulaUITests.m */,
+				383419D42008322A00F00957 /* Info.plist */,
+			);
+			path = AkulaUITests;
+			sourceTree = "<group>";
+		};
+		383419E02008325000F00957 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				383419B72008322A00F00957 /* Assets.xcassets */,
+				383419B42008322A00F00957 /* Main.storyboard */,
+				383419B92008322A00F00957 /* LaunchScreen.storyboard */,
+			);
+			path = GUI;
+			sourceTree = "<group>";
+		};
+		383419E12008326500F00957 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				383419AE2008322A00F00957 /* MasterViewController.h */,
+				383419AF2008322A00F00957 /* MasterViewController.m */,
+				383419B12008322A00F00957 /* DetailViewController.h */,
+				383419B22008322A00F00957 /* DetailViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		383419E22008327F00F00957 /* ApplicationSupport */ = {
+			isa = PBXGroup;
+			children = (
+				383419BD2008322A00F00957 /* main.m */,
+				383419AB2008322A00F00957 /* AppDelegate.h */,
+				383419AC2008322A00F00957 /* AppDelegate.m */,
+			);
+			path = ApplicationSupport;
+			sourceTree = "<group>";
+		};
+		383419E32008344000F00957 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				383419F2200835B100F00957 /* HealthKit.framework */,
+				383419F3200835B100F00957 /* HealthKitUI.framework */,
+				383419F0200835A600F00957 /* MapKit.framework */,
+				383419E42008344000F00957 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		383419EE2008348D00F00957 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				383419EF2008349800F00957 /* Model */,
+			);
+			name = Data;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		383419EF2008349800F00957 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				383419EA2008348700F00957 /* Akula.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		383419A72008322A00F00957 /* Akula */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 383419D72008322A00F00957 /* Build configuration list for PBXNativeTarget "Akula" */;
+			buildPhases = (
+				383419A42008322A00F00957 /* Sources */,
+				383419A52008322A00F00957 /* Frameworks */,
+				383419A62008322A00F00957 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Akula;
+			productName = Akula;
+			productReference = 383419A82008322A00F00957 /* Akula.app */;
+			productType = "com.apple.product-type.application";
+		};
+		383419C22008322A00F00957 /* AkulaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 383419DA2008322A00F00957 /* Build configuration list for PBXNativeTarget "AkulaTests" */;
+			buildPhases = (
+				383419BF2008322A00F00957 /* Sources */,
+				383419C02008322A00F00957 /* Frameworks */,
+				383419C12008322A00F00957 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				383419C52008322A00F00957 /* PBXTargetDependency */,
+			);
+			name = AkulaTests;
+			productName = AkulaTests;
+			productReference = 383419C32008322A00F00957 /* AkulaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		383419CD2008322A00F00957 /* AkulaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 383419DD2008322A00F00957 /* Build configuration list for PBXNativeTarget "AkulaUITests" */;
+			buildPhases = (
+				383419CA2008322A00F00957 /* Sources */,
+				383419CB2008322A00F00957 /* Frameworks */,
+				383419CC2008322A00F00957 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				383419D02008322A00F00957 /* PBXTargetDependency */,
+			);
+			name = AkulaUITests;
+			productName = AkulaUITests;
+			productReference = 383419CE2008322A00F00957 /* AkulaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		383419A02008322A00F00957 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KV;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Kenn Villegas";
+				TargetAttributes = {
+					383419A72008322A00F00957 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					383419C22008322A00F00957 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 383419A72008322A00F00957;
+					};
+					383419CD2008322A00F00957 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 383419A72008322A00F00957;
+					};
+				};
+			};
+			buildConfigurationList = 383419A32008322A00F00957 /* Build configuration list for PBXProject "Akula" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3834199F2008322A00F00957;
+			productRefGroup = 383419A92008322A00F00957 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				383419A72008322A00F00957 /* Akula */,
+				383419C22008322A00F00957 /* AkulaTests */,
+				383419CD2008322A00F00957 /* AkulaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		383419A62008322A00F00957 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				383419BB2008322A00F00957 /* LaunchScreen.storyboard in Resources */,
+				383419B82008322A00F00957 /* Assets.xcassets in Resources */,
+				383419B62008322A00F00957 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419C12008322A00F00957 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419CC2008322A00F00957 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		383419A42008322A00F00957 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				383419B02008322A00F00957 /* MasterViewController.m in Sources */,
+				383419AD2008322A00F00957 /* AppDelegate.m in Sources */,
+				383419BE2008322A00F00957 /* main.m in Sources */,
+				383419B32008322A00F00957 /* DetailViewController.m in Sources */,
+				383419EC2008348700F00957 /* Akula.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419BF2008322A00F00957 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				383419ED2008348700F00957 /* Akula.xcdatamodeld in Sources */,
+				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		383419CA2008322A00F00957 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				383419D32008322A00F00957 /* AkulaUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		383419C52008322A00F00957 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 383419A72008322A00F00957 /* Akula */;
+			targetProxy = 383419C42008322A00F00957 /* PBXContainerItemProxy */;
+		};
+		383419D02008322A00F00957 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 383419A72008322A00F00957 /* Akula */;
+			targetProxy = 383419CF2008322A00F00957 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		383419B42008322A00F00957 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				383419B52008322A00F00957 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		383419B92008322A00F00957 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				383419BA2008322A00F00957 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		383419D52008322A00F00957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		383419D62008322A00F00957 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		383419D82008322A00F00957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = Akula/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.Akula;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		383419D92008322A00F00957 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = Akula/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.Akula;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		383419DB2008322A00F00957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = AkulaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.AkulaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Akula.app/Akula";
+			};
+			name = Debug;
+		};
+		383419DC2008322A00F00957 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = AkulaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.AkulaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Akula.app/Akula";
+			};
+			name = Release;
+		};
+		383419DE2008322A00F00957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = AkulaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.AkulaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Akula;
+			};
+			name = Debug;
+		};
+		383419DF2008322A00F00957 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQ75G5YK98;
+				INFOPLIST_FILE = AkulaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.k3nv.AkulaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Akula;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		383419A32008322A00F00957 /* Build configuration list for PBXProject "Akula" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				383419D52008322A00F00957 /* Debug */,
+				383419D62008322A00F00957 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		383419D72008322A00F00957 /* Build configuration list for PBXNativeTarget "Akula" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				383419D82008322A00F00957 /* Debug */,
+				383419D92008322A00F00957 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		383419DA2008322A00F00957 /* Build configuration list for PBXNativeTarget "AkulaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				383419DB2008322A00F00957 /* Debug */,
+				383419DC2008322A00F00957 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		383419DD2008322A00F00957 /* Build configuration list for PBXNativeTarget "AkulaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				383419DE2008322A00F00957 /* Debug */,
+				383419DF2008322A00F00957 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		383419EA2008348700F00957 /* Akula.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				383419EB2008348700F00957 /* Akula.xcdatamodel */,
+			);
+			currentVersion = 383419EB2008348700F00957 /* Akula.xcdatamodel */;
+			path = Akula.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 383419A02008322A00F00957 /* Project object */;
+}
