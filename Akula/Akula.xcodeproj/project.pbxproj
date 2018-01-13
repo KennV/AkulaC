@@ -23,6 +23,7 @@
 		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
 		38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */; };
+		38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
 		38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVAbstractDataController.m; sourceTree = "<group>"; };
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
+		38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAbstractControllerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				383419C72008322A00F00957 /* AkulaTests.m */,
 				383419C92008322A00F00957 /* Info.plist */,
+				38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */,
 			);
 			path = AkulaTests;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				383419ED2008348700F00957 /* Akula.xcdatamodeld in Sources */,
+				38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */,
 				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
