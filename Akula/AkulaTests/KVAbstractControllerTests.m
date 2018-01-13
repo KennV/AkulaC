@@ -52,9 +52,20 @@
     [super tearDown];
 }
 
-- (void)testOne {
+- (void)testAbstractInitializerResults {
   KDVAbstractDataController * tOne = [[KDVAbstractDataController alloc]init];
   XCTAssertNotNil(tOne);
+  XCTAssertNotNil([tOne applicationName]);
+  XCTAssertNotNil([tOne databaseName]);
+  XCTAssertNotNil([tOne PCONT]);
+  XCTAssertNotNil([tOne PSK]);
+  XCTAssertNotNil([tOne MOC]);
+  XCTAssertNotNil([tOne fetchCon]);
+  XCTAssert([[tOne applicationName] isEqualToString:(@"Akula")]);
+  XCTAssert([[tOne databaseName]isEqualToString:(@"Akula.sqlite")]);
+  XCTAssertTrue([[tOne entityClassName]isEqualToString:@"KVAbstractEntity"]);
+  
+  
 }
 
 @end

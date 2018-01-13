@@ -250,9 +250,9 @@
 		38503D42200848FD00FC92D3 /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
-				38503D43200848FD00FC92D3 /* KVEntityController */,
 				38503D44200848FD00FC92D3 /* KVAbstractController */,
 				38503D47200848FD00FC92D3 /* KVApplicationController */,
+				38503D43200848FD00FC92D3 /* KVEntityController */,
 			);
 			path = Abstract;
 			sourceTree = "<group>";
@@ -267,8 +267,8 @@
 		38503D44200848FD00FC92D3 /* KVAbstractController */ = {
 			isa = PBXGroup;
 			children = (
-				38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */,
 				38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */,
+				38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */,
 			);
 			path = KVAbstractController;
 			sourceTree = "<group>";
