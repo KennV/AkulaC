@@ -12,51 +12,33 @@
 
 @interface KVAbstractControllerTests : XCTestCase
 @property (strong, nonatomic)KDVAbstractDataController *SUT;
-@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemPSK;
-@property (strong, nonatomic)NSManagedObjectContext *testMOC;
 @end
 
 @implementation KVAbstractControllerTests
-//
+/*
+I have pulled all of the extra setup and inMemoryController from here it is not an enhancement of the system
+*/
 @synthesize SUT = _SUT;
-@synthesize inMemPSK = _inMemPSK;
-@synthesize testMOC = _testMOC;
-
-- (void)setupInMemPSK {
-  //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
-  //xcdatamodel
-  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"];
-  //  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anubis" withExtension:@"xcdatamodel"];
-  NSManagedObjectModel *_mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-  NSPersistentStoreCoordinator *_psk = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_mom];
-  XCTAssertTrue([_psk addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store");
-  
-  NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-  _ctx.persistentStoreCoordinator = _psk;
-  [self setInMemPSK:(_psk)];
-  [self setTestMOC:(_ctx)];
-
-}
 
 - (void)setUp {
   [super setUp];
-  [self setupInMemPSK];
 }
 
 - (void)tearDown {
-  //
-  [self setTestMOC:(nil)];
-  [self setInMemPSK:(nil)];
   [self setSUT:(nil)];
-  
-    [super tearDown];
+  [super tearDown];
 }
 
+/*
+This test Asserts that the KDVAbstractDataController inits with the correct state. In practice I could also set the SUT to KDVAbstractDataController and test from there
+*/
 - (void)testAbstractInitializerResults {
   KDVAbstractDataController * tOne = [[KDVAbstractDataController alloc]init];
   XCTAssertNotNil(tOne);
+  XCTAssertTrue([tOne copyDatabaseIfNotPresent]);
   XCTAssertNotNil([tOne applicationName]);
   XCTAssertNotNil([tOne databaseName]);
+  XCTAssertNotNil([tOne MOM]);
   XCTAssertNotNil([tOne PCONT]);
   XCTAssertNotNil([tOne PSK]);
   XCTAssertNotNil([tOne MOC]);
@@ -64,8 +46,6 @@
   XCTAssert([[tOne applicationName] isEqualToString:(@"Akula")]);
   XCTAssert([[tOne databaseName]isEqualToString:(@"Akula.sqlite")]);
   XCTAssertTrue([[tOne entityClassName]isEqualToString:@"KVAbstractEntity"]);
-  
-  
 }
 
 @end

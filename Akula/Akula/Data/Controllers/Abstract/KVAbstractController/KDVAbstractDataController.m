@@ -8,7 +8,7 @@
 */
 /**
 After much agonizing, this is the base class
-There is a funny donkey-punch in this Ajax product because I got sick and tired of wonky xcode jive, So I build this app without CData built in and added it after all of teh base shit was up and running. I am even semi reluctant to put it on github at this point. because while it is stable I am still pushing for something.
+There is a funny donkey-punch in this Ajax product because I got sick and tired of wonky xcode jive, So I build this app without CData built in and added it after all of the base shit was up and running. I am even semi reluctant to put it on github at this point. because while it is stable I am still pushing for something.
 The long and short is Cocoa is STILL better. I mean I _will and do_ fail and the reasoning is quite cryptic at times but that is the nature of test
 If the burn is that I have to rebuild the App & Tests in Swift every time or refactor the App & Tests in Cocoa every time I fuck up then I will and did choose the latter
  OKAY this is a Funny Burn. I repurposed the Abstract Controller from the …/Ajax.µ and in the Ajax.xcdm I was using KDV as my prefix. I still am as of now in this class *HOWEVER* I will Likely use KDV for the second Abstract Controller {KDVApplicationController.h} and then Go Back to the KV… Prefix for my Actual Entity Controller and also my Akula specific Classes
