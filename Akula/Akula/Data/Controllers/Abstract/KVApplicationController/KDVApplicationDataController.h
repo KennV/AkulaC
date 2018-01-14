@@ -36,10 +36,18 @@
  Gets entities of the default type matching the predicate string
 
  @param predicateString Predicate Description
- @return Gets entities matching the predicate string
+ @return Entities matching the predicate string
 */
 - (NSMutableArray *)getEntitiesMatchingPredicateString: (NSString *)predicateString, ...;
 
+/**
+ Gets Sorted and Filtered Entities
+
+ @param entityName Class Name for this Controller
+ @param sortDescriptor NSSortDescriptor
+ @param predicateString Filter String
+ @return Sorted and Filtered Entities
+ */
 - (NSMutableArray *)getEntities:(NSString *)entityName
                        sortedBy:(NSSortDescriptor *)sortDescriptor
         matchingPredicateString:(NSString *)predicateString, ...;
