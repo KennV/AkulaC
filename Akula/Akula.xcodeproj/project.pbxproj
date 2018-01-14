@@ -23,6 +23,7 @@
 		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
 		38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */; };
+		38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3866264E200BB89900D38E5B /* KDVApplicationDataController.m */; };
 		38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,8 @@
 		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
 		38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVAbstractDataController.m; sourceTree = "<group>"; };
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
+		3866264E200BB89900D38E5B /* KDVApplicationDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVApplicationDataController.m; sourceTree = "<group>"; };
+		3866264F200BB89900D38E5B /* KDVApplicationDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVApplicationDataController.h; sourceTree = "<group>"; };
 		38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAbstractControllerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,6 +279,8 @@
 		38503D47200848FD00FC92D3 /* KVApplicationController */ = {
 			isa = PBXGroup;
 			children = (
+				3866264F200BB89900D38E5B /* KDVApplicationDataController.h */,
+				3866264E200BB89900D38E5B /* KDVApplicationDataController.m */,
 			);
 			path = KVApplicationController;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 			files = (
 				383419B02008322A00F00957 /* MasterViewController.m in Sources */,
 				383419AD2008322A00F00957 /* AppDelegate.m in Sources */,
+				38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */,
 				383419BE2008322A00F00957 /* main.m in Sources */,
 				38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */,
 				383419B32008322A00F00957 /* DetailViewController.m in Sources */,
