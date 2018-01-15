@@ -8,7 +8,6 @@
 */
 
 #import <XCTest/XCTest.h>
-#import "KDVAbstractDataController.h"
 #import "KDVApplicationDataController.h"
 
 @interface KVAKulaTests : XCTestCase
