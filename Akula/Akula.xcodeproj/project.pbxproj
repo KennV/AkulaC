@@ -24,7 +24,6 @@
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
 		38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */; };
 		38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3866264E200BB89900D38E5B /* KDVApplicationDataController.m */; };
-		38662654200C0F2200D38E5B /* KVAKulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38662653200C0F2200D38E5B /* KVAKulaTests.m */; };
 		38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F499200C129B00762934 /* KVAkulaDataController.m */; };
 		38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */; };
 		38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */; };
@@ -75,7 +74,6 @@
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
 		3866264E200BB89900D38E5B /* KDVApplicationDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVApplicationDataController.m; sourceTree = "<group>"; };
 		3866264F200BB89900D38E5B /* KDVApplicationDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVApplicationDataController.h; sourceTree = "<group>"; };
-		38662653200C0F2200D38E5B /* KVAKulaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAKulaTests.m; sourceTree = "<group>"; };
 		38F4F498200C129B00762934 /* KVAkulaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVAkulaDataController.h; sourceTree = "<group>"; };
 		38F4F499200C129B00762934 /* KVAkulaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataController.m; sourceTree = "<group>"; };
 		38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataControllerTests.m; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 		38662652200C0DE000D38E5B /* AkulaTests */ = {
 			isa = PBXGroup;
 			children = (
-				38662653200C0F2200D38E5B /* KVAKulaTests.m */,
 				38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */,
 			);
 			path = AkulaTests;
@@ -465,7 +462,6 @@
 				38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */,
 				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
 				38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */,
-				38662654200C0F2200D38E5B /* KVAKulaTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
