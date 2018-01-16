@@ -22,7 +22,6 @@
 @synthesize inMemPSK = _inMemPSK;
 @synthesize testMOC = _testMOC;
 
-//
 - (void)setupInMemPSK
 {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
@@ -75,26 +74,68 @@
   
   KVRootEntity * zEntity = [[self SUT]createEntityInMOC:([self testMOC])];
   XCTAssertNotNil(zEntity);
-  XCTAssertTrue([[zEntity hexID] isEqualToString:defOne]);
-  
+  XCTAssertTrue([[zEntity hexID] isEqualToString:(defOne)]);
+  XCTAssertTrue([[zEntity qName] isEqualToString:(defOne)]);
+  XCTAssertTrue([[zEntity type] isEqualToString:(defOne)]);
+  XCTAssertTrue([[zEntity status] isEqualToNumber:(defZero)]);
+  // NOTE WILL HAVE TO ADD GRAPHICS
   XCTAssertNotNil([zEntity graphics]);
-  XCTAssertTrue([[[zEntity graphics]caption] isEqualToString:defOne]);
-  XCTAssertTrue([[[zEntity graphics]photoFileName] isEqualToString:defOne]);
+  XCTAssertTrue([[[zEntity graphics]caption] isEqualToString:(defOne)]);
+  XCTAssertTrue([[[zEntity graphics]photoFileName] isEqualToString:(defOne)]);
   
   XCTAssertNotNil([zEntity physics]);
-  XCTAssertTrue([[[zEntity physics]massKG] isEqualToNumber:defZero]);
-  XCTAssertTrue([[[zEntity physics]xLong] isEqualToNumber:defZero]);
-  XCTAssertTrue([[[zEntity physics]yWide] isEqualToNumber:defZero]);
-  XCTAssertTrue([[[zEntity physics]zTall] isEqualToNumber:defZero]);
-  
+  XCTAssertTrue([[[zEntity physics]massKG] isEqualToNumber:(defZero)]);
+  XCTAssertTrue([[[zEntity physics]xLong] isEqualToNumber:(defZero)]);
+  XCTAssertTrue([[[zEntity physics]yWide] isEqualToNumber:(defZero)]);
+  XCTAssertTrue([[[zEntity physics]zTall] isEqualToNumber:(defZero)]);
   
   XCTAssertNotNil([zEntity location]);
-  XCTAssertTrue([[[zEntity location]altitude] isEqualToNumber:defZero]);
-  XCTAssertTrue([[[zEntity location]latitude] isEqualToNumber:defZero]);
-  XCTAssertTrue([[[zEntity location]longitude] isEqualToNumber:defZero]);
+  XCTAssertTrue([[[zEntity location]altitude] isEqualToNumber:(defZero)]);
+  XCTAssertTrue([[[zEntity location]latitude] isEqualToNumber:(defZero)]);
+  XCTAssertTrue([[[zEntity location]longitude] isEqualToNumber:(defZero)]);
   // NOTE DETECTED BUG : HEADING WAS SCALAR
-  XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:defZero]);
+  XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
   
 }
+/**
+ Demonstration of Documentation
+ Those 99 lines of code did not increase coverage at all, and AAMOF it could also fail when I add new code in production it may likely fail. This is secondary
+ By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
+*/
+- (void)testFour {
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+//  [[self SUT]createEntity];
+//  [[self SUT]createEntityInMOC:([self testMOC])];
+  [[self SUT]createEntityInMOC:(nil)];
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
+  [[self SUT]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+}
+
+- (void)testBaseRandomizer {
+  int flow = 100000;
+  int rolls = 1;
+  int sides = 20;
+  do {
+    XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumber:100], 1);
+    XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) :(sides)], (rolls));
+    XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) :(sides)], ( (sides) * (rolls) ));
+    flow -= 1;
+  } while (flow > 0);
+}
+
+- (void)testComplexRandomizer {
+  int flow = 100000;
+  int rolls = 7;    // Prime 1
+  int sides = 199;  // Largest Prime < 200
+  do {
+  XCTAssert((int)[SUT makeRandomNumber:100] >= 0);
+  XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) : (sides)], (rolls));
+  XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) : (sides)], ( (sides) * (rolls) ));
+    flow -= 1;
+  } while (flow > 0);
+}
+
+
 
 @end
