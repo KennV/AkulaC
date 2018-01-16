@@ -119,7 +119,7 @@
   do {
     XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumber:100], 1);
     XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) :(sides)], (rolls));
-    XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) :(sides)], ( (sides) * (rolls) ));
+    XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) :(sides)], ((sides) * (rolls)));
     flow -= 1;
   } while (flow > 0);
 }
@@ -131,7 +131,7 @@
   do {
   XCTAssert((int)[SUT makeRandomNumber:100] >= 0);
   XCTAssertGreaterThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) : (sides)], (rolls));
-  XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) : (sides)], ( (sides) * (rolls) ));
+  XCTAssertLessThanOrEqual((int)[SUT makeRandomNumberCurve:(rolls) : (sides)], ((sides) * (rolls)));
     flow -= 1;
   } while (flow > 0);
 }
