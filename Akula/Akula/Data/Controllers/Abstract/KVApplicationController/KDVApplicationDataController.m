@@ -6,6 +6,14 @@
   Copyright © 2017 Kenn Villegas. All rights reserved.
 
 */
+
+/**
+Yeah there are a lot of fetches that I do not use but they only impact coverage by >5%
+Soo I _could_ cover them or delete them
+Let these be the last five pct that I chase
+FWIW the subroutines in question are not nor have they ever been used in production ~BUT they may be useful in the OLDER Cocoa-Bindings where they came from (i.e. In a multi column view where the filter was on the topic of a given column)
+*/
+
 #import "KDVApplicationDataController.h"
 
 @implementation KDVApplicationDataController
