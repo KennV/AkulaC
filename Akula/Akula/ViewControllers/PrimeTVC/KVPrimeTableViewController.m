@@ -6,15 +6,15 @@
 //  Copyright © 2018 Kenn Villegas. All rights reserved.
 //
 
-#import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "KVPrimeTableViewController.h"
+#import "KVMapViewController.h"
 
-@interface MasterViewController ()
+@interface KVPrimeTableViewController ()
 
 @property NSMutableArray *objects;
 @end
 
-@implementation MasterViewController
+@implementation KVPrimeTableViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -23,7 +23,7 @@
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
-  self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+  self.detailViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
 
@@ -55,7 +55,7 @@
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
       NSDate *object = self.objects[indexPath.row];
-      DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+      KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
       [controller setDetailItem:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
       controller.navigationItem.leftItemsSupplementBackButton = YES;

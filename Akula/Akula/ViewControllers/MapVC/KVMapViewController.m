@@ -6,13 +6,13 @@
 //  Copyright © 2018 Kenn Villegas. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "KVMapViewController.h"
 
-@interface DetailViewController ()
+@interface KVMapViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation KVMapViewController
 
 - (void)configureView {
   // Update the user interface for the detail item.
