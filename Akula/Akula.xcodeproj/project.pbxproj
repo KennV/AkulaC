@@ -176,9 +176,9 @@
 		383419E12008326500F00957 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				383419F82008374D00F00957 /* AcessoryViews */,
-				38A5266F201129EE00F969C3 /* MapVC */,
 				383419F62008372300F00957 /* PrimeTVC */,
+				38A5266F201129EE00F969C3 /* MapVC */,
+				383419F82008374D00F00957 /* AcessoryViews */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

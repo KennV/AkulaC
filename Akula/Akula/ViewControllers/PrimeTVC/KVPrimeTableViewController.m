@@ -4,22 +4,34 @@
  
  Created by Kenn Villegas on 1/11/18.
  Copyright © 2018 Kenn Villegas. All rights reserved.
+This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
+This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
+
  
+*/
+
+/**
+Okay this is where the rubber meets the road.
+
+- I have an NSMutableArray of objects
+- This needs to be an NSArray of RootEntities or better
+ - Non Mutable
+
 */
 
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
 
 @interface KVPrimeTableViewController ()
-
 @property NSMutableArray *objects;
+
 @end
 
 @implementation KVPrimeTableViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+  // TODO: Customization Point for this controller
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -27,18 +39,15 @@
   self.detailViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
   self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
   [super viewWillAppear:animated];
 }
 
-
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
 
 - (void)insertNewObject:(id)sender {
   if (!self.objects) {
@@ -48,7 +57,6 @@
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
-
 
 #pragma mark - Segues
 
@@ -62,7 +70,6 @@
       controller.navigationItem.leftItemsSupplementBackButton = YES;
   }
 }
-
 
 #pragma mark - Table View
 
