@@ -1,10 +1,11 @@
-//
-//  DetailViewController.m
-//  Akula
-//
-//  Created by Kenn Villegas on 1/11/18.
-//  Copyright © 2018 Kenn Villegas. All rights reserved.
-//
+/**
+ DetailViewController.m
+ Akula
+ 
+ Created by Kenn Villegas on 1/11/18.
+ Copyright © 2018 Kenn Villegas. All rights reserved.
+ 
+*/
 
 #import "KVMapViewController.h"
 

@@ -1,10 +1,11 @@
-//
-//  MasterViewController.m
-//  Akula
-//
-//  Created by Kenn Villegas on 1/11/18.
-//  Copyright © 2018 Kenn Villegas. All rights reserved.
-//
+/**
+ MasterViewController.m
+ Akula
+ 
+ Created by Kenn Villegas on 1/11/18.
+ Copyright © 2018 Kenn Villegas. All rights reserved.
+ 
+*/
 
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
