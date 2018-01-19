@@ -36,7 +36,7 @@ Okay this is where the rubber meets the road.
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
-  self.detailViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+  self.mapViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,7 +65,7 @@ Okay this is where the rubber meets the road.
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
       NSDate *object = self.objects[indexPath.row];
       KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
-      [controller setDetailItem:object];
+      [controller setMapItem:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
       controller.navigationItem.leftItemsSupplementBackButton = YES;
   }

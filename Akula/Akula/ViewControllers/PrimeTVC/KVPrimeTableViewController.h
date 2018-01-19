@@ -16,7 +16,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVPrimeTableViewController : UITableViewController
 
-@property (strong, nonatomic) KVMapViewController *detailViewController;
+@property (strong, nonatomic) KVMapViewController *mapViewController;
 
 
 @end
