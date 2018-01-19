@@ -11,11 +11,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface KVMapViewController : UIViewController
+@interface KVMapViewController : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) NSDate *currentEntity;
 @property (weak, nonatomic) IBOutlet UILabel *entityDescriptionLabel;
-
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @end
 

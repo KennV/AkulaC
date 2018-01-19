@@ -17,6 +17,12 @@ Okay this is where the rubber meets the road.
 - This needs to be an NSArray of RootEntities or better
  - Non Mutable
 
+ 
+Hella trippy
+• I thought I had a bug,
+• Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of teh template.
+
+*thus* the next step is to write a save function 
 */
 
 #import "KVPrimeTableViewController.h"

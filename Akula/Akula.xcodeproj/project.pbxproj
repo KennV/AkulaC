@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		381F9BCA2011955000283FDB /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		383419AD2008322A00F00957 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419AC2008322A00F00957 /* AppDelegate.m */; };
 		383419B62008322A00F00957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B42008322A00F00957 /* Main.storyboard */; };
 		383419B82008322A00F00957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383419B72008322A00F00957 /* Assets.xcassets */; };
@@ -74,8 +75,6 @@
 		38A5267420112A1C00F969C3 /* KVPrimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVPrimeTableViewController.h; sourceTree = "<group>"; };
 		38B34F87201191BE002A6897 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
 		38B34F88201191BE002A6897 /* Akula-TEST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Akula-TEST.xcdatamodel"; sourceTree = "<group>"; };
-		38B34F8A201191BE002A6897 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
-		38B34F8B201191BE002A6897 /* Akula-TEST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Akula-TEST.xcdatamodel"; sourceTree = "<group>"; };
 		38F4F498200C129B00762934 /* KVAkulaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVAkulaDataController.h; sourceTree = "<group>"; };
 		38F4F499200C129B00762934 /* KVAkulaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataController.m; sourceTree = "<group>"; };
 		38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataControllerTests.m; sourceTree = "<group>"; };
@@ -297,7 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				38B34F86201191BE002A6897 /* Akula.xcdatamodeld */,
-				38B34F89201191BE002A6897 /* Akula-TEST.xcdatamodeld */,
 			);
 			name = Model;
 			path = Akula/Data/Model;
@@ -461,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				381F9BCA2011955000283FDB /* Akula.xcdatamodeld in Sources */,
 				38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */,
 				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
 				38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */,
@@ -750,17 +749,6 @@
 			);
 			currentVersion = 38B34F87201191BE002A6897 /* Akula.xcdatamodel */;
 			path = Akula.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		38B34F89201191BE002A6897 /* Akula-TEST.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				38B34F8A201191BE002A6897 /* Akula.xcdatamodel */,
-				38B34F8B201191BE002A6897 /* Akula-TEST.xcdatamodel */,
-			);
-			currentVersion = 38B34F8A201191BE002A6897 /* Akula.xcdatamodel */;
-			path = "Akula-TEST.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
