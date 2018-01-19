@@ -23,7 +23,7 @@ Okay this is where the rubber meets the road.
 #import "KVMapViewController.h"
 
 @interface KVPrimeTableViewController ()
-@property NSMutableArray *objects;
+@property NSMutableArray *entities;
 
 @end
 
@@ -48,12 +48,12 @@ Okay this is where the rubber meets the road.
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
+// TODO: Replace This with a controller function
 - (void)insertNewObject:(id)sender {
-  if (!self.objects) {
-      self.objects = [[NSMutableArray alloc] init];
+  if (!self.entities) {
+      self.entities = [[NSMutableArray alloc] init];
   }
-  [self.objects insertObject:[NSDate date] atIndex:0];
+  [self.entities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -63,44 +63,47 @@ Okay this is where the rubber meets the road.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      NSDate *object = self.objects[indexPath.row];
+      NSDate *object = self.entities[indexPath.row];
       KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
-      [controller setMapItem:object];
+      [controller setCurrentEntity:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
       controller.navigationItem.leftItemsSupplementBackButton = YES;
   }
 }
 
+#pragma mark - DataSource
+/**
+// First this must be synthed
+- (NSMutableArray *)entities {
+  return nil;
+}
+*/
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.objects.count;
+  return self.entities.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-  NSDate *object = self.objects[indexPath.row];
+  NSDate *object = self.entities[indexPath.row];
   cell.textLabel.text = [object description];
   return cell;
 }
-
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   // Return NO if you do not want the specified item to be editable.
   return YES;
 }
 
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-      [self.objects removeObjectAtIndex:indexPath.row];
+      [self.entities removeObjectAtIndex:indexPath.row];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

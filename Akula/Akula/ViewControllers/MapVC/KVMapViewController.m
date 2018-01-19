@@ -20,8 +20,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)configureView {
   // Update the user interface for the detail item.
-  if (self.mapItem) {
-      self.detailDescriptionLabel.text = [self.mapItem description];
+  if (self.currentEntity) {
+      self.entityDescriptionLabel.text = [self.currentEntity description];
   }
 }
 
@@ -41,9 +41,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #pragma mark - Managing the detail item
 
-- (void)setMapItem:(NSDate *)newDetailItem {
-  if (_mapItem != newDetailItem) {
-      _mapItem = newDetailItem;
+- (void)setCurrentEntity:(NSDate *)newDetailItem {
+  if (_currentEntity != newDetailItem) {
+      _currentEntity = newDetailItem;
       
       // Update the view.
       [self configureView];
