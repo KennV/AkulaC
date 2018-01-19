@@ -15,8 +15,6 @@
 		383419C82008322A00F00957 /* AkulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419C72008322A00F00957 /* AkulaTests.m */; };
 		383419D32008322A00F00957 /* AkulaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419D22008322A00F00957 /* AkulaUITests.m */; };
 		383419E52008344000F00957 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419E42008344000F00957 /* CoreData.framework */; };
-		383419EC2008348700F00957 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 383419EA2008348700F00957 /* Akula.xcdatamodeld */; };
-		383419ED2008348700F00957 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 383419EA2008348700F00957 /* Akula.xcdatamodeld */; };
 		383419F1200835A600F00957 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F0200835A600F00957 /* MapKit.framework */; };
 		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
@@ -24,6 +22,7 @@
 		38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3866264E200BB89900D38E5B /* KDVApplicationDataController.m */; };
 		38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A52671201129EE00F969C3 /* KVMapViewController.m */; };
 		38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5267320112A1C00F969C3 /* KVPrimeTableViewController.m */; };
+		38B34F8C201191BE002A6897 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F499200C129B00762934 /* KVAkulaDataController.m */; };
 		38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */; };
 		38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */; };
@@ -62,7 +61,6 @@
 		383419D22008322A00F00957 /* AkulaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AkulaUITests.m; sourceTree = "<group>"; };
 		383419D42008322A00F00957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		383419E42008344000F00957 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		383419EB2008348700F00957 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
 		383419F0200835A600F00957 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		383419F2200835B100F00957 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
@@ -74,6 +72,10 @@
 		38A52671201129EE00F969C3 /* KVMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVMapViewController.m; sourceTree = "<group>"; };
 		38A5267320112A1C00F969C3 /* KVPrimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVPrimeTableViewController.m; sourceTree = "<group>"; };
 		38A5267420112A1C00F969C3 /* KVPrimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVPrimeTableViewController.h; sourceTree = "<group>"; };
+		38B34F87201191BE002A6897 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
+		38B34F88201191BE002A6897 /* Akula-TEST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Akula-TEST.xcdatamodel"; sourceTree = "<group>"; };
+		38B34F8A201191BE002A6897 /* Akula.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Akula.xcdatamodel; sourceTree = "<group>"; };
+		38B34F8B201191BE002A6897 /* Akula-TEST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Akula-TEST.xcdatamodel"; sourceTree = "<group>"; };
 		38F4F498200C129B00762934 /* KVAkulaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVAkulaDataController.h; sourceTree = "<group>"; };
 		38F4F499200C129B00762934 /* KVAkulaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataController.m; sourceTree = "<group>"; };
 		38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataControllerTests.m; sourceTree = "<group>"; };
@@ -207,19 +209,10 @@
 		383419EE2008348D00F00957 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				38B34F85201191BE002A6897 /* Model */,
 				38503D41200848FD00FC92D3 /* Controllers */,
-				383419EF2008349800F00957 /* Model */,
 			);
 			name = Data;
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		383419EF2008349800F00957 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				383419EA2008348700F00957 /* Akula.xcdatamodeld */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		383419F62008372300F00957 /* PrimeTVC */ = {
@@ -299,6 +292,16 @@
 			);
 			path = MapVC;
 			sourceTree = "<group>";
+		};
+		38B34F85201191BE002A6897 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				38B34F86201191BE002A6897 /* Akula.xcdatamodeld */,
+				38B34F89201191BE002A6897 /* Akula-TEST.xcdatamodeld */,
+			);
+			name = Model;
+			path = Akula/Data/Model;
+			sourceTree = SOURCE_ROOT;
 		};
 		38F4F497200C125600762934 /* AkulaDataController */ = {
 			isa = PBXGroup;
@@ -443,13 +446,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B34F8C201191BE002A6897 /* Akula.xcdatamodeld in Sources */,
 				383419AD2008322A00F00957 /* AppDelegate.m in Sources */,
 				38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */,
 				383419BE2008322A00F00957 /* main.m in Sources */,
 				38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */,
 				38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */,
 				38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */,
-				383419EC2008348700F00957 /* Akula.xcdatamodeld in Sources */,
 				38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +461,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				383419ED2008348700F00957 /* Akula.xcdatamodeld in Sources */,
 				38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */,
 				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
 				38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */,
@@ -740,13 +742,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		383419EA2008348700F00957 /* Akula.xcdatamodeld */ = {
+		38B34F86201191BE002A6897 /* Akula.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				383419EB2008348700F00957 /* Akula.xcdatamodel */,
+				38B34F87201191BE002A6897 /* Akula.xcdatamodel */,
+				38B34F88201191BE002A6897 /* Akula-TEST.xcdatamodel */,
 			);
-			currentVersion = 383419EB2008348700F00957 /* Akula.xcdatamodel */;
+			currentVersion = 38B34F87201191BE002A6897 /* Akula.xcdatamodel */;
 			path = Akula.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		38B34F89201191BE002A6897 /* Akula-TEST.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				38B34F8A201191BE002A6897 /* Akula.xcdatamodel */,
+				38B34F8B201191BE002A6897 /* Akula-TEST.xcdatamodel */,
+			);
+			currentVersion = 38B34F8A201191BE002A6897 /* Akula.xcdatamodel */;
+			path = "Akula-TEST.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

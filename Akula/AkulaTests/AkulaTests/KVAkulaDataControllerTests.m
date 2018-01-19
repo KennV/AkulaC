@@ -45,11 +45,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super setUp];
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
-  [[self SUT]setMOC:([self testMOC])];
+//  [[self SUT]setMOC:([self testMOC])];
+  [[self SUT]setPSK:[self inMemPSK]];
 }
 
 - (void)tearDown {
-  [self setSUT:(nil)];
+  [[self SUT]setPSK:(nil)];
+//  [self setSUT:(nil)];
   [self setTestMOC:(nil)];
   [self setInMemPSK:(nil)];
   [super tearDown];
@@ -64,7 +66,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
-  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
+//  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
@@ -106,6 +108,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
 */
 - (void)testFour {
+  /**
+  
+  */
+  XCTAssertNil(nil);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
 //  [[self SUT]createEntity];
 //  [[self SUT]createEntityInMOC:([self testMOC])];
