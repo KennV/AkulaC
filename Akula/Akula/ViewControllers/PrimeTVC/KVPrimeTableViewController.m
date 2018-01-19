@@ -23,7 +23,7 @@ Okay this is where the rubber meets the road.
 #import "KVMapViewController.h"
 
 @interface KVPrimeTableViewController ()
-@property NSMutableArray *entities;
+@property NSMutableArray *akulaEntities;
 
 @end
 
@@ -48,12 +48,12 @@ Okay this is where the rubber meets the road.
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-// TODO: Replace This with a controller function
+// TODO: Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-  if (!self.entities) {
-      self.entities = [[NSMutableArray alloc] init];
+  if (!self.akulaEntities) {
+      self.akulaEntities = [[NSMutableArray alloc] init];
   }
-  [self.entities insertObject:[NSDate date] atIndex:0];
+  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -63,7 +63,7 @@ Okay this is where the rubber meets the road.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      NSDate *object = self.entities[indexPath.row];
+      NSDate *object = self.akulaEntities[indexPath.row];
       KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
       [controller setCurrentEntity:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -85,13 +85,13 @@ Okay this is where the rubber meets the road.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.entities.count;
+  return self.akulaEntities.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-  NSDate *object = self.entities[indexPath.row];
+  NSDate *object = self.akulaEntities[indexPath.row];
   cell.textLabel.text = [object description];
   return cell;
 }
@@ -103,7 +103,7 @@ Okay this is where the rubber meets the road.
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-      [self.entities removeObjectAtIndex:indexPath.row];
+      [self.akulaEntities removeObjectAtIndex:indexPath.row];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
