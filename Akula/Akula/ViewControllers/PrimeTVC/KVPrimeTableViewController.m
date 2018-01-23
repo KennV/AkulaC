@@ -22,18 +22,76 @@ Hella trippy
 • I thought I had a bug,
 • Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of teh template.
 
-*thus* the next step is to write a save function 
+*thus* the next step is to write a save function
+ 
+OOOPS DON'T BE A BITCH.
+I NEED +Colors and effects, {See Accesessory Views Folder}
+ 
+isHiddenIfYes(Bool)
+Different Tupes of controllers for sections
+number of sections
+ (* OIC *)
+ sectionCount. { %KVCDataCon%:getAllEntities.count}
+
+THEN after all of that I might want a protocol for this controller. Jeppers
+
+WOW I thought I did a commit, I was about to add an appDataCon and probably a getter for akulaEntities helping me decide if it is mutable or not.
+
 */
 
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
 
 @interface KVPrimeTableViewController ()
+// HEY THIS
 @property NSMutableArray *akulaEntities;
+
+// so for expediancy I made a cheap CLUT without the table or dict even
+@property (weak, nonatomic)UIColor *color00;
+@property (weak, nonatomic)UIColor *color01;
+@property (weak, nonatomic)UIColor *color02;
+@property (weak, nonatomic)UIColor *color03;
+
+@property (weak, nonatomic)UIColor *color10;
+@property (weak, nonatomic)UIColor *color11;
+@property (weak, nonatomic)UIColor *color12;
+@property (weak, nonatomic)UIColor *color13;
+
+@property (weak, nonatomic)UIColor *buttonBaseColor;
+@property (weak, nonatomic)UIColor *buttonSelectedColor;
+@property (weak, nonatomic)UIColor *buttonTextColor;
+@property (weak, nonatomic)UIColor *buttonTextAltColor;
+
+@property (weak, nonatomic)UIColor *altTextColor;
+@property (weak, nonatomic)UIColor *baseTextColor;
+@property (weak, nonatomic)UIColor *hilightTextColor;
+@property (weak, nonatomic)UIColor *specialTextColor;
+//I expect that these will also be refactored into sensible names
+
 
 @end
 
 @implementation KVPrimeTableViewController
+// Them colors
+@synthesize color00 = _color00;
+@synthesize color01 = _color01;
+@synthesize color02 = _color02;
+@synthesize color03 = _color03;
+
+@synthesize color10 = _color10;
+@synthesize color11 = _color11;
+@synthesize color12 = _color12;
+@synthesize color13 = _color13;
+
+@synthesize buttonBaseColor = _buttonBaseColor;
+@synthesize buttonSelectedColor = _buttonSelectedColor;
+@synthesize buttonTextColor = _buttonTextColor;
+@synthesize buttonTextAltColor = _buttonTextAltColor;
+
+@synthesize altTextColor = _altTextColor;
+@synthesize baseTextColor = _baseTextColor;
+@synthesize hilightTextColor = _hilightTextColor;
+@synthesize specialTextColor = _specialTextColor;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
