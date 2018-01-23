@@ -13,11 +13,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import <UIKit/UIKit.h>
 
 @class KVMapViewController;
+@class KVAkulaDataController;
 
 @interface KVPrimeTableViewController : UITableViewController
 
 @property (strong, nonatomic) KVMapViewController *mapViewController;
-
+@property (strong, nonatomic) KVAkulaDataController *ADC;
 
 @end
 

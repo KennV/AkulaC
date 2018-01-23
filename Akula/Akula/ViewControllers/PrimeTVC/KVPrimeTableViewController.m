@@ -20,7 +20,7 @@ Okay this is where the rubber meets the road.
  
 Hella trippy
 • I thought I had a bug,
-• Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of teh template.
+• Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of the template.
 
 *thus* the next step is to write a save function
  
@@ -41,21 +41,23 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
+#import "KVAkulaDataController.h"
 
 @interface KVPrimeTableViewController ()
-// HEY THIS
-@property NSMutableArray *akulaEntities;
+
+// HEY THIS switched from mutable akulaEntities to the product of an extensible array
+@property NSArray *akulaEntities;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
-@property (weak, nonatomic)UIColor *color00;
-@property (weak, nonatomic)UIColor *color01;
-@property (weak, nonatomic)UIColor *color02;
-@property (weak, nonatomic)UIColor *color03;
+@property (weak, nonatomic)UIColor *baseColor00;
+@property (weak, nonatomic)UIColor *baseColor01;
+@property (weak, nonatomic)UIColor *baseColor02;
+@property (weak, nonatomic)UIColor *baseColor03;
 
-@property (weak, nonatomic)UIColor *color10;
-@property (weak, nonatomic)UIColor *color11;
-@property (weak, nonatomic)UIColor *color12;
-@property (weak, nonatomic)UIColor *color13;
+@property (weak, nonatomic)UIColor *tableSectionColor;
+@property (weak, nonatomic)UIColor *tableBackgroundColor;
+@property (weak, nonatomic)UIColor *tableAltBackgroundColor;
+@property (weak, nonatomic)UIColor *tableSectionTextColor;
 
 @property (weak, nonatomic)UIColor *buttonBaseColor;
 @property (weak, nonatomic)UIColor *buttonSelectedColor;
@@ -73,15 +75,15 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 @implementation KVPrimeTableViewController
 // Them colors
-@synthesize color00 = _color00;
-@synthesize color01 = _color01;
-@synthesize color02 = _color02;
-@synthesize color03 = _color03;
+@synthesize baseColor00 = _baseColor00;
+@synthesize baseColor01 = _baseColor01;
+@synthesize baseColor02 = _baseColor02;
+@synthesize baseColor03 = _baseColor03;
 
-@synthesize color10 = _color10;
-@synthesize color11 = _color11;
-@synthesize color12 = _color12;
-@synthesize color13 = _color13;
+@synthesize tableSectionColor = _tableSectionColor;
+@synthesize tableBackgroundColor = _tableBackgroundColor;
+@synthesize tableAltBackgroundColor = _tableAltBackgroundColor;
+@synthesize tableSectionTextColor = _tableSectionTextColor;
 
 @synthesize buttonBaseColor = _buttonBaseColor;
 @synthesize buttonSelectedColor = _buttonSelectedColor;
@@ -117,7 +119,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   if (!self.akulaEntities) {
       self.akulaEntities = [[NSMutableArray alloc] init];
   }
-  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
+  // THIS ARRAY IS NO LONGER MUTABLE
+//  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -141,6 +144,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 - (NSMutableArray *)entities {
   return nil;
 }
+
+Hmm, what if akulaEntities - - getAllEntities was a +class function? It doesn't have to be at all but this is where _filthy Singeltons_ come from.
 */
 #pragma mark - Table View
 
@@ -167,7 +172,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-      [self.akulaEntities removeObjectAtIndex:indexPath.row];
+    // THIS ARRAY IS NO LONGER MUTABLE
+//      [self.akulaEntities removeObjectAtIndex:indexPath.row];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
