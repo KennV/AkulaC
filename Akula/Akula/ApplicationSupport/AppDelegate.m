@@ -9,16 +9,30 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 */
 
+/**
+OK the view has data, and it should But where should that come from the View is the application's minion. I should say what happens to the state when it loads or saves
+*/
+
 #import "AppDelegate.h"
 #import "KVMapViewController.h"
+//
+#import "KVAkulaDataController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
-
+@property(readonly,nonatomic)KVAkulaDataController *allDataController;
 @end
 
 @implementation AppDelegate
+@synthesize allDataController = _allDataController;
 
+- (KVAkulaDataController *)allDataController {
+  if (_allDataController == (nil)) {
+    _allDataController = [[KVAkulaDataController  alloc]init];
+  }
+  return _allDataController;
+}
 
+// NEED TO ADD to the views.ADC
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;

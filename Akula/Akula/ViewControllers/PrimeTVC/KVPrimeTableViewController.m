@@ -28,7 +28,7 @@ OOOPS DON'T BE A BITCH.
 I NEED +Colors and effects, {See Accesessory Views Folder}
  
 isHiddenIfYes(Bool)
-Different Tupes of controllers for sections
+Different Types of controllers for sections
 number of sections
  (* OIC *)
  sectionCount. { %KVCDataCon%:getAllEntities.count}
@@ -74,6 +74,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @end
 
 @implementation KVPrimeTableViewController
+
+@synthesize ADC = _ADC;
 // Them colors
 @synthesize baseColor00 = _baseColor00;
 @synthesize baseColor01 = _baseColor01;
@@ -94,6 +96,14 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @synthesize baseTextColor = _baseTextColor;
 @synthesize hilightTextColor = _hilightTextColor;
 @synthesize specialTextColor = _specialTextColor;
+
+-(KVAkulaDataController *)ADC {
+  if (_ADC==(nil)) {
+    _ADC = [[KVAkulaDataController  alloc]initAllUp];
+    NSLog(@"this should have been loaded from the delegate");
+  }
+  return _ADC;
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
