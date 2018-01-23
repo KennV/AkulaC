@@ -70,7 +70,7 @@ _then set a default init_
  */
 @property (readonly, strong, nonatomic) NSManagedObjectModel *MOM;
 
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *PSK;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *PSK;
 
 @property (readonly, strong) NSPersistentContainer *PCONT;
 

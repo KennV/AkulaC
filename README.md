@@ -1,5 +1,15 @@
 # A Funny Thing About Regret #
 
+## Revised iOS GUI ##
+
+201801017@1845
+zesty: I was looking into my controller and it i s backward-compatible. but I  have at least three exta functions that I might not need. So I killeedt then and got lesss tha 6% EXTRA coverage. well that is shitty. So I left it in and then branched over inot a GUI fork
+
+	I mean, in any given VueKhan I should be able to init a tested Entity THEN mutate that to a testable kUnit
+
+it makes me wonder how the other half lived
+
+
 ## Burn the Boats We're on a Mission ##
 
 20180115@1045

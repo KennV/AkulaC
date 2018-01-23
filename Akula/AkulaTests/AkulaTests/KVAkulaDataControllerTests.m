@@ -4,6 +4,9 @@
  
  Created by Kenn Villegas on 1/14/18.
  Copyright © 2018 Kenn Villegas. All rights reserved.
+This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
+This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
+
  
  */
 
@@ -42,11 +45,13 @@
   [super setUp];
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
-  [[self SUT]setMOC:([self testMOC])];
+//  [[self SUT]setMOC:([self testMOC])];
+  [[self SUT]setPSK:[self inMemPSK]];
 }
 
 - (void)tearDown {
-  [self setSUT:(nil)];
+  [[self SUT]setPSK:(nil)];
+//  [self setSUT:(nil)];
   [self setTestMOC:(nil)];
   [self setInMemPSK:(nil)];
   [super tearDown];
@@ -61,7 +66,7 @@
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
-  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
+//  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
@@ -103,6 +108,10 @@
  By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
 */
 - (void)testFour {
+  /**
+  
+  */
+  XCTAssertNil(nil);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
 //  [[self SUT]createEntity];
 //  [[self SUT]createEntityInMOC:([self testMOC])];

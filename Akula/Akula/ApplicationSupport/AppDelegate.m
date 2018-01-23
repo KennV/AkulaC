@@ -1,21 +1,38 @@
-//
-//  AppDelegate.m
-//  Akula
-//
-//  Created by Kenn Villegas on 1/11/18.
-//  Copyright © 2018 Kenn Villegas. All rights reserved.
-//
+/**
+  AppDelegate.m
+  Akula
+
+  Created by Kenn Villegas on 1/11/18.
+  Copyright © 2018 Kenn Villegas. All rights reserved.
+This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
+This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
+
+*/
+
+/**
+OK the view has data, and it should But where should that come from the View is the application's minion. I should say what happens to the state when it loads or saves
+*/
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
+#import "KVMapViewController.h"
+//
+#import "KVAkulaDataController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
-
+@property(readonly,nonatomic)KVAkulaDataController *allDataController;
 @end
 
 @implementation AppDelegate
+@synthesize allDataController = _allDataController;
 
+- (KVAkulaDataController *)allDataController {
+  if (_allDataController == (nil)) {
+    _allDataController = [[KVAkulaDataController  alloc]init];
+  }
+  return _allDataController;
+}
 
+// NEED TO ADD to the views.ADC
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
@@ -56,7 +73,7 @@
 #pragma mark - Split view
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil)) {
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {
