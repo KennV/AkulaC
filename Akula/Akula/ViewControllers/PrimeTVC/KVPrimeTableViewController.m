@@ -23,11 +23,11 @@ Hella trippy
 • Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of the template.
 
 *thus* the next step is to write a save function
- 
-OOOPS DON'T BE A BITCH.
+
 I NEED +Colors and effects, {See Accesessory Views Folder}
  
-isHiddenIfYes(Bool)
+isVisibleIfYes(Bool)
+
 Different Types of controllers for sections
 number of sections
  (* OIC *)
@@ -41,12 +41,11 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
-#import "KVAkulaDataController.h"
 
 @interface KVPrimeTableViewController ()
 
 // HEY THIS switched from mutable akulaEntities to the product of an extensible array
-@property NSArray *akulaEntities;
+//@property NSArray *akulaEntities;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
 @property (weak, nonatomic)UIColor *baseColor00;
@@ -124,11 +123,11 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-// TODO: Replace This with a controller function preferably from a delegate
+// TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-  if (!self.akulaEntities) {
-      self.akulaEntities = [[NSMutableArray alloc] init];
-  }
+//  if (!self.akulaEntities) {
+//      self.akulaEntities = [[NSMutableArray alloc] init];
+//  }
   // THIS ARRAY IS NO LONGER MUTABLE
 //  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -140,7 +139,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
       NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-      NSDate *object = self.akulaEntities[indexPath.row];
+    KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
       KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
       [controller setCurrentEntity:object];
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -158,20 +157,19 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 Hmm, what if akulaEntities - - getAllEntities was a +class function? It doesn't have to be at all but this is where _filthy Singeltons_ come from.
 */
 #pragma mark - Table View
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+  return 1; // Should be three
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.akulaEntities.count;
+  return [[_ADC getAllEntities]count];
 }
-
+  // TODO: - Make a correct Custom Cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-  NSDate *object = self.akulaEntities[indexPath.row];
-  cell.textLabel.text = [object description];
+  // TODO: - fix this;
+  KVRootEntity *object = [_ADC getAllEntities][indexPath.row];
+  cell.textLabel.text = [[object incepDate]description];
   return cell;
 }
 
@@ -182,6 +180,7 @@ Hmm, what if akulaEntities - - getAllEntities was a +class function? It doesn't 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
+    // TODO: - call delete entitiy from the ADC
     // THIS ARRAY IS NO LONGER MUTABLE
 //      [self.akulaEntities removeObjectAtIndex:indexPath.row];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
