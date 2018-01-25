@@ -41,7 +41,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #pragma mark - Managing the detail item
 
-- (void)setCurrentEntity:(NSDate *)newDetailItem {
+- (void)setCurrentEntity:(KVRootEntity *)newDetailItem {
   if (_currentEntity != newDetailItem) {
       _currentEntity = newDetailItem;
       
