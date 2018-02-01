@@ -43,8 +43,10 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 #import "KVMapViewController.h"
 
 @interface KVPrimeTableViewController ()
-//HEY THIS switched from mutable akulaEntities to the product of the ADC's array
+
+// HEY THIS switched from mutable akulaEntities to the product of an extensible array
 @property (weak, nonatomic)NSArray *akulaEntities;
+
 // so for expediancy I made a cheap CLUT without the table or dict even
 @property (weak, nonatomic)UIColor *baseColor00;
 @property (weak, nonatomic)UIColor *baseColor01;
@@ -65,6 +67,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @property (weak, nonatomic)UIColor *baseTextColor;
 @property (weak, nonatomic)UIColor *hilightTextColor;
 @property (weak, nonatomic)UIColor *specialTextColor;
+//I expect that these will also be refactored into sensible names
+
 
 @end
 
@@ -72,6 +76,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 @synthesize ADC = _ADC;
 @synthesize akulaEntities = _akulaEntities;
+
 // Them colors
 @synthesize baseColor00 = _baseColor00;
 @synthesize baseColor01 = _baseColor01;
@@ -95,16 +100,11 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 
 #pragma mark - DataSource
-- (KVAkulaDataController *)ADC {
-  if (_ADC == (nil)) {
-    _ADC = [[KVAkulaDataController alloc]init];
-    NSLog(@"LOL-Whut");
-  }
-  return(_ADC);
-}
+/**
+ */
+
 - (NSArray *)akulaEntities {
-  return ([[self ADC]getAllEntities]);
-  
+  return([[self ADC] getAllEntities]);
 }
 
 - (void)viewDidLoad {
@@ -115,7 +115,6 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
   self.mapViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -129,11 +128,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-  
-  [[self ADC]createEntityInMOC:[[self ADC]MOC]];
-  NSLog(@"Count = %lu",(unsigned long)[[self akulaEntities]count]);
-  [[self tableView]beginUpdates];
-  //
+  // THIS ARRAY IS NO LONGER MUTABLE
+//  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -160,7 +156,6 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   return [[self akulaEntities]count];
 }
   // TODO: - Make a correct Custom Cell
-// FIXME: - THIS is not getting called
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
   
