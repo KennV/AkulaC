@@ -62,7 +62,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil([self inMemPSK]);
   XCTAssertNotNil([self testMOC]);
   XCTAssertNotNil([self SUT]);
-  XCTAssertNotNil([[self SUT]PCONT]);
+  XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
@@ -71,6 +71,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
   XCTAssertTrue([[[self SUT]entityClassName] isEqualToString:(@"KVRootEntity")]);
+  
 }
 
 - (void)testSUTAndEntity {

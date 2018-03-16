@@ -10,33 +10,24 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import <XCTest/XCTest.h>
+#import "KVAkulaDataController.h"
 
-@interface AkulaTests : XCTestCase
+@interface MockDataCon : KVAkulaDataController {
+  
+}
 
 @end
 
+@interface AkulaTests : XCTestCase
+@property(strong, nonatomic)NSPersistentContainer* container;
+@end
+
+
 @implementation AkulaTests
-
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+@synthesize container = _container;
+// Get and test the view Controller
+  
+  // test what the dataCon is
+  // hey this uses some bullshit I need the container
 
 @end
