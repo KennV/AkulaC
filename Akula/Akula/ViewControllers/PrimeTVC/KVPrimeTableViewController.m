@@ -106,6 +106,11 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 - (NSArray *)akulaEntities {
   return([[self ADC] getAllEntities]);
 }
+-(KVAkulaDataController *)ADC {
+  if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
+  
+  return _ADC;
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -115,6 +120,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
   self.mapViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -129,6 +135,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
   // THIS ARRAY IS NO LONGER MUTABLE
+  [self.ADC createEntityInMOC:[_ADC MOC]];
 //  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

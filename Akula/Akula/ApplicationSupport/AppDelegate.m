@@ -28,7 +28,7 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 
 - (KVAkulaDataController *)allDataController {
   if (_allDataController == (nil)) {
-    _allDataController = [[KVAkulaDataController  alloc]init];
+    _allDataController = [[KVAkulaDataController  alloc]initAllUp];
   }
   return _allDataController;
 }
