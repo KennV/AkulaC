@@ -24,7 +24,7 @@ If the burn is that I have to rebuild the App & Tests in Swift every time or ref
 @synthesize MOC = _MOC;
 @synthesize MOM = _MOM;
 @synthesize PSK = _PSK;
-@synthesize PCONT = _PCONT;
+@synthesize container = _container;
 @synthesize fetchCon = _fetchCon;
 @synthesize copyDatabaseIfNotPresent = _copyDatabaseIfNotPresent;
 
@@ -97,12 +97,12 @@ If the burn is that I have to rebuild the App & Tests in Swift every time or ref
   return _MOC;
 }
 
-- (NSPersistentContainer *)PCONT {
+- (NSPersistentContainer *)container {
   // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
   @synchronized (self) {
-    if (_PCONT == nil) {
-      _PCONT = [[NSPersistentContainer alloc] initWithName:[self applicationName]];
-      [_PCONT loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+    if (_container == nil) {
+      _container = [[NSPersistentContainer alloc] initWithName:[self applicationName]];
+      [_container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
         if (error != nil) {
           // Replace this implementation with code to handle the error appropriately.
           // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -122,7 +122,7 @@ If the burn is that I have to rebuild the App & Tests in Swift every time or ref
     }
   }
   //      id j = _persistentContainer.persistentStoreCoordinator
-  return _PCONT;
+  return _container;
 }
 
 #pragma mark - Fetched results controller
