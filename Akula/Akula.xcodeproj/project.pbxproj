@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		381F9BCA2011955000283FDB /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
+		38007367202D143200B7CB7D /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		383419AD2008322A00F00957 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419AC2008322A00F00957 /* AppDelegate.m */; };
 		383419B62008322A00F00957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B42008322A00F00957 /* Main.storyboard */; };
 		383419B82008322A00F00957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383419B72008322A00F00957 /* Assets.xcassets */; };
 		383419BB2008322A00F00957 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B92008322A00F00957 /* LaunchScreen.storyboard */; };
 		383419BE2008322A00F00957 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419BD2008322A00F00957 /* main.m */; };
-		383419C82008322A00F00957 /* AkulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419C72008322A00F00957 /* AkulaTests.m */; };
 		383419D32008322A00F00957 /* AkulaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419D22008322A00F00957 /* AkulaUITests.m */; };
 		383419E52008344000F00957 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419E42008344000F00957 /* CoreData.framework */; };
 		383419F1200835A600F00957 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F0200835A600F00957 /* MapKit.framework */; };
@@ -25,8 +24,6 @@
 		38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5267320112A1C00F969C3 /* KVPrimeTableViewController.m */; };
 		38B34F8C201191BE002A6897 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F499200C129B00762934 /* KVAkulaDataController.m */; };
-		38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F49B200C12B700762934 /* KVAkulaDataControllerTests.m */; };
-		38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FD2BB82009A5DE00E203CE /* KVAbstractControllerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -459,10 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				381F9BCA2011955000283FDB /* Akula.xcdatamodeld in Sources */,
-				38FD2BB92009A5DE00E203CE /* KVAbstractControllerTests.m in Sources */,
-				383419C82008322A00F00957 /* AkulaTests.m in Sources */,
-				38F4F49C200C12B700762934 /* KVAkulaDataControllerTests.m in Sources */,
+				38007367202D143200B7CB7D /* Akula.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
