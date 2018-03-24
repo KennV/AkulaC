@@ -28,6 +28,13 @@ If the burn is that I have to rebuild the App & Tests in Swift every time or ref
 @synthesize fetchCon = _fetchCon;
 @synthesize copyDatabaseIfNotPresent = _copyDatabaseIfNotPresent;
 
+/** Default init
+
+ @param a Application Name
+ @param d Database Name
+ @param c Class EntityClassName
+ @return New Entity Controller
+ */
 - (instancetype)initWithAppName:(NSString*)a databaseName:(NSString*)d className:(NSString*)c {
   self = [super init];
   if (self) {
@@ -40,8 +47,11 @@ If the burn is that I have to rebuild the App & Tests in Swift every time or ref
   return self;
 }
 
-- (instancetype)init {
-  return ([self initWithAppName:(@"Akula") databaseName:(@"Akula.sqlite") className:(@"KVAbstractEntity")]);
+- (instancetype)init
+{
+  return ([self initWithAppName:(@"Akula")
+                   databaseName:(@"Akula.sqlite")
+                      className:(@"KVAbstractEntity")]);
 }
 #pragma mark - Core Data stack
 - (NSURL *)applicationDocumentsDirectory {
