@@ -28,7 +28,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @implementation KVAkulaDataControllerTests
 @synthesize SUT;
 @synthesize inMemoryContainer = _inMemoryContainer;
-@synthesize testMOC = _testMOC;
+@synthesize inMemContext = _inMemContext;
 
 - (void)setupInMemPSK {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
@@ -49,7 +49,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super setUp];
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
-//  [[self SUT]setMOC:([self testMOC])];
+//  [[self SUT]setMOC:([self inMemContext])];
   [[self SUT]setPSK:[self inMemoryContainer]];
 }
 
@@ -64,13 +64,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)testTestingRig01 {
 
   XCTAssertNotNil([self inMemoryContainer]);
-  XCTAssertNotNil([self testMOC]);
+  XCTAssertNotNil([self inMemContext]);
   XCTAssertNotNil([self SUT]);
   XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
-//  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
+//  XCTAssertEqual([self inMemContext], [[self SUT]MOC]);
 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
