@@ -47,36 +47,4 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   
   return rEntity;
 }
-
-#pragma mark - Numerical Utilities
-- (int)makeRandomNumber:(int)range {
-//  return arc4random_uniform(range);
-  if (range <= 0) {
-    return 1; // I shall not return 0
-  }
-  int candidate = arc4random_uniform(range);
-  if (candidate > range) {
-    return range; // Nor Return Greater than Range
-  }
-  if (candidate <= 0) {
-    // And if I attempt to return 0
-    candidate = 1; // I shall not return 0
-  }
-  return candidate;
-}
-
-- (int)makeRandomNumberCurve:(int)rolls :(int)range {
-  int result = 0;
-  if (rolls <=0)
-  {
-    return(result);
-  }
-  do
-  {
-    rolls -= 1;
-    result += [self makeRandomNumber:(range)];
-  } while (rolls > 0);
-  return(result);
-}
-
 @end

@@ -72,7 +72,7 @@ _then set a default init_
 
 @property (strong, nonatomic) NSPersistentStoreCoordinator *PSK;
 
-@property (readonly, strong) NSPersistentContainer *PCONT;
+@property (readonly, strong) NSPersistentContainer *container;
 
 /**
  Gets ALL Entities of this type

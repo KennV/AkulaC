@@ -11,22 +11,26 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  */
 
 #import <XCTest/XCTest.h>
-#import "KVAkulaDataController.h"
+//@class KVAkulaDataController;
+#import "KVAkulaDataController.h" //added model to test
+//
+@class MockADC : KVAkulaDataController {
+  // Well this seems to work
+}
 
 @interface KVAkulaDataControllerTests : XCTestCase
-@property (strong, nonatomic)KVAkulaDataController * SUT;
-@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemPSK;
+@property (strong, nonatomic)MockADC * SUT; //ZOWIE B'YOTHCEZ
+@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryContainer;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
 
 @end
 
 @implementation KVAkulaDataControllerTests
 @synthesize SUT;
-@synthesize inMemPSK = _inMemPSK;
+@synthesize inMemoryContainer = _inMemoryContainer;
 @synthesize testMOC = _testMOC;
 
-- (void)setupInMemPSK
-{
+- (void)setupInMemPSK {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
   //xcdatamodel
   NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"];
@@ -46,7 +50,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
 //  [[self SUT]setMOC:([self testMOC])];
-  [[self SUT]setPSK:[self inMemPSK]];
+  [[self SUT]setPSK:[self inMemoryContainer]];
 }
 
 - (void)tearDown {
@@ -59,10 +63,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)testTestingRig01 {
 
-  XCTAssertNotNil([self inMemPSK]);
+  XCTAssertNotNil([self inMemoryContainer]);
   XCTAssertNotNil([self testMOC]);
   XCTAssertNotNil([self SUT]);
-  XCTAssertNotNil([[self SUT]PCONT]);
+  XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
@@ -71,6 +75,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
   XCTAssertTrue([[[self SUT]entityClassName] isEqualToString:(@"KVRootEntity")]);
+  
 }
 
 - (void)testSUTAndEntity {
