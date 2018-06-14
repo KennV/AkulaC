@@ -8,8 +8,12 @@ This Software, Including its source code, binaries and indermediate derived libr
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 // https://medium.com/flawless-app-stories/cracking-the-tests-for-core-data-15ef893a3fee
 */
-#import <CoreData/CoreData.h>
 #import <XCTest/XCTest.h>
+#import <CoreData/CoreData.h>
+#import "KVAkulaDataController.h"
+
+//added model to test
+//
 
 @interface AkulaTests : XCTestCase
 
@@ -19,6 +23,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 
 @implementation AkulaTests
+@synthesize container = _container;
 //@synthesize container = _container;
 // Get and test the view Controller
   
