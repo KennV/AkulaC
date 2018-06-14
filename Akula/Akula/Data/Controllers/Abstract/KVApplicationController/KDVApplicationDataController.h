@@ -58,4 +58,22 @@
  @param e That Entity
 */
 - (void)deleteEntity:(NSManagedObject *)e;
+
+/**
+ Basic Number Generator
+ 
+ @param range Allowed Range
+ @return Number within Range
+ */
+- (int)makeRandomNumber:(int)range;
+
+/**
+ D & D Style Number Generator
+ 
+ @param rolls Number of Rolls
+ @param range Number within Range
+ @return Number within Rolls * Range
+ */
+- (int)makeRandomNumberCurve:(int)rolls :(int)range;
+
 @end

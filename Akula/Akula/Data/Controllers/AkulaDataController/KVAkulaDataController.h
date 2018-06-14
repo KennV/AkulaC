@@ -30,31 +30,15 @@ FOUNDATION_EXPORT NSString *STATES[9];
  @return AkulaDataCon - AllUP
 */
 - (instancetype)initAllUp;
-
-/**
- Basic Number Generator
-
- @param range Allowed Range
- @return Number within Range
-*/
-- (int)makeRandomNumber:(int)range;
-
-/**
- D & D Style Number Generator
-
- @param rolls Number of Rolls
- @param range Number within Range
- @return Number within Rolls * Range
-*/
-- (int)makeRandomNumberCurve:(int)rolls :(int)range;
-
-
 /**
  DEFAULT CREATE ENTITY
-
+ 
  @param m MOC
  @return Entity - All Up
  */
 - (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m;
+
+- (void)saveEntities;
+
 
 @end

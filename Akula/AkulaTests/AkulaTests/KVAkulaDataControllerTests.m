@@ -11,22 +11,24 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  */
 
 #import <XCTest/XCTest.h>
-#import "KVAkulaDataController.h"
+//@class KVAkulaDataController;
+#import "KVAkulaDataController.h" //added model to test
+//
 
 @interface KVAkulaDataControllerTests : XCTestCase
-@property (strong, nonatomic)KVAkulaDataController * SUT;
-@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemPSK;
+
+@property (strong, nonatomic)KVAkulaDataController * SUT; //ZOWIE B'YOTHCEZ
+@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
 
 @end
 
 @implementation KVAkulaDataControllerTests
 @synthesize SUT;
-@synthesize inMemPSK = _inMemPSK;
-@synthesize testMOC = _testMOC;
+@synthesize inMemoryCoordinator = _inMemoryCoordinator;
+//@synthesize inMemContext = _inMemContext;
 
-- (void)setupInMemPSK
-{
+- (void)setupInMemPSK {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
   //xcdatamodel
   NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"];
@@ -37,7 +39,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
   _ctx.persistentStoreCoordinator = _psk;
-  [self setInMemPSK:(_psk)];
+//  [self setInMemPSK:(_psk)];
+  [self setInMemoryCoordinator:(_psk)];
   [self setTestMOC:(_ctx)];
 }
 
@@ -45,32 +48,34 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super setUp];
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
-//  [[self SUT]setMOC:([self testMOC])];
-  [[self SUT]setPSK:[self inMemPSK]];
+//  [[self SUT]setMOC:([self inMemContext])];
+  [[self SUT]setPSK:[self inMemoryCoordinator]];
 }
 
 - (void)tearDown {
   [[self SUT]setPSK:(nil)];
 //  [self setSUT:(nil)];
   [self setTestMOC:(nil)];
-  [self setInMemPSK:(nil)];
+//  [self setInMemPSK:(nil)];
+  [self setInMemoryCoordinator:(nil)];
   [super tearDown];
 }
 
 - (void)testTestingRig01 {
 
-  XCTAssertNotNil([self inMemPSK]);
-  XCTAssertNotNil([self testMOC]);
+  XCTAssertNotNil([self inMemoryCoordinator]);
+  XCTAssertNotNil([self inMemoryCoordinator]); //[self setInMemoryCoordinator:(_psk)];
   XCTAssertNotNil([self SUT]);
-  XCTAssertNotNil([[self SUT]PCONT]);
+  XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSK]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
-//  XCTAssertEqual([self testMOC], [[self SUT]MOC]);
+//  XCTAssertEqual([self inMemContext], [[self SUT]MOC]);
 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
   XCTAssertTrue([[[self SUT]entityClassName] isEqualToString:(@"KVRootEntity")]);
+  
 }
 
 - (void)testSUTAndEntity {
