@@ -7,7 +7,6 @@
 This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 
- 
 */
 
 /**
@@ -135,7 +134,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
   // THIS ARRAY IS NO LONGER MUTABLE
-  [self.ADC createEntityInMOC:[_ADC MOC]];
+  [self.ADC createEntityInMOC:[self.ADC MOC]];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   //  [self.akulaEntities insertObject:[NSDate date] atIndex:0];

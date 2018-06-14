@@ -7,7 +7,6 @@
 This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 
-
 */
 
 #import "KVAkulaDataController.h"
@@ -24,23 +23,23 @@ const NSString *STREET_NAMES[26] = {@"apple", @"birch", @"cherry", @"dogwood", @
 const NSString *CITIES [9] = {@"New York", @"Boston", @"Philadelphia", @"Baltimore", @"Atlanta", @"Newark", @"Austin", @"Chicago", @"Pittsburgh"};
 const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"IL", @"PA"};
 //
-
 - (instancetype)initAllUp {
   return ([self initWithAppName:(@"Akula") databaseName:(@"Akula.sqlite") className:(@"KVRootEntity")]);
 }
 
--(KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m {
+- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m {
   
   if (m == nil) {
     m = [self MOC];
   }
-  
+
   KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(m)];
   KVAbstractPhysics * aep = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:(m)];
   KVAbstractGraphicsEntity * aeg = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(m)];
   KVAbstractLocationEntity * ael = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(m)];
   
   [rEntity setIncepDate:[NSDate date]];
+  [rEntity setDbID:[NSUUID UUID]];
   [rEntity setPhysics:(aep)];
   [rEntity setGraphics:(aeg)];
   [rEntity setLocation:(ael)];

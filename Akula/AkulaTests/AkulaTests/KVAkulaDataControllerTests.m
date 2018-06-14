@@ -7,8 +7,7 @@
 This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 
- 
- */
+*/
 
 #import <XCTest/XCTest.h>
 //@class KVAkulaDataController;
@@ -17,7 +16,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVAkulaDataControllerTests : XCTestCase
 
-@property (strong, nonatomic)KVAkulaDataController * SUT; //ZOWIE B'YOTHCEZ
+@property (strong, nonatomic)KVAkulaDataController * SUT;
 @property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
 
@@ -118,8 +117,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   */
   XCTAssertNil(nil);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
-//  [[self SUT]createEntity];
-//  [[self SUT]createEntityInMOC:([self testMOC])];
+
   [[self SUT]createEntityInMOC:(nil)];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   [[self SUT]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
