@@ -45,6 +45,30 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   [rEntity setGraphics:(aeg)];
   [rEntity setLocation:(ael)];
   
+  NSError *error = nil;
+  if (![[self MOC] save:&error]) {
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    //NSCocoaErrorDomain Code=1570
+    //required fields set to nil see xcdm
+    abort();
+  }
+//
   return rEntity;
 }
+
+- (void)saveEntities
+{
+  NSError *error = nil;
+  NSManagedObjectContext *managedObjectContext = self.MOC;
+  if (managedObjectContext != nil) {
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+    }
+  }
+}
+
+
 @end

@@ -136,8 +136,9 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 - (void)insertNewObject:(id)sender {
   // THIS ARRAY IS NO LONGER MUTABLE
   [self.ADC createEntityInMOC:[_ADC MOC]];
-//  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  
+  //  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

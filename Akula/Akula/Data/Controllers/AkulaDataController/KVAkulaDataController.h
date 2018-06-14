@@ -38,4 +38,7 @@ FOUNDATION_EXPORT NSString *STATES[9];
  */
 - (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m;
 
+- (void)saveEntities;
+
+
 @end
