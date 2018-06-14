@@ -14,21 +14,19 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //@class KVAkulaDataController;
 #import "KVAkulaDataController.h" //added model to test
 //
-@class MockADC : KVAkulaDataController {
-  // Well this seems to work
-}
 
 @interface KVAkulaDataControllerTests : XCTestCase
-@property (strong, nonatomic)MockADC * SUT; //ZOWIE B'YOTHCEZ
-@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryContainer;
+
+@property (strong, nonatomic)KVAkulaDataController * SUT; //ZOWIE B'YOTHCEZ
+@property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
 
 @end
 
 @implementation KVAkulaDataControllerTests
 @synthesize SUT;
-@synthesize inMemoryContainer = _inMemoryContainer;
-@synthesize inMemContext = _inMemContext;
+@synthesize inMemoryCoordinator = _inMemoryCoordinator;
+//@synthesize inMemContext = _inMemContext;
 
 - (void)setupInMemPSK {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
@@ -41,7 +39,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
   _ctx.persistentStoreCoordinator = _psk;
-  [self setInMemPSK:(_psk)];
+//  [self setInMemPSK:(_psk)];
+  [self setInMemoryCoordinator:(_psk)];
   [self setTestMOC:(_ctx)];
 }
 
@@ -50,21 +49,22 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [self setupInMemPSK];
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
 //  [[self SUT]setMOC:([self inMemContext])];
-  [[self SUT]setPSK:[self inMemoryContainer]];
+  [[self SUT]setPSK:[self inMemoryCoordinator]];
 }
 
 - (void)tearDown {
   [[self SUT]setPSK:(nil)];
 //  [self setSUT:(nil)];
   [self setTestMOC:(nil)];
-  [self setInMemPSK:(nil)];
+//  [self setInMemPSK:(nil)];
+  [self setInMemoryCoordinator:(nil)];
   [super tearDown];
 }
 
 - (void)testTestingRig01 {
 
-  XCTAssertNotNil([self inMemoryContainer]);
-  XCTAssertNotNil([self inMemContext]);
+  XCTAssertNotNil([self inMemoryCoordinator]);
+  XCTAssertNotNil([self inMemoryCoordinator]); //[self setInMemoryCoordinator:(_psk)];
   XCTAssertNotNil([self SUT]);
   XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSK]);
