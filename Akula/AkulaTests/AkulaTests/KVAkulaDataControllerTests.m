@@ -14,6 +14,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "KVAkulaDataController.h" //added model to test
 //
 
+@interface mockTestController <T:KVRootEntity*> : KVAkulaDataController {
+  
+}
+@end
+
 @interface KVAkulaDataControllerTests : XCTestCase
 
 @property (strong, nonatomic)KVAkulaDataController * SUT;
@@ -104,6 +109,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[zEntity location]longitude] isEqualToNumber:(defZero)]);
   // NOTE DETECTED BUG : HEADING WAS SCALAR
   XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
+//  XCTAssertTrue(SUT.didSaveEntities);
   
 }
 /**
@@ -127,7 +133,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)testFive {
   XCTAssertTrue(SUT.didSaveEntities);
 }
-
 
 - (void)testBaseRandomizer {
   int flow = 100000;
