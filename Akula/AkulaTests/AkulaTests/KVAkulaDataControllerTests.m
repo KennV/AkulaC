@@ -124,6 +124,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
 }
 
+- (void)testFive {
+  XCTAssertTrue(SUT.saveEntities);
+}
+
+
 - (void)testBaseRandomizer {
   int flow = 100000;
   int rolls = 1;

@@ -47,25 +47,25 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @property (weak, nonatomic)NSArray *akulaEntities;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
-@property (weak, nonatomic)UIColor *baseColor00;
-@property (weak, nonatomic)UIColor *baseColor01;
-@property (weak, nonatomic)UIColor *baseColor02;
-@property (weak, nonatomic)UIColor *baseColor03;
+@property (weak,nonatomic)UIColor* baseColor00;
+@property (weak,nonatomic)UIColor* baseColor01;
+@property (weak,nonatomic)UIColor* baseColor02;
+@property (weak,nonatomic)UIColor* baseColor03;
 
-@property (weak, nonatomic)UIColor *tableSectionColor;
-@property (weak, nonatomic)UIColor *tableBackgroundColor;
-@property (weak, nonatomic)UIColor *tableAltBackgroundColor;
-@property (weak, nonatomic)UIColor *tableSectionTextColor;
+@property (weak,nonatomic)UIColor* tableSectionColor;
+@property (weak,nonatomic)UIColor* tableBackgroundColor;
+@property (weak,nonatomic)UIColor* tableAltBackgroundColor;
+@property (weak,nonatomic)UIColor* tableSectionTextColor;
 
-@property (weak, nonatomic)UIColor *buttonBaseColor;
-@property (weak, nonatomic)UIColor *buttonSelectedColor;
-@property (weak, nonatomic)UIColor *buttonTextColor;
-@property (weak, nonatomic)UIColor *buttonTextAltColor;
+@property (weak,nonatomic)UIColor* buttonBaseColor;
+@property (weak,nonatomic)UIColor* buttonSelectedColor;
+@property (weak,nonatomic)UIColor* buttonTextColor;
+@property (weak,nonatomic)UIColor* buttonTextAltColor;
 
-@property (weak, nonatomic)UIColor *altTextColor;
-@property (weak, nonatomic)UIColor *baseTextColor;
-@property (weak, nonatomic)UIColor *hilightTextColor;
-@property (weak, nonatomic)UIColor *specialTextColor;
+@property (weak,nonatomic)UIColor* altTextColor;
+@property (weak,nonatomic)UIColor* baseTextColor;
+@property (weak,nonatomic)UIColor* hilightTextColor;
+@property (weak,nonatomic)UIColor* specialTextColor;
 //I expect that these will also be refactored into sensible names
 
 
@@ -133,11 +133,10 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-  // THIS ARRAY IS NO LONGER MUTABLE
+
   [self.ADC createEntityInMOC:[self.ADC MOC]];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
-  //  [self.akulaEntities insertObject:[NSDate date] atIndex:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

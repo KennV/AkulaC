@@ -50,13 +50,15 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
     //NSCocoaErrorDomain Code=1570
     //required fields set to nil see xcdm
     abort();
-  }
+  } else {
 //
-  return rEntity;
+    return rEntity;
+  }
 }
 
-- (void)saveEntities
+- (BOOL)saveEntities
 {
+  //  [[self MOC]save:<#(NSError * _Nullable __autoreleasing * _Nullable)#>]
   NSError *error = nil;
   NSManagedObjectContext *managedObjectContext = self.MOC;
   if (managedObjectContext != nil) {
@@ -67,6 +69,7 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
       abort();
     }
   }
+  return (true);
 }
 
 
