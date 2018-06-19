@@ -8,7 +8,6 @@ This Software, Including its source code, binaries and indermediate derived libr
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 
 */
-
 #import "KVAkulaDataController.h"
 
 @implementation KVAkulaDataController
@@ -23,6 +22,7 @@ const NSString *STREET_NAMES[26] = {@"apple", @"birch", @"cherry", @"dogwood", @
 const NSString *CITIES [9] = {@"New York", @"Boston", @"Philadelphia", @"Baltimore", @"Atlanta", @"Newark", @"Austin", @"Chicago", @"Pittsburgh"};
 const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"IL", @"PA"};
 //
+
 - (instancetype)initAllUp {
   return ([self initWithAppName:(@"Akula") databaseName:(@"Akula.sqlite") className:(@"KVRootEntity")]);
 }
@@ -51,14 +51,12 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
     //required fields set to nil see xcdm
     abort();
   } else {
-//
     return rEntity;
   }
 }
 
-- (BOOL)saveEntities
+- (BOOL)didSaveEntities
 {
-  //  [[self MOC]save:<#(NSError * _Nullable __autoreleasing * _Nullable)#>]
   NSError *error = nil;
   NSManagedObjectContext *managedObjectContext = self.MOC;
   if (managedObjectContext != nil) {

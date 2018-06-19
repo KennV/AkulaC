@@ -125,7 +125,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 - (void)testFive {
-  XCTAssertTrue(SUT.saveEntities);
+  XCTAssertTrue(SUT.didSaveEntities);
 }
 
 
