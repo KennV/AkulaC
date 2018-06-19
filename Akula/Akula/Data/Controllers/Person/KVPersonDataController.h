@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "KVAkulaDataController.h"
 
-@interface KVPersonDataController <T:KVPerson*> : KVAkulaDataController
+@interface KVPersonDataController <T:KVPerson*> : KVAkulaDataController<T>
 
 @end

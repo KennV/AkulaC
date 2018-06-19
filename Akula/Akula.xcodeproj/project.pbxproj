@@ -239,9 +239,9 @@
 		38503D41200848FD00FC92D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				38D788E820D96D4E007F2814 /* Person */,
 				38503D42200848FD00FC92D3 /* Abstract */,
 				38F4F497200C125600762934 /* AkulaDataController */,
+				38D788E820D96D4E007F2814 /* Person */,
 			);
 			name = Controllers;
 			path = Akula/Data/Controllers;
@@ -311,8 +311,8 @@
 		38D788E820D96D4E007F2814 /* Person */ = {
 			isa = PBXGroup;
 			children = (
-				38D788E920D96D4E007F2814 /* KVPersonDataController.m */,
 				38D788EA20D96D4E007F2814 /* KVPersonDataController.h */,
+				38D788E920D96D4E007F2814 /* KVPersonDataController.m */,
 			);
 			path = Person;
 			sourceTree = "<group>";
