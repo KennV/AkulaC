@@ -68,6 +68,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="MapView" destination="Z2M-yE-nFN" id="2E0-it-cnb"/>
                         <outlet property="entityDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                     </connections>
                 </viewController>

@@ -17,16 +17,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @implementation KVMapViewController
 
-#pragma mark - Managing the detail item
-
-- (void)setCurrentEntity:(KVRootEntity *)newDetailItem {
-  if (_currentEntity != newDetailItem) {
-    _currentEntity = newDetailItem;
-    // Update the view.
-    [self configureView];
-  }
-}
-
 - (void)configureView {
   // Update the user interface for the detail item.
   if (self.currentEntity) {
@@ -44,5 +34,34 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Managing the detail item
+
+/**
+ my entity
+
+ @param newEntity KVRootEntity
+ */
+- (void)setCurrentEntity:(KVRootEntity *)newEntity {
+  if (_currentEntity != newEntity) {
+    _currentEntity = newEntity;
+    // Update the view.
+    [self configureView];
+  }
+}
+
+#pragma mark - Setup GUI State
+
+#pragma mark - Setup Map View
+//TODO: add camera
+- (void)setupMapView {
+  [[self MapView]setDelegate:self];
+  if ([[self MapView]isHidden]) {
+    ;
+  } else {
+    //2
+  }
+}
+#pragma mark - Setup Pin View
 
 @end

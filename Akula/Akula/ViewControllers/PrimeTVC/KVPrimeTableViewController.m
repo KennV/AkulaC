@@ -144,12 +144,13 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
-      NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
-      KVMapViewController *controller = (KVMapViewController *)[[segue destinationViewController] topViewController];
-      [controller setCurrentEntity:object];
-      controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-      controller.navigationItem.leftItemsSupplementBackButton = YES;
+    KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
+    [mapView setMA_Delegate:(self)];
+    [mapView setCurrentEntity:object];
+    mapView.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+    mapView.navigationItem.leftItemsSupplementBackButton = YES;
   }
 }
 
