@@ -22,7 +22,7 @@ FOUNDATION_EXPORT NSString *STREET_NAMES[26];
 FOUNDATION_EXPORT NSString *CITIES[9];
 FOUNDATION_EXPORT NSString *STATES[9];
 
-@interface KVAkulaDataController : KDVApplicationDataController
+@interface KVAkulaDataController <T:KVRootEntity*> : KDVApplicationDataController
 
 /**
  DEFAULT INITIALIZER

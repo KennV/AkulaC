@@ -16,7 +16,7 @@ But to do that need to define the test then fail it and init it
 _then set a default init_
 */
 
-@interface KDVAbstractDataController : NSObject <NSFetchedResultsControllerDelegate>
+@interface KDVAbstractDataController <T:NSManagedObject*> : NSObject <NSFetchedResultsControllerDelegate>
 
 /**
  Default Init()
