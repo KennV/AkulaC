@@ -70,7 +70,6 @@
 		38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVAbstractDataController.m; sourceTree = "<group>"; };
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
 		3854FED720D32B95006BEFA5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3854FED920D32D50006BEFA5 /* KVMapViewController+KVMapVC_EXT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KVMapViewController+KVMapVC_EXT.h"; sourceTree = "<group>"; };
 		3866264E200BB89900D38E5B /* KDVApplicationDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVApplicationDataController.m; sourceTree = "<group>"; };
 		3866264F200BB89900D38E5B /* KDVApplicationDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVApplicationDataController.h; sourceTree = "<group>"; };
 		38A52670201129EE00F969C3 /* KVMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVMapViewController.h; sourceTree = "<group>"; };
@@ -294,7 +293,6 @@
 			children = (
 				38A52670201129EE00F969C3 /* KVMapViewController.h */,
 				38A52671201129EE00F969C3 /* KVMapViewController.m */,
-				3854FED920D32D50006BEFA5 /* KVMapViewController+KVMapVC_EXT.h */,
 			);
 			path = MapVC;
 			sourceTree = "<group>";
