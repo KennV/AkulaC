@@ -10,14 +10,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import <XCTest/XCTest.h>
-//@class KVAkulaDataController;
+@class KVAkulaDataController;
 #import "KVAkulaDataController.h" //added model to test
 //
 
-@interface mockTestController <T:KVRootEntity*> : KVAkulaDataController {
-  
-}
-@end
 
 @interface KVAkulaDataControllerTests : XCTestCase
 
@@ -107,7 +103,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[zEntity location]altitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[zEntity location]latitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[zEntity location]longitude] isEqualToNumber:(defZero)]);
-  // NOTE DETECTED BUG : HEADING WAS SCALAR
   XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
 //  XCTAssertTrue(SUT.didSaveEntities);
   
@@ -117,7 +112,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  Those 99 lines of code did not increase coverage at all, and AAMOF it could also fail when I add new code in production it may likely fail. This is secondary
  By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
 */
-- (void)testFour {
+- (void)testCreateAndDelete {
   /**
   
   */
@@ -127,12 +122,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [[self SUT]createEntityInMOC:(nil)];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   [[self SUT]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
+    XCTAssertTrue(SUT.didSaveEntities);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+    XCTAssertTrue(SUT.didSaveEntities);
 }
 
-- (void)testFive {
-  XCTAssertTrue(SUT.didSaveEntities);
-}
 
 - (void)testBaseRandomizer {
   int flow = 100000;
@@ -157,7 +151,5 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
     flow -= 1;
   } while (flow > 0);
 }
-
-
 
 @end

@@ -183,6 +183,9 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
     [[self ADC]deleteEntity:[[self akulaEntities]objectAtIndex:(indexPath.row)]];
 //      [self.akulaEntities removeObjectAtIndex:indexPath.row];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    if ([[self ADC]didSaveEntities]) {
+      
+    }
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
   }
