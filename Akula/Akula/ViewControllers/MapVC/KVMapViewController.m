@@ -26,6 +26,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self setupMapView];
   // Do any additional setup after loading the view, typically from a nib.
   [self configureView];
 }
@@ -56,11 +57,26 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //TODO: add camera
 - (void)setupMapView {
   [[self MapView]setDelegate:self];
-  if ([[self MapView]isHidden]) {
-    ;
+//  MKMapCamera * cam = [[MKMapCamera alloc]init];
+  
+  [[self MapView]setMapType:MKMapTypeHybrid];
+  [[self MapView]setShowsScale:false];
+
+  if (self.currentEntity == nil ) {
+    if (self.PDC.getAllEntities.firstObject) {
+      [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
+    }
   } else {
-    //2
+    CLLocationCoordinate2D objLocation =
+    CLLocationCoordinate2DMake([[[_currentEntity location]latitude]doubleValue],
+                               [[[_currentEntity location]longitude]doubleValue]);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(objLocation, 500, 500);
+    [[self MapView]setRegion:region animated:TRUE];
   }
+  
+//  [[self MapView]setNeedsDisplay];
+  
+//  [[self MapView]setCamera:cam];
 }
 #pragma mark - Setup Pin View
 

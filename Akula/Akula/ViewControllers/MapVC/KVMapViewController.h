@@ -9,6 +9,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  
 */
 #import "Akula+CoreDataModel.h"
+#import "KVPersonDataController.h"
 /*
  Currently these will be optional
  I STRONGLY SUSPECT that I will be implementing these in the actual controller for person; Or that somehow, and likely quite obvious; I will be a delegate of a delegate in this
@@ -33,10 +34,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController : UIViewController <MKMapViewDelegate>
 
-@property (weak, nonatomic) id<MapViewActionsProtocol> MA_Delegate;
-@property (strong, nonatomic) KVRootEntity *currentEntity;
-@property (weak, nonatomic) IBOutlet UILabel *entityDescriptionLabel;
-@property (weak, nonatomic) IBOutlet MKMapView *MapView;
+//
+@property(weak,nonatomic)KVPersonDataController *PDC;
+
+@property(weak,nonatomic)id <MapViewActionsProtocol> MA_Delegate;
+@property(strong,nonatomic)KVRootEntity *currentEntity;
+@property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
+@property(weak,nonatomic)IBOutlet MKMapView *MapView;
 
 @end
 
