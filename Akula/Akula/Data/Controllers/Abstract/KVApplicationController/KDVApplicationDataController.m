@@ -7,45 +7,38 @@
 
 */
 
-/**
-Yeah there are a lot of fetches that I do not use but they only impact coverage by >5%
-Soo I _could_ cover them or delete them
-Let these be the last five pct that I chase
-FWIW the subroutines in question are not nor have they ever been used in production ~BUT they may be useful in the OLDER Cocoa-Bindings where they came from (i.e. In a multi column view where the filter was on the topic of a given column)
-*/
-
 #import "KDVApplicationDataController.h"
 
 @implementation KDVApplicationDataController
+
 @synthesize fetchCon = _fetchCon;
 
-- (instancetype)initAllUp {
-  self = [self initWithAppName:@"Akula"
-                  databaseName:@"Akula.sqlite"
-                     className:@"KVAbstractEntity"];
-  if (self) {
-    
+- (instancetype)initAllUp
+{
+  if (!(self = [self initWithAppName:@"Akula"
+                        databaseName:@"Akula.sqlite"
+                           className:@"KVAbstractEntity"]))
+  {
+    NSLog(@"Class %@ failed to init",[self description]);
+    return(nil);
   }
   return self;
 }
 #pragma mark - Fetched results controller
 - (NSFetchedResultsController *)fetchCon {
   NSString *defaultKey = (@"incepDate");
-  if (_fetchCon != nil) {
+  if (_fetchCon != nil)
+  {
     return _fetchCon;
   }
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  /**
-  Edit the entity name as appropriate. (Event, RootEntity, ABSTRACT_OBJ)
-  */
+
   NSEntityDescription *entity =
   [NSEntityDescription entityForName:[self entityClassName]
               inManagedObjectContext:[self MOC]];
   [fetchRequest setEntity:entity];
-  /**
-  Set the batch size to a suitable number.
-  */
-  [fetchRequest setFetchBatchSize:20];
+
+  [fetchRequest setFetchBatchSize:20]; // batch size to a suitable number.
   /**
    Edit the sort key as appropriate.
    GENERALLY @"incepDate"
@@ -75,26 +68,26 @@ FWIW the subroutines in question are not nor have they ever been used in product
 - (NSMutableArray *)getEntities:(NSString *)entityName
                        sortedBy:(NSSortDescriptor *)sortDescriptor
               matchingPredicate:(NSPredicate *)predicate {
-  
+
   NSError *error = nil;
   /**
   Create the request object
   */
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
-  
+
   /**
   Set the entity type to be fetched
   */
   NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[self MOC]];
   [request setEntity:entity];
-  
+
   /**
   Set the predicate if specified
   */
   if (predicate) {
     [request setPredicate:predicate];
   }
-  
+
   /**
   Set the sort descriptor if specified
   */
@@ -107,7 +100,7 @@ FWIW the subroutines in question are not nor have they ever been used in product
   if (mutableFetchResults == nil) {
     // Handle the error.
   }
-  
+
   return mutableFetchResults;
 }
 
@@ -146,23 +139,26 @@ FWIW the subroutines in question are not nor have they ever been used in product
 
 #pragma mark - utilities
 
-- (void)deleteEntity:(NSManagedObject *)e  {
+- (void)deleteEntity:(NSManagedObject *)e
+{
   [[self MOC] deleteObject:e];
 }
 
-
-
 #pragma mark - Numerical Utilities
+
 - (int)makeRandomNumber:(int)range {
   //  return arc4random_uniform(range);
-  if (range <= 0) {
+  if (range <= 0)
+  {
     return 1; // I shall not return 0
   }
   int candidate = arc4random_uniform(range);
-  if (candidate > range) {
+  if (candidate > range)
+  {
     return range; // Nor Return Greater than Range
   }
-  if (candidate <= 0) {
+  if (candidate <= 0)
+  {
     // And if I attempt to return 0
     candidate = 1; // I shall not return 0
   }
@@ -182,6 +178,5 @@ FWIW the subroutines in question are not nor have they ever been used in product
   } while (rolls > 0);
   return(result);
 }
-
 
 @end
