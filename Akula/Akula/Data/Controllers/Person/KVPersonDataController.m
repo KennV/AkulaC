@@ -29,6 +29,12 @@
   if (m == nil) {
     m = [self MOC];
   }
+  /**
+    Couch Front Porch in Baltimore
+  */
+  double DefaultLatitude = 37.33115792;
+  double DefaultLongitude = -122.03076853;
+  
   KVPerson * p = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName] inManagedObjectContext:(m)];
   KVAbstractPhysics *aep = [NSEntityDescription insertNewObjectForEntityForName:@"KVAbstractPhysics" inManagedObjectContext:(m)];
   KVAbstractGraphicsEntity * aeg = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(m)];
@@ -40,6 +46,13 @@
   [p setGraphics:(aeg)];
   [p setLocation:(ael)];
   
+  if (DefaultLatitude != [[[p location]latitude]doubleValue]) {
+    [[p location]setLatitude:[NSNumber numberWithDouble:(DefaultLatitude)]];
+  }
+  if (DefaultLongitude != [[[p location]longitude]doubleValue]) {
+    [[p location]setLongitude:[NSNumber numberWithDouble:(DefaultLongitude)]];
+  }
+  
   NSError *error = nil;
   if (![[self MOC] save:&error]) {
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -48,8 +61,7 @@
     abort();
   } else {
     return p;
-  }
-  
+  }  
 }
 
 @end

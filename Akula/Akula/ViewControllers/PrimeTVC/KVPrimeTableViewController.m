@@ -45,6 +45,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 // HEY THIS switched from mutable akulaEntities to the product of an extensible array
 @property (weak, nonatomic)NSArray *akulaEntities;
+/// Groovy Location Sense
+@property (strong,nonatomic)CLLocationManager *locationManager;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
 @property (weak,nonatomic)UIColor* baseColor00;
@@ -74,8 +76,9 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @implementation KVPrimeTableViewController
 
 @synthesize ADC = _ADC;
+@synthesize PDC =_PDC;
 @synthesize akulaEntities = _akulaEntities;
-
+@synthesize locationManager = _locationManager;
 // Them colors
 @synthesize baseColor00 = _baseColor00;
 @synthesize baseColor01 = _baseColor01;
@@ -105,7 +108,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 - (NSArray *)akulaEntities {
   return([[self ADC] getAllEntities]);
 }
--(KVAkulaDataController *)ADC {
+- (KVAkulaDataController *)ADC {
   if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
   
   return _ADC;
@@ -118,8 +121,9 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
-  self.mapViewController = (KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-  
+//  self.mapViewController =
+  [self setMapViewController:(KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController]];
+  [self setupCLManager];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -133,7 +137,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-
+//[[self PDC]createPersoninMOC:[[self ADC]MOC]];
   [self.ADC createEntityInMOC:[self.ADC MOC]];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
@@ -191,5 +195,33 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   }
 }
 
+#pragma mark - Map Functions
+- (void) setupCLManager
+{
+  if (!(_locationManager))
+  {
+    _locationManager = [[CLLocationManager alloc]init];
+  }
+  [[self locationManager]setDelegate:(self)];
+  [self setupCLAuthState];
+  //
+  [[self locationManager]setDistanceFilter:kCLDistanceFilterNone];
+  [[self locationManager]setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+  [[self locationManager]startUpdatingLocation];
+}
+
+- (void)setupCLAuthState {
+  if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+    [[self locationManager]requestAlwaysAuthorization];
+  }
+}
+
+- (void) findLocation {
+  //
+  
+}
+- (void) foundLocation {
+  
+}
 
 @end
