@@ -44,7 +44,8 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 @interface KVPrimeTableViewController ()
 
 // HEY THIS switched from mutable akulaEntities to the product of an extensible array
-@property (weak, nonatomic)NSArray *akulaEntities;
+//@property (weak, nonatomic)NSArray *akulaEntities;
+//@property (weak, nonatomic)NSArray *personsArray;
 /// Groovy Location Sense
 @property (strong,nonatomic)CLLocationManager *locationManager;
 
@@ -75,9 +76,10 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 @implementation KVPrimeTableViewController
 
-@synthesize ADC = _ADC;
+@synthesize ADC =_ADC;
 @synthesize PDC =_PDC;
-@synthesize akulaEntities = _akulaEntities;
+//@synthesize akulaEntities = _akulaEntities;
+//@synthesize personsArray =_personsArray;
 @synthesize locationManager = _locationManager;
 // Them colors
 @synthesize baseColor00 = _baseColor00;
@@ -105,24 +107,43 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 /**
  */
 
-- (NSArray *)akulaEntities {
-  return([[self ADC] getAllEntities]);
+//- (NSArray *)akulaEntities {
+//  return([[self ADC] getAllEntities]);
+//}
+
+- (void)setupDataSource {
+  [self setADC:([[KVAkulaDataController alloc]initAllUp])];
+  [[self PDC]setMOC:([[self PDC]MOC]) ];
 }
+
+- (NSArray *)OLDpersonsArray {
+  return [NSArray arrayWithArray:[[self PDC]getAllEntities]];
+}
+
 - (KVAkulaDataController *)ADC {
   if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
   
   return _ADC;
 }
 
+- (KVPersonDataController *)PDC {
+  if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
+  
+  return _PDC;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   // TODO: Customization Point for this controller
+  [self setupDataSource];
+  
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
 //  self.mapViewController =
   [self setMapViewController:(KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController]];
+  [[self mapViewController]setMA_Delegate:(self)];
   [self setupCLManager];
 }
 
@@ -137,8 +158,17 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 // TODO: - Replace This with a controller function preferably from a delegate
 - (void)insertNewObject:(id)sender {
-//[[self PDC]createPersoninMOC:[[self ADC]MOC]];
-  [self.ADC createEntityInMOC:[self.ADC MOC]];
+  //
+  [self findLocation];
+  [[self PDC ]createEntityInMOC:([[self PDC]MOC])];
+//  [[self PDC]createPersoninMOC:([[self ADC]MOC])];
+//  [self.ADC createEntityInMOC:[self.ADC MOC]];
+  KVPerson *p = [[[self PDC]getAllEntities]firstObject];
+  [self updateEntityLocation:([p location])];
+  NSLog(@" %6f :: %6f ", [p location].latitude.floatValue,[p location].longitude.floatValue);
+  KVAbstractLocationEntity *xLoc = p.location;
+  __unused BOOL tf = [[self PDC]didSaveEntities];
+  // this fails with !=p(nil) PDC is prolly (nil) as well [verified]
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -164,13 +194,15 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self akulaEntities]count];
+//  return [[self akulaEntities]count];
+  return [[[self PDC]getAllEntities]count];
 }
   // TODO: - Make a correct Custom Cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-  
-  KVRootEntity *object = [self akulaEntities][indexPath.row];
+  //  KVRootEntity *object = [self akulaEntities][indexPath.row];
+//  KVRootEntity *object = [[self PDC]getAllEntities][indexPath.row];
+  KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
   cell.textLabel.text = [[object incepDate]description];
   return cell;
 }
@@ -182,13 +214,15 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-//    KVRootEntity *deletrix = [[self akulaEntities]objectAtIndex:(indexPath.row)];
-//    [ADC deleteEntity:deletrix];
-    [[self ADC]deleteEntity:[[self akulaEntities]objectAtIndex:(indexPath.row)]];
-//      [self.akulaEntities removeObjectAtIndex:indexPath.row];
+    id deletrix = [[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)];
+
+    if (deletrix != nil) {
+      [[self PDC]deleteEntity:(deletrix)];
+    } else {
+      NSLog(@"Error trying to delete Nil-Item");
+    }
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    if ([[self ADC]didSaveEntities]) {
-      
+    if ([[self PDC]didSaveEntities]) {
     }
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -196,7 +230,10 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 
 #pragma mark - Map Functions
-- (void) setupCLManager
+
+#pragma mark Setup Location Manager
+
+- (void)setupCLManager
 {
   if (!(_locationManager))
   {
@@ -215,13 +252,22 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
     [[self locationManager]requestAlwaysAuthorization];
   }
 }
+//TODO: - Update Location
 
 - (void) findLocation {
   //
+  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  NSLog(@"location ==> Latitude %6f\t %6f ",coordinate.latitude, coordinate.longitude);
+  [self foundLocation];
   
 }
 - (void) foundLocation {
-  
+  [[self locationManager]stopUpdatingLocation];
+}
+
+- (void)updateEntityLocation:(KVAbstractLocationEntity*)location; {
+  [location setLatitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].latitude)]];
+  [location setLongitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].longitude)]];
 }
 
 @end

@@ -25,7 +25,10 @@
   return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVPerson"]);
 }
 
-- (KVPerson*)createPersoninMOC:(NSManagedObjectContext*)m {
+//- (id)createEntityInMOC:(NSManagedObjectContext *)m {
+
+//}
+- (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m {
   if (m == nil) {
     m = [self MOC];
   }
@@ -60,6 +63,7 @@
     //required fields set to nil see xcdm
     abort();
   } else {
+    
     return p;
   }  
 }
