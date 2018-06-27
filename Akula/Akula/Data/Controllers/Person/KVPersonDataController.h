@@ -11,6 +11,6 @@
 
 @interface KVPersonDataController <T:KVPerson*> : KVAkulaDataController<T>
 
-
-- (KVPerson*)createPersoninMOC:(NSManagedObjectContext*)m;
+- (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m;
+//- (id)createPersoninMOC:(NSManagedObjectContext*)m;
 @end

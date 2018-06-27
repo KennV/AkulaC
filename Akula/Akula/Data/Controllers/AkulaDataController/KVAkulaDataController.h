@@ -36,7 +36,7 @@ FOUNDATION_EXPORT NSString *STATES[9];
  @param m MOC
  @return Entity - All Up
  */
-- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m;
+- (id)createEntityInMOC:(NSManagedObjectContext*)m;
 
 - (BOOL)didSaveEntities;
 
