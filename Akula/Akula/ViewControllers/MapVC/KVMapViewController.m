@@ -13,23 +13,27 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController ()
 
+@property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
+
+@property(weak,nonatomic)IBOutlet MKMapView *MapView;
+
 @end
 
 @implementation KVMapViewController
-
-- (void)configureView {
-  // Update the user interface for the detail item.
-  if (self.currentEntity) {
-    
-      self.entityDescriptionLabel.text = [self.currentEntity description];
-  }
-}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self setupMapView];
   // Do any additional setup after loading the view, typically from a nib.
   [self configureView];
+}
+
+- (void)configureView {
+  // Update the user interface for the detail item.
+  if (self.currentEntity) {
+    self.entityDescriptionLabel.text = [self.currentEntity description];
+    [self setupNotationPins];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,12 +59,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #pragma mark - Setup GUI State
 
 #pragma mark - Setup Map View
-//TODO: add camera
+
 - (void)setupMapView {
   [[self MapView]setDelegate:self];
 //  MKMapCamera * cam = [[MKMapCamera alloc]init];
   
-  [[self MapView]setMapType:MKMapTypeHybrid];
+  [[self MapView]setMapType:MKMapTypeStandard]; //was MKMapTypeHybrid
   [[self MapView]setShowsScale:false];
 
   if (self.currentEntity == nil ) {
@@ -68,10 +72,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
       [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
     }
   } else {
+    // We do have a proper currentEntity
     CLLocationCoordinate2D objLocation =
     CLLocationCoordinate2DMake([[[_currentEntity location]latitude]doubleValue],
                                [[[_currentEntity location]longitude]doubleValue]);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(objLocation, 500, 500);
+    // ¿bp? ## Observer that at this point the _currEnt is fully fetched with no faults
     [[self MapView]setRegion:region animated:TRUE];
   }
   
@@ -79,6 +85,15 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
 //  [[self MapView]setCamera:cam];
 }
+
 #pragma mark - Setup Pin View
+- (void)setupNotationPins {
+  KVAkulaDataController *allDataCon = [[KVAkulaDataController alloc]init];
+//  if (![self.PDC.MOC isEqual:(allDataCon.MOC)]) {
+//    NSLog(@"Pony");
+//  }
+  NSMutableArray *j1 = allDataCon.getAllEntities;
+  
+}
 
 @end
