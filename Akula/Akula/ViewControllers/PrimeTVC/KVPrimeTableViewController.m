@@ -34,8 +34,6 @@ number of sections
 
 THEN after all of that I might want a protocol for this controller. Jeppers
 
-WOW I thought I did a commit, I was about to add an appDataCon and probably a getter for akulaEntities helping me decide if it is mutable or not.
-
 */
 
 #import "KVPrimeTableViewController.h"
@@ -43,10 +41,6 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 @interface KVPrimeTableViewController ()
 
-// HEY THIS switched from mutable akulaEntities to the product of an extensible array
-//@property (weak, nonatomic)NSArray *akulaEntities;
-//@property (weak, nonatomic)NSArray *personsArray;
-/// Groovy Location Sense
 @property (strong,nonatomic)CLLocationManager *locationManager;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
@@ -78,8 +72,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 
 @synthesize ADC =_ADC;
 @synthesize PDC =_PDC;
-//@synthesize akulaEntities = _akulaEntities;
-//@synthesize personsArray =_personsArray;
+
 @synthesize locationManager = _locationManager;
 // Them colors
 @synthesize baseColor00 = _baseColor00;
@@ -107,9 +100,6 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 /**
  */
 
-//- (NSArray *)akulaEntities {
-//  return([[self ADC] getAllEntities]);
-//}
 
 - (void)setupDataSource {
   [self setADC:([[KVAkulaDataController alloc]initAllUp])];
@@ -161,12 +151,11 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   //
   [self findLocation];
   [[self PDC ]createEntityInMOC:([[self PDC]MOC])];
-//  [[self PDC]createPersoninMOC:([[self ADC]MOC])];
-//  [self.ADC createEntityInMOC:[self.ADC MOC]];
+
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
   [self updateEntityLocation:([p location])];
   NSLog(@" %6f :: %6f ", [p location].latitude.floatValue,[p location].longitude.floatValue);
-  KVAbstractLocationEntity *xLoc = p.location;
+//  KVAbstractLocationEntity *xLoc = p.location;
   __unused BOOL tf = [[self PDC]didSaveEntities];
   // this fails with !=p(nil) PDC is prolly (nil) as well [verified]
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -180,6 +169,7 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
+    
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
     [mapView setMA_Delegate:(self)];
     [mapView setCurrentEntity:object];
@@ -194,14 +184,13 @@ WOW I thought I did a commit, I was about to add an appDataCon and probably a ge
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  return [[self akulaEntities]count];
+
   return [[[self PDC]getAllEntities]count];
 }
   // TODO: - Make a correct Custom Cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-  //  KVRootEntity *object = [self akulaEntities][indexPath.row];
-//  KVRootEntity *object = [[self PDC]getAllEntities][indexPath.row];
+  
   KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
   cell.textLabel.text = [[object incepDate]description];
   return cell;

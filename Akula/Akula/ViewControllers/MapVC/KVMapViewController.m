@@ -20,6 +20,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)configureView {
   // Update the user interface for the detail item.
   if (self.currentEntity) {
+    
       self.entityDescriptionLabel.text = [self.currentEntity description];
   }
 }
