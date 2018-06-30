@@ -26,6 +26,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [self setupMapView];
   // Do any additional setup after loading the view, typically from a nib.
   [self configureView];
+//  if (!(self.view.isHidden)) {
+//    NSLog(@"\nBlink\n");
+//  }
 }
 
 - (void)configureView {
@@ -47,7 +50,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  my entity
 
  @param newEntity KVRootEntity
- */
+*/
 - (void)setCurrentEntity:(KVRootEntity *)newEntity {
   if (_currentEntity != newEntity) {
     _currentEntity = newEntity;
@@ -89,11 +92,20 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #pragma mark - Setup Pin View
 - (void)setupNotationPins {
   KVAkulaDataController *allDataCon = [[KVAkulaDataController alloc]init];
-//  if (![self.PDC.MOC isEqual:(allDataCon.MOC)]) {
-//    NSLog(@"Pony");
-//  }
-  NSMutableArray *j1 = allDataCon.getAllEntities;
-  
+
+  NSArray *jiveArr = allDataCon.getAllEntities;
+
+  for (KVRootEntity *jiveItem in jiveArr) {
+    if ([jiveItem isKindOfClass:[KVRootEntity class]]) {
+      NSLog(@"I am a Kind of Root Entity");
+    }
+    if ([jiveItem isMemberOfClass:[KVPerson class]]) {
+      NSLog(@"Specifically a Person\n");
+    }
+    if ([jiveItem isMemberOfClass:[KVRootEntity class]]) {
+      NSLog(@"Not an Impossible Pony");
+    }
+    }
 }
 
 @end

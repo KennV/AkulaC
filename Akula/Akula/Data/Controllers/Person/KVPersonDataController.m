@@ -16,6 +16,9 @@
 
 @implementation KVPersonDataController
 
+double DefaultLatitude = 37.33115792;
+double DefaultLongitude = -122.03076853;
+
 - (instancetype)init {
   return ([self initAllUp]);
 }
@@ -25,18 +28,20 @@
   return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVPerson"]);
 }
 
-//- (id)createEntityInMOC:(NSManagedObjectContext *)m {
-
+/**- */
+//- (BOOL)didSetupDefaultLocation:(id<MA_)a forPerson:(id)b fromDelegate:(id)c; {
+//  return (false);
 //}
+
 - (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m {
   if (m == nil) {
     m = [self MOC];
   }
   /**
     Couch Front Porch in Baltimore
-  */
   double DefaultLatitude = 37.33115792;
   double DefaultLongitude = -122.03076853;
+   */
   
   KVPerson * p = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName] inManagedObjectContext:(m)];
   KVAbstractPhysics *aep = [NSEntityDescription insertNewObjectForEntityForName:@"KVAbstractPhysics" inManagedObjectContext:(m)];

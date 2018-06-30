@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KVAkulaDataController.h"
+#import "KVPerson+CoreDataProperties.h"
 
 @interface KVPersonDataController <T:KVPerson*> : KVAkulaDataController<T>
 
