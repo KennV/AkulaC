@@ -106,15 +106,13 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self PDC]setMOC:([[self PDC]MOC]) ];
 }
 
-- (NSArray *)OLDpersonsArray {
-  return [NSArray arrayWithArray:[[self PDC]getAllEntities]];
-}
 
 - (KVAkulaDataController *)ADC {
   if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
   
   return _ADC;
 }
+
 
 - (KVPersonDataController *)PDC {
   if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
@@ -124,17 +122,18 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // TODO: Customization Point for this controller
+
   [self setupDataSource];
+  [self setupCLManager];
   
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
   self.navigationItem.rightBarButtonItem = addButton;
-//  self.mapViewController =
-  [self setMapViewController:(KVMapViewController *)[[self.splitViewController.viewControllers lastObject] topViewController]];
+
+  [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
   [[self mapViewController]setMA_Delegate:(self)];
-  [self setupCLManager];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -250,6 +249,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [self foundLocation];
   
 }
+
 - (void) foundLocation {
   [[self locationManager]stopUpdatingLocation];
 }
