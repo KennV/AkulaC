@@ -68,7 +68,6 @@ double DefaultLongitude = -122.03076853;
     //required fields set to nil see xcdm
     abort();
   } else {
-    
     return p;
   }  
 }

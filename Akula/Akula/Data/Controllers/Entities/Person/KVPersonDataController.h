@@ -7,10 +7,11 @@
 */
 
 #import <Foundation/Foundation.h>
-#import "KVAkulaDataController.h"
+//#import "KVAkulaDataController.h"
+#import "KVEntitiesDataController.h"
 #import "KVPerson+CoreDataProperties.h"
 
-@interface KVPersonDataController <T:KVPerson*> : KVAkulaDataController<T>
+@interface KVPersonDataController <T:KVPerson*> : KVEntitiesDataController<T>
 
 - (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;
