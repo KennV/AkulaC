@@ -65,7 +65,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)setupMapView {
   [[self MapView]setDelegate:self];
-//  MKMapCamera * cam = [[MKMapCamera alloc]init];
+  MKMapCamera * cam = [[MKMapCamera alloc]init];
   
   [[self MapView]setMapType:MKMapTypeStandard]; //was MKMapTypeHybrid
   [[self MapView]setShowsScale:false];
@@ -86,7 +86,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
 //  [[self MapView]setNeedsDisplay];
   
-//  [[self MapView]setCamera:cam];
+  [[self MapView]setCamera:cam];
 }
 
 #pragma mark - Setup Pin View
@@ -105,7 +105,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
     if ([jiveItem isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
-    }
+  }
 }
 
 @end
