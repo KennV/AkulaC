@@ -205,6 +205,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     id deletrix = [[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)];
 
     if (deletrix != nil) {
+      //NSLog(@"Deleting %@ at index %ld", [deletrix description],(long)indexPath.row);
       [[self PDC]deleteEntity:(deletrix)];
     } else {
       NSLog(@"Error trying to delete Nil-Item");
