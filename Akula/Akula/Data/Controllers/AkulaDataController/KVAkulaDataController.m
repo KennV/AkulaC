@@ -23,6 +23,7 @@ const NSString *STREET_NAMES[26] = {@"apple", @"birch", @"cherry", @"dogwood", @
 const NSString *CITIES [9] = {@"New York", @"Boston", @"Philadelphia", @"Baltimore", @"Atlanta", @"Newark", @"Austin", @"Chicago", @"Pittsburgh"};
 const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"IL", @"PA"};
 
+
 - (instancetype)initAllUp {
   return ([self initWithAppName:(@"Akula") databaseName:(@"Akula.sqlite") className:(@"KVRootEntity")]);
 }

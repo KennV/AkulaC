@@ -15,4 +15,5 @@
 
 - (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;
+- (void)randomizePersonName:(KVPerson*)p;
 @end

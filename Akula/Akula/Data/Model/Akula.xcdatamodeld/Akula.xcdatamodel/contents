@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="KVAbstractEntity" representedClassName="KVAbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="dbID" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="incepDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -49,6 +49,7 @@
     <entity name="KVPerson" representedClassName="KVPerson" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
         <attribute name="emailID" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="firstName" attributeType="String" defaultValueString="unset" syncable="YES"/>
+        <attribute name="gender" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="lastName" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="middleName" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="phoneNumber" attributeType="String" defaultValueString="unset" syncable="YES"/>
@@ -68,7 +69,7 @@
         <element name="KVEntity" positionX="-153" positionY="306" width="128" height="43"/>
         <element name="KVEvent" positionX="-135" positionY="479" width="128" height="133"/>
         <element name="KVItem" positionX="88" positionY="18" width="128" height="148"/>
-        <element name="KVPerson" positionX="61" positionY="425" width="128" height="133"/>
+        <element name="KVPerson" positionX="61" positionY="425" width="128" height="150"/>
         <element name="KVRootEntity" positionX="-299" positionY="9" width="128" height="103"/>
     </elements>
 </model>

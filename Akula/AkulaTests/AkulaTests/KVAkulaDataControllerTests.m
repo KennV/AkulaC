@@ -250,7 +250,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   }
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (kMax));
   /**
-   THis Array is non-mutable but it's members are
+   This Array is non-mutable but it's members are
   */
   NSArray *somePeople = [[self PDC]getAllEntities];
   
@@ -272,6 +272,29 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   }
   XCTAssertTrue([[self PDC]didSaveEntities]);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+}
+
+- (void)testNameFunctions {
+//  XCTAssertFalse(@"" isEqualToString:[PDC cre])
+  KVPerson * p = [[self PDC] createEntityInMOC:([self testMOC])];
+  XCTAssertNotNil([p gender]);
+  XCTAssertNotNil([p firstName]);
+  XCTAssertNotNil([p middleName]);
+  XCTAssertNotNil([p lastName]);
+  XCTAssertNotNil([p gender]);
+  XCTAssertTrue([(@"unset") isEqualToString:[p firstName]]);
+  XCTAssertTrue([(@"unset") isEqualToString:[p lastName]]);
+  XCTAssertTrue([(@"unset") isEqualToString:[p middleName]]);
+  XCTAssertTrue([(@"unset") isEqualToString:[p gender]]);
+  [[self PDC] randomizePersonName:p];
+  
+  XCTAssertFalse([(@"unset") isEqualToString:[p firstName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p lastName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p middleName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p gender]]);
+
+
+  
 }
 
 - (void)nonTestMemo {
