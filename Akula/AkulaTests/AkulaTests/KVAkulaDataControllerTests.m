@@ -128,6 +128,16 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
 */
 
+- (void)testAbstractDataController {
+  id j = [[KDVAbstractDataController alloc]init];
+  XCTAssertNotNil(j);
+  if ([j isMemberOfClass:[KDVAbstractDataController class]]) {
+    XCTAssertNotNil([j fetchCon]);
+  }
+
+}
+
+
 - (void)testCreateAndDelete {
   /**
   This test set determines: that the SUT can create and delete entities, and that it will have the correct count of entities in the SUT's getAllEntities()
@@ -183,7 +193,21 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
 }
 
+
 - (void)testPDC {
+  [self setPDC:(nil)];
+  XCTAssertNil([self PDC]);
+  
+  XCTAssertNotNil([[KVPersonDataController alloc]init], @"Nper");
+  
+  [self setPDC:(nil)];
+  XCTAssertNil([self PDC]);
+  
+  XCTAssertNotNil([[KVPersonDataController alloc]initAllUp], @"Nper");
+  
+}
+
+- (void)testPerson {
   /**
    This test set determines:
    */
@@ -285,16 +309,26 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([(@"unset") isEqualToString:[p firstName]]);
   XCTAssertTrue([(@"unset") isEqualToString:[p lastName]]);
   XCTAssertTrue([(@"unset") isEqualToString:[p middleName]]);
-  XCTAssertTrue([(@"unset") isEqualToString:[p gender]]);
-  [[self PDC] randomizePersonName:p];
+  XCTAssertFalse([(@"unset") isEqualToString:[p gender]]);
+
+  [[self PDC] randomizePersonName:p];//
   
   XCTAssertFalse([(@"unset") isEqualToString:[p firstName]]);
   XCTAssertFalse([(@"unset") isEqualToString:[p lastName]]);
   XCTAssertFalse([(@"unset") isEqualToString:[p middleName]]);
   XCTAssertFalse([(@"unset") isEqualToString:[p gender]]);
 
+  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p firstName]]);
+  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p lastName]]);
+  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p middleName]]);
+  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p gender]]);
 
+  [[self PDC]resetDefaultPerson:p];
   
+  XCTAssertTrue([(@"Edit-Me") isEqualToString:[p firstName]]);
+  XCTAssertTrue([(@"Edit-Me") isEqualToString:[p lastName]]);
+  XCTAssertTrue([(@"Edit-Me") isEqualToString:[p middleName]]);
+  XCTAssertTrue([(@"Edit-Me") isEqualToString:[p gender]]);
 }
 
 - (void)nonTestMemo {
