@@ -15,14 +15,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 
 FOUNDATION_EXPORT NSString *HEX_DIGIT[16];
-FOUNDATION_EXPORT NSString *FEMALE_NAME[20];
-FOUNDATION_EXPORT NSString *MALE_NAME[20];
-FOUNDATION_EXPORT NSString *LAST_NAME[20];
+
 FOUNDATION_EXPORT NSString *STREET_NAMES[26];
 FOUNDATION_EXPORT NSString *CITIES[9];
 FOUNDATION_EXPORT NSString *STATES[9];
 
-@interface KVAkulaDataController : KDVApplicationDataController
+@interface KVAkulaDataController <T:KVRootEntity*> : KDVApplicationDataController<T>
 
 /**
  DEFAULT INITIALIZER
@@ -36,9 +34,12 @@ FOUNDATION_EXPORT NSString *STATES[9];
  @param m MOC
  @return Entity - All Up
  */
-- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m;
+- (id)createEntityInMOC:(NSManagedObjectContext*)m;
 
-- (void)saveEntities;
+- (BOOL)didSaveEntities;
 
-
+- (NSString*)createFemaleName;
+- (NSString*)createLastName;
+- (NSString*)createMaleName;
+- (NSString*)createMiddleName;
 @end

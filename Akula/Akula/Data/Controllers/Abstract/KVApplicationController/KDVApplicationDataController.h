@@ -9,7 +9,7 @@
 #import "KDVAbstractDataController.h"
 //#import "KDVApplicationEntity+CoreDataClass.h"
 
-@interface KDVApplicationDataController : KDVAbstractDataController <NSFetchedResultsControllerDelegate>
+@interface KDVApplicationDataController <T:NSManagedObject*> : KDVAbstractDataController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController <KVAbstractEntity *> *fetchCon;
 - (instancetype)initAllUp;

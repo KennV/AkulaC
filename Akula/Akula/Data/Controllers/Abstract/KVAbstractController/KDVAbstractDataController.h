@@ -9,18 +9,14 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 #import "Akula+CoreDataModel.h"
-//NEWER
-//#import "KVAbstractEntity+CoreDataClass.h"
-//#import "KVAbstractGraphicsEntity+CoreDataClass.h"
-//#import "KVAbstractLocationEntity+CoreDataClass.h"
-//#import "KVAbstractPhysics+CoreDataClass.h"
+
 /**
 OKrazy I need this to be in test from the get-go
 But to do that need to define the test then fail it and init it
 _then set a default init_
 */
 
-@interface KDVAbstractDataController : NSObject <NSFetchedResultsControllerDelegate>
+@interface KDVAbstractDataController <T:NSManagedObject*> : NSObject <NSFetchedResultsControllerDelegate>
 
 /**
  Default Init()
