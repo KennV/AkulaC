@@ -42,4 +42,9 @@ FOUNDATION_EXPORT NSString *STATES[9];
 - (NSString*)createLastName;
 - (NSString*)createMaleName;
 - (NSString*)createMiddleName;
+
+- (KVAbstractPhysics*)mkPhysSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx;
+- (KVAbstractGraphicsEntity*)mkGraphicsSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx;
+- (KVAbstractLocationEntity*)mkLocationSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx;
+
 @end

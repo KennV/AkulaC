@@ -193,6 +193,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
 }
 
+- (void)testSubEntities {
+  XCTAssertNotNil([[self SUT]mkGraphicsSubEntityFor:nil in:[[self SUT]MOC]]);
+  XCTAssertNotNil([[self SUT]mkLocationSubEntityFor:nil in:[[self SUT]MOC]]);
+  XCTAssertNotNil([[self SUT]mkPhysSubEntityFor:nil in:[[self SUT]MOC]]);
+
+}
 
 - (void)testPDC {
   [self setPDC:(nil)];
@@ -337,6 +343,17 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   SO
   CAN I make an ARR, then parse/process them out of that, then save and have the effect still in place on the [self SUT]getAllEntities]
   */
+}
+
+- (void)testFetchesAndJunk {
+  XCTAssertNotNil([[KDVApplicationDataController alloc]initAllUp]);
+  KDVApplicationDataController *khan = [[KDVApplicationDataController alloc]initAllUp];
+  XCTAssertNotNil([khan fetchCon]);
+//  [khan insert]
+  KVRootEntity * tEntity = [NSEntityDescription insertNewObjectForEntityForName:(@"KVRootEntity")inManagedObjectContext:([[self SUT]MOC])];
+  XCTAssertNotNil(tEntity);
+  XCTAssertTrue([[khan getAllEntities]count] == 0);
+  
 }
 
 @end

@@ -11,13 +11,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #import "KVAkulaDataController.h"
 
+
 @implementation KVAkulaDataController
 
 const NSString *HEX_DIGIT[16] = {@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"a", @"b", @"c", @"d", @"e", @"f"};
 
-//const
-//const
-//const
 const NSString *STREET_NAMES[26] = {@"apple", @"birch", @"cherry", @"dogwood", @"ebony", @"fig", @"ginko", @"hickory", @"inode", @"juniper", @"katsura", @"larch", @"mahogany", @"nutmeg", @"oak", @"palm", @"qwest-tree", @"rosewood", @"spruce", @"teak", @"umbrella-tree", @"viburnum", @"walnut", @"xylosma", @"yucca", @"zelkova"};
 const NSString *CITIES [9] = {@"New York", @"Boston", @"Philadelphia", @"Baltimore", @"Atlanta", @"Newark", @"Austin", @"Chicago", @"Pittsburgh"};
 const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"IL", @"PA"};
@@ -27,33 +25,23 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   return ([self initWithAppName:(@"Akula") databaseName:(@"Akula.sqlite") className:(@"KVRootEntity")]);
 }
 
-- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m {
-  
-  if (m == nil) {
-    m = [self MOC];
-  }
 
-  KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(m)];
-  KVAbstractPhysics * aep = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:(m)];
-  KVAbstractGraphicsEntity * aeg = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(m)];
-  KVAbstractLocationEntity * ael = [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(m)];
-  
-  [rEntity setIncepDate:[NSDate date]];
-  [rEntity setDbID:[NSUUID UUID]];
-  [rEntity setPhysics:(aep)];
-  [rEntity setGraphics:(aeg)];
-  [rEntity setLocation:(ael)];
-  
-  NSError *error = nil;
-  if (![[self MOC] save:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    //NSCocoaErrorDomain Code=1570
-    //required fields set to nil see xcdm
-    abort();
-  } else {
-    return rEntity;
-  }
+/**
+ For Clarity's Sake I am pulling these here
+ */
+
+- (KVAbstractPhysics*)mkPhysSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:(ctx)];
 }
+
+- (KVAbstractGraphicsEntity*)mkGraphicsSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(ctx)];
+}
+
+- (KVAbstractLocationEntity*)mkLocationSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(ctx)];
+}
+
 
 - (BOOL)didSaveEntities
 {
@@ -73,6 +61,14 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
 - (NSString*)createFemaleName {
   NSString *FEMALE_NAME[20] =  { @"Jessica", @"Ashley", @"Amanda", @"Sarah", @"Jennifer", @"Brittany", @"Stephanie", @"Samantha", @"Nicole", @"Elizabeth", @"Lauren", @"Megan", @"Tiffany", @"Heather", @"Amber", @"Melissa", @"Danielle", @"Emily", @"Rachel", @"Kayla "};
   return (FEMALE_NAME[[self makeRandomNumber:(20)]]);
+}
+
+- (NSString*)createLastName {
+  NSString *LAST_NAME[20] = {@"Cero", @"Uno", @"Dos", @"Tres", @"Quatro", @"Cinco", @"Seis", @"Siete", @"Ocho", @"Nueve", @"Diez", @"Once", @"Doce", @"Triece", @"Catorce", @"Quince", @"Diesiseis", @"Dies y Siete", @"Diez y Ochco", @"Diez y Nueve"};
+  
+  NSString *name = (@"");
+  name = LAST_NAME[[self makeRandomNumber:20]];
+  return (name);
 }
 
 - (NSString*)createMaleName {
@@ -98,13 +94,36 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   
 }
 
-- (NSString*)createLastName {
-  NSString *LAST_NAME[20] = {@"Cero", @"Uno", @"Dos", @"Tres", @"Quatro", @"Cinco", @"Seis", @"Siete", @"Ocho", @"Nueve", @"Diez", @"Once", @"Doce", @"Triece", @"Catorce", @"Quince", @"Diesiseis", @"Dies y Siete", @"Diez y Ochco", @"Diez y Nueve"};
+
+- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m {
   
-  NSString *name = (@"");
-  name = LAST_NAME[[self makeRandomNumber:20]];
-  return (name);
+  if (m == nil) {
+    m = [self MOC];
+  }
+  
+  KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(m)];
+  
+  [rEntity setIncepDate:[NSDate date]];
+  [rEntity setDbID:[NSUUID UUID]];
+  [rEntity setPhysics:([self mkPhysSubEntityFor:rEntity in:m])];
+  [rEntity setLocation:([self mkLocationSubEntityFor:rEntity in:m])];
+  [rEntity setGraphics:([self mkGraphicsSubEntityFor:rEntity in:m])];
+  
+  [[rEntity physics]setOwner:rEntity];
+  [[rEntity location]setOwner:rEntity];
+  [[rEntity graphics]setOwner:rEntity];
+  
+  NSError *error = nil;
+  if (![[self MOC] save:&error]) {
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    //NSCocoaErrorDomain Code=1570
+    //required fields set to nil see xcdm
+    abort();
+  } else {
+    return rEntity;
+  }
 }
+
 
 
 @end
