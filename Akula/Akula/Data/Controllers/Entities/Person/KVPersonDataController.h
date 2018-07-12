@@ -11,6 +11,15 @@
 #import "KVEntitiesDataController.h"
 #import "KVPerson+CoreDataProperties.h"
 
+@protocol PersonDataProtocol
+
+@optional
+///Good signatures but these would go into the PersonController
+- (bool)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
+
+@end
+
+
 @interface KVPersonDataController <T:KVPerson*> : KVEntitiesDataController<T>
 
 - (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m;

@@ -260,4 +260,14 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [location setLongitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].longitude)]];
 }
 
+- (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate Task:(KVTask*)e Person:(KVPerson*)p {
+  BOOL r = FALSE;
+  
+  NSSet *tl = [NSSet setWithSet:[p taskList]];
+  if (!([tl containsObject:e])) {
+    //
+  }
+  return (r);
+
+}
 @end

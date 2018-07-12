@@ -19,8 +19,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @protocol MapViewActionsProtocol
 
 @optional
-///Good signatures but these would go into the PersonController
-//- (bool)didChangePerson:(id<MapViewActionsProtocol>)deli withPerson:(KVPerson*)p;
+- (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate Task:(KVTask*)e Person:(KVPerson*)p;
+
+
 //- (void)willRunSetupFrom:(id<MapViewActionsProtocol>)deli;
 
 @end
