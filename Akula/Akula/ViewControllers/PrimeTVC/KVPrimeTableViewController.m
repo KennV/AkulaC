@@ -260,14 +260,31 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [location setLongitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].longitude)]];
 }
 
-- (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate Task:(KVTask*)e Person:(KVPerson*)p {
-  BOOL r = FALSE;
+#pragma mark - CONFRMANCE === COMPLIANCE
+
+/*
+ Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
+ There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
+ */
+
+-(BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
+  BOOL st8 = FALSE;
   
-  NSSet *tl = [NSSet setWithSet:[p taskList]];
-  if (!([tl containsObject:e])) {
+  return (st8);
+}
+
+- (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate
+                          Task:(KVTask*)e
+                        Person:(KVPerson*)p {
+  
+  if ([[p taskList]containsObject:e]) {
     //
+    return FALSE;
+  } else {
+    [p setTaskList:[[p taskList] setByAddingObject:e]];
+    return TRUE;
   }
-  return (r);
+
 
 }
 @end

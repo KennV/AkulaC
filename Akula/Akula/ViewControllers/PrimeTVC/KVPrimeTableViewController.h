@@ -19,7 +19,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #import "KVMapViewController.h"
 
-@interface KVPrimeTableViewController : UITableViewController <MapViewActionsProtocol,CLLocationManagerDelegate>
+@interface KVPrimeTableViewController : UITableViewController <MapViewActionsProtocol,PersonDataProtocol,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) KVMapViewController *mapViewController;
 @property (strong, nonatomic) KVAkulaDataController *ADC;

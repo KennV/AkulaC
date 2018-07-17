@@ -15,7 +15,7 @@
 
 @optional
 ///Good signatures but these would go into the PersonController
-- (bool)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
 
 @end
 

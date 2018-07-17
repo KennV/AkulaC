@@ -352,8 +352,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //  [khan insert]
   KVRootEntity * tEntity = [NSEntityDescription insertNewObjectForEntityForName:(@"KVRootEntity")inManagedObjectContext:([[self SUT]MOC])];
   XCTAssertNotNil(tEntity);
+  //FIXME: This test is wrong
   XCTAssertTrue([[khan getAllEntities]count] == 0);
-  
 }
 
 @end
