@@ -14,9 +14,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "KVAkulaDataController.h" //added model to test
 #import "KVPersonDataController.h"
 //
+#import "AppDelegate.h"
 
 
-@interface KVAkulaDataControllerTests : XCTestCase
+@interface KVAkulaDataControllerTests : XCTestCase <PersonDataProtocol>
 
 @property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
@@ -42,7 +43,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
   _ctx.persistentStoreCoordinator = _psk;
-//  [self setInMemPSK:(_psk)];
+
   [self setInMemoryCoordinator:(_psk)];
   [self setTestMOC:(_ctx)];
 }
@@ -354,6 +355,68 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil(tEntity);
   //FIXME: This test is wrong
   XCTAssertTrue([[khan getAllEntities]count] == 0);
+}
+
+#pragma mark - profiling
+
+- (void)testPerformanceExample {
+  // This is an example of a performance test case.
+  [self measureBlock:^{
+    // Put the code you want to measure the time of here.
+  }];
+}
+
+#pragma mark - Folding
+
+- (void)testAkulaAppDelegate {
+  id<UIApplicationDelegate> appDel = [[UIApplication sharedApplication]delegate];
+  
+  XCTAssert([appDel isKindOfClass:[AppDelegate class]]);
+  XCTAssertNotNil([appDel window]);
+  
+//  XCTAssertNotNil(appDel.)
+  
+  XCTAssertTrue([appDel application:((UIApplication*)appDel) didFinishLaunchingWithOptions:nil]);
+  
+  UISplitViewController *rootView = (UISplitViewController<UISplitViewControllerDelegate>*)[[appDel window]rootViewController];
+  XCTAssertNotNil([[rootView viewControllers]lastObject]);
+}
+
+- (void)testAkulaVue {
+  KVPrimeTableViewController *j = [[KVPrimeTableViewController alloc]init];
+  XCTAssertNotNil(j.ADC);
+  
+  [j viewDidLoad];
+  XCTAssertNotNil([j ADC]);
+  XCTAssertNotNil([[j ADC]MOM]);
+  XCTAssertNotNil([[j ADC]PSK]);
+  XCTAssertNotNil([[j ADC]MOC]);
+  
+  XCTAssertNotNil([j PDC]);
+  XCTAssertNotNil([[j PDC]MOM]);
+  XCTAssertNotNil([[j PDC]PSK]);
+  XCTAssertNotNil([[j PDC]MOC]);
+  
+  XCTAssertFalse([[[j PDC]PSK]isEqual:[[j ADC]PSK]]);
+  
+  NSLog(@"%@",j.PDC.description);
+}
+
+#pragma mark - ProtocolTests
+/**
+ Yups this is sum Wiley Coyote Level Nice;
+ Test the behavior of the Controller and the Entity
+ Or the ViewController of the controller of the entity.
+ THEN I can use these protocols in the EntityCon and the VueCon
+ */
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli
+             withPerson:(KVPerson *)p {
+  BOOL result = FALSE;
+/**
+ nope, this does not go here, but it does, the deli in this instance should be the ViewController
+ 
+ */
+  return (result);
 }
 
 @end
