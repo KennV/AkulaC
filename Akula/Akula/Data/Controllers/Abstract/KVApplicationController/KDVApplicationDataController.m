@@ -65,9 +65,11 @@
   return _fetchCon;
 }
 
-- (NSMutableArray *)getEntities:(NSString *)entityName
-                       sortedBy:(NSSortDescriptor *)sortDescriptor
-              matchingPredicate:(NSPredicate *)predicate {
+//Called mutable reurns NSArray
+
+- (NSArray *)getEntities:(NSString *)entityName
+                sortedBy:(NSSortDescriptor *)sortDescriptor
+       matchingPredicate:(NSPredicate *)predicate {
 
   NSError *error = nil;
   /**
@@ -104,15 +106,15 @@
   return mutableFetchResults;
 }
 
-- (NSMutableArray *)getAllEntities {
+- (NSArray *)getAllEntities {
   return [self getEntities:[self entityClassName] sortedBy:nil matchingPredicate:nil];
 }
 
-- (NSMutableArray *)getEntitiesMatchingPredicate: (NSPredicate *)p {
+- (NSArray *)getEntitiesMatchingPredicate: (NSPredicate *)p {
   return [self getEntities:([self entityClassName]) sortedBy:nil matchingPredicate:p];
 }
 
-- (NSMutableArray *)getEntitiesMatchingPredicateString: (NSString *)predicateString, ...; {
+- (NSArray *)getEntitiesMatchingPredicateString: (NSString *)predicateString, ...; {
   va_list variadicArguments;
   va_start(variadicArguments, predicateString);
   NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString
@@ -121,12 +123,12 @@
   return [self getEntities:([self entityClassName]) sortedBy:nil matchingPredicate:predicate];
 }
 
-- (NSMutableArray *)getEntitiesSortedBy:(NSSortDescriptor *)sortDescriptor
+- (NSArray *)getEntitiesSortedBy:(NSSortDescriptor *)sortDescriptor
                       matchingPredicate:(NSPredicate *)predicate {
   return [self getEntities:([self entityClassName]) sortedBy:sortDescriptor matchingPredicate:predicate];
 }
 
-- (NSMutableArray *)getEntities:(NSString *)entityName
+- (NSArray *)getEntities:(NSString *)entityName
                        sortedBy:(NSSortDescriptor *)sortDescriptor
         matchingPredicateString:(NSString *)predicateString, ...; {
   va_list variadicArguments;

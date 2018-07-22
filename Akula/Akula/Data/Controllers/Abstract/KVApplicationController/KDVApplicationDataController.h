@@ -22,7 +22,7 @@
  
  @return All entities of this class type
 */
-- (NSMutableArray *)getAllEntities;
+- (NSArray *)getAllEntities;
 
 /**
  Gets entities of the default type matching the predicate
@@ -30,7 +30,7 @@
  @param p NSPred
  @return All entities of class type Matching (p)
 */
-- (NSMutableArray *)getEntitiesMatchingPredicate: (NSPredicate *)p;
+- (NSArray *)getEntitiesMatchingPredicate: (NSPredicate *)p;
 
 /**
  Gets entities of the default type matching the predicate string
@@ -38,7 +38,7 @@
  @param predicateString Predicate Description
  @return Entities matching the predicate string
 */
-- (NSMutableArray *)getEntitiesMatchingPredicateString: (NSString *)predicateString, ...;
+- (NSArray *)getEntitiesMatchingPredicateString: (NSString *)predicateString, ...;
 
 /**
  Gets Sorted and Filtered Entities
@@ -48,7 +48,7 @@
  @param predicateString Filter String
  @return Sorted and Filtered Entities
  */
-- (NSMutableArray *)getEntities:(NSString *)entityName
+- (NSArray *)getEntities:(NSString *)entityName
                        sortedBy:(NSSortDescriptor *)sortDescriptor
         matchingPredicateString:(NSString *)predicateString, ...;
 
