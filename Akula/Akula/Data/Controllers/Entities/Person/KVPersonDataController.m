@@ -32,7 +32,7 @@ double DefaultLongitude = -122.03076853;
 //- (BOOL)didSetupDefaultLocation:(id<MA_)a forPerson:(id)b fromDelegate:(id)c; {
 //  return (false);
 //}
-- (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m {
+- (KVPerson*)makeNewObjectInMOC:(NSManagedObjectContext*)m {
   if (m == nil) {
     m = [self MOC];
   }

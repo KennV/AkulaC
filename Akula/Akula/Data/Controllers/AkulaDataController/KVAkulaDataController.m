@@ -30,15 +30,15 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
  For Clarity's Sake I am pulling these here
  */
 
-- (KVAbstractPhysics*)mkPhysSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+- (KVAbstractPhysics*)makePhysSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
   return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:(ctx)];
 }
 
-- (KVAbstractGraphicsEntity*)mkGraphicsSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+- (KVAbstractGraphicsEntity*)makeGraphicsSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
   return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(ctx)];
 }
 
-- (KVAbstractLocationEntity*)mkLocationSubEntityFor:(id)e in:(NSManagedObjectContext*)ctx {
+- (KVAbstractLocationEntity*)makeLocationSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
   return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(ctx)];
 }
 
@@ -94,7 +94,7 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
 }
 
 
-- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)ctx {
+- (KVRootEntity *)makeNewObjectInMOC:(NSManagedObjectContext*)ctx {
   
   if (ctx == nil) {
     ctx = [self MOC];
@@ -104,9 +104,9 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   
   [rEntity setIncepDate:[NSDate date]];
   [rEntity setDbID:[NSUUID UUID]];
-  [rEntity setPhysics:([self mkPhysSubEntityFor:rEntity in:ctx])];
-  [rEntity setLocation:([self mkLocationSubEntityFor:rEntity in:ctx])];
-  [rEntity setGraphics:([self mkGraphicsSubEntityFor:rEntity in:ctx])];
+  [rEntity setPhysics:([self makePhysSubEntityFor:rEntity In:ctx])];
+  [rEntity setLocation:([self makeLocationSubEntityFor:rEntity In:ctx])];
+  [rEntity setGraphics:([self makeGraphicsSubEntityFor:rEntity In:ctx])];
   
   [[rEntity physics]setOwner:rEntity];
   [[rEntity location]setOwner:rEntity];

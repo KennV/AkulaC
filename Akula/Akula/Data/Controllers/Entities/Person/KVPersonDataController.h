@@ -22,7 +22,7 @@
 
 @interface KVPersonDataController <T:KVPerson*> : KVEntitiesDataController<T>
 
-- (KVPerson*)createEntityInMOC:(NSManagedObjectContext*)m;
+- (KVPerson*)makeNewObjectInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;
 - (void)randomizePersonName:(KVPerson*)p;
 - (void)resetDefaultPerson:(KVPerson*)newP;

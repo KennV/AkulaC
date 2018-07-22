@@ -149,7 +149,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewObject:(id)sender {
   //
   [self findLocation];
-  [[self PDC ]createEntityInMOC:([[self PDC]MOC])];
+  [[self PDC ]makeNewObjectInMOC:([[self PDC]MOC])];
 
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
   [self updateEntityLocation:([p location])];
