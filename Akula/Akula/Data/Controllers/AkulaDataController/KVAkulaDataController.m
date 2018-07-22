@@ -42,7 +42,6 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(ctx)];
 }
 
-
 - (BOOL)didSaveEntities
 {
   NSError *error = nil;
@@ -95,19 +94,19 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
 }
 
 
-- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)m {
+- (KVRootEntity *)createEntityInMOC:(NSManagedObjectContext*)ctx {
   
-  if (m == nil) {
-    m = [self MOC];
+  if (ctx == nil) {
+    ctx = [self MOC];
   }
   
-  KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(m)];
+  KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(ctx)];
   
   [rEntity setIncepDate:[NSDate date]];
   [rEntity setDbID:[NSUUID UUID]];
-  [rEntity setPhysics:([self mkPhysSubEntityFor:rEntity in:m])];
-  [rEntity setLocation:([self mkLocationSubEntityFor:rEntity in:m])];
-  [rEntity setGraphics:([self mkGraphicsSubEntityFor:rEntity in:m])];
+  [rEntity setPhysics:([self mkPhysSubEntityFor:rEntity in:ctx])];
+  [rEntity setLocation:([self mkLocationSubEntityFor:rEntity in:ctx])];
+  [rEntity setGraphics:([self mkGraphicsSubEntityFor:rEntity in:ctx])];
   
   [[rEntity physics]setOwner:rEntity];
   [[rEntity location]setOwner:rEntity];

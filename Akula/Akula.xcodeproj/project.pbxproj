@@ -315,8 +315,8 @@
 		3886196120E7E88D00E2AAAD /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				3886195A20E7E52000E2AAAD /* KVEntitiesDataController.m */,
 				3886195B20E7E52000E2AAAD /* KVEntitiesDataController.h */,
+				3886195A20E7E52000E2AAAD /* KVEntitiesDataController.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -324,8 +324,8 @@
 		3886196220E7E89C00E2AAAD /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				3886195D20E7E52000E2AAAD /* KVItemsDataController.m */,
 				3886195E20E7E52000E2AAAD /* KVItemsDataController.h */,
+				3886195D20E7E52000E2AAAD /* KVItemsDataController.m */,
 			);
 			path = Items;
 			sourceTree = "<group>";
