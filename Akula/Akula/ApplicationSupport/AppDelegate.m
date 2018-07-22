@@ -14,10 +14,10 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 */
 
 #import "AppDelegate.h"
-#import "KVPrimeTableViewController.h"
-#import "KVMapViewController.h"
-//
-#import "KVAkulaDataController.h"
+//#import "KVPrimeTableViewController.h"
+//#import "KVMapViewController.h"
+////
+//#import "KVAkulaDataController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 @property(readonly,nonatomic)KVAkulaDataController *allDataController;
@@ -41,11 +41,11 @@ OK _At This Time_ the view has data, and it should But where should that come fr
  What used to be called navCon is now masterNavCon
  I test for Identity and I also test for respondsTo
  */
-  UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+  UISplitViewController *splitViewController = (UISplitViewController *)[[self window]rootViewController];
   
   [splitViewController setDelegate:self];
   
-  KVPrimeTableViewController *masterNavigationController = [splitViewController.viewControllers lastObject];
+  KVPrimeTableViewController *masterNavigationController = [[splitViewController viewControllers] lastObject];
   
   if ([masterNavigationController isKindOfClass:([KVPrimeTableViewController class])] &&
       [masterNavigationController respondsToSelector:(@selector(setADC:))])
@@ -84,8 +84,10 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 
 #pragma mark - Split view
 // TODO: - implement setup logic
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil)) {
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
+{
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
+    {
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {
