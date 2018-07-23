@@ -22,9 +22,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @interface KVPrimeTableViewController : UITableViewController <MapViewActionsProtocol,PersonDataProtocol,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) KVMapViewController *mapViewController;
+
 @property (strong, nonatomic) KVAkulaDataController *ADC;
 @property (strong, nonatomic) KVPersonDataController *PDC;
 
 - (void)insertNewObject:(id)sender;
+
 @end
 

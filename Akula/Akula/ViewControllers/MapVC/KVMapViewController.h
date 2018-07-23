@@ -38,5 +38,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @property(strong,nonatomic)KVRootEntity *currentEntity;
 
+- (void)setupGUIState;
 @end
 

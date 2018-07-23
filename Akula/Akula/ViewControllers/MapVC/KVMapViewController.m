@@ -13,6 +13,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController ()
 
+- (void)setupButtonsForApplicationState;
+- (void)setupGUIForApplicationState;
+- (void)setupMapGUIState;
+
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
 @property(weak,nonatomic)IBOutlet MKMapView *MapView;
@@ -25,10 +29,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super viewDidLoad];
   [self setupMapView];
   // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [self setupMapGUIState];
   [self configureView];
-//  if (!(self.view.isHidden)) {
-//    NSLog(@"\nBlink\n");
-//  }
 }
 
 - (void)configureView {
@@ -60,16 +65,35 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 #pragma mark - Setup GUI State
+- (void)setupGUIState; {
+  self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+  
+  self.navigationItem.leftItemsSupplementBackButton = YES;
+}
 
-#pragma mark - Setup Map View
+- (void)setupButtonsForApplicationState; {
+  
+}
 
-- (void)setupMapView {
+- (void)setupGUIForApplicationState; {
+  //toolbar
+  //back/breadcrumb button (to Master)
+  //keyed segues
+}
+
+- (void)setupMapGUIState; {
   [[self MapView]setDelegate:self];
   MKMapCamera * cam = [[MKMapCamera alloc]init];
   
   [[self MapView]setMapType:MKMapTypeStandard]; //was MKMapTypeHybrid
   [[self MapView]setShowsScale:false];
 
+  [[self MapView]setCamera:cam];
+}
+#pragma mark - Setup Map View
+
+- (void)setupMapView {
+  
   if (self.currentEntity == nil ) {
     if (self.PDC.getAllEntities.firstObject) {
       [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
@@ -86,7 +110,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
 //  [[self MapView]setNeedsDisplay];
   
-  [[self MapView]setCamera:cam];
+  
 }
 
 #pragma mark - Setup Pin View

@@ -6,7 +6,6 @@
 
 @end
 
-
 @implementation KVEntitiesDataController
 
 @end

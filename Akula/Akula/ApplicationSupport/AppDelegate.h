@@ -12,13 +12,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import <UIKit/UIKit.h>
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
-//
 #import "KVAkulaDataController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 

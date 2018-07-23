@@ -33,7 +33,6 @@ OK _At This Time_ the view has data, and it should But where should that come fr
   return _allDataController;
 }
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 /**
  Override point for customization after application launch.
@@ -51,6 +50,7 @@ OK _At This Time_ the view has data, and it should But where should that come fr
       [masterNavigationController respondsToSelector:(@selector(setADC:))])
   {
     masterNavigationController.mapViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    //FIXME: setupState
     [masterNavigationController setADC:[self allDataController]];
   }
   
@@ -88,6 +88,12 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 {
     if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
     {
+/*
+ OK 'secondaryViewController' is *UINavigationController and its topView *KVMapViewController
+ I should set some class / factory methods to setup the view
+ 
+ ## Look at the Tricorder Implementation ##
+ */
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {

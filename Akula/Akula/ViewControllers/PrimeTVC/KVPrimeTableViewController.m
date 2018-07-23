@@ -41,6 +41,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 @interface KVPrimeTableViewController ()
 
+
 @property (strong,nonatomic)CLLocationManager *locationManager;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
@@ -100,19 +101,30 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 /**
  */
 
-
-- (void)setupDataSource {
-  [self setADC:([[KVAkulaDataController alloc]initAllUp])];
-  [[self PDC]setMOC:([[self PDC]MOC]) ];
+- (void)setupAppState; {
+  
 }
 
+- (void)setupDataSource; {
+  [[self PDC]setMOC:([[self ADC]MOC]) ];
+}
+
+- (void)setupGUIState; {
+  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  
+  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+  self.navigationItem.rightBarButtonItem = addButton;
+  
+  [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
+  [[self mapViewController]setMA_Delegate:(self)];
+  [[self mapViewController]setupGUIState];
+}
 
 - (KVAkulaDataController *)ADC {
   if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
   
   return _ADC;
 }
-
 
 - (KVPersonDataController *)PDC {
   if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
@@ -126,14 +138,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [self setupDataSource];
   [self setupCLManager];
   
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-  self.navigationItem.rightBarButtonItem = addButton;
-
-  [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
-  [[self mapViewController]setMA_Delegate:(self)];
-
+  [self setupGUIState];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -172,8 +178,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
     [mapView setMA_Delegate:(self)];
     [mapView setCurrentEntity:object];
-    mapView.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-    mapView.navigationItem.leftItemsSupplementBackButton = YES;
+    
   }
 }
 
