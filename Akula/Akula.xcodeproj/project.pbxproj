@@ -31,6 +31,7 @@
 		38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5267320112A1C00F969C3 /* KVPrimeTableViewController.m */; };
 		38B34F8C201191BE002A6897 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D788E920D96D4E007F2814 /* KVPersonDataController.m */; };
+		38D9A83021059FA4006446A9 /* KVTasksDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9A82F21059FA4006446A9 /* KVTasksDataController.m */; };
 		38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F4F499200C129B00762934 /* KVAkulaDataController.m */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,8 @@
 		38B34F88201191BE002A6897 /* Akula-TEST.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Akula-TEST.xcdatamodel"; sourceTree = "<group>"; };
 		38D788E920D96D4E007F2814 /* KVPersonDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVPersonDataController.m; sourceTree = "<group>"; };
 		38D788EA20D96D4E007F2814 /* KVPersonDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVPersonDataController.h; sourceTree = "<group>"; };
+		38D9A82E21059FA4006446A9 /* KVTasksDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVTasksDataController.h; sourceTree = "<group>"; };
+		38D9A82F21059FA4006446A9 /* KVTasksDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVTasksDataController.m; sourceTree = "<group>"; };
 		38F4F498200C129B00762934 /* KVAkulaDataController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVAkulaDataController.h; sourceTree = "<group>"; };
 		38F4F499200C129B00762934 /* KVAkulaDataController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -333,6 +336,7 @@
 		3886195C20E7E52000E2AAAD /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				38D9A82D21059DC2006446A9 /* Tasks */,
 				3886196220E7E89C00E2AAAD /* Items */,
 			);
 			path = Items;
@@ -381,6 +385,15 @@
 				38D788E920D96D4E007F2814 /* KVPersonDataController.m */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		38D9A82D21059DC2006446A9 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				38D9A82E21059FA4006446A9 /* KVTasksDataController.h */,
+				38D9A82F21059FA4006446A9 /* KVTasksDataController.m */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 		38F4F497200C125600762934 /* AkulaDataController */ = {
@@ -527,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B34F8C201191BE002A6897 /* Akula.xcdatamodeld in Sources */,
+				38D9A83021059FA4006446A9 /* KVTasksDataController.m in Sources */,
 				383419AD2008322A00F00957 /* AppDelegate.m in Sources */,
 				38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */,
 				383419BE2008322A00F00957 /* main.m in Sources */,

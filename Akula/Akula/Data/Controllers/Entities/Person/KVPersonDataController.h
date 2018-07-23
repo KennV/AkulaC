@@ -7,16 +7,21 @@
 */
 
 #import <Foundation/Foundation.h>
-//#import "KVAkulaDataController.h"
+
 #import "KVEntitiesDataController.h"
 #import "KVPerson+CoreDataProperties.h"
 
+#import "KVTasksDataController.h"
+
+
 @protocol PersonDataProtocol
 
-@optional
-///Good signatures but these would go into the PersonController
 - (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
+@optional
 
+- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
+                   withTasksCon:(KVTasksDataController*)tkon
+                         person:(KVPerson*)p;
 @end
 
 
