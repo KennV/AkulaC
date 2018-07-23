@@ -52,7 +52,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [super setUp];
 
   [self setupInMemoryCoordinator];
-  [[self SUT]setPSK:[self inMemoryCoordinator]];
+  [[self SUT]setPSX:[self inMemoryCoordinator]];
   
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
   [[self SUT]setMOC:[self testMOC]];
@@ -63,7 +63,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 - (void)tearDown {
-  [[self SUT]setPSK:(nil)];
+  [[self SUT]setPSX:(nil)];
   [self setTestMOC:(nil)];
   [self setInMemoryCoordinator:(nil)];
   
@@ -83,7 +83,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil([self inMemoryCoordinator]);
   XCTAssertNotNil([self SUT]);
   XCTAssertNotNil([[self SUT]container]);
-  XCTAssertNotNil([[self SUT]PSK]);
+  XCTAssertNotNil([[self SUT]PSX]);
   XCTAssertNotNil([[self SUT]MOM]);
   XCTAssertNotNil([[self SUT]MOC]);
 
@@ -149,7 +149,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   
-  [[self SUT]createEntityInMOC:([[self SUT] MOC])];
+  [[self SUT]makeNewObjectInMOC:([[self SUT] MOC])];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   
   [[self SUT]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
@@ -170,7 +170,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
   
-  KVRootEntity * zEntity = [[self SUT]createEntityInMOC:([self testMOC])];
+  KVRootEntity * zEntity = [[self SUT]makeNewObjectInMOC:([self testMOC])];
   XCTAssertNotNil(zEntity);
   XCTAssertTrue([[zEntity hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[zEntity qName] isEqualToString:(defOne)]);
@@ -195,9 +195,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 - (void)testSubEntities {
-  XCTAssertNotNil([[self SUT]mkGraphicsSubEntityFor:nil in:[[self SUT]MOC]]);
-  XCTAssertNotNil([[self SUT]mkLocationSubEntityFor:nil in:[[self SUT]MOC]]);
-  XCTAssertNotNil([[self SUT]mkPhysSubEntityFor:nil in:[[self SUT]MOC]]);
+  XCTAssertNotNil([[self SUT]makeGraphicsSubEntityFor:nil In:[[self SUT]MOC]]);
+  XCTAssertNotNil([[self SUT]makeLocationSubEntityFor:nil In:[[self SUT]MOC]]);
+  XCTAssertNotNil([[self SUT]makePhysSubEntityFor:nil In:[[self SUT]MOC]]);
 
 }
 
@@ -223,7 +223,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
 //  [PDC setMOC:[[self SUT]MOC]];
   //
-  KVPerson * tmpPerson = [[self PDC] createEntityInMOC:([self testMOC])];
+  KVPerson * tmpPerson = [[self PDC] makeNewObjectInMOC:([self testMOC])];
   XCTAssertNotNil(tmpPerson);
   XCTAssertTrue([[tmpPerson hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson qName] isEqualToString:(defOne)]);
@@ -253,7 +253,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   
-  [[self PDC]createEntityInMOC:([[self SUT] MOC])];
+  [[self PDC]makeNewObjectInMOC:([[self SUT] MOC])];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   /***/
   KVPerson *jiveP = [[[self PDC]getAllEntities]lastObject];
@@ -277,7 +277,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   /***/
   for (UInt16 k = 0; k < kMax; k+=1) {
-    [[self PDC]createEntityInMOC:([[self SUT] MOC])];
+    [[self PDC]makeNewObjectInMOC:([[self SUT] MOC])];
   }
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (kMax));
   /**
@@ -307,7 +307,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)testNameFunctions {
 //  XCTAssertFalse(@"" isEqualToString:[PDC cre])
-  KVPerson * p = [[self PDC] createEntityInMOC:([self testMOC])];
+  KVPerson * p = [[self PDC] makeNewObjectInMOC:([self testMOC])];
   XCTAssertNotNil([p gender]);
   XCTAssertNotNil([p firstName]);
   XCTAssertNotNil([p middleName]);
@@ -349,12 +349,24 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)testFetchesAndJunk {
   XCTAssertNotNil([[KDVApplicationDataController alloc]initAllUp]);
   KDVApplicationDataController *khan = [[KDVApplicationDataController alloc]initAllUp];
+  [khan setMOC:[[self SUT]MOC]];
   XCTAssertNotNil([khan fetchCon]);
-//  [khan insert]
-  KVRootEntity * tEntity = [NSEntityDescription insertNewObjectForEntityForName:(@"KVRootEntity")inManagedObjectContext:([[self SUT]MOC])];
+  
+  KVRootEntity * tEntity = [NSEntityDescription insertNewObjectForEntityForName:(@"KVRootEntity")inManagedObjectContext:([khan MOC])];
   XCTAssertNotNil(tEntity);
-  //FIXME: This test is wrong
-  XCTAssertTrue([[khan getAllEntities]count] == 0);
+  
+  NSError *error = nil;
+  //  NSManagedObjectContext *managedObjectContext = self.MOC;
+  if ([khan MOC] != nil) {
+    if ([[khan MOC] hasChanges] && ![[khan MOC] save:&error]) {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+    }
+
+    XCTAssertTrue([[khan getAllEntities]count] != 0);
+  }
 }
 
 #pragma mark - profiling
@@ -374,12 +386,14 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssert([appDel isKindOfClass:[AppDelegate class]]);
   XCTAssertNotNil([appDel window]);
   
-//  XCTAssertNotNil(appDel.)
-  
   XCTAssertTrue([appDel application:((UIApplication*)appDel) didFinishLaunchingWithOptions:nil]);
   
   UISplitViewController *rootView = (UISplitViewController<UISplitViewControllerDelegate>*)[[appDel window]rootViewController];
   XCTAssertNotNil([[rootView viewControllers]lastObject]);
+/**
+ 
+*/
+
 }
 
 - (void)testAkulaVue {
@@ -389,17 +403,20 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [j viewDidLoad];
   XCTAssertNotNil([j ADC]);
   XCTAssertNotNil([[j ADC]MOM]);
-  XCTAssertNotNil([[j ADC]PSK]);
+  XCTAssertNotNil([[j ADC]PSX]);
   XCTAssertNotNil([[j ADC]MOC]);
   
   XCTAssertNotNil([j PDC]);
   XCTAssertNotNil([[j PDC]MOM]);
-  XCTAssertNotNil([[j PDC]PSK]);
+  XCTAssertNotNil([[j PDC]PSX]);
   XCTAssertNotNil([[j PDC]MOC]);
   
-  XCTAssertFalse([[[j PDC]PSK]isEqual:[[j ADC]PSK]]);
+  XCTAssertTrue([[[j PDC]MOM]isEqual:[[j ADC]MOM]]);
+  XCTAssertEqual([[j PDC]MOC], [[j ADC]MOC]);
+  XCTAssertFalse([[[j PDC]PSX]isEqual:[[j ADC]PSX]]);
   
   NSLog(@"%@",j.PDC.description);
+  
 }
 
 #pragma mark - ProtocolTests

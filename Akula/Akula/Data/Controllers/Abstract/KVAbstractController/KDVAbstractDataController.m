@@ -17,7 +17,7 @@
 
 @synthesize MOC = _MOC;
 @synthesize MOM = _MOM;
-@synthesize PSK = _PSK;
+@synthesize PSX = _PSX;
 @synthesize container = _container;
 @synthesize fetchCon = _fetchCon;
 @synthesize copyDatabaseIfNotPresent = _copyDatabaseIfNotPresent;
@@ -68,17 +68,17 @@
   return _MOM;
 }
 
-- (NSPersistentStoreCoordinator *)PSK
+- (NSPersistentStoreCoordinator *)PSX
 {
-  if (_PSK != nil)
+  if (_PSX != nil)
   {
-    return _PSK;
+    return _PSX;
   }
-  _PSK = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self MOM]];
+  _PSX = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self MOM]];
   NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:[self databaseName]];
   NSError *error = nil;
   NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-  if (![_PSK addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+  if (![_PSX addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
     // Report any error we got.
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -89,7 +89,7 @@
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     abort();
   }
-  return _PSK;
+  return _PSX;
 }
 
 - (NSManagedObjectContext *)MOC
@@ -100,7 +100,7 @@
     return _MOC;
   }
   
-  NSPersistentStoreCoordinator *coordinator = [self PSK];
+  NSPersistentStoreCoordinator *coordinator = [self PSX];
   if (!coordinator)
   {
     return nil;
@@ -188,7 +188,7 @@
                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
   
-  if (![_PSK addPersistentStoreWithType:NSSQLiteStoreType
+  if (![_PSX addPersistentStoreWithType:NSSQLiteStoreType
                           configuration:nil
                                     URL:storeURL
                                 options:options
