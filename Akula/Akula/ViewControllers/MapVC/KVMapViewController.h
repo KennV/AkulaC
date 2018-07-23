@@ -8,8 +8,11 @@ This Software, Including its source code, binaries and indermediate derived libr
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
  
 */
+#import "KVPinView.h"
 #import "Akula+CoreDataModel.h"
 #import "KVPersonDataController.h"
+
+
 /*
  Currently these will be optional
  I STRONGLY SUSPECT that I will be implementing these in the actual controller for person; Or that somehow, and likely quite obvious; I will be a delegate of a delegate in this

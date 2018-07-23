@@ -21,12 +21,16 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @property(weak,nonatomic)IBOutlet MKMapView *MapView;
 
+@property(weak,nonatomic)KVPinView *AnnotationView;
+
+
 @end
 
 @implementation KVMapViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self setupGUIState];
   [self setupMapView];
   // Do any additional setup after loading the view, typically from a nib.
 }
@@ -44,11 +48,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   }
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Managing the detail item
 
 /**
@@ -60,7 +59,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   if (_currentEntity != newEntity) {
     _currentEntity = newEntity;
     // Update the view.
-    [self configureView];
+//    [self configureView];
   }
 }
 
@@ -69,17 +68,21 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
   
   self.navigationItem.leftItemsSupplementBackButton = YES;
+  NSLog(@"~sup GUI\n");
 }
 
 - (void)setupButtonsForApplicationState; {
-  
+  NSLog(@"~sup Buttons\n");
 }
 
 - (void)setupGUIForApplicationState; {
   //toolbar
   //back/breadcrumb button (to Master)
   //keyed segues
+  NSLog(@"~sup GUI for State\n");
 }
+
+#pragma mark - Setup Map View
 
 - (void)setupMapGUIState; {
   [[self MapView]setDelegate:self];
@@ -90,7 +93,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
   [[self MapView]setCamera:cam];
 }
-#pragma mark - Setup Map View
 
 - (void)setupMapView {
   
@@ -108,9 +110,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
     [[self MapView]setRegion:region animated:TRUE];
   }
   
-//  [[self MapView]setNeedsDisplay];
-  
-  
 }
 
 #pragma mark - Setup Pin View
@@ -120,11 +119,17 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   NSArray *jiveArr = allDataCon.getAllEntities;
 
   for (KVRootEntity *jiveItem in jiveArr) {
+    
+    CLLocationCoordinate2D pinLoc =
+    CLLocationCoordinate2DMake([[[jiveItem location]latitude]doubleValue],
+                               [[[jiveItem location]longitude]doubleValue]);
+    
     if ([jiveItem isKindOfClass:[KVRootEntity class]]) {
       NSLog(@"I am a Kind of Root Entity");
     }
     if ([jiveItem isMemberOfClass:[KVPerson class]]) {
       NSLog(@"Specifically a Person\n");
+      NSLog(@"@ %.6f and %.6f", pinLoc.latitude, pinLoc.longitude);
     }
     if ([jiveItem isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");

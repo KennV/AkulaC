@@ -18,6 +18,8 @@
 		383419F1200835A600F00957 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F0200835A600F00957 /* MapKit.framework */; };
 		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
+		384BC86D21059391007DC8E7 /* KVPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 384BC86C21059391007DC8E7 /* KVPinView.m */; };
+		384BC871210593D9007DC8E7 /* KVPinItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 384BC870210593D9007DC8E7 /* KVPinItem.m */; };
 		38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */; };
 		3854229220D305A4004558F1 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		3854FED820D32B95006BEFA5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3854FED720D32B95006BEFA5 /* CoreLocation.framework */; };
@@ -68,6 +70,10 @@
 		383419F0200835A600F00957 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		383419F2200835B100F00957 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
+		384BC86B21059391007DC8E7 /* KVPinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVPinView.h; sourceTree = "<group>"; };
+		384BC86C21059391007DC8E7 /* KVPinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVPinView.m; sourceTree = "<group>"; };
+		384BC86F210593D9007DC8E7 /* KVPinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVPinItem.h; sourceTree = "<group>"; };
+		384BC870210593D9007DC8E7 /* KVPinItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVPinItem.m; sourceTree = "<group>"; };
 		384FF278205C42C100386F57 /* KVAkulaDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataControllerTests.m; sourceTree = "<group>"; };
 		38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVAbstractDataController.m; sourceTree = "<group>"; };
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
@@ -237,8 +243,28 @@
 		383419F82008374D00F00957 /* AcessoryViews */ = {
 			isa = PBXGroup;
 			children = (
+				384BC86A210592C5007DC8E7 /* AnnotationView */,
 			);
 			path = AcessoryViews;
+			sourceTree = "<group>";
+		};
+		384BC86A210592C5007DC8E7 /* AnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				384BC86E2105939E007DC8E7 /* PinItim */,
+				384BC86B21059391007DC8E7 /* KVPinView.h */,
+				384BC86C21059391007DC8E7 /* KVPinView.m */,
+			);
+			path = AnnotationView;
+			sourceTree = "<group>";
+		};
+		384BC86E2105939E007DC8E7 /* PinItim */ = {
+			isa = PBXGroup;
+			children = (
+				384BC86F210593D9007DC8E7 /* KVPinItem.h */,
+				384BC870210593D9007DC8E7 /* KVPinItem.m */,
+			);
+			path = PinItim;
 			sourceTree = "<group>";
 		};
 		38503D41200848FD00FC92D3 /* Controllers */ = {
@@ -504,11 +530,13 @@
 				383419AD2008322A00F00957 /* AppDelegate.m in Sources */,
 				38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */,
 				383419BE2008322A00F00957 /* main.m in Sources */,
+				384BC86D21059391007DC8E7 /* KVPinView.m in Sources */,
 				3886196020E7E52000E2AAAD /* KVItemsDataController.m in Sources */,
 				38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */,
 				38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */,
 				38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */,
 				3886195F20E7E52000E2AAAD /* KVEntitiesDataController.m in Sources */,
+				384BC871210593D9007DC8E7 /* KVPinItem.m in Sources */,
 				38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */,
 				38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */,
 			);
