@@ -15,6 +15,7 @@
 @end
 
 @implementation KVPersonDataController
+@synthesize delegate = _delegate;
 
 double DefaultLatitude = 37.33115792;
 double DefaultLongitude = -122.03076853;

@@ -27,6 +27,8 @@
 
 @interface KVPersonDataController <T:KVPerson*> : KVEntitiesDataController<T>
 
+@property(weak,nonatomic)id<PersonDataProtocol> delegate;
+
 - (KVPerson*)makeNewObjectInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;
 - (void)randomizePersonName:(KVPerson*)p;
