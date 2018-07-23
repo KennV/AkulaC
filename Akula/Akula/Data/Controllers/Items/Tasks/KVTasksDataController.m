@@ -9,5 +9,5 @@
 #import "KVTasksDataController.h"
 
 @implementation KVTasksDataController
-
+@synthesize delegate = _delegate;
 @end

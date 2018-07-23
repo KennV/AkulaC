@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="KVAbstractEntity" representedClassName="KVAbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="dbID" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="incepDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -79,7 +79,7 @@
         <attribute name="phoneNumber" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="textID" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <relationship name="medsList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication" syncable="YES"/>
-        <relationship name="taskList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="newRelationship" inverseEntity="KVTask" syncable="YES"/>
+        <relationship name="taskList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask" syncable="YES"/>
     </entity>
     <entity name="KVRootEntity" representedClassName="KVRootEntity" isAbstract="YES" parentEntity="KVAbstractEntity" syncable="YES" codeGenerationType="class">
         <attribute name="hexID" attributeType="String" defaultValueString="unset" syncable="YES"/>
@@ -92,7 +92,7 @@
         <attribute name="duration" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="taskMemo" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="taskList" inverseEntity="KVPerson" syncable="YES"/>
+        <relationship name="taskOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="taskList" inverseEntity="KVPerson" syncable="YES"/>
     </entity>
     <elements>
         <element name="KVAbstractEntity" positionX="-495" positionY="-2" width="128" height="118"/>

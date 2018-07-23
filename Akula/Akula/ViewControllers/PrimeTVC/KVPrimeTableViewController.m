@@ -35,7 +35,8 @@ number of sections
 THEN after all of that I might want a protocol for this controller. Jeppers
 
 */
-
+#import "KVAkulaDataController.h"
+#import "KVTasksDataController.h"
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
 
@@ -66,13 +67,14 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @property (weak,nonatomic)UIColor* specialTextColor;
 //I expect that these will also be refactored into sensible names
 
-
+@property (strong, nonatomic) KVTasksDataController *TDC;
 @end
 
 @implementation KVPrimeTableViewController
 
 @synthesize ADC =_ADC;
 @synthesize PDC =_PDC;
+@synthesize TDC = _TDC;
 
 @synthesize locationManager = _locationManager;
 // Them colors
@@ -106,7 +108,10 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 }
 
 - (void)setupDataSource; {
-  [[self PDC]setMOC:([[self ADC]MOC]) ];
+  [[self PDC]setMOC:([[self ADC]MOC])];
+  [[self PDC]setDelegate:(self)];
+  [[self TDC]setMOC:([[self ADC]MOC])];
+  [[self TDC]setDelegate:(self)];  
 }
 
 - (void)setupGUIState; {
@@ -129,7 +134,13 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (KVPersonDataController *)PDC {
   if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
   
-  return _PDC;
+  return (_PDC);
+}
+
+-(KVTasksDataController *)TDC {
+  if (!(_TDC)) _TDC = [[KVTasksDataController alloc]initAllUp];
+  
+  return (_TDC);
 }
 
 - (void)viewDidLoad {
@@ -289,7 +300,22 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     [p setTaskList:[[p taskList] setByAddingObject:e]];
     return TRUE;
   }
+}
 
-
+- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
+              withTask:(KVTask *)t
+              toPerson:(KVPerson *)p
+{
+  BOOL facts = nil;
+  if ([t taskOwner] != p) {
+    [t setTaskOwner:p];
+  }
+  if ([[p taskList]containsObject:t]) {
+    facts = FALSE;
+  } else {
+    [p setTaskList:([NSSet setWithSet:[[p taskList]setByAddingObject:t]])];
+    facts = TRUE;
+  }
+  return (facts);
 }
 @end
