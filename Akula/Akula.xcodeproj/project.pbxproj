@@ -327,8 +327,8 @@
 		3886195920E7E52000E2AAAD /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				38D788E820D96D4E007F2814 /* Person */,
 				3886196120E7E88D00E2AAAD /* Entities */,
+				38D788E820D96D4E007F2814 /* Person */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -336,8 +336,8 @@
 		3886195C20E7E52000E2AAAD /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				38D9A82D21059DC2006446A9 /* Tasks */,
 				3886196220E7E89C00E2AAAD /* Items */,
+				38D9A82D21059DC2006446A9 /* Tasks */,
 			);
 			path = Items;
 			sourceTree = "<group>";

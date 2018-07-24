@@ -30,7 +30,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @synthesize SUT = _SUT;
 @synthesize PDC = _PDC;
 @synthesize inMemoryCoordinator = _inMemoryCoordinator;
-//@synthesize inMemContext = _inMemContext;
 
 - (void)setupInMemoryCoordinator {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
@@ -46,6 +45,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
   [self setInMemoryCoordinator:(_psk)];
   [self setTestMOC:(_ctx)];
+  /**
+   Expected Results
+   */
 }
 
 - (void)setUp {
@@ -59,7 +61,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   [self setPDC:([[KVPersonDataController alloc]initAllUp])];
   [[self PDC] setMOC:[[self SUT]MOC]];
-  
+  /**
+   Expected Results
+   */
 }
 
 - (void)tearDown {
@@ -73,6 +77,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [[self SUT]setMOC:(nil)];
   [self setSUT:(nil)];
   [super tearDown];
+  /**
+   Expected Results
+   */
 }
 
 - (void)testTestingRig01 {
@@ -90,7 +97,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[self SUT]applicationName] isEqualToString:(@"Akula")]);
   XCTAssertTrue([[[self SUT]databaseName] isEqualToString:(@"Akula.sqlite")]);
   XCTAssertTrue([[[self SUT]entityClassName] isEqualToString:(@"KVRootEntity")]);
-  
+  /**
+   Expected Results
+   */
 }
 
 - (void)testBaseRandomizer {
@@ -106,6 +115,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
     XCTAssertLessThanOrEqual((int)[[self SUT]makeRandomNumberCurve:(rolls) :(sides)], ((sides) * (rolls)));
     flow -= 1;
   } while (flow > 0);
+  /**
+   Expected Results
+   */
 }
 
 - (void)testComplexRandomizer {
@@ -122,22 +134,22 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertLessThanOrEqual((int)[[self SUT]makeRandomNumberCurve:(rolls) : (sides)], ((sides) * (rolls)));
     flow -= 1;
   } while (flow > 0);
+  /**
+   Expected Results
+   */
 }
-/**
- Demonstration of Documentation
- Those 99 lines of code did not increase coverage at all, and AAMOF it could also fail when I add new code in production it may likely fail. This is secondary
- By Proving the RootEntity, its SubEntities and All of their ivars (*well not including Photo*) I can confidently move to testing fetches and saves.
-*/
 
 - (void)testAbstractDataController {
   id j = [[KDVAbstractDataController alloc]init];
   XCTAssertNotNil(j);
   if ([j isMemberOfClass:[KDVAbstractDataController class]]) {
     XCTAssertNotNil([j fetchCon]);
+    
   }
-
+  /**
+   Expected Results
+   */
 }
-
 
 - (void)testCreateAndDelete {
   /**
@@ -159,6 +171,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   
   XCTAssertTrue([[self SUT]didSaveEntities]);
+  /**
+   Expected Results
+   */
 }
 
 - (void)testSUTAndEntity {
@@ -198,7 +213,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil([[self SUT]makeGraphicsSubEntityFor:nil In:[[self SUT]MOC]]);
   XCTAssertNotNil([[self SUT]makeLocationSubEntityFor:nil In:[[self SUT]MOC]]);
   XCTAssertNotNil([[self SUT]makePhysSubEntityFor:nil In:[[self SUT]MOC]]);
-
+  /**
+   Expected Results
+   */
 }
 
 - (void)testPDC {
@@ -211,7 +228,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNil([self PDC]);
   
   XCTAssertNotNil([[KVPersonDataController alloc]initAllUp], @"Nper");
-  
+  /**
+   Expected Results
+   */
 }
 
 - (void)testPerson {
@@ -245,6 +264,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertFalse([[[tmpPerson location]latitude] isEqualToNumber:(defZero)]);
   XCTAssertFalse([[[tmpPerson location]longitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[tmpPerson location]heading] isEqualToNumber:(defZero)]);
+  /**
+   Expected Results
+   */
 }
 
 - (void)testEntityMutability {
@@ -265,7 +287,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[self SUT]didSaveEntities]);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   XCTAssertTrue([[self SUT]didSaveEntities]);
-  
+  /**
+   Expected Results
+   */
 }
 
 - (void)testArrayMutability {
@@ -303,6 +327,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   }
   XCTAssertTrue([[self PDC]didSaveEntities]);
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+  /**
+   Expected Results
+   */
 }
 
 - (void)testNameFunctions {
@@ -336,6 +363,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([(@"Edit-Me") isEqualToString:[p lastName]]);
   XCTAssertTrue([(@"Edit-Me") isEqualToString:[p middleName]]);
   XCTAssertTrue([(@"Edit-Me") isEqualToString:[p gender]]);
+  /**
+   Expected Results
+   */
 }
 
 - (void)nonTestMemo {
@@ -359,14 +389,15 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   //  NSManagedObjectContext *managedObjectContext = self.MOC;
   if ([khan MOC] != nil) {
     if ([[khan MOC] hasChanges] && ![[khan MOC] save:&error]) {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
     }
 
     XCTAssertTrue([[khan getAllEntities]count] != 0);
   }
+  /**
+   Expected Results
+   */
 }
 
 #pragma mark - profiling
@@ -376,6 +407,33 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [self measureBlock:^{
     // Put the code you want to measure the time of here.
   }];
+}
+
+#pragma mark - MiniTweek
+- (void)testClassFetch {
+  /**
+   This test is six percent of the current test load
+   */
+  XCTAssertNotNil([[[[self SUT] makeNewObjectInMOC:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[[self PDC] makeNewObjectInMOC:([self testMOC])] class]fetchRequest]);
+
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEvent") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVItem") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+//
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMedication") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMessage") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVPackage") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVTask") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  /**
+   Expected Results
+   */
 }
 
 #pragma mark - Folding
@@ -390,10 +448,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   UISplitViewController *rootView = (UISplitViewController<UISplitViewControllerDelegate>*)[[appDel window]rootViewController];
   XCTAssertNotNil([[rootView viewControllers]lastObject]);
-/**
- 
-*/
-
+  /**
+   Expected Results
+   */
+  
 }
 
 - (void)testAkulaVue {
@@ -414,8 +472,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertTrue([[[j PDC]MOM]isEqual:[[j ADC]MOM]]);
   XCTAssertEqual([[j PDC]MOC], [[j ADC]MOC]);
   XCTAssertFalse([[[j PDC]PSX]isEqual:[[j ADC]PSX]]);
-  
-  NSLog(@"%@",j.PDC.description);
+  /**
+   Expected Results
+   */
   
 }
 
@@ -434,6 +493,26 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  
  */
   return (result);
+  /**
+   Expected Results
+   */
 }
 
+- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
+                   withTasksCon:(KVTasksDataController *)tkon
+                         person:(KVPerson *)p {
+  return FALSE;
+  /**
+   Expected Results
+   */
+}
+
+- (void)testAddTask {
+  XCTAssertFalse([self didModifyTasksForPerson:self
+                                  withTasksCon:nil
+                                        person:nil]);
+  /**
+   Expected Results
+   */
+}
 @end

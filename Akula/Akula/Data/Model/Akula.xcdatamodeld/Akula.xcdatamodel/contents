@@ -78,8 +78,8 @@
         <attribute name="middleName" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="phoneNumber" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="textID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <relationship name="medsList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication" syncable="YES"/>
-        <relationship name="taskList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask" syncable="YES"/>
+        <relationship name="medsList" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication" syncable="YES"/>
+        <relationship name="taskList" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask" syncable="YES"/>
     </entity>
     <entity name="KVRootEntity" representedClassName="KVRootEntity" isAbstract="YES" parentEntity="KVAbstractEntity" syncable="YES" codeGenerationType="class">
         <attribute name="hexID" attributeType="String" defaultValueString="unset" syncable="YES"/>
