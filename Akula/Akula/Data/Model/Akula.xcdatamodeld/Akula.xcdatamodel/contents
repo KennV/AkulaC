@@ -28,9 +28,12 @@
         <attribute name="zTall" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="physics" inverseEntity="KVAbstractEntity" syncable="YES"/>
     </entity>
-    <entity name="KVAppointment" representedClassName="KVAppointment" parentEntity="KVTask" syncable="YES" codeGenerationType="class"/>
+    <entity name="KVAppointment" representedClassName="KVAppointment" parentEntity="KVTask" syncable="YES" codeGenerationType="class">
+        <relationship name="invitees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointment" inverseEntity="KVPerson" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointmentsList" inverseEntity="KVPerson" syncable="YES"/>
+    </entity>
     <entity name="KVEntity" representedClassName="KVEntity" isAbstract="YES" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class"/>
-    <entity name="KVEvent" representedClassName="KVEvent" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
+    <entity name="KVEvent" representedClassName="KVEvent" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
         <attribute name="duration" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="label" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -63,6 +66,8 @@
         <attribute name="hasAttachmentIfYes" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="shortLabel" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="summaryDataString" attributeType="String" defaultValueString="unset" syncable="YES"/>
+        <relationship name="messageOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageList" inverseEntity="KVPerson" syncable="YES"/>
+        <relationship name="messageReciever" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageRecipient" inverseEntity="KVPerson" syncable="YES"/>
     </entity>
     <entity name="KVPackage" representedClassName="KVPackage" parentEntity="KVMessage" syncable="YES" codeGenerationType="class">
         <attribute name="shippingMassKG" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -78,7 +83,11 @@
         <attribute name="middleName" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="phoneNumber" attributeType="String" defaultValueString="unset" syncable="YES"/>
         <attribute name="textID" attributeType="String" defaultValueString="unset" syncable="YES"/>
+        <relationship name="appointment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="invitees" inverseEntity="KVAppointment" syncable="YES"/>
+        <relationship name="appointmentsList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="owner" inverseEntity="KVAppointment" syncable="YES"/>
         <relationship name="medsList" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication" syncable="YES"/>
+        <relationship name="messageList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageOwner" inverseEntity="KVMessage" syncable="YES"/>
+        <relationship name="messageRecipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageReciever" inverseEntity="KVMessage" syncable="YES"/>
         <relationship name="taskList" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask" syncable="YES"/>
     </entity>
     <entity name="KVRootEntity" representedClassName="KVRootEntity" isAbstract="YES" parentEntity="KVAbstractEntity" syncable="YES" codeGenerationType="class">
@@ -99,14 +108,14 @@
         <element name="KVAbstractGraphicsEntity" positionX="-855" positionY="-58" width="128" height="118"/>
         <element name="KVAbstractLocationEntity" positionX="-855" positionY="81" width="128" height="118"/>
         <element name="KVAbstractPhysics" positionX="-819" positionY="243" width="128" height="118"/>
-        <element name="KVAppointment" positionX="443" positionY="360" width="128" height="43"/>
+        <element name="KVAppointment" positionX="439" positionY="392" width="128" height="73"/>
         <element name="KVEntity" positionX="-153" positionY="306" width="128" height="43"/>
-        <element name="KVEvent" positionX="-135" positionY="479" width="128" height="133"/>
+        <element name="KVEvent" positionX="81" positionY="198" width="128" height="133"/>
         <element name="KVItem" positionX="88" positionY="-13" width="128" height="163"/>
         <element name="KVMedication" positionX="691" positionY="171" width="128" height="163"/>
-        <element name="KVMessage" positionX="441" positionY="12" width="128" height="103"/>
+        <element name="KVMessage" positionX="441" positionY="9" width="128" height="133"/>
         <element name="KVPackage" positionX="441" positionY="-164" width="128" height="103"/>
-        <element name="KVPerson" positionX="61" positionY="425" width="128" height="178"/>
+        <element name="KVPerson" positionX="54" positionY="401" width="128" height="238"/>
         <element name="KVRootEntity" positionX="-299" positionY="9" width="128" height="103"/>
         <element name="KVTask" positionX="439" positionY="171" width="128" height="118"/>
     </elements>
