@@ -67,7 +67,8 @@
   _MOM = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
   return _MOM;
 }
-
+// Part two of Lightweight Migration
+// FIXME: Test and Implement Lightweight Migration
 - (NSPersistentStoreCoordinator *)PSX
 {
   if (_PSX != nil)

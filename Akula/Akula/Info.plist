@@ -14,20 +14,20 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>k3nv</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>k3nv</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>AkulaC / Ares Kit uses Camera Access to enable photos</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Always Set to always, Please!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>AkulaC / Ares Kit Attempts to provide location and context based services by accessing your current location and patterns. Please enable for proper usage.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>AkulaC / Ares Kit uses Camera Access to enable photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>AkulaC / Ares Kit uses Photos Library</string>
 	<key>UILaunchStoryboardName</key>

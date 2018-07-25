@@ -30,7 +30,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @synthesize SUT = _SUT;
 @synthesize PDC = _PDC;
 @synthesize inMemoryCoordinator = _inMemoryCoordinator;
-
+// Lightweight Migration
+// https://stackoverflow.com/questions/8881453/the-model-used-to-open-the-store-is-incompatible-with-the-one-used-to-create-the
+// FIXME: Add Lightweight Migration like THIS
 - (void)setupInMemoryCoordinator {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
   //xcdatamodel
