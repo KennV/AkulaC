@@ -7,7 +7,9 @@
 //
 
 #import <MapKit/MapKit.h>
-
+#import "KVMapViewController.h"
+#import "KVRootEntity+CoreDataClass.h"
 @interface KVPinItem : MKPointAnnotation
-
+-(instancetype)initNewPinItemFor:(KVRootEntity*)entity At:(CLLocationCoordinate2D)coord;
+-(instancetype)initNewPinItemAt:(CLLocationCoordinate2D)coord;
 @end

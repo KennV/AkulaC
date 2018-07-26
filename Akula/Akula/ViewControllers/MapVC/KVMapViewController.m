@@ -10,6 +10,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import "KVMapViewController.h"
+#import "KVPinItem.h"
 
 @interface KVMapViewController ()
 
@@ -20,7 +21,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @property(weak,nonatomic)IBOutlet MKMapView *MapView;
 
-@property(weak,nonatomic)KVPinView *AnnotationView;
+@property(weak,nonatomic)KVPinItem *PinItem;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *ToolBar;
 
@@ -28,7 +29,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @implementation KVMapViewController
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
-@synthesize AnnotationView = _AnnotationView;
+@synthesize PinItem = _PinItem;
 @synthesize ToolBar = _ToolBar;
 
 - (void)viewDidLoad {
@@ -121,22 +122,27 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
   for (KVRootEntity *jiveItem in jiveArr) {
     
-    CLLocationCoordinate2D pinLoc =
-    CLLocationCoordinate2DMake([[[jiveItem location]latitude]doubleValue],
-                               [[[jiveItem location]longitude]doubleValue]);
-    
     if ([jiveItem isKindOfClass:[KVRootEntity class]]) {
-//      NSLog(@"I am a Kind of Root Entity");
+
       
     }
     if ([jiveItem isMemberOfClass:[KVPerson class]]) {
-      NSLog(@"Specifically a Person\n");
-      NSLog(@"@ %.6f and %.6f", pinLoc.latitude, pinLoc.longitude);
+
+      CLLocationCoordinate2D pinLoc =
+      CLLocationCoordinate2DMake([[[jiveItem location]latitude]doubleValue],
+                                 [[[jiveItem location]longitude]doubleValue]);
+      NSLog(@"\n@ %.6f and %.6f", pinLoc.latitude, pinLoc.longitude);
+      KVPinItem *jPin = [[KVPinItem alloc]initNewPinItemFor:jiveItem At:pinLoc];
+      NSLog(@"\n adding pin \n");
+      [[self MapView]addAnnotation:jPin];
     }
     if ([jiveItem isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
   }
+//  mapView.addAnnotation(pin);
+  
+
 }
 
 @end

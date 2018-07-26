@@ -169,7 +169,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
   [self updateEntityLocation:([p location])];
-  NSLog(@" %6f :: %6f ", [p location].latitude.floatValue,[p location].longitude.floatValue);
+//  NSLog(@" %6f :: %6f ", [p location].latitude.floatValue,[p location].longitude.floatValue);
 //  KVAbstractLocationEntity *xLoc = p.location;
   __unused BOOL tf = [[self PDC]didSaveEntities];
   // this fails with !=p(nil) PDC is prolly (nil) as well [verified]

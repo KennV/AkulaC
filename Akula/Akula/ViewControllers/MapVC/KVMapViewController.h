@@ -8,7 +8,8 @@ This Software, Including its source code, binaries and indermediate derived libr
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
  
 */
-#import "KVPinView.h"
+
+#import "KVPinItem.h"
 #import "Akula+CoreDataModel.h"
 #import "KVPersonDataController.h"
 
