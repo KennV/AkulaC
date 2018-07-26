@@ -122,7 +122,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
   [[self mapViewController]setMA_Delegate:(self)];
-  [[self mapViewController]setupGUIState];
 }
 
 - (KVAkulaDataController *)ADC {

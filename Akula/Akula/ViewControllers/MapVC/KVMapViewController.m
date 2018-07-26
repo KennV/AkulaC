@@ -15,7 +15,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)setupButtonsForApplicationState;
 - (void)setupGUIForApplicationState;
-- (void)setupMapGUIState;
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -23,20 +22,23 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @property(weak,nonatomic)KVPinView *AnnotationView;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *ToolBar;
 
 @end
-
 @implementation KVMapViewController
+@synthesize entityDescriptionLabel = _entityDescriptionLabel;
+@synthesize MapView = _MapView;
+@synthesize AnnotationView = _AnnotationView;
+@synthesize ToolBar = _ToolBar;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self setupGUIState];
   [self setupMapView];
-  // Do any additional setup after loading the view, typically from a nib.
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  [self setupMapGUIState];
   [self configureView];
 }
 
@@ -44,6 +46,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   // Update the user interface for the detail item.
   if (self.currentEntity) {
     self.entityDescriptionLabel.text = [self.currentEntity description];
+    if (!(_MapView)) [self setupMapView];
     [self setupNotationPins];
   }
 }
@@ -59,7 +62,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   if (_currentEntity != newEntity) {
     _currentEntity = newEntity;
     // Update the view.
-//    [self configureView];
+    [self configureView];
   }
 }
 
@@ -82,34 +85,32 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   NSLog(@"~sup GUI for State\n");
 }
 
-#pragma mark - Setup Map View
+// #pragma mark - Setup Map View
 
-- (void)setupMapGUIState; {
+- (void)setupMapView {
   [[self MapView]setDelegate:self];
   MKMapCamera * cam = [[MKMapCamera alloc]init];
   
   [[self MapView]setMapType:MKMapTypeStandard]; //was MKMapTypeHybrid
   [[self MapView]setShowsScale:false];
 
-  [[self MapView]setCamera:cam];
-}
-
-- (void)setupMapView {
   
   if (self.currentEntity == nil ) {
     if (self.PDC.getAllEntities.firstObject) {
-      [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
     }
   } else {
+    [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
     // We do have a proper currentEntity
     CLLocationCoordinate2D objLocation =
     CLLocationCoordinate2DMake([[[_currentEntity location]latitude]doubleValue],
                                [[[_currentEntity location]longitude]doubleValue]);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(objLocation, 500, 500);
     // ¿bp? ## Observer that at this point the _currEnt is fully fetched with no faults
+    [self setupNotationPins];
     [[self MapView]setRegion:region animated:TRUE];
   }
-  
+  [[self MapView]setCamera:cam];
+
 }
 
 #pragma mark - Setup Pin View
@@ -125,7 +126,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
                                [[[jiveItem location]longitude]doubleValue]);
     
     if ([jiveItem isKindOfClass:[KVRootEntity class]]) {
-      NSLog(@"I am a Kind of Root Entity");
+//      NSLog(@"I am a Kind of Root Entity");
+      
     }
     if ([jiveItem isMemberOfClass:[KVPerson class]]) {
       NSLog(@"Specifically a Person\n");
