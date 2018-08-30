@@ -29,6 +29,7 @@
   if(!(self = [self init])) return nil;
 //  self.title = (@"Hello");
   [self setTitle:(@"New Pin")];
+  self.coordinate = coord;
 //  [self set]
   return self;
 }

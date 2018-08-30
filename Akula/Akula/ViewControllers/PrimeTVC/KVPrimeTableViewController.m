@@ -186,9 +186,11 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
     
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
+    [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
     [mapView setCurrentEntity:object];
     
+    NSLog(@"think");
   }
 }
 

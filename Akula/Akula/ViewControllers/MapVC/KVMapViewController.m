@@ -15,7 +15,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
-- (void)setupGUIForApplicationState;
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -26,7 +25,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property (weak, nonatomic) IBOutlet UIToolbar *ToolBar;
 
 @end
+
+
 @implementation KVMapViewController
+@synthesize currentEntity = _currentEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
 @synthesize PinItem = _PinItem;
@@ -47,13 +49,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   // Update the user interface for the detail item.
   if (self.currentEntity) {
     self.entityDescriptionLabel.text = [self.currentEntity description];
-    if (!(_MapView)) [self setupMapView];
-    [self setupNotationPins];
+//    if (!(_MapView)) [self setupMapView];
+    [self setupMapView];
+//    [self setupNotationPins];
   }
 }
 
 #pragma mark - Managing the detail item
-
 /**
  my entity
 
@@ -61,6 +63,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 - (void)setCurrentEntity:(KVRootEntity *)newEntity {
   if (_currentEntity != newEntity) {
+    //
+    // set a private location here.
+    //
     _currentEntity = newEntity;
     // Update the view.
     [self configureView];
@@ -70,20 +75,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #pragma mark - Setup GUI State
 - (void)setupGUIState; {
   self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-  
   self.navigationItem.leftItemsSupplementBackButton = YES;
-  NSLog(@"~sup GUI\n");
+
 }
 
 - (void)setupButtonsForApplicationState; {
-  NSLog(@"~sup Buttons\n");
-}
+//  NSLog(@"~sup Buttons\n");
 
-- (void)setupGUIForApplicationState; {
-  //toolbar
-  //back/breadcrumb button (to Master)
-  //keyed segues
-  NSLog(@"~sup GUI for State\n");
 }
 
 // #pragma mark - Setup Map View
@@ -92,9 +90,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   [[self MapView]setDelegate:self];
   MKMapCamera * cam = [[MKMapCamera alloc]init];
   
-  [[self MapView]setMapType:MKMapTypeStandard]; //was MKMapTypeHybrid
-  [[self MapView]setShowsScale:false];
-
+  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
+//  [[self MapView]setShowsBuildings:(FALSE)];
+//  [[self MapView]setShowsCompass:(TRUE)];
+//  [[self MapView]setShowsPointsOfInterest:(FALSE)];
+//  [[self MapView]setShowsScale:(TRUE)];
+//  [[self MapView]setShowsTraffic:(TRUE)];
+//  [[self MapView]setShowsUserLocation:(TRUE)];
   
   if (self.currentEntity == nil ) {
     if (self.PDC.getAllEntities.firstObject) {
@@ -118,25 +120,25 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)setupNotationPins {
   KVAkulaDataController *allDataCon = [[KVAkulaDataController alloc]init];
 
-  NSArray *jiveArr = allDataCon.getAllEntities;
+  NSArray *allItems = allDataCon.getAllEntities;
 
-  for (KVRootEntity *jiveItem in jiveArr) {
+  for (KVRootEntity *e in allItems) {
     
-    if ([jiveItem isKindOfClass:[KVRootEntity class]]) {
+    if ([e isKindOfClass:[KVRootEntity class]]) {
 
       
     }
-    if ([jiveItem isMemberOfClass:[KVPerson class]]) {
+    if ([e isMemberOfClass:[KVPerson class]]) {
 
-      CLLocationCoordinate2D pinLoc =
-      CLLocationCoordinate2DMake([[[jiveItem location]latitude]doubleValue],
-                                 [[[jiveItem location]longitude]doubleValue]);
-      NSLog(@"\n@ %.6f and %.6f", pinLoc.latitude, pinLoc.longitude);
-      KVPinItem *jPin = [[KVPinItem alloc]initNewPinItemFor:jiveItem At:pinLoc];
-      NSLog(@"\n adding pin \n");
-      [[self MapView]addAnnotation:jPin];
+      CLLocationCoordinate2D loc2D =
+      CLLocationCoordinate2DMake([[[e location]latitude]doubleValue],
+                                 [[[e location]longitude]doubleValue]);
+      NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
+      KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
+//      NSLog(@"\n adding pin \n");
+      [[self MapView]addAnnotation:pin];
     }
-    if ([jiveItem isMemberOfClass:[KVRootEntity class]]) {
+    if ([e isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
   }
