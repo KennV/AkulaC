@@ -35,8 +35,6 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 
 @implementation KVMapViewController
-// hey look at this sexy *FAILSAFE* struct
-CLLocationCoordinate2D _mapCenter;
 
 @synthesize currentEntity = _currentEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
@@ -46,6 +44,12 @@ CLLocationCoordinate2D _mapCenter;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  if (!([[[self MapView]delegate] isEqual:(self)])) {
+    [[self MapView]setDelegate:self];
+    /**
+     It is set in the XIB but it makes sense to failsafe it here
+     */
+  }
   [self setupGUIState];
 
 }
@@ -55,12 +59,9 @@ CLLocationCoordinate2D _mapCenter;
 }
 
 - (void)configureView {
-  // Update the user interface for the detail item.
   if ([self currentEntity]) {
-
     [[self entityDescriptionLabel]setText:[[self currentEntity]description]];
     [self setupMapViewWith:[self currentEntity]];
-
   }
 }
 
@@ -72,24 +73,19 @@ CLLocationCoordinate2D _mapCenter;
 */
 - (void)setCurrentEntity:(KVRootEntity *)newEntity {
   if (_currentEntity != newEntity) {
-    //
-    // set a private location here.
-    //
     _currentEntity = newEntity;
-    // Update the view.
     [self configureView];
   }
 }
 
 #pragma mark - Setup GUI State
+
 - (void)setupGUIState; {
   self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
   self.navigationItem.leftItemsSupplementBackButton = YES;
-
 }
 
 - (void)setupButtonsForApplicationState; {
-//  NSLog(@"~sup Buttons\n");
 
 }
 
@@ -98,16 +94,13 @@ CLLocationCoordinate2D _mapCenter;
 #pragma mark - Improved
 
 - (void)setupMapView {
-  if (!([[[self MapView]delegate] isEqual:(self)])) {
-    [[self MapView]setDelegate:self];
-  }
-  
+
   [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(FALSE)];
-  [[self MapView]setShowsCompass:(TRUE)];
+  [[self MapView]setShowsCompass:(FALSE)];
   [[self MapView]setShowsPointsOfInterest:(FALSE)];
-  [[self MapView]setShowsScale:(TRUE)];
-  [[self MapView]setShowsTraffic:(TRUE)];
+  [[self MapView]setShowsScale:(FALSE)];
+  [[self MapView]setShowsTraffic:(FALSE)];
   [[self MapView]setShowsUserLocation:(TRUE)];
 }
 
