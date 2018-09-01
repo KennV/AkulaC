@@ -144,7 +144,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  //see ALSO: Conformance is Compliance
+  [[self mapViewController]setMA_Delegate:self];
   [self setupDataSource];
   [self setupCLManager];
   
@@ -161,18 +162,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-// TODO: - Replace This with a controller function preferably from a delegate
+
+/**
+ TODO: - Replace This with a controller function preferably from a delegate
+ MY Wish is MY COMMAND
+*/
 - (void)insertNewObject:(id)sender {
   //
-  [self findLocation];
-  [[self PDC ]makeNewObjectInMOC:([[self PDC]MOC])];
-
-  KVPerson *p = [[[self PDC]getAllEntities]firstObject];
-  [self updateEntityLocation:([p location])];
-//  NSLog(@" %6f :: %6f ", [p location].latitude.floatValue,[p location].longitude.floatValue);
-//  KVAbstractLocationEntity *xLoc = p.location;
-  __unused BOOL tf = [[self PDC]didSaveEntities];
-  // this fails with !=p(nil) PDC is prolly (nil) as well [verified]
+  if ([self didAddNewPersonFor:self]) {
+    NSLog(@"\nPOWA");
+  }
+//  [self jiveTeleFunken];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -282,7 +282,28 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 /*
  Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
  There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
+ 
+Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli` is a great example And I wrote this definfition before writing the declaration and tested it before using it
+ ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
+ 
  */
+
+- (BOOL)didAddNewPersonFor:(id<MapViewActionsProtocol>)deli; {
+  
+  BOOL result = nil;
+  
+  [self findLocation];
+  [[self PDC ]makeNewObjectInMOC:([[self PDC]MOC])];
+  
+  KVPerson *p = [[[self PDC]getAllEntities]firstObject];
+  [self updateEntityLocation:([p location])];
+  
+  result = [[self PDC]didSaveEntities];
+  
+  return (result);
+}
+
+
 
 -(BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
   BOOL st8 = FALSE;
@@ -319,4 +340,5 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   }
   return (facts);
 }
+
 @end

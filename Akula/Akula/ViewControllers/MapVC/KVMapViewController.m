@@ -97,14 +97,10 @@ CLLocationCoordinate2D _mapCenter;
 
 #pragma mark - Improved
 
-- (void)setupMapViewWith:(KVRootEntity*)currentEntity {
-  
+- (void)setupMapView {
   if (!([[[self MapView]delegate] isEqual:(self)])) {
     [[self MapView]setDelegate:self];
   }
-  CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
-  MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
-  
   
   [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(FALSE)];
@@ -113,6 +109,14 @@ CLLocationCoordinate2D _mapCenter;
   [[self MapView]setShowsScale:(TRUE)];
   [[self MapView]setShowsTraffic:(TRUE)];
   [[self MapView]setShowsUserLocation:(TRUE)];
+}
+
+- (void)setupMapViewWith:(KVRootEntity*)currentEntity {
+  
+  [self setupMapView];
+  
+  CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
+  MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
   
   [self setupNotationPins];
   
@@ -146,6 +150,7 @@ CLLocationCoordinate2D _mapCenter;
       CLLocationCoordinate2D loc2D =
       CLLocationCoordinate2DMake([[[e location]latitude]doubleValue],
                                  [[[e location]longitude]doubleValue]);
+      
       NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
       KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
       NSLog(@"\n adding pin \n");
@@ -154,9 +159,8 @@ CLLocationCoordinate2D _mapCenter;
     if ([e isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
-//    mapView.addAnnotation(pin);
+
   }
-  
 
 }
 
