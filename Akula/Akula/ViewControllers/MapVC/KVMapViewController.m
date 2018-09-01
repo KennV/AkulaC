@@ -50,6 +50,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
      It is set in the XIB but it makes sense to failsafe it here
      */
   }
+  [self setupMapView];
   [self setupGUIState];
 
 }
@@ -59,6 +60,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 }
 
 - (void)configureView {
+  
   if ([self currentEntity]) {
     [[self entityDescriptionLabel]setText:[[self currentEntity]description]];
     [self setupMapViewWith:[self currentEntity]];
@@ -105,8 +107,6 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 }
 
 - (void)setupMapViewWith:(KVRootEntity*)currentEntity {
-  
-  [self setupMapView];
   
   CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
   MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
