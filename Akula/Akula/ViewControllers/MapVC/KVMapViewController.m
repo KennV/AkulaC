@@ -8,7 +8,14 @@ This Software, Including its source code, binaries and indermediate derived libr
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
 
 */
+/**
+A Few things are missing in here
 
+FIRST OF ALL, the map view centers somplace 00.00,00.00 and it renders at the correct place so that is one to FUCKING FIX YESTERDAY
+~hell there are obviusly other items but I have recently moved development back onto the phone and it is better.
+OKAY before I make a nav controller I need to decide what gets pitched up to there and part of it would be the behavior of the detail view which is currently this but should be better utilized as one of MANY possible segues.
+ ~rather than build that I will continue to abstract this
+ */
 #import "KVMapViewController.h"
 #import "KVPinItem.h"
 
@@ -28,6 +35,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 
 @implementation KVMapViewController
+// hey look at this sexy *FAILSAFE* struct
+CLLocationCoordinate2D _mapCenter;
+
 @synthesize currentEntity = _currentEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
@@ -37,7 +47,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self setupGUIState];
-  [self setupMapView];
 
 }
 
@@ -47,11 +56,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)configureView {
   // Update the user interface for the detail item.
-  if (self.currentEntity) {
-    self.entityDescriptionLabel.text = [self.currentEntity description];
-//    if (!(_MapView)) [self setupMapView];
-    [self setupMapView];
-//    [self setupNotationPins];
+  if ([self currentEntity]) {
+
+    [[self entityDescriptionLabel]setText:[[self currentEntity]description]];
+    [self setupMapViewWith:[self currentEntity]];
+
   }
 }
 
@@ -84,37 +93,41 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 }
 
-// #pragma mark - Setup Map View
+#pragma mark BUGFIX: NEW VUE
 
-- (void)setupMapView {
-  [[self MapView]setDelegate:self];
-  MKMapCamera * cam = [[MKMapCamera alloc]init];
+#pragma mark - Improved
+
+- (void)setupMapViewWith:(KVRootEntity*)currentEntity {
+  
+  if (!([[[self MapView]delegate] isEqual:(self)])) {
+    [[self MapView]setDelegate:self];
+  }
+  CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
+  MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
+  
   
   [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
-//  [[self MapView]setShowsBuildings:(FALSE)];
-//  [[self MapView]setShowsCompass:(TRUE)];
-//  [[self MapView]setShowsPointsOfInterest:(FALSE)];
-//  [[self MapView]setShowsScale:(TRUE)];
-//  [[self MapView]setShowsTraffic:(TRUE)];
-//  [[self MapView]setShowsUserLocation:(TRUE)];
+  [[self MapView]setShowsBuildings:(FALSE)];
+  [[self MapView]setShowsCompass:(TRUE)];
+  [[self MapView]setShowsPointsOfInterest:(FALSE)];
+  [[self MapView]setShowsScale:(TRUE)];
+  [[self MapView]setShowsTraffic:(TRUE)];
+  [[self MapView]setShowsUserLocation:(TRUE)];
   
-  if (self.currentEntity == nil ) {
-    if (self.PDC.getAllEntities.firstObject) {
-    }
-  } else {
-    [self setCurrentEntity:(self.PDC.getAllEntities.firstObject)];
-    // We do have a proper currentEntity
-    CLLocationCoordinate2D objLocation =
-    CLLocationCoordinate2DMake([[[_currentEntity location]latitude]doubleValue],
-                               [[[_currentEntity location]longitude]doubleValue]);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(objLocation, 500, 500);
-    // ¿bp? ## Observer that at this point the _currEnt is fully fetched with no faults
-    [self setupNotationPins];
-    [[self MapView]setRegion:region animated:TRUE];
-  }
-  [[self MapView]setCamera:cam];
-
+  [self setupNotationPins];
+  
+  [[self MapView]setRegion:region animated:FALSE];
+  
+  [[self MapView]setCamera:[self makeCameraWithLocation:center] animated:FALSE];
 }
+
+- (MKMapCamera*)makeCameraWithLocation:(CLLocationCoordinate2D)loc {
+  MKMapCamera * cam = [[MKMapCamera alloc]init];
+  cam.centerCoordinate = loc;
+
+  return cam;
+}
+
 
 #pragma mark - Setup Pin View
 - (void)setupNotationPins {
@@ -135,14 +148,14 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
                                  [[[e location]longitude]doubleValue]);
       NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
       KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
-//      NSLog(@"\n adding pin \n");
+      NSLog(@"\n adding pin \n");
       [[self MapView]addAnnotation:pin];
     }
     if ([e isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
+//    mapView.addAnnotation(pin);
   }
-//  mapView.addAnnotation(pin);
   
 
 }

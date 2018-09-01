@@ -41,7 +41,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z2M-yE-nFN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="-0.5" width="375" height="667.5"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JEX-9P-axG" id="4gJ-8b-zAp"/>
+                                </connections>
                             </mapView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kd-mt-mNv">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -59,14 +62,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Z2M-yE-nFN" firstAttribute="centerX" secondItem="0XM-y9-sOw" secondAttribute="centerX" id="4kI-At-DgC"/>
                             <constraint firstItem="4Kd-mt-mNv" firstAttribute="trailing" secondItem="Z2M-yE-nFN" secondAttribute="trailing" id="5sm-Jq-ff0"/>
                             <constraint firstItem="4Kd-mt-mNv" firstAttribute="bottom" secondItem="Z2M-yE-nFN" secondAttribute="bottom" id="8iR-lW-Nob"/>
-                            <constraint firstItem="Z2M-yE-nFN" firstAttribute="centerY" secondItem="0XM-y9-sOw" secondAttribute="centerY" id="AC7-a5-QFX"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="D66-za-yxn"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="FUk-xL-I2y"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="Wq1-1l-Da9"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="4Kd-mt-mNv" secondAttribute="centerX" id="aho-cB-nuE"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="Z2M-yE-nFN" secondAttribute="centerY" id="b4V-vk-pJM"/>
                             <constraint firstItem="Z2M-yE-nFN" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="m2F-nQ-iEP"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
                             <constraint firstItem="Z2M-yE-nFN" firstAttribute="bottom" secondItem="VUw-jc-0yf" secondAttribute="bottom" id="ti4-M4-4WL"/>
                             <constraint firstItem="4Kd-mt-mNv" firstAttribute="leading" secondItem="Z2M-yE-nFN" secondAttribute="leading" id="wdm-14-87d"/>
                         </constraints>
