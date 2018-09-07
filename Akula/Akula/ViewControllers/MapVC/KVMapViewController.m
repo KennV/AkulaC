@@ -107,22 +107,17 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 }
 
 - (void)setupMapViewWith:(KVRootEntity*)currentEntity {
-  
+  MKMapCamera *cam = [[MKMapCamera alloc]init];
   CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
   MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
-  
   [self setupNotationPins];
   
   [[self MapView]setRegion:region animated:FALSE];
   
-  [[self MapView]setCamera:[self makeCameraWithLocation:center] animated:FALSE];
-}
-
-- (MKMapCamera*)makeCameraWithLocation:(CLLocationCoordinate2D)loc {
-  MKMapCamera * cam = [[MKMapCamera alloc]init];
-  cam.centerCoordinate = loc;
-
-  return cam;
+  [cam setPitch:(70)];
+  [cam setAltitude:440];
+  [cam setCenterCoordinate:center];
+  
 }
 
 
