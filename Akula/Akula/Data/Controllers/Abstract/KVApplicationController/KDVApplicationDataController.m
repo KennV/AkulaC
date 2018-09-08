@@ -96,6 +96,7 @@
   if (sortDescriptor) {
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [request setSortDescriptors:sortDescriptors];
+//    ([NSSortDescriptor sortDescriptorWithKey:(@"incepDate") ascending:false])
   }
   // Execute the fetch
   NSMutableArray *mutableFetchResults = [[[self MOC] executeFetchRequest:request error:&error] mutableCopy];
@@ -107,7 +108,8 @@
 }
 
 - (NSArray *)getAllEntities {
-  return [self getEntities:[self entityClassName] sortedBy:nil matchingPredicate:nil];
+  NSSortDescriptor *sort = ([NSSortDescriptor sortDescriptorWithKey:(@"incepDate") ascending:false]);
+  return [self getEntities:[self entityClassName] sortedBy:(sort) matchingPredicate:(nil)];
 }
 
 - (NSArray *)getEntitiesMatchingPredicate: (NSPredicate *)p {
