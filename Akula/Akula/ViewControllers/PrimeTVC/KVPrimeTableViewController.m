@@ -121,7 +121,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   self.navigationItem.rightBarButtonItem = addButton;
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
-  [[self mapViewController]setMA_Delegate:(self)];
+  [[self MapViewController]setMA_Delegate:(self)];
 }
 
 - (KVAkulaDataController *)ADC {
@@ -136,7 +136,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   return (_PDC);
 }
 
--(KVTasksDataController *)TDC {
+- (KVTasksDataController *)TDC {
   if (!(_TDC)) _TDC = [[KVTasksDataController alloc]initAllUp];
   
   return (_TDC);
@@ -145,7 +145,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)viewDidLoad {
   [super viewDidLoad];
   //see ALSO: Conformance is Compliance
-  [[self mapViewController]setMA_Delegate:self];
+  [[self MapViewController]setMA_Delegate:self];
   [self setupDataSource];
   [self setupCLManager];
   
@@ -170,12 +170,12 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewObject:(id)sender {
   //
   if ([self didAddNewPersonFor:self]) {
-    NSLog(@"\nPOWA");
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
   }
-//  [self jiveTeleFunken];
-  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-  
-  [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Segues
@@ -272,11 +272,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self locationManager]stopUpdatingLocation];
 }
 
-- (void)updateEntityLocation:(KVAbstractLocationEntity*)location; {
-  [location setLatitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].latitude)]];
-  [location setLongitude:[NSNumber numberWithDouble:([[[self locationManager]location]coordinate].longitude)]];
-}
-
 #pragma mark - CONFRMANCE === COMPLIANCE
 
 /*
@@ -292,14 +287,25 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   
   BOOL result = nil;
   
-  [self findLocation];
+//  [self findLocation];
   [[self PDC ]makeNewObjectInMOC:([[self PDC]MOC])];
   
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
-  [self updateEntityLocation:([p location])];
+  
+  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  
+  [[p location]setLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
+  [[p location]setLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
+  
+  [self foundLocation];
+  
+  NSLog(@"%@",p.location.latitude.description);
+//  [self updateEntityLocation:([p location])];//
+  [[self MapViewController]setCurrentEntity:p];
+//  __unused KVAbstractLocationEntity *tmpZ = [p location];
   
   result = [[self PDC]didSaveEntities];
-  
+
   return (result);
 }
 

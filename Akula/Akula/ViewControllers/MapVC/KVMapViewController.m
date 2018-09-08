@@ -134,18 +134,15 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
   for (KVRootEntity *e in allItems) {
     
-//    if ([e isKindOfClass:[KVRootEntity class]]) {
-//    }
     if ([e isMemberOfClass:[KVPerson class]]) {
+      KVAbstractLocationEntity * l = e.location;
+      CLLocationCoordinate2D loc2D = CLLocationCoordinate2DMake(l.latitude.doubleValue, l.longitude.doubleValue);
 
-      CLLocationCoordinate2D loc2D =
-      CLLocationCoordinate2DMake([[[e location]latitude]doubleValue],
-                                 [[[e location]longitude]doubleValue]);
-//      NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
       KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
-      NSLog(@"\n adding pin \n");
+      NSLog(@"\n adding pin at: %.9f and %.9f", loc2D.latitude, loc2D.longitude);
       [[self MapView]addAnnotation:pin];
     }
+    
     if ([e isMemberOfClass:[KVRootEntity class]]) {
       NSLog(@"Not an Impossible Pony");
     }
