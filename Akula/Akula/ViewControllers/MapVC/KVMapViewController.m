@@ -50,8 +50,8 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
      It is set in the XIB but it makes sense to failsafe it here
      */
   }
-  [self setupMapView];
   [self setupGUIState];
+  [self setupMapView];
 
 }
 
@@ -96,28 +96,32 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 #pragma mark - Improved
 
 - (void)setupMapView {
-
   [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
-  [[self MapView]setShowsBuildings:(FALSE)];
-  [[self MapView]setShowsCompass:(FALSE)];
-  [[self MapView]setShowsPointsOfInterest:(FALSE)];
-  [[self MapView]setShowsScale:(FALSE)];
-  [[self MapView]setShowsTraffic:(FALSE)];
+  [[self MapView]setShowsBuildings:(false)];
+  [[self MapView]setShowsCompass:(false)];
+  [[self MapView]setShowsPointsOfInterest:(false)];
+  [[self MapView]setShowsScale:(false)];
+  [[self MapView]setShowsTraffic:(false)];
   [[self MapView]setShowsUserLocation:(TRUE)];
 }
 
 - (void)setupMapViewWith:(KVRootEntity*)currentEntity {
-  MKMapCamera *cam = [[MKMapCamera alloc]init];
+  
   CLLocationCoordinate2D center = CLLocationCoordinate2DMake(([[[currentEntity location]latitude]doubleValue]), ([[[currentEntity location]longitude]doubleValue]));
   MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 500, 500);
+  
+  [[self MapView]setRegion:region animated:false];
+  [[self MapView]setCamera:[self setupMapCamAtLocation:(center)] animated:false];
+  
   [self setupNotationPins];
-  
-  [[self MapView]setRegion:region animated:FALSE];
-  
+}
+
+- (MKMapCamera *)setupMapCamAtLocation:(CLLocationCoordinate2D)loc {
+  MKMapCamera *cam = [[MKMapCamera alloc]init];
   [cam setPitch:(70)];
   [cam setAltitude:440];
-  [cam setCenterCoordinate:center];
-  
+  [cam setCenterCoordinate:loc];
+  return (cam);
 }
 
 
@@ -129,17 +133,14 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
   for (KVRootEntity *e in allItems) {
     
-    if ([e isKindOfClass:[KVRootEntity class]]) {
-
-      
-    }
+//    if ([e isKindOfClass:[KVRootEntity class]]) {
+//    }
     if ([e isMemberOfClass:[KVPerson class]]) {
 
       CLLocationCoordinate2D loc2D =
       CLLocationCoordinate2DMake([[[e location]latitude]doubleValue],
                                  [[[e location]longitude]doubleValue]);
-      
-      NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
+//      NSLog(@"\n@ %.6f and %.6f", loc2D.latitude, loc2D.longitude);
       KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
       NSLog(@"\n adding pin \n");
       [[self MapView]addAnnotation:pin];
