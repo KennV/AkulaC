@@ -49,7 +49,7 @@ OK _At This Time_ the view has data, and it should But where should that come fr
   if ([masterNavigationController isKindOfClass:([KVPrimeTableViewController class])] &&
       [masterNavigationController respondsToSelector:(@selector(setADC:))])
   {
-    masterNavigationController.mapViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    masterNavigationController.MapViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     //FIXME: setupState
     [masterNavigationController setADC:[self allDataController]];
   }
