@@ -117,7 +117,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)setupGUIState; {
   self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewPerson:)];
   self.navigationItem.rightBarButtonItem = addButton;
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
@@ -167,7 +167,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
  TODO: - Replace This with a controller function preferably from a delegate
  MY Wish is MY COMMAND
 */
-- (void)insertNewObject:(id)sender {
+- (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
   if ([self didAddNewPersonFor:self]) {
@@ -175,9 +175,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    #pragma mark - select HERE
     [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
-
   }
 }
 
@@ -314,18 +313,15 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   return (result);
 }
 
-
-
--(BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
-  BOOL st8 = FALSE;
-  
-  return (st8);
-}
-
 - (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate
                           Task:(KVTask*)e
                         Person:(KVPerson*)p {
-  
+  // TODO: IMPLEMENT THIS NOW!!!
+  // I need to know what row is selected;
+  // IF NO row is selected then select the FIRST ROW;
+  /**
+   I learned that today so it is not hard
+   */
   if ([[p taskList]containsObject:e]) {
     //
     return FALSE;
@@ -335,11 +331,20 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   }
 }
 
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
+  BOOL st8 = FALSE;
+  
+  return (st8);
+}
+
+
 - (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
               withTask:(KVTask *)t
               toPerson:(KVPerson *)p
 {
   BOOL facts = nil;
+  
+  
   if ([t taskOwner] != p) {
     [t setTaskOwner:p];
   }
