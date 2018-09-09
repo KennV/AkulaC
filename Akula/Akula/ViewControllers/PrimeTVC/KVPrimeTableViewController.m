@@ -198,20 +198,57 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 #pragma mark - Table View
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1; // Should be three
+  NSInteger secCount = 1;
+  if (self.TDC) {
+//    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
+  }
+  return secCount; // Should be three
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-  return [[[self PDC]getAllEntities]count];
+  NSInteger rowCount = 0;
+  switch (section) {
+    case 0:
+      rowCount = [[[self PDC]getAllEntities]count];
+//      break;
+    case 1:
+      rowCount = [[[self TDC]getAllEntities]count];
+      // THIS IS CURRENTLY EMPTY
+    default:
+      return (rowCount);
+      break;
+  }
+  return (rowCount);
+  
+//  return [[[self PDC]getAllEntities]count];
 }
   // TODO: - Make a correct Custom Cell
+/**
+ Phase 01, make the logic to add the cell then reaf the "Cell" to "personCell" and "taskCell" then make these in the GUI
+ Phase 02, add the logical stubs for these and the section headers footers and
+ Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
+ 
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
   
-  KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
-  cell.textLabel.text = [[object incepDate]description];
-  return cell;
+  if ([indexPath section] == 0) {
+    //
+    UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
+    
+    KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
+    pCell.textLabel.text = [[p incepDate]description];
+    return pCell;
+  } else if ([indexPath section] == 1)
+  {
+    UITableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    
+    KVTask *t = [[self TDC]getAllEntities][indexPath.row];
+    tCell.textLabel.text = [[t incepDate]description];
+    return tCell;
+  }  else if ([indexPath section] == 2) {
+    return (nil);
+  }
+  return (nil);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -349,10 +386,10 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
     [t setTaskOwner:p];
   }
   if ([[p taskList]containsObject:t]) {
-    facts = FALSE;
+    facts = false;
   } else {
     [p setTaskList:([NSSet setWithSet:[[p taskList]setByAddingObject:t]])];
-    facts = TRUE;
+    facts = true;
   }
   return (facts);
 }
