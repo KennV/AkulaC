@@ -168,12 +168,15 @@ THEN after all of that I might want a protocol for this controller. Jeppers
  MY Wish is MY COMMAND
 */
 - (void)insertNewObject:(id)sender {
-  //
+  // reload here
+  [[self tableView]reloadData];
   if ([self didAddNewPersonFor:self]) {
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
 
   }
 }
@@ -305,6 +308,8 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 //  __unused KVAbstractLocationEntity *tmpZ = [p location];
   
   result = [[self PDC]didSaveEntities];
+//  [[self tableView]reloadData];
+  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
 
   return (result);
 }
@@ -346,5 +351,6 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   }
   return (facts);
 }
+
 
 @end

@@ -92,6 +92,14 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 #pragma mark BUGFIX: NEW VUE
 
+- (IBAction)addPerson:(UIBarButtonItem *)sender {
+  if ([[self MA_Delegate]didAddNewPersonFor:[self MA_Delegate]]) {
+    NSLog(@"Deli Powa");
+  }
+  
+}
+
+
 #pragma mark - Improved
 
 - (void)setupMapView {
