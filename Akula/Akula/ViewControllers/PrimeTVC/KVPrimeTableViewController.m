@@ -189,11 +189,11 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
     
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
+    // FIXME: _ALWAYS_USE_PDC_ in Map View
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
     [mapView setCurrentEntity:object];
-    
-    NSLog(@"think");
+
   }
 }
 
@@ -291,7 +291,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   BOOL result = nil;
   
 //  [self findLocation];
-  [[self PDC ]makeNewObjectInMOC:([[self PDC]MOC])];
+  [[self PDC ]makeNewPersonInMOC:([[self PDC]MOC])];
   
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
   
@@ -302,7 +302,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   
   [self foundLocation];
   
-  NSLog(@"%@",p.location.latitude.description);
+  NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
 //  [self updateEntityLocation:([p location])];//
   [[self MapViewController]setCurrentEntity:p];
 //  __unused KVAbstractLocationEntity *tmpZ = [p location];

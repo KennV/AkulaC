@@ -29,7 +29,7 @@
 
 @property(weak,nonatomic)id<PersonDataProtocol> delegate;
 
-- (KVPerson*)makeNewObjectInMOC:(NSManagedObjectContext*)m;
+- (KVPerson*)makeNewPersonInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;
 - (void)randomizePersonName:(KVPerson*)p;
 - (void)resetDefaultPerson:(KVPerson*)newP;

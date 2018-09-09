@@ -163,7 +163,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   
-  [[self SUT]makeNewObjectInMOC:([[self SUT] MOC])];
+  [[self SUT]makeNewPersonInMOC:([[self SUT] MOC])];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   
   [[self SUT]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
@@ -187,7 +187,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
   
-  KVRootEntity * zEntity = [[self SUT]makeNewObjectInMOC:([self testMOC])];
+  KVRootEntity * zEntity = [[self SUT]makeNewPersonInMOC:([self testMOC])];
   XCTAssertNotNil(zEntity);
   XCTAssertTrue([[zEntity hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[zEntity qName] isEqualToString:(defOne)]);
@@ -244,7 +244,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
 //  [PDC setMOC:[[self SUT]MOC]];
   //
-  KVPerson * tmpPerson = [[self PDC] makeNewObjectInMOC:([self testMOC])];
+  KVPerson * tmpPerson = [[self PDC] makeNewPersonInMOC:([self testMOC])];
   XCTAssertNotNil(tmpPerson);
   XCTAssertTrue([[tmpPerson hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson qName] isEqualToString:(defOne)]);
@@ -277,7 +277,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   
-  [[self PDC]makeNewObjectInMOC:([[self SUT] MOC])];
+  [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   /***/
   KVPerson *jiveP = [[[self PDC]getAllEntities]lastObject];
@@ -303,7 +303,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   /***/
   for (UInt16 k = 0; k < kMax; k+=1) {
-    [[self PDC]makeNewObjectInMOC:([[self SUT] MOC])];
+    [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
   }
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (kMax));
   /**
@@ -336,7 +336,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)testNameFunctions {
 //  XCTAssertFalse(@"" isEqualToString:[PDC cre])
-  KVPerson * p = [[self PDC] makeNewObjectInMOC:([self testMOC])];
+  KVPerson * p = [[self PDC] makeNewPersonInMOC:([self testMOC])];
   XCTAssertNotNil([p gender]);
   XCTAssertNotNil([p firstName]);
   XCTAssertNotNil([p middleName]);
@@ -416,8 +416,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   /**
    This test is six percent of the current test load
    */
-  XCTAssertNotNil([[[[self SUT] makeNewObjectInMOC:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[[self PDC] makeNewObjectInMOC:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[[self SUT] makeNewPersonInMOC:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[[self PDC] makeNewPersonInMOC:([self testMOC])] class]fetchRequest]);
 
   XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
   XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);

@@ -94,7 +94,7 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
 }
 
 
-- (KVRootEntity *)makeNewObjectInMOC:(NSManagedObjectContext*)ctx {
+- (KVRootEntity *)makeNewPersonInMOC:(NSManagedObjectContext*)ctx {
   
   if (ctx == nil) {
     ctx = [self MOC];

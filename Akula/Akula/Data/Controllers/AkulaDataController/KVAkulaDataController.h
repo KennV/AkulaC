@@ -34,7 +34,7 @@ FOUNDATION_EXPORT NSString *STATES[9];
  @param ctx MOC
  @return Entity - All Up
  */
-- (id)makeNewObjectInMOC:(NSManagedObjectContext*)ctx;
+- (id)makeNewPersonInMOC:(NSManagedObjectContext*)ctx;
 
 - (BOOL)didSaveEntities;
 
