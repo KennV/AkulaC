@@ -78,12 +78,19 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  __unused bool j = [[self allDataController]didSaveEntities];
+
+  if ([[self allDataController]didSaveEntities]) {
+    NSLog(@"App terminated correctly");
+  } else {
+    NSLog(@"App NOT terminated correctly");
+  }
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 #pragma mark - Split view
-// TODO: - implement setup logic
+// TODO: - implement UISplitViewController
+//#pragma mark - Split view
+// TODO: - implement Split View logic
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
 {
     if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
