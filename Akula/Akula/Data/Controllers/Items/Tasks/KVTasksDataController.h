@@ -15,8 +15,8 @@
 #import "KVTask+CoreDataClass.h"
 #import "KVItemsDataController.h"
 
-@protocol TasksDataProtocol
-
+@protocol TasksActionProtocol
+- (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli;
 @optional
 /**
  below is an excellent example of a protocol signature.
@@ -24,11 +24,11 @@
  It declares it's purpose / intent
 */
 
-- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
+- (BOOL)didBindTaskFor:(id<TasksActionProtocol>)deli
               withTask:(KVTask*)t
               toPerson:(KVPerson*)p;
 @end
 
 @interface KVTasksDataController <T : KVTask*> : KVItemsDataController <T>
-@property(weak,nonatomic)id<TasksDataProtocol> delegate;
+@property(weak,nonatomic)id<TasksActionProtocol> delegate;
 @end

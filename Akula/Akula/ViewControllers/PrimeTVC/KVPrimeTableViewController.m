@@ -170,7 +170,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-  if ([self didAddNewPersonFor:self]) {
+  if ([self didAddNewPersoninDelegate:self]) {
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
@@ -325,7 +325,11 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
  
  */
 
-- (BOOL)didAddNewPersonFor:(id<MapViewActionsProtocol>)deli; {
+- (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli {
+  
+}
+
+- (BOOL)didAddNewPersoninDelegate:(id<MapViewActionsProtocol>)deli; {
   
   BOOL result = nil;
   
@@ -378,7 +382,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 }
 
 
-- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
+- (BOOL)didBindTaskFor:(id<TasksActionProtocol>)deli
               withTask:(KVTask *)t
               toPerson:(KVPerson *)p
 {
