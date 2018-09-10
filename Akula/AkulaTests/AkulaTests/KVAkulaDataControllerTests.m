@@ -17,7 +17,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "AppDelegate.h"
 
 
-@interface KVAkulaDataControllerTests : XCTestCase <PersonDataProtocol>
+@interface KVAkulaDataControllerTests : XCTestCase <PersonActionProtocol>
 
 @property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
@@ -487,7 +487,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  Or the ViewController of the controller of the entity.
  THEN I can use these protocols in the EntityCon and the VueCon
  */
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli
+- (BOOL)didChangePerson:(id<PersonActionProtocol>)deli
              withPerson:(KVPerson *)p {
   BOOL result = FALSE;
 /**
@@ -500,7 +500,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
 }
 
-- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
+- (BOOL)didModifyTasksForPerson:(id<PersonActionProtocol>)deli
                    withTasksCon:(KVTasksDataController *)tkon
                          person:(KVPerson *)p {
   return FALSE;

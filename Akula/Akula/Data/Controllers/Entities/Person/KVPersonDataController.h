@@ -14,12 +14,12 @@
 #import "KVTasksDataController.h"
 
 
-@protocol PersonDataProtocol
+@protocol PersonActionProtocol
 
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
+- (BOOL)didChangePerson:(id<PersonActionProtocol>)deli withPerson:(KVPerson*)p;
 @optional
 
-- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
+- (BOOL)didModifyTasksForPerson:(id<PersonActionProtocol>)deli
                    withTasksCon:(KVTasksDataController*)tkon
                          person:(KVPerson*)p;
 @end
@@ -27,7 +27,7 @@
 
 @interface KVPersonDataController <T:KVPerson*> : KVEntitiesDataController<T>
 
-@property(weak,nonatomic)id<PersonDataProtocol> delegate;
+@property(weak,nonatomic)id<PersonActionProtocol> delegate;
 
 - (KVPerson*)makeNewPersonInMOC:(NSManagedObjectContext*)m;
 //- (id)createPersoninMOC:(NSManagedObjectContext*)m;

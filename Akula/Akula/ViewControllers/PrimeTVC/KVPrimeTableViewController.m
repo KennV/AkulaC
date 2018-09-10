@@ -375,7 +375,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   }
 }
 
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
+- (BOOL)didChangePerson:(id<PersonActionProtocol>)deli withPerson:(KVPerson *)p {
   BOOL st8 = FALSE;
   
   return (st8);
