@@ -281,7 +281,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   /***/
   KVPerson *jiveP = [[[self PDC]getAllEntities]lastObject];
-  XCTAssertTrue([@"unset" isEqualToString:[jiveP firstName]]);
+  XCTAssertFalse([@"unset" isEqualToString:[jiveP firstName]]);
   [jiveP setFirstName:(@"Joe")];
   XCTAssertTrue([[self SUT]didSaveEntities]);
   XCTAssertTrue([@"Joe" isEqualToString:[[[[self PDC]getAllEntities]lastObject]firstName]]);
@@ -342,9 +342,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertNotNil([p middleName]);
   XCTAssertNotNil([p lastName]);
   XCTAssertNotNil([p gender]);
-  XCTAssertTrue([(@"unset") isEqualToString:[p firstName]]);
-  XCTAssertTrue([(@"unset") isEqualToString:[p lastName]]);
-  XCTAssertTrue([(@"unset") isEqualToString:[p middleName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p firstName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p lastName]]);
+  XCTAssertFalse([(@"unset") isEqualToString:[p middleName]]);
   XCTAssertFalse([(@"unset") isEqualToString:[p gender]]);
 
   [[self PDC] randomizePersonName:p];//

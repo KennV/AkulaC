@@ -66,7 +66,7 @@ double DefaultLongitude = -122.03076853;
     [p setGender:(@"male")];
   }
   
-//  [self randomizePersonName:p];
+  [self randomizePersonName:p]; //reactivated person name
   
 //  [self randomizeContactInformation:p];
   

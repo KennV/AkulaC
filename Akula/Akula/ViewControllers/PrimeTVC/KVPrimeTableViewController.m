@@ -236,7 +236,10 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
     
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
-    pCell.textLabel.text = [[p incepDate]description];
+    pCell.textLabel.text = [[p firstName] stringByAppendingString:[p lastName]];
+    NSString *t1 = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
+    [[pCell textLabel]setText:t1];
+//    pCell.textLabel.text = [[p incepDate]description];
     return pCell;
   } else if ([indexPath section] == 1)
   {
