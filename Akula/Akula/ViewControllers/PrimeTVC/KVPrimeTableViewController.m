@@ -266,15 +266,24 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     if (deletrix != nil) {
       //NSLog(@"Deleting %@ at index %ld", [deletrix description],(long)indexPath.row);
       [[self PDC]deleteEntity:(deletrix)];
+      
     } else {
       NSLog(@"Error trying to delete Nil-Item");
     }
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    if ([[self PDC]didSaveEntities]) {
+    if ([indexPath row] > 1) {
+      /**
+       A couple of things ALSO need to happen
+       I need another selected row
+       and the table view needs a new selected entity
+       */
+    }
+    if ([[self PDC]didSaveEntities] == false) {
     }
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
   }
+  
 }
 
 #pragma mark - Map Functions
@@ -324,21 +333,12 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
  ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
  
  */
-
-- (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli {
-  
-}
-
-- (BOOL)didAddNewPersoninDelegate:(id<MapViewActionsProtocol>)deli; {
-  
-  BOOL result = nil;
-  
-//  [self findLocation];
+- (void)willAddPersonInDelegate:(id<PersonActionProtocol>)deli {
   [[self PDC ]makeNewPersonInMOC:([[self PDC]MOC])];
+  [self findLocation];
+  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
   
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
-  
-  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
   
   [[p location]setLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
   [[p location]setLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
@@ -346,8 +346,22 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   [self foundLocation];
   
   NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
-//  [self updateEntityLocation:([p location])];//
-  [[self MapViewController]setCurrentEntity:p];
+  //  [self updateEntityLocation:([p location])];//
+
+}
+
+- (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli {
+  
+}
+
+- (BOOL)didAddNewPersoninDelegate:(id<MapViewActionsProtocol>)deli {
+  
+  BOOL result = nil;
+  
+//  [self findLocation];
+  
+  [self willAddPersonInDelegate:self];
+//  [[self MapViewController]setCurrentEntity:p];
 //  __unused KVAbstractLocationEntity *tmpZ = [p location];
   
   result = [[self PDC]didSaveEntities];

@@ -10,4 +10,9 @@
 
 @implementation KVTasksDataController
 @synthesize delegate = _delegate;
+
+
+- (instancetype)initAllUp {
+  return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVTask"]);
+}
 @end

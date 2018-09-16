@@ -24,11 +24,13 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @property (strong, nonatomic)KVAkulaDataController * SUT;
 @property (strong, nonatomic)KVPersonDataController *PDC;
+@property (strong, nonatomic)KVTasksDataController *TDC;
 @end
 
 @implementation KVAkulaDataControllerTests
 @synthesize SUT = _SUT;
 @synthesize PDC = _PDC;
+@synthesize TDC = _TDC;
 @synthesize inMemoryCoordinator = _inMemoryCoordinator;
 // Lightweight Migration
 // https://stackoverflow.com/questions/8881453/the-model-used-to-open-the-store-is-incompatible-with-the-one-used-to-create-the
@@ -63,6 +65,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   
   [self setPDC:([[KVPersonDataController alloc]initAllUp])];
   [[self PDC] setMOC:[[self SUT]MOC]];
+  
+  [self setTDC:([[KVTasksDataController alloc]initAllUp])];
+  [[self TDC]setMOC:[[self SUT]MOC]];
   /**
    Expected Results
    */
@@ -487,6 +492,17 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  Or the ViewController of the controller of the entity.
  THEN I can use these protocols in the EntityCon and the VueCon
  */
+/**
+20180914@0030
+ # Tests and Testable Protocols #
+ 
+ Judging by the extant structure of this code below. with the _expected_result_ right there in the function, it seem as if I have been planning this at least subliminially in my mind for a while.
+ 
+ Everything in a protocol affects state.
+ And I want to mke this much more transparent at a class level by using protocol inheritance.
+ */
+
+
 - (BOOL)didChangePerson:(id<PersonActionProtocol>)deli
              withPerson:(KVPerson *)p {
   BOOL result = FALSE;
@@ -517,4 +533,23 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    Expected Results
    */
 }
+/**
+20180914@0030
+Also this may be a great opportunity to test some of the different boilerplate fetches that are performed
+ Lets look at the types of parameters that they take
+DO I have these properly documented
+*/
+#pragma mark - TKON
+- (void)testZOner {
+//  XCTAssertNotNil(self.)
+  XCTAssertNotNil([self TDC]);
+  //
+//  XCTAssertEqual((@"KVTask"), [[self TDC]entityClassName]);
+  
+  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
+//  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:<#(nonnull NSString *)#> inManagedObjectContext:<#(nonnull NSManagedObjectContext *)#>]
+  
+}
+
+
 @end
