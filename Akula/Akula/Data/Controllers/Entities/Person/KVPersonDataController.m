@@ -65,21 +65,20 @@ double DefaultLongitude = -122.03076853;
   } else {
     [p setGender:(@"male")];
   }
-  
+
   [self randomizePersonName:p]; //reactivated person name
-  
+
 //  [self randomizeContactInformation:p];
-  
-  
-  NSError *error = nil;
-  if (![[self MOC] save:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    //NSCocoaErrorDomain Code=1570
-    //required fields set to nil see xcdm
-    abort();
-  } else {
     return p;
-  }  
+//  NSError *error = nil;
+//  if (![[self MOC] save:&error]) {
+//    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//    //NSCocoaErrorDomain Code=1570
+//    //required fields set to nil see xcdm
+//    abort();
+//  } else {
+//    return p;
+//  }
 }
 
 - (void)resetDefaultPerson:(KVPerson*)newP {

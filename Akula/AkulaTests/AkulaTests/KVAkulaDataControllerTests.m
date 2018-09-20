@@ -37,13 +37,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 // FIXME: Add Lightweight Migration like THIS
 - (void)setupInMemoryCoordinator {
   //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
-  //xcdatamodel
-  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"];
-  //  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Anubis" withExtension:@"xcdatamodel"];
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"]; //xcdatamodel
   NSManagedObjectModel *_mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
   NSPersistentStoreCoordinator *_psk = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_mom];
-  XCTAssertTrue([_psk addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store");
-  
+  XCTAssertTrue([_psk addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store"); // ** Note I _prefer_ the longhand version of this
+
   NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
   _ctx.persistentStoreCoordinator = _psk;
 
@@ -54,10 +52,21 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
 }
 
+/**
+ 
+ 20180915@2145
+ SO my base class is KVRootEntity. and if I were to add classFunctions to that Controller, *KVRootEntityController then it would be simple to +(void/bool)add/delete#RootEntity
+ BECAUSE THE SUT.entityClassName is @"KVRootEntity"
+ ¿Can I send These <BLIND>?
+
+*/
+
+
 - (void)setUp {
   [super setUp];
 
   [self setupInMemoryCoordinator];
+  
   [[self SUT]setPSX:[self inMemoryCoordinator]];
   
   [self setSUT:[[KVAkulaDataController alloc]initAllUp]];
@@ -192,7 +201,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
   
-  KVRootEntity * zEntity = [[self SUT]makeNewPersonInMOC:([self testMOC])];
+  KVRootEntity * zEntity = [[self SUT]makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil(zEntity);
   XCTAssertTrue([[zEntity hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[zEntity qName] isEqualToString:(defOne)]);
@@ -249,7 +258,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 //  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
 //  [PDC setMOC:[[self SUT]MOC]];
   //
-  KVPerson * tmpPerson = [[self PDC] makeNewPersonInMOC:([self testMOC])];
+  KVPerson * tmpPerson = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil(tmpPerson);
   XCTAssertTrue([[tmpPerson hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson qName] isEqualToString:(defOne)]);
@@ -341,7 +350,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)testNameFunctions {
 //  XCTAssertFalse(@"" isEqualToString:[PDC cre])
-  KVPerson * p = [[self PDC] makeNewPersonInMOC:([self testMOC])];
+  KVPerson * p = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil([p gender]);
   XCTAssertNotNil([p firstName]);
   XCTAssertNotNil([p middleName]);
@@ -421,23 +430,23 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   /**
    This test is six percent of the current test load
    */
-  XCTAssertNotNil([[[[self SUT] makeNewPersonInMOC:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[[self PDC] makeNewPersonInMOC:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[[self SUT] makeNewPersonInMOC:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[[self PDC] makeNewPersonInMOC:([[self SUT]MOC])] class]fetchRequest]);
 
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEntity") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEvent") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVItem") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractEntity") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEntity") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVEvent") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVItem") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
 //
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMedication") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMessage") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVPackage") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
-  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVTask") inManagedObjectContext:([self testMOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVAppointment") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMedication") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVMessage") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVPackage") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
+  XCTAssertNotNil([[[NSEntityDescription insertNewObjectForEntityForName:(@"KVTask") inManagedObjectContext:([[self SUT]MOC])] class]fetchRequest]);
   /**
    Expected Results
    */
@@ -500,6 +509,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  
  Everything in a protocol affects state.
  And I want to mke this much more transparent at a class level by using protocol inheritance.
+
  */
 
 
@@ -524,6 +534,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    Expected Results
    */
 }
+// OOOh xcode just added this b/c I added it _elsewhere_
+- (void)willAddPersonInDelegate:(id<PersonActionProtocol>)deli {
+//  <#code#>
+}
 
 - (void)testAddTask {
   XCTAssertFalse([self didModifyTasksForPerson:self
@@ -543,10 +557,11 @@ DO I have these properly documented
 - (void)testZOner {
 //  XCTAssertNotNil(self.)
   XCTAssertNotNil([self TDC]);
+  XCTAssertNotNil([[self PDC]makeNewPersonInMOC:nil]);
   //
 //  XCTAssertEqual((@"KVTask"), [[self TDC]entityClassName]);
   
-  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
+//  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
 //  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:<#(nonnull NSString *)#> inManagedObjectContext:<#(nonnull NSManagedObjectContext *)#>]
   
 }
