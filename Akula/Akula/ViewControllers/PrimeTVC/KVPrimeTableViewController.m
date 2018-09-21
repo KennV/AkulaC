@@ -200,27 +200,20 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   NSInteger secCount = 1;
   if (self.TDC) {
-//    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
+    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
   }
   return secCount; // Should be three
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  NSInteger rowCount = 0;
-  switch (section) {
-    case 0:
-      rowCount = [[[self PDC]getAllEntities]count];
-//      break;
-    case 1:
-      rowCount = [[[self TDC]getAllEntities]count];
-      // THIS IS CURRENTLY EMPTY
-    default:
-      return (rowCount);
-      break;
-  }
-  return (rowCount);
   
-//  return [[[self PDC]getAllEntities]count];
+  if (section == 0) {
+    return ([[[self PDC]getAllEntities]count]);
+  } else if (section == 1) {
+    return ([[[self TDC]getAllEntities]count]);
+  }
+  return (0);
+
 }
   // TODO: - Make a correct Custom Cell
 /**
@@ -334,7 +327,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
  
  */
 - (void)willAddPersonInDelegate:(id<PersonActionProtocol>)deli {
-  [[self PDC ]makeNewPersonInMOC:([[self PDC]MOC])];
+  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
   CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
   
@@ -358,7 +351,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   
   BOOL result = nil;
   
-//  [self findLocation];
+  [self findLocation];//
   
   [self willAddPersonInDelegate:self];
 //  [[self MapViewController]setCurrentEntity:p];

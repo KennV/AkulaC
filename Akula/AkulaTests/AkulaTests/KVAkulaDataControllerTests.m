@@ -118,6 +118,69 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
 }
 
+- (void)testEntityMutability {
+  /**
+   This test set determines:
+   */
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+  
+  [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
+  /***/
+  KVPerson *jiveP = [[[self PDC]getAllEntities]lastObject];
+  XCTAssertFalse([@"unset" isEqualToString:[jiveP firstName]]);
+  [jiveP setFirstName:(@"Joe")];
+  XCTAssertTrue([[self SUT]didSaveEntities]);
+  XCTAssertTrue([@"Joe" isEqualToString:[[[[self PDC]getAllEntities]lastObject]firstName]]);
+  [[self PDC]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
+  XCTAssertTrue([[self SUT]didSaveEntities]);
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+  XCTAssertTrue([[self SUT]didSaveEntities]);
+  /**
+   Expected Results
+   */
+}
+
+- (void)testArrayMutability {
+  /**
+   This test set determines:
+   */
+  UInt16 kMax = 32;
+  
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+  /***/
+  for (UInt16 k = 0; k < kMax; k+=1) {
+    [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
+  }
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (kMax));
+  /**
+   This Array is non-mutable but it's members are
+   */
+  NSArray *somePeople = [[self PDC]getAllEntities];
+  
+  for (KVPerson *personX in somePeople) {
+    [personX setFirstName:@"Tony"];
+  }
+  
+  XCTAssertEqual(kMax, [[[self PDC]getAllEntities]count]);
+  XCTAssertTrue([[self PDC]didSaveEntities]);
+  
+  for (KVPerson *personX in somePeople) {
+    XCTAssertFalse([[personX firstName]isEqualToString:@"unset"]);
+    XCTAssertTrue([[personX firstName]isEqualToString:@"Tony"]);
+  }
+  XCTAssertTrue([[self PDC]didSaveEntities]);
+  
+  while ([[[self PDC]getAllEntities]count]!=0) {
+    [[self PDC]deleteEntity:[[[self PDC]getAllEntities]lastObject]];
+  }
+  XCTAssertTrue([[self PDC]didSaveEntities]);
+  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
+  /**
+   Expected Results
+   */
+}
+
 - (void)testBaseRandomizer {
   /**
    This test set determines: My ability to make a single random value between one and twenty
@@ -280,69 +343,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   XCTAssertFalse([[[tmpPerson location]latitude] isEqualToNumber:(defZero)]);
   XCTAssertFalse([[[tmpPerson location]longitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[tmpPerson location]heading] isEqualToNumber:(defZero)]);
-  /**
-   Expected Results
-   */
-}
-
-- (void)testEntityMutability {
-  /**
-   This test set determines:
-   */
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
-  
-  [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
-  /***/
-  KVPerson *jiveP = [[[self PDC]getAllEntities]lastObject];
-  XCTAssertFalse([@"unset" isEqualToString:[jiveP firstName]]);
-  [jiveP setFirstName:(@"Joe")];
-  XCTAssertTrue([[self SUT]didSaveEntities]);
-  XCTAssertTrue([@"Joe" isEqualToString:[[[[self PDC]getAllEntities]lastObject]firstName]]);
-  [[self PDC]deleteEntity:[[[self SUT]getAllEntities]lastObject]];
-  XCTAssertTrue([[self SUT]didSaveEntities]);
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
-  XCTAssertTrue([[self SUT]didSaveEntities]);
-  /**
-   Expected Results
-   */
-}
-
-- (void)testArrayMutability {
-  /**
-   This test set determines:
-   */
-  UInt16 kMax = 32;
-  
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
-  /***/
-  for (UInt16 k = 0; k < kMax; k+=1) {
-    [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
-  }
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (kMax));
-  /**
-   This Array is non-mutable but it's members are
-  */
-  NSArray *somePeople = [[self PDC]getAllEntities];
-  
-  for (KVPerson *personX in somePeople) {
-    [personX setFirstName:@"Tony"];
-  }
-  
-  XCTAssertEqual(kMax, [[[self PDC]getAllEntities]count]);
-  XCTAssertTrue([[self PDC]didSaveEntities]);
-  
-  for (KVPerson *personX in somePeople) {
-    XCTAssertFalse([[personX firstName]isEqualToString:@"unset"]);
-    XCTAssertTrue([[personX firstName]isEqualToString:@"Tony"]);
-  }
-  XCTAssertTrue([[self PDC]didSaveEntities]);
-
-  while ([[[self PDC]getAllEntities]count]!=0) {
-    [[self PDC]deleteEntity:[[[self PDC]getAllEntities]lastObject]];
-  }
-  XCTAssertTrue([[self PDC]didSaveEntities]);
-  XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
   /**
    Expected Results
    */
