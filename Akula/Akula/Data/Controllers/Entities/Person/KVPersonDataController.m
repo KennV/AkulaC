@@ -69,6 +69,7 @@ double DefaultLongitude = -122.03076853;
   [self randomizePersonName:p]; //reactivated person name
 
 //  [self randomizeContactInformation:p];
+  //OOH set bak to a default OK?
     return p;
 //  NSError *error = nil;
 //  if (![[self MOC] save:&error]) {

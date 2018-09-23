@@ -13,9 +13,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @class KVAkulaDataController;
 #import "KVAkulaDataController.h" //added model to test
 #import "KVPersonDataController.h"
-//
-#import "AppDelegate.h"
 
+#import "AppDelegate.h"
 
 @interface KVAkulaDataControllerTests : XCTestCase <PersonActionProtocol>
 
@@ -25,24 +24,34 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property (strong, nonatomic)KVAkulaDataController * SUT;
 @property (strong, nonatomic)KVPersonDataController *PDC;
 @property (strong, nonatomic)KVTasksDataController *TDC;
+
 @end
 
 @implementation KVAkulaDataControllerTests
+
 @synthesize SUT = _SUT;
 @synthesize PDC = _PDC;
 @synthesize TDC = _TDC;
 @synthesize inMemoryCoordinator = _inMemoryCoordinator;
-// Lightweight Migration
-// https://stackoverflow.com/questions/8881453/the-model-used-to-open-the-store-is-incompatible-with-the-one-used-to-create-the
-// FIXME: Add Lightweight Migration like THIS
-- (void)setupInMemoryCoordinator {
-  //https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
+
+/**
+ Lightweight Migration
+ https://stackoverflow.com/questions/8881453/the-model-used-to-open-the-store-is-incompatible-with-the-one-used-to-create-the
+ FIXME: Add Lightweight Migration like THIS
+ */
+- (void)
+setupInMemoryCoordinator {
+  /**
+   https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
+  */
   NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Akula" withExtension:@"momd"]; //xcdatamodel
   NSManagedObjectModel *_mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
   NSPersistentStoreCoordinator *_psk = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_mom];
-  XCTAssertTrue([_psk addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store"); // ** Note I _prefer_ the longhand version of this
+  
+  XCTAssertTrue([_psk addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:NULL] ? YES : NO, @"Should be able to add in-memory store");
 
   NSManagedObjectContext *_ctx = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+  
   _ctx.persistentStoreCoordinator = _psk;
 
   [self setInMemoryCoordinator:(_psk)];
@@ -60,7 +69,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  ¿Can I send These <BLIND>?
 
 */
-
 
 - (void)setUp {
   [super setUp];
@@ -102,9 +110,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
   /**
    This test set determines: The initial state of my test rig.
   */
-  XCTAssertNotNil([self inMemoryCoordinator]);
-  XCTAssertNotNil([self inMemoryCoordinator]);
   XCTAssertNotNil([self SUT]);
+  XCTAssertNotNil([self inMemoryCoordinator]);
+
   XCTAssertNotNil([[self SUT]container]);
   XCTAssertNotNil([[self SUT]PSX]);
   XCTAssertNotNil([[self SUT]MOM]);
@@ -120,10 +128,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)testEntityMutability {
   /**
-   This test set determines:
+   This test set determines: if the relevant contents of the non mutable array from getAllEntities can be modified without error
    */
+
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (0));
-  
   [[self PDC]makeNewPersonInMOC:([[self SUT] MOC])];
   XCTAssertEqual(([[[self SUT]getAllEntities]count]), (1));
   /***/
@@ -318,16 +326,16 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
    */
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
-//  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
-//  [PDC setMOC:[[self SUT]MOC]];
-  //
+/**  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
+ [PDC setMOC:[[self SUT]MOC]];
+  */
   KVPerson * tmpPerson = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil(tmpPerson);
   XCTAssertTrue([[tmpPerson hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson qName] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson type] isEqualToString:(defOne)]);
   XCTAssertTrue([[tmpPerson status] isEqualToNumber:(defZero)]);
-  // NOTE WILL HAVE TO ADD GRAPHICS
+
   XCTAssertNotNil([tmpPerson graphics]);
   XCTAssertTrue([[[tmpPerson graphics]caption] isEqualToString:(defOne)]);
   XCTAssertTrue([[[tmpPerson graphics]photoFileName] isEqualToString:(defOne)]);
@@ -349,7 +357,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 - (void)testNameFunctions {
-//  XCTAssertFalse(@"" isEqualToString:[PDC cre])
+
   KVPerson * p = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil([p gender]);
   XCTAssertNotNil([p firstName]);
@@ -426,6 +434,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 }
 
 #pragma mark - MiniTweek
+
 - (void)testClassFetch {
   /**
    This test is six percent of the current test load
@@ -512,7 +521,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
  */
 
-
 - (BOOL)didChangePerson:(id<PersonActionProtocol>)deli
              withPerson:(KVPerson *)p {
   BOOL result = FALSE;
@@ -563,8 +571,6 @@ DO I have these properly documented
   
 //  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
 //  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:<#(nonnull NSString *)#> inManagedObjectContext:<#(nonnull NSManagedObjectContext *)#>]
-  
 }
-
 
 @end
