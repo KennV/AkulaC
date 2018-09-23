@@ -29,10 +29,12 @@ double DefaultLongitude = -122.03076853;
   return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVPerson"]);
 }
 
-/**- */
-//- (BOOL)didSetupDefaultLocation:(id<MA_)a forPerson:(id)b fromDelegate:(id)c; {
-//  return (false);
-//}
+/** -
+- (BOOL)didSetupDefaultLocation:(id<MA_)a forPerson:(id)b fromDelegate:(id)c; {
+  return (false);
+}
+ */
+
 - (KVPerson*)makeNewPersonInMOC:(NSManagedObjectContext*)m {
   if (m == nil) {
     m = [self MOC];
@@ -71,15 +73,17 @@ double DefaultLongitude = -122.03076853;
 //  [self randomizeContactInformation:p];
   //OOH set bak to a default OK?
     return p;
-//  NSError *error = nil;
-//  if (![[self MOC] save:&error]) {
-//    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//    //NSCocoaErrorDomain Code=1570
-//    //required fields set to nil see xcdm
-//    abort();
-//  } else {
-//    return p;
-//  }
+  /**
+  NSError *error = nil;
+  if (![[self MOC] save:&error]) {
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    //NSCocoaErrorDomain Code=1570
+    //required fields set to nil see xcdm
+    abort();
+  } else {
+    return p;
+  }
+  */
 }
 
 - (void)resetDefaultPerson:(KVPerson*)newP {
