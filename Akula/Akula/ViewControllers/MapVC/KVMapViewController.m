@@ -93,7 +93,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 #pragma mark BUGFIX: NEW VUE
 
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
-  if ([[self MA_Delegate]didAddNewPersoninDelegate:[self MA_Delegate]]) {
+  if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
     NSLog(@"Deli Powa");
   }
   

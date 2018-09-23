@@ -23,7 +23,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  today it is not an issue but soon it will be.
  */
 
-- (BOOL)didAddNewPersoninDelegate:(id<MapViewActionsProtocol>)deli;
+- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli;
 
 @optional
 - (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate Task:(KVTask*)e Person:(KVPerson*)p;

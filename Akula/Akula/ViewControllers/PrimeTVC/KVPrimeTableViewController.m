@@ -170,7 +170,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-  if ([self didAddNewPersoninDelegate:self]) {
+  if ([self didAddNewPersonFromDelegate:self]) {
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
@@ -229,10 +229,10 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
     
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
-    pCell.textLabel.text = [[p firstName] stringByAppendingString:[p lastName]];
+    
     NSString *t1 = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
     [[pCell textLabel]setText:t1];
-//    pCell.textLabel.text = [[p incepDate]description];
+    
     return pCell;
   } else if ([indexPath section] == 1)
   {
@@ -347,7 +347,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   
 }
 
-- (BOOL)didAddNewPersoninDelegate:(id<MapViewActionsProtocol>)deli {
+- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
   
   BOOL result = nil;
   
@@ -360,7 +360,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   result = [[self PDC]didSaveEntities];
 //  [[self tableView]reloadData];
   [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
-
+  [[self tableView]reloadData];
   return (result);
 }
 
