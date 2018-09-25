@@ -96,9 +96,11 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
     NSLog(@"Deli Powa");
   }
-  
 }
 
+- (IBAction)addTaskForPerson:(UIBarButtonItem *)sender {
+//  KVRootEntity *p = (KVPerson * )self.currentEntity;
+}
 
 #pragma mark - Improved
 
@@ -132,7 +134,6 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   [cam setCenterCoordinate:loc];
   return (cam);
 }
-
 
 #pragma mark - Setup Pin View
 - (void)setupNotationPins {
