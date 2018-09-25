@@ -94,20 +94,26 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
   if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
-    NSLog(@"Deli Powa");
+//    NSLog(@"Deli Powa");
   }
 }
 
 - (IBAction)addTaskForPerson:(UIBarButtonItem *)sender {
-//  KVRootEntity *p = (KVPerson * )self.currentEntity;
+  NSLog(@"Jeli Powa");
+/**
+ Ok a good way to test this, A better way to test It?
+ 
+ KVRootEntity *p = (KVPerson * )self.currentEntity;
+ */
 }
 
 #pragma mark - Improved
 
 - (void)setupMapView {
-  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
+  [[self MapView]setMapType:MKMapTypeStandard];
+//  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(false)];
-  [[self MapView]setShowsCompass:(false)];
+  [[self MapView]setShowsCompass:(true)];
   [[self MapView]setShowsPointsOfInterest:(false)];
   [[self MapView]setShowsScale:(false)];
   [[self MapView]setShowsTraffic:(false)];

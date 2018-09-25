@@ -163,7 +163,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   // Dispose of any resources that can be recreated.
 }
 
-// FIXME: - CRASHER FROM HERE BUT NOT FROM THE MAP VIEW
+#pragma mark - Insert Person
+// FIXME : - CRASHER FROM HERE BUT NOT FROM THE MAP VIEW
 
 - (void)insertNewPerson:(id)sender {
   // reload here
@@ -174,7 +175,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-#pragma mark - select HERE
+
   [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
 
 }
@@ -265,18 +266,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     if ([indexPath row] >= 0) {
       /**
+       FIXME: - Select Row?
        A couple of things ALSO need to happen
        I need another selected row
        and the table view needs a new selected entity
        */
-      
     }
     if ([[self PDC]didSaveEntities] == false) {
     }
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
   }
-  
 }
 
 #pragma mark - Map Functions
