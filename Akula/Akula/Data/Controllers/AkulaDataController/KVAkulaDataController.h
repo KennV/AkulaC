@@ -34,6 +34,7 @@ FOUNDATION_EXPORT NSString *STATES[9];
  @param ctx MOC
  @return Entity - All Up
  */
+- (id)makeNewEntityInMOC:(NSManagedObjectContext*)ctx;
 - (id)makeNewPersonInMOC:(NSManagedObjectContext*)ctx;
 
 - (BOOL)didSaveEntities;
@@ -43,8 +44,6 @@ FOUNDATION_EXPORT NSString *STATES[9];
 - (NSString*)createMaleName;
 - (NSString*)createMiddleName;
 
-- (KVAbstractPhysics*)makePhysSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx;
-- (KVAbstractGraphicsEntity*)makeGraphicsSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx;
-- (KVAbstractLocationEntity*)makeLocationSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx;
+
 
 @end

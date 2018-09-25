@@ -15,4 +15,10 @@
 - (instancetype)initAllUp {
   return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVTask"]);
 }
+- (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m {
+//  return ([[KVTask alloc]initWithContext:m]);
+  return (KVTask*
+          )([self makeNewEntityInMOC:m]);
+  
+}
 @end

@@ -272,7 +272,7 @@ setupInMemoryCoordinator {
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
   
-  KVRootEntity * zEntity = [[self SUT]makeNewPersonInMOC:([[self SUT]MOC])];
+  KVRootEntity * zEntity = [[self SUT]makeNewEntityInMOC:([[self SUT]MOC])];
   XCTAssertNotNil(zEntity);
   XCTAssertTrue([[zEntity hexID] isEqualToString:(defOne)]);
   XCTAssertTrue([[zEntity qName] isEqualToString:(defOne)]);
@@ -294,15 +294,6 @@ setupInMemoryCoordinator {
   XCTAssertTrue([[[zEntity location]latitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[zEntity location]longitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[zEntity location]heading] isEqualToNumber:(defZero)]);
-}
-
-- (void)testSubEntities {
-  XCTAssertNotNil([[self SUT]makeGraphicsSubEntityFor:nil In:[[self SUT]MOC]]);
-  XCTAssertNotNil([[self SUT]makeLocationSubEntityFor:nil In:[[self SUT]MOC]]);
-  XCTAssertNotNil([[self SUT]makePhysSubEntityFor:nil In:[[self SUT]MOC]]);
-  /**
-   Expected Results
-   */
 }
 
 - (void)testPDC {
@@ -566,6 +557,8 @@ DO I have these properly documented
 //  XCTAssertNotNil(self.)
   XCTAssertNotNil([self TDC]);
   XCTAssertNotNil([[self PDC]makeNewPersonInMOC:nil]);
+  XCTAssertNotNil([[self TDC]makeNewTaskInMOC:[[self TDC]MOC]]);
+//  XCTAssertNotNil([[self TDC]makeNewTaskInMOC]);
   //
 //  XCTAssertEqual((@"KVTask"), [[self TDC]entityClassName]);
   

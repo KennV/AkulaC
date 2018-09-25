@@ -31,19 +31,24 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
  */
 
 - (KVAbstractPhysics*)makePhysSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
-  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractPhysics") inManagedObjectContext:(ctx)];
+  KVAbstractPhysics *p = [[KVAbstractPhysics alloc]initWithContext:ctx];
+  [p setOwner:e];
+  return (p);
 }
 
 - (KVAbstractGraphicsEntity*)makeGraphicsSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
-  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractGraphicsEntity") inManagedObjectContext:(ctx)];
+  KVAbstractGraphicsEntity *g = [[KVAbstractGraphicsEntity alloc]initWithContext:ctx];
+  [g setOwner:e];
+  return (g);
 }
 
 - (KVAbstractLocationEntity*)makeLocationSubEntityFor:(id)e In:(NSManagedObjectContext*)ctx {
-  return [NSEntityDescription insertNewObjectForEntityForName:(@"KVAbstractLocationEntity") inManagedObjectContext:(ctx)];
+  KVAbstractLocationEntity *l = [[KVAbstractLocationEntity alloc]initWithContext:ctx];
+  [l setOwner:e];
+  return l;
 }
 
-- (BOOL)didSaveEntities
-{
+- (BOOL)didSaveEntities {
   NSError *error = nil;
   NSManagedObjectContext *managedObjectContext = self.MOC;
   if (managedObjectContext != nil) {
@@ -93,36 +98,38 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   
 }
 
+/**
+ These next two look like they would be forward recievers, however they work…
+*/
 
-- (KVRootEntity *)makeNewPersonInMOC:(NSManagedObjectContext*)ctx {
-  
+- (KVRootEntity *)makeNewEntityInMOC:(NSManagedObjectContext*)ctx {
   if (ctx == nil) {
     ctx = [self MOC];
   }
+  KVRootEntity *entity = [[KVRootEntity alloc]initWithContext:ctx];
+  [entity setIncepDate:[NSDate date]];
+  [entity setDbID:[NSUUID  UUID]];
   
-  KVRootEntity * rEntity = [NSEntityDescription insertNewObjectForEntityForName:[self entityClassName]inManagedObjectContext:(ctx)];
+  [entity setPhysics:([self makePhysSubEntityFor:entity In:ctx])];
+  [entity setLocation:([self makeLocationSubEntityFor:entity In:ctx])];
+  [entity setGraphics:([self makeGraphicsSubEntityFor:entity In:ctx])];
   
-  [rEntity setIncepDate:[NSDate date]];
-  [rEntity setDbID:[NSUUID UUID]];
-  [rEntity setPhysics:([self makePhysSubEntityFor:rEntity In:ctx])];
-  [rEntity setLocation:([self makeLocationSubEntityFor:rEntity In:ctx])];
-  [rEntity setGraphics:([self makeGraphicsSubEntityFor:rEntity In:ctx])];
-  
-  [[rEntity physics]setOwner:rEntity];
-  [[rEntity location]setOwner:rEntity];
-  [[rEntity graphics]setOwner:rEntity];
-  
-  NSError *error = nil;
-  if (![[self MOC] save:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    //NSCocoaErrorDomain Code=1570
-    //required fields set to nil see xcdm
-    abort();
-  } else {
-    return rEntity;
-  }
+  return entity;
 }
 
-
+- (KVPerson *)makeNewPersonInMOC:(NSManagedObjectContext*)ctx {
+  if (ctx == nil) {
+    ctx = [self MOC];
+  }
+  KVPerson *person = [[KVPerson alloc]initWithContext:ctx];
+  [person setIncepDate:[NSDate date]];
+  [person setDbID:[NSUUID  UUID]];
+  
+  [person setPhysics:([self makePhysSubEntityFor:person In:ctx])];
+  [person setLocation:([self makeLocationSubEntityFor:person In:ctx])];
+  [person setGraphics:([self makeGraphicsSubEntityFor:person In:ctx])];
+  
+  return person;
+}
 
 @end
