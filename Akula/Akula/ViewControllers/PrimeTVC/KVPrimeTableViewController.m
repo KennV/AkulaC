@@ -163,21 +163,20 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   // Dispose of any resources that can be recreated.
 }
 
-/**
- TODO: - Replace This with a controller function preferably from a delegate
- MY Wish is MY COMMAND
-*/
+// FIXME: - CRASHER FROM HERE BUT NOT FROM THE MAP VIEW
+
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-  if ([self didAddNewPersonFromDelegate:self]) {
 
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    #pragma mark - select HERE
-    [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
-  }
+  [self willAddPersonInDelegate:self];
+
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  
+  [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+#pragma mark - select HERE
+  [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
+
 }
 
 #pragma mark - Segues
@@ -264,12 +263,13 @@ THEN after all of that I might want a protocol for this controller. Jeppers
       NSLog(@"Error trying to delete Nil-Item");
     }
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    if ([indexPath row] > 1) {
+    if ([indexPath row] >= 0) {
       /**
        A couple of things ALSO need to happen
        I need another selected row
        and the table view needs a new selected entity
        */
+      
     }
     if ([[self PDC]didSaveEntities] == false) {
     }
@@ -356,11 +356,12 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   [self willAddPersonInDelegate:self];
 //  [[self MapViewController]setCurrentEntity:p];
 //  __unused KVAbstractLocationEntity *tmpZ = [p location];
-  
+
   result = [[self PDC]didSaveEntities];
 //  [[self tableView]reloadData];
   [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
   [[self tableView]reloadData];
+  
   return (result);
 }
 
