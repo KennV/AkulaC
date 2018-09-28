@@ -113,11 +113,11 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   [[self MapView]setMapType:MKMapTypeStandard];
 //  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(false)];
-  [[self MapView]setShowsCompass:(true)];
-  [[self MapView]setShowsPointsOfInterest:(false)];
-  [[self MapView]setShowsScale:(false)];
+  [[self MapView]setShowsCompass:(false)];
+  [[self MapView]setShowsPointsOfInterest:(true)];
+  [[self MapView]setShowsScale:(true)];
   [[self MapView]setShowsTraffic:(false)];
-  [[self MapView]setShowsUserLocation:(TRUE)];
+  [[self MapView]setShowsUserLocation:(true)];
 }
 
 - (void)setupMapViewWith:(KVRootEntity*)currentEntity {

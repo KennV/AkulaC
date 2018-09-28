@@ -479,7 +479,7 @@ setupInMemoryCoordinator {
   XCTAssertNotNil([[j ADC]MOM]);
   XCTAssertNotNil([[j ADC]PSX]);
   XCTAssertNotNil([[j ADC]MOC]);
-  
+/**
   XCTAssertNotNil([j PDC]);
   XCTAssertNotNil([[j PDC]MOM]);
   XCTAssertNotNil([[j PDC]PSX]);
@@ -488,7 +488,8 @@ setupInMemoryCoordinator {
   XCTAssertTrue([[[j PDC]MOM]isEqual:[[j ADC]MOM]]);
   XCTAssertEqual([[j PDC]MOC], [[j ADC]MOC]);
   XCTAssertFalse([[[j PDC]PSX]isEqual:[[j ADC]PSX]]);
-  /**
+ */
+ /**
    Expected Results
    */
   
@@ -565,5 +566,11 @@ DO I have these properly documented
 //  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
 //  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:<#(nonnull NSString *)#> inManagedObjectContext:<#(nonnull NSManagedObjectContext *)#>]
 }
-
+/**
+If I had to wire it down on what is so different today
+ The abstract class is more abstract. It is encouraging because I did not change any lines of test() and from what I was seeing in the debugger was a fully formed entity. I guess that _IS_ the difference, not one test threw. AND I know what the next ones that will fail are
+ #NOTE# the next test to fail is when I go back and set the names and crap to default or unset/edit-me or whatever.
+ I would like to have the interface more closely in sync with Tricorder(), and that is soon.
+ 
+ */
 @end

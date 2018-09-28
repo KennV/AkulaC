@@ -16,9 +16,9 @@
   return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVTask"]);
 }
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m {
-//  return ([[KVTask alloc]initWithContext:m]);
-  return (KVTask*
-          )([self makeNewEntityInMOC:m]);
-  
+//  return (KVTask *)([self makeNewEntityInMOC:m]);
+  KVTask *t = ([self makeNewEntityInMOC:m]);
+
+  return t;
 }
 @end

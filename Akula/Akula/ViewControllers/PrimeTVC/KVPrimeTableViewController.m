@@ -66,7 +66,16 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @property (weak,nonatomic)UIColor* hilightTextColor;
 @property (weak,nonatomic)UIColor* specialTextColor;
 //I expect that these will also be refactored into sensible names
+// making this private here affects test lines:482…492
 
+/**
+ Akula PersonDataController
+ */
+@property (strong, nonatomic) KVPersonDataController *PDC;
+
+/**
+ Akula TaskDataController
+ */
 @property (strong, nonatomic) KVTasksDataController *TDC;
 @end
 
@@ -111,17 +120,28 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self PDC]setMOC:([[self ADC]MOC])];
   [[self PDC]setDelegate:(self)];
   [[self TDC]setMOC:([[self ADC]MOC])];
-  [[self TDC]setDelegate:(self)];  
+  [[self TDC]setDelegate:(self)];
+  
 }
 
+/**
+ Set up the left/edit button the right/addPerson button
+ */
 - (void)setupGUIState; {
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  /**
   
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewPerson:)];
-  self.navigationItem.rightBarButtonItem = addButton;
+  */
+  [[self navigationItem]setLeftBarButtonItem:[self editButtonItem]];
+
+  UIBarButtonItem *addButton =
+  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                target:self
+                                                action:@selector(insertNewPerson:)];
+  [[self navigationItem]setRightBarButtonItem:(addButton)];
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
   [[self MapViewController]setMA_Delegate:(self)];
+  
 }
 
 - (KVAkulaDataController *)ADC {
@@ -146,7 +166,9 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [super viewDidLoad];
   //see ALSO: Conformance is Compliance
   [[self MapViewController]setMA_Delegate:self];
+  
   [self setupDataSource];
+  
   [self setupCLManager];
   
   [self setupGUIState];
@@ -344,6 +366,8 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 }
 
 - (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli {
+//  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+  
   
 }
 
@@ -368,11 +392,12 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 - (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate
                           Task:(KVTask*)e
                         Person:(KVPerson*)p {
-  // TODO: IMPLEMENT THIS NOW!!!
-  // I need to know what row is selected;
-  // IF NO row is selected then select the FIRST ROW;
   /**
+   TODO: IMPLEMENT THIS NOW!!!
+   I need to know what row is selected;
+   IF NO row is selected then select the FIRST ROW;
    I learned that today so it is not hard
+   KVTask *t = [[self TDC]
    */
   if ([[p taskList]containsObject:e]) {
     //
@@ -395,10 +420,10 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
               toPerson:(KVPerson *)p
 {
   BOOL facts = nil;
-  
-  
-  if ([t taskOwner] != p) {
-    [t setTaskOwner:p];
+  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+  [[self TDC]didSaveEntities];
+  if ([task taskOwner] != p) {
+    [task setTaskOwner:p];
   }
   if ([[p taskList]containsObject:t]) {
     facts = false;
@@ -406,6 +431,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
     [p setTaskList:([NSSet setWithSet:[[p taskList]setByAddingObject:t]])];
     facts = true;
   }
+  
   return (facts);
 }
 
