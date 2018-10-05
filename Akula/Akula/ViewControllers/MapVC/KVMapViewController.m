@@ -22,6 +22,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
+@property (strong, nonatomic) KVAkulaDataController *ADC;
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -35,7 +36,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 
 @implementation KVMapViewController
-
+@synthesize ADC = _ADC;
 @synthesize currentEntity = _currentEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
@@ -93,6 +94,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 #pragma mark BUGFIX: NEW VUE
 
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
+  //TODO: MAKE A SELECTION BOUNCE BACK TO THE MAP
   if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
 //    NSLog(@"Deli Powa");
   }
@@ -143,6 +145,9 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 #pragma mark - Setup Pin View
 - (void)setupNotationPins {
+  /**
+   I _bet_ this is where i get it wrong.
+  */
   KVAkulaDataController *allDataCon = [[KVAkulaDataController alloc]init];
 
   NSArray *allItems = allDataCon.getAllEntities;
