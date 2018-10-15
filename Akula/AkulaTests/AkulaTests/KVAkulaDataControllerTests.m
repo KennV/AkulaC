@@ -16,7 +16,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #import "AppDelegate.h"
 
-@interface KVAkulaDataControllerTests : XCTestCase <PersonActionProtocol>
+@interface KVAkulaDataControllerTests : XCTestCase <PersonDataProtocol>
 
 @property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
@@ -513,7 +513,7 @@ setupInMemoryCoordinator {
 
  */
 
-- (BOOL)didChangePerson:(id<PersonActionProtocol>)deli
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli
              withPerson:(KVPerson *)p {
   BOOL result = FALSE;
 /**
@@ -526,7 +526,7 @@ setupInMemoryCoordinator {
    */
 }
 
-- (BOOL)didModifyTasksForPerson:(id<PersonActionProtocol>)deli
+- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
                    withTasksCon:(KVTasksDataController *)tkon
                          person:(KVPerson *)p {
   return FALSE;
@@ -535,7 +535,7 @@ setupInMemoryCoordinator {
    */
 }
 // OOOh xcode just added this b/c I added it _elsewhere_
-- (void)willAddPersonInDelegate:(id<PersonActionProtocol>)deli {
+- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
 //  <#code#>
 }
 

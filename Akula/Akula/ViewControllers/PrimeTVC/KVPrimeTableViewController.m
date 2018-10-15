@@ -348,7 +348,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
  ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
  
  */
-- (void)willAddPersonInDelegate:(id<PersonActionProtocol>)deli {
+- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
   CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
@@ -365,7 +365,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 
 }
 
-- (void)willAddTaskInDelegate:(id<TasksActionProtocol>)deli {
+- (void)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
 //  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
   
   
@@ -408,14 +408,14 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   }
 }
 
-- (BOOL)didChangePerson:(id<PersonActionProtocol>)deli withPerson:(KVPerson *)p {
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
   BOOL st8 = FALSE;
   
   return (st8);
 }
 
 
-- (BOOL)didBindTaskFor:(id<TasksActionProtocol>)deli
+- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
               withTask:(KVTask *)t
               toPerson:(KVPerson *)p
 {
