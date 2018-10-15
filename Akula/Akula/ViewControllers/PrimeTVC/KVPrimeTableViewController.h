@@ -29,7 +29,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  */
 @property (strong, nonatomic) KVAkulaDataController *ADC;
 //@property (strong, nonatomic) KVPersonDataController *PDC;
-//- (void)insertNewPerson:(id)sender;
+
+
 
 @end
 
