@@ -18,15 +18,7 @@
 @protocol TasksDataProtocol
 - (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli;
 @optional
-/**
- below is an excellent example of a protocol signature.
- it is an action on a state with an unambigous return / effect
- It declares it's purpose / intent
-*/
 
-- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
-              withTask:(KVTask*)t
-              toPerson:(KVPerson*)p;
 @end
 
 @interface KVTasksDataController <T : KVTask*> : KVItemsDataController <T>

@@ -183,15 +183,18 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - Insert Person
-// FIXME : - CRASHER FROM HERE BUT NOT FROM THE MAP VIEW
 
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-
+  /**
+  if ([self didAddNewPersonFromDelegate:self]) {
+  This will error here because of the number of rows in the VC is Invalid / Inconsistant
+  }
+  */
   [self willAddPersonInDelegate:self];
-
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -364,9 +367,24 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 }
 
 - (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
-//  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-  BOOL r = nil;
-  return r;
+  // Actually this needs to be my current P*
+  KVPerson* person = [[[self PDC]getAllEntities]firstObject];
+  //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
+  BOOL facts = nil;
+  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+
+  if ([task taskOwner] != person) {
+    [task setTaskOwner:person];
+  }
+  if ([[person taskList]containsObject:task]) {
+    facts = false;
+  } else {
+    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+    [[self TDC]didSaveEntities];
+    facts = true;
+  }
+  [[self TDC]didSaveEntities];
+  return (facts);
 }
 
 - (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
@@ -387,23 +405,22 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   return (result);
 }
 
-- (BOOL)didAddTaskToPersonFrom:(id<MapViewActionsProtocol>)delegate
-                          Task:(KVTask*)e
-                        Person:(KVPerson*)p {
-  /**
-   TODO: IMPLEMENT THIS NOW!!!
-   I need to know what row is selected;
-   IF NO row is selected then select the FIRST ROW;
-   I learned that today so it is not hard
-   KVTask *t = [[self TDC]
-   */
-  if ([[p taskList]containsObject:e]) {
-    //
-    return FALSE;
-  } else {
-    [p setTaskList:[[p taskList] setByAddingObject:e]];
-    return TRUE;
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<MapViewActionsProtocol>)delegate {
+  BOOL facts = nil;
+//  if (!task) {
+//    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+//  }
+  [[self TDC]didSaveEntities];
+  if ([task taskOwner] != person) {
+    [task setTaskOwner:person];
   }
+  if ([[person taskList]containsObject:task]) {
+    facts = false;
+  } else {
+    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+    facts = true;
+  }
+  return (facts);
 }
 
 - (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
@@ -411,27 +428,5 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   
   return (st8);
 }
-
-
-- (BOOL)didBindTaskFor:(id<TasksDataProtocol>)deli
-              withTask:(KVTask *)t
-              toPerson:(KVPerson *)p
-{
-  BOOL facts = nil;
-  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-  [[self TDC]didSaveEntities];
-  if ([task taskOwner] != p) {
-    [task setTaskOwner:p];
-  }
-  if ([[p taskList]containsObject:t]) {
-    facts = false;
-  } else {
-    [p setTaskList:([NSSet setWithSet:[[p taskList]setByAddingObject:t]])];
-    facts = true;
-  }
-  
-  return (facts);
-}
-
 
 @end

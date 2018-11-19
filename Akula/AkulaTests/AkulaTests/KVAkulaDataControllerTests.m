@@ -342,6 +342,9 @@ setupInMemoryCoordinator {
   XCTAssertFalse([[[tmpPerson location]latitude] isEqualToNumber:(defZero)]);
   XCTAssertFalse([[[tmpPerson location]longitude] isEqualToNumber:(defZero)]);
   XCTAssertTrue([[[tmpPerson location]heading] isEqualToNumber:(defZero)]);
+  
+  XCTAssertNotNil([tmpPerson taskList]);
+  XCTAssertTrue([[tmpPerson taskList]count] == 0);
   /**
    Expected Results
    */
@@ -541,10 +544,16 @@ setupInMemoryCoordinator {
 
 - (void)testAddTask {
   XCTAssertFalse([self didModifyTasksForPerson:self
-                                  withTasksCon:nil
+                                  withTasksCon:[self TDC]
                                         person:nil]);
+  KVPerson * tmpPerson = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
+  XCTAssertNotNil(tmpPerson);
+  
+  XCTAssertNotNil([tmpPerson taskList]);
+  XCTAssertTrue([[tmpPerson taskList]count] == 0);
   /**
    Expected Results
+  20181119@1145 - - Now what I really want is to only be able to add a task in the presence of an entity, specifically a person but possibly a place and also I _do_ have the delegate here in the test unit.
    */
 }
 /**
