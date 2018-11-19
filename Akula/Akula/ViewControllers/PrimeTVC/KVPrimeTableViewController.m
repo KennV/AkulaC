@@ -365,10 +365,10 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 
 }
 
-- (void)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
+- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
 //  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-  
-  
+  BOOL r = nil;
+  return r;
 }
 
 - (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {

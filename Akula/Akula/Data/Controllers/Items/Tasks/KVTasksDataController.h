@@ -16,7 +16,7 @@
 #import "KVItemsDataController.h"
 
 @protocol TasksDataProtocol
-- (void)willAddTaskInDelegate:(id<TasksDataProtocol>)deli;
+- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli;
 @optional
 /**
  below is an excellent example of a protocol signature.
