@@ -35,6 +35,7 @@ number of sections
 THEN after all of that I might want a protocol for this controller. Jeppers
 
 */
+
 #import "KVAkulaDataController.h"
 #import "KVTasksDataController.h"
 #import "KVPrimeTableViewController.h"
@@ -42,8 +43,15 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 @interface KVPrimeTableViewController ()
 
-
 @property (strong,nonatomic)CLLocationManager *locationManager;
+/**
+ Akula PersonDataController
+*/
+@property (strong, nonatomic) KVPersonDataController *PDC;
+/**
+ Akula TaskDataController
+*/
+@property (strong, nonatomic) KVTasksDataController *TDC;
 
 // so for expediancy I made a cheap CLUT without the table or dict even
 @property (weak,nonatomic)UIColor* baseColor00;
@@ -68,22 +76,13 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 //I expect that these will also be refactored into sensible names
 // making this private here affects test lines:482…492
 
-/**
- Akula PersonDataController
- */
-@property (strong, nonatomic) KVPersonDataController *PDC;
-
-/**
- Akula TaskDataController
- */
-@property (strong, nonatomic) KVTasksDataController *TDC;
 @end
 
 @implementation KVPrimeTableViewController
 
 @synthesize ADC =_ADC;
 @synthesize PDC =_PDC;
-@synthesize TDC = _TDC;
+@synthesize TDC =_TDC;
 
 @synthesize locationManager = _locationManager;
 // Them colors
@@ -121,7 +120,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self PDC]setDelegate:(self)];
   [[self TDC]setMOC:([[self ADC]MOC])];
   [[self TDC]setDelegate:(self)];
-  
 }
 
 /**

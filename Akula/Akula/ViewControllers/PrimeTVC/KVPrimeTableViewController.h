@@ -10,7 +10,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import <UIKit/UIKit.h>
-//
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
@@ -23,14 +22,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @interface KVPrimeTableViewController : UITableViewController <CLLocationManagerDelegate, MapViewActionsProtocol,PersonDataProtocol,TasksDataProtocol>
 
 @property (strong, nonatomic) KVMapViewController *MapViewController;
-
 /**
  Akula AllDataController
- */
+*/
 @property (strong, nonatomic) KVAkulaDataController *ADC;
-//@property (strong, nonatomic) KVPersonDataController *PDC;
-
-
 
 @end
 
