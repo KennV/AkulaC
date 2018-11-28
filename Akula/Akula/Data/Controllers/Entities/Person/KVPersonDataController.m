@@ -56,16 +56,17 @@ double DefaultLongitude = -122.03076853;
   if (DefaultLongitude != [[[p location]longitude]doubleValue]) {
     [[p location]setLongitude:[NSNumber numberWithDouble:(DefaultLongitude)]];
   }
+  /** Hey it would be programatically correct to #NOT# randomize this */
   if ((int)[self makeRandomNumber:(1000)] < 500) {
     [p setGender:(@"female")];
   } else {
     [p setGender:(@"male")];
   }
-
-  [self randomizePersonName:p]; //reactivated person name
+  //TODO: - Go To Default Person
+  [self randomizePersonName:p];
 
 //  [self randomizeContactInformation:p];
-  //OOH set bak to a default OK?
+  //OOH set back to a default OK?
     return p;
   /**
   NSError *error = nil;
@@ -88,7 +89,7 @@ double DefaultLongitude = -122.03076853;
   [newP setMiddleName:(def1)];
   [newP setPhoneNumber:(@"(101)555-4321")];
   [newP setEmailID:([def1 stringByAppendingString:@"@One.edu"])];
-  [newP setTextID:[def1 stringByAppendingString:(@"@Scv.net")]];
+  [newP setTextID:[def1 stringByAppendingString:(@"@Svc.net")]];
   
 }
 

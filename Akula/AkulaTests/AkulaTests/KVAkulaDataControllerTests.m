@@ -315,6 +315,9 @@ setupInMemoryCoordinator {
   /**
    This test set determines:
    */
+  KVPerson * jivePerson = [[self PDC] makeNewPersonInMOC:(nil)];
+  
+  
   NSString * defOne = (@"unset");
   NSNumber * defZero = (@0);
 /**  KVPersonDataController *PDC = [[KVPersonDataController alloc]initAllUp];
@@ -345,13 +348,14 @@ setupInMemoryCoordinator {
   
   XCTAssertNotNil([tmpPerson taskList]);
   XCTAssertTrue([[tmpPerson taskList]count] == 0);
+    XCTAssertTrue([[jivePerson taskList]count] == 0);
   /**
    Expected Results
    */
 }
 
 - (void)testNameFunctions {
-
+//@"Edit-Me",@"unset"
   KVPerson * p = [[self PDC] makeNewPersonInMOC:([[self SUT]MOC])];
   XCTAssertNotNil([p gender]);
   XCTAssertNotNil([p firstName]);
@@ -388,7 +392,7 @@ setupInMemoryCoordinator {
 
 - (void)nonTestMemo {
   /**
-  OK I Can edit them indivitually, and also ed. them in a non-mutable arr
+  OK I Can edit them individually, and also ed. them in a non-mutable arr
   SO
   CAN I make an ARR, then parse/process them out of that, then save and have the effect still in place on the [self SUT]getAllEntities]
   */
@@ -455,7 +459,8 @@ setupInMemoryCoordinator {
    */
 }
 
-#pragma mark - Folding
+//#pragma mark - Folding
+#pragma mark - THIS IS _HELLA_ IMPORTANT
 
 - (void)testAkulaAppDelegate {
   id<UIApplicationDelegate> appDel = [[UIApplication sharedApplication]delegate];
@@ -582,4 +587,12 @@ If I had to wire it down on what is so different today
  I would like to have the interface more closely in sync with Tricorder(), and that is soon.
  
  */
+
+/**
+ Fun Facts and Other Fallacies
+ It seems important to note that what is true in test is a completely different animal than what is possible in production. This is an artifact of the language and metaphor that we are working with.
+ 
+*/
+
+
 @end
