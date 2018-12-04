@@ -11,63 +11,66 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 */
 
 #import <XCTest/XCTest.h>
+#import "AppDelegate.h"
 #import "KDVApplicationDataController.h"
 
 @interface KVAbstractControllerTests : XCTestCase
-@property (strong, nonatomic)KDVAbstractDataController *SUT;
+@property (strong, nonatomic)id<UIApplicationDelegate> SUT;
+@property (strong, nonatomic)KVPrimeTableViewController *TVC;
+
 @end
 
 @implementation KVAbstractControllerTests
-/*
-I have pulled all of the extra setup and inMemoryController from here it is not an enhancement of the system
-*/
+
 @synthesize SUT = _SUT;
+@synthesize TVC = _TVC;
 
 - (void)setUp {
   [super setUp];
+  [self setSUT:[[UIApplication sharedApplication]delegate]];
+  [self setTVC:[[KVPrimeTableViewController alloc]init]];
 }
 
 - (void)tearDown {
-  [self setSUT:(nil)];
+//  [self setSUT:(nil)];
   [super tearDown];
 }
 /*
 This test Asserts that the KDVAbstractDataController inits with the correct state. In practice I could also set the SUT to KDVAbstractDataController and test from there
 */
-- (void)testAbstractControllerInitializerResults {
-  KDVAbstractDataController * absCon = [[KDVAbstractDataController alloc]init];
-  XCTAssertNotNil(absCon);
-  XCTAssertTrue([absCon copyDatabaseIfNotPresent]);
-  XCTAssertNotNil([absCon applicationName]);
-  XCTAssertNotNil([absCon databaseName]);
-  XCTAssertNotNil([absCon MOM]);
-  XCTAssertNotNil([absCon PCONT]);
-  XCTAssertNotNil([absCon PSK]);
-  XCTAssertNotNil([absCon MOC]);
-  XCTAssertNotNil([absCon fetchCon]);
-  XCTAssert([[absCon applicationName] isEqualToString:(@"Akula")]);
-  XCTAssert([[absCon databaseName]isEqualToString:(@"Akula.sqlite")]);
-  XCTAssertTrue([[absCon entityClassName]isEqualToString:@"KVAbstractEntity"]);
+
+//#pragma mark - Folding
+#pragma mark - THIS IS _HELLA_ IMPORTANT
+
+- (void)testAkulaAppDelegate {
+//  id<UIApplicationDelegate> appDel = [[UIApplication sharedApplication]delegate];
+  
+  XCTAssert([[self SUT] isKindOfClass:[AppDelegate class]]);
+  XCTAssertNotNil([[self SUT] window]);
+  
+  XCTAssertTrue([[self SUT] application:((UIApplication*)[self SUT]) didFinishLaunchingWithOptions:nil]);
+  
+  UISplitViewController *rootView = (UISplitViewController<UISplitViewControllerDelegate>*)[[[self SUT] window]rootViewController];
+  XCTAssertNotNil([[rootView viewControllers]lastObject]);
+  /**
+   Expected Results
+   */
 }
-/**
-Then to be a weirdo I added the Basic AppCon to this test
-*/
-- (void)testAppControllerInitializerResults {
-  KDVAbstractDataController * appCon = [[KDVApplicationDataController alloc]initAllUp];
-  XCTAssertNotNil(appCon);
-  XCTAssertTrue([appCon copyDatabaseIfNotPresent]);
-  XCTAssertNotNil([appCon applicationName]);
-  XCTAssertNotNil([appCon databaseName]);
-  XCTAssertNotNil([appCon MOM]);
-  XCTAssertNotNil([appCon PCONT]);
-  XCTAssertNotNil([appCon PSK]);
-  XCTAssertNotNil([appCon MOC]);
-  XCTAssertNotNil([appCon fetchCon]);
-  XCTAssert([[appCon applicationName] isEqualToString:(@"Akula")]);
-  XCTAssert([[appCon databaseName]isEqualToString:(@"Akula.sqlite")]);
-  XCTAssertTrue([[appCon entityClassName]isEqualToString:@"KVAbstractEntity"]);
+
+- (void)testAkulaVue {
+
+  XCTAssertNotNil([[self TVC]ADC]);
+
+  [[self TVC] viewDidLoad];
+  XCTAssertNotNil([[self TVC] ADC]);
+  XCTAssertNotNil([[[self TVC] ADC]MOM]);
+  XCTAssertNotNil([[[self TVC] ADC]PSX]);
+  XCTAssertNotNil([[[self TVC] ADC]MOC]);
+  
+  /**
+   Expected Results
+   */
+  
 }
-/**
-The next set cannot be completed without a inMemMOC, which I removed from this test module
-*/
+
 @end

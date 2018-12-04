@@ -377,7 +377,7 @@ setupInMemoryCoordinator {
   XCTAssertFalse([(@"Edit-Me") isEqualToString:[p firstName]]);
   XCTAssertFalse([(@"Edit-Me") isEqualToString:[p lastName]]);
   XCTAssertFalse([(@"Edit-Me") isEqualToString:[p middleName]]);
-  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p gender]]);
+//  XCTAssertFalse([(@"Edit-Me") isEqualToString:[p gender]]);
 
   [[self PDC]resetDefaultPerson:p];
   

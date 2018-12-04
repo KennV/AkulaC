@@ -57,28 +57,13 @@ double DefaultLongitude = -122.03076853;
     [[p location]setLongitude:[NSNumber numberWithDouble:(DefaultLongitude)]];
   }
   /** Hey it would be programatically correct to #NOT# randomize this */
-  if ((int)[self makeRandomNumber:(1000)] < 500) {
-    [p setGender:(@"female")];
-  } else {
-    [p setGender:(@"male")];
-  }
-  //TODO: - Go To Default Person
+  [self resetDefaultPerson:p];
+  
   [self randomizePersonName:p];
 
 //  [self randomizeContactInformation:p];
-  //OOH set back to a default OK?
+  
     return p;
-  /**
-  NSError *error = nil;
-  if (![[self MOC] save:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    //NSCocoaErrorDomain Code=1570
-    //required fields set to nil see xcdm
-    abort();
-  } else {
-    return p;
-  }
-  */
 }
 
 - (void)resetDefaultPerson:(KVPerson*)newP {

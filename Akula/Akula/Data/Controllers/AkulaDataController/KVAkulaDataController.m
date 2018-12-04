@@ -50,11 +50,15 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
 
 - (BOOL)didSaveEntities {
   NSError *error = nil;
-  NSManagedObjectContext *managedObjectContext = self.MOC;
-  if (managedObjectContext != nil) {
-    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+  NSManagedObjectContext *m = [self MOC];
+  if (m != nil) {
+    if ([m hasChanges] && ![m save:&error]) {
+      /**
+       NSCocoaErrorDomain Code=1570
+       required fields set to nil see xcdm
+       Replace this implementation with code to handle the error appropriately.
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+       */
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
     }
@@ -121,15 +125,15 @@ const NSString *STATES[9] = {@"NY", @"MA", @"MA", @"MD", @"GA", @"NJ", @"TX", @"
   if (ctx == nil) {
     ctx = [self MOC];
   }
-  KVPerson *person = [[KVPerson alloc]initWithContext:ctx];
-  [person setIncepDate:[NSDate date]];
-  [person setDbID:[NSUUID  UUID]];
+  KVPerson *p = [[KVPerson alloc]initWithContext:ctx];
+  [p setIncepDate:[NSDate date]];
+  [p setDbID:[NSUUID  UUID]];
   
-  [person setPhysics:([self makePhysSubEntityFor:person In:ctx])];
-  [person setLocation:([self makeLocationSubEntityFor:person In:ctx])];
-  [person setGraphics:([self makeGraphicsSubEntityFor:person In:ctx])];
+  [p setPhysics:([self makePhysSubEntityFor:p In:ctx])];
+  [p setLocation:([self makeLocationSubEntityFor:p In:ctx])];
+  [p setGraphics:([self makeGraphicsSubEntityFor:p In:ctx])];
   
-  return person;
+  return p;
 }
 
 @end
