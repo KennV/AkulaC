@@ -220,6 +220,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 }
 
 #pragma mark - Table View
+
+//TODO: - Need a fuckin  Current Person!
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   NSInteger secCount = 1;
   if (self.TDC) {
@@ -238,7 +240,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   return (0);
 
 }
-  // TODO: - Make a correct Custom Cell
+//FIXME: - Make a correct Custom Cell
 /**
  Phase 01, make the logic to add the cell then reaf the "Cell" to "personCell" and "taskCell" then make these in the GUI
  Phase 02, add the logical stubs for these and the section headers footers and
@@ -252,7 +254,9 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
     
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
-    
+    /** Always set the MapView's entity to the current one
+     */
+    [[self MapViewController]setCurrentEntity:p];
     NSString *t1 = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
     [[pCell textLabel]setText:t1];
     

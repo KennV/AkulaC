@@ -76,8 +76,9 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 - (void)setCurrentEntity:(KVRootEntity *)newEntity {
   if (_currentEntity != newEntity) {
     _currentEntity = newEntity;
-    [self configureView];
   }
+  //Always ConfView on Set?
+  [self configureView];
 }
 
 #pragma mark - Setup GUI State
@@ -150,7 +151,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   */
   KVAkulaDataController *allDataCon = [[KVAkulaDataController alloc]init];
 
-  NSArray *allItems = allDataCon.getAllEntities;
+  NSArray *allItems = [allDataCon getAllEntities];
 
   for (KVRootEntity *e in allItems) {
     
@@ -159,7 +160,8 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
       CLLocationCoordinate2D loc2D = CLLocationCoordinate2DMake(l.latitude.doubleValue, l.longitude.doubleValue);
 
       KVPinItem *pin = [[KVPinItem alloc]initNewPinItemFor:e At:loc2D];
-      NSLog(@"\n adding pin at: %.9f and %.9f", loc2D.latitude, loc2D.longitude);
+      [pin setTitle:[e hexID]];
+//      NSLog(@"\n adding pin at: %.9f and %.9f", loc2D.latitude, loc2D.longitude);
       [[self MapView]addAnnotation:pin];
     }
     
