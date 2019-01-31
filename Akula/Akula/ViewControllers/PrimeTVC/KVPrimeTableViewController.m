@@ -306,6 +306,97 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   }
 }
 
+#pragma mark - CONFRMANCE === COMPLIANCE
+/*
+
+ Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
+ There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
+ 
+ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli` is a great example And I wrote this definfition before writing the declaration and tested it before using it
+ ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
+ 
+ */
+- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
+  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
+  [self findLocation];
+  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  
+  KVPerson *p = [[[self PDC]getAllEntities]firstObject];
+  
+  [[p location]setLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
+  [[p location]setLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
+  
+  [self foundLocation];
+  
+  NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
+    //  [self updateEntityLocation:([p location])];//
+  
+}
+
+- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
+    // Actually this needs to be my current P*
+  KVPerson* person = [[[self PDC]getAllEntities]firstObject];
+    //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
+  BOOL facts = nil;
+  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+  
+  if ([task taskOwner] != person) {
+    [task setTaskOwner:person];
+  }
+  if ([[person taskList]containsObject:task]) {
+    facts = false;
+  } else {
+    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+    [[self TDC]didSaveEntities];
+    facts = true;
+  }
+  [[self TDC]didSaveEntities];
+  return (facts);
+}
+
+- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
+  
+  BOOL result = nil;
+  
+  [self findLocation];//
+  
+  [self willAddPersonInDelegate:self];
+    //  [[self MapViewController]setCurrentEntity:p];
+    //  __unused KVAbstractLocationEntity *tmpZ = [p location];
+  
+  result = [[self PDC]didSaveEntities];
+    //  [[self tableView]reloadData];
+  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
+  [[self tableView]reloadData];
+  
+  return (result);
+}
+
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<MapViewActionsProtocol>)delegate {
+  BOOL facts = nil;
+    //  if (!task) {
+    //    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+    //  }
+  [[self TDC]didSaveEntities];
+  if ([task taskOwner] != person) {
+    [task setTaskOwner:person];
+  }
+  if ([[person taskList]containsObject:task]) {
+    facts = false;
+  } else {
+    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+    facts = true;
+  }
+  return (facts);
+}
+
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
+  BOOL st8 = FALSE;
+  
+  return (st8);
+}
+
+
 #pragma mark - Map Functions
 
 #pragma mark Setup Location Manager
@@ -342,95 +433,4 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void) foundLocation {
   [[self locationManager]stopUpdatingLocation];
 }
-
-#pragma mark - CONFRMANCE === COMPLIANCE
-
-/*
- Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
- There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
- 
-Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli` is a great example And I wrote this definfition before writing the declaration and tested it before using it
- ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
- 
- */
-- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
-  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
-  [self findLocation];
-  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
-  
-  KVPerson *p = [[[self PDC]getAllEntities]firstObject];
-  
-  [[p location]setLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
-  [[p location]setLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
-  
-  [self foundLocation];
-  
-  NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
-  //  [self updateEntityLocation:([p location])];//
-
-}
-
-- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
-  // Actually this needs to be my current P*
-  KVPerson* person = [[[self PDC]getAllEntities]firstObject];
-  //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
-  BOOL facts = nil;
-  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-
-  if ([task taskOwner] != person) {
-    [task setTaskOwner:person];
-  }
-  if ([[person taskList]containsObject:task]) {
-    facts = false;
-  } else {
-    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-    [[self TDC]didSaveEntities];
-    facts = true;
-  }
-  [[self TDC]didSaveEntities];
-  return (facts);
-}
-
-- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
-  
-  BOOL result = nil;
-  
-  [self findLocation];//
-  
-  [self willAddPersonInDelegate:self];
-//  [[self MapViewController]setCurrentEntity:p];
-//  __unused KVAbstractLocationEntity *tmpZ = [p location];
-
-  result = [[self PDC]didSaveEntities];
-//  [[self tableView]reloadData];
-  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
-  [[self tableView]reloadData];
-  
-  return (result);
-}
-
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<MapViewActionsProtocol>)delegate {
-  BOOL facts = nil;
-//  if (!task) {
-//    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-//  }
-  [[self TDC]didSaveEntities];
-  if ([task taskOwner] != person) {
-    [task setTaskOwner:person];
-  }
-  if ([[person taskList]containsObject:task]) {
-    facts = false;
-  } else {
-    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-    facts = true;
-  }
-  return (facts);
-}
-
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
-  BOOL st8 = FALSE;
-  
-  return (st8);
-}
-
 @end
