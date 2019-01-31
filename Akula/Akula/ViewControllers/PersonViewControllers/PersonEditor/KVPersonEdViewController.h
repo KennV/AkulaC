@@ -1,10 +1,10 @@
-//
-//  KVPersonEdViewController.h
-//  Akula
-//
-//  Created by Kenn Villegas on 1/25/19.
-//  Copyright © 2019 Kenn Villegas. All rights reserved.
-//
+/**
+  KVPersonEdViewController.h
+  Akula
+
+  Created by Kenn Villegas on 1/25/19.
+  Copyright © 2019 Kenn Villegas. All rights reserved.
+*/
 
 #import <UIKit/UIKit.h>
 
