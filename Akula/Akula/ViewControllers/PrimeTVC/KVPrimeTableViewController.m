@@ -139,6 +139,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
   [[self MapViewController]setMA_Delegate:(self)];
+    //TODO: SETUP MapVC's GUI State
   
 }
 
@@ -147,7 +148,9 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   
   return _ADC;
 }
-
+/**
+ OKAY; While I Love initAllUp it should be initAllUpWith:MOC
+*/
 - (KVPersonDataController *)PDC {
   if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
   
@@ -183,7 +186,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Insert Person
 
 - (void)insertNewPerson:(id)sender {
@@ -194,13 +196,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   This will error here because of the number of rows in the VC is Invalid / Inconsistant
   }
   */
-  [self willAddPersonInDelegate:self];
+  [self.PDC.delegate willAddPersonInDelegate:self];
+//[[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
+/**
+ Getting closer
+ [self willAddTaskInDelegate:self];
+*/
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 
   [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
-
 }
 
 #pragma mark - Segues
@@ -222,6 +228,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 #pragma mark - Table View
 
 //TODO: - Need a fuckin  Current Person!
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   NSInteger secCount = 1;
   if (self.TDC) {
@@ -238,7 +245,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     return ([[[self TDC]getAllEntities]count]);
   }
   return (0);
-
 }
 //FIXME: - Make a correct Custom Cell
 /**
@@ -306,6 +312,40 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   }
 }
 
+
+#pragma mark - Map Functions
+- (void)setupCLAuthState {
+  if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+    [[self locationManager]requestAlwaysAuthorization];
+  }
+}
+  //TODO: - Update Location
+
+- (void) findLocation {
+    //
+  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  NSLog(@"location ==> Latitude %6f\t %6f ",coordinate.latitude, coordinate.longitude);
+  [self foundLocation];
+  
+}
+
+- (void) foundLocation {
+  [[self locationManager]stopUpdatingLocation];
+}
+
+- (void)setupCLManager {
+  if (!(_locationManager))
+      {
+    _locationManager = [[CLLocationManager alloc]init];
+      }
+  [[self locationManager]setDelegate:(self)];
+  [self setupCLAuthState];
+    //
+  [[self locationManager]setDistanceFilter:kCLDistanceFilterNone];
+  [[self locationManager]setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+  [[self locationManager]startUpdatingLocation];
+}
+
 #pragma mark - CONFRMANCE === COMPLIANCE
 /*
 
@@ -338,22 +378,29 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   KVPerson* person = [[[self PDC]getAllEntities]firstObject];
     //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
   BOOL facts = nil;
+  
   KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
   
-  if ([task taskOwner] != person) {
-    [task setTaskOwner:person];
-  }
-  if ([[person taskList]containsObject:task]) {
-    facts = false;
-  } else {
-    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-    [[self TDC]didSaveEntities];
-    facts = true;
-  }
+  [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+//  if ([task taskOwner] != person) {
+//    [task setTaskOwner:person];
+//  }
+//  if ([[person taskList]containsObject:task]) {
+//    facts = false;
+//  } else {
+//    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+//    [[self TDC]didSaveEntities];
+//    facts = true;
+//  }
+  
   [[self TDC]didSaveEntities];
   return (facts);
 }
-
+/**
+ OKAY; This is kind of important as a fix
+ [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
+ _But_ not always
+ */
 - (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
   
   BOOL result = nil;
@@ -394,43 +441,5 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   BOOL st8 = FALSE;
   
   return (st8);
-}
-
-
-#pragma mark - Map Functions
-
-#pragma mark Setup Location Manager
-
-- (void)setupCLManager
-{
-  if (!(_locationManager))
-  {
-    _locationManager = [[CLLocationManager alloc]init];
-  }
-  [[self locationManager]setDelegate:(self)];
-  [self setupCLAuthState];
-  //
-  [[self locationManager]setDistanceFilter:kCLDistanceFilterNone];
-  [[self locationManager]setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
-  [[self locationManager]startUpdatingLocation];
-}
-
-- (void)setupCLAuthState {
-  if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-    [[self locationManager]requestAlwaysAuthorization];
-  }
-}
-//TODO: - Update Location
-
-- (void) findLocation {
-  //
-  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
-  NSLog(@"location ==> Latitude %6f\t %6f ",coordinate.latitude, coordinate.longitude);
-  [self foundLocation];
-  
-}
-
-- (void) foundLocation {
-  [[self locationManager]stopUpdatingLocation];
 }
 @end
