@@ -201,9 +201,9 @@
 		383419E12008326500F00957 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				38C0801F21FAE28900CBE4C9 /* PersonViewControllers */,
 				383419F62008372300F00957 /* PrimeTVC */,
 				38A5266F201129EE00F969C3 /* MapVC */,
+				38C0801F21FAE28900CBE4C9 /* PersonViewControllers */,
 				383419F82008374D00F00957 /* AcessoryViews */,
 			);
 			path = ViewControllers;

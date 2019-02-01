@@ -17,8 +17,8 @@
 }
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m {
 //  return (KVTask *)([self makeNewEntityInMOC:m]);
+//FIXME: ¿DaAKTUALFuck?
   KVTask *t = ([self makeNewEntityInMOC:m]);
-
   return t;
 }
 @end
