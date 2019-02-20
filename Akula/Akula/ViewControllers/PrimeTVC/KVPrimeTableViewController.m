@@ -138,9 +138,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self navigationItem]setRightBarButtonItem:(addButton)];
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
-  [[self MapViewController]setMA_Delegate:(self)];
     //TODO: SETUP MapVC's GUI State
-  
+
 }
 
 - (KVAkulaDataController *)ADC {
@@ -191,17 +190,9 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-  /**
-  if ([self didAddNewPersonFromDelegate:self]) {
-  This will error here because of the number of rows in the VC is Invalid / Inconsistant
-  }
-  */
+
   [self.PDC.delegate willAddPersonInDelegate:self];
-//[[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
-/**
- Getting closer
- [self willAddTaskInDelegate:self];
-*/
+
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -217,9 +208,9 @@ THEN after all of that I might want a protocol for this controller. Jeppers
     KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
     
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
-    // FIXME: _ALWAYS_USE_PDC_ in Map View
+
     [mapView setPDC:[self PDC]];
-    [mapView setMA_Delegate:(self)];
+
     [mapView setCurrentEntity:object];
 
   }
@@ -347,15 +338,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 }
 
 #pragma mark - CONFRMANCE === COMPLIANCE
-/*
 
- Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
- There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
- 
- Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli` is a great example And I wrote this definfition before writing the declaration and tested it before using it
- ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
- 
- */
 - (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
@@ -396,23 +379,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self TDC]didSaveEntities];
   return (facts);
 }
-/**
- OKAY; This is kind of important as a fix
- [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
- _But_ not always
- */
+//
 - (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
   
   BOOL result = nil;
   
   [self findLocation];//
   
-  [self willAddPersonInDelegate:self];
-    //  [[self MapViewController]setCurrentEntity:p];
-    //  __unused KVAbstractLocationEntity *tmpZ = [p location];
+  [[[self PDC]delegate] willAddPersonInDelegate:self];
   
   result = [[self PDC]didSaveEntities];
-    //  [[self tableView]reloadData];
+
   [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
   [[self tableView]reloadData];
   
