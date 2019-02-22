@@ -17,12 +17,7 @@
 @protocol PersonDataProtocol
 
 - (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli;
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli
-             withPerson:(KVPerson*)p;
-- (BOOL)didAddTask:(KVTask*)task
-                To:(KVPerson*)person
-              From:(id<PersonDataProtocol>)delegate;
-
+- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson*)p;
 @optional
 - (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
                    withTasksCon:(KVTasksDataController*)tkon

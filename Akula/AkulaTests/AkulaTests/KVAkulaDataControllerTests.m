@@ -39,7 +39,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  https://stackoverflow.com/questions/8881453/the-model-used-to-open-the-store-is-incompatible-with-the-one-used-to-create-the
  FIXME: Add Lightweight Migration like THIS
  */
-- (void)setupInMemoryCoordinator {
+- (void)
+setupInMemoryCoordinator {
   /**
    https://stackoverflow.com/questions/43625748/unit-testing-with-core-data-in-objective-c
   */
@@ -545,11 +546,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 - (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
 //  <#code#>
 }
-
-- (BOOL)didAddTask:(KVTask *)task To:(KVPerson *)person From:(id<PersonDataProtocol>)delegate {
-  return (true);
-}
-
 
 - (void)testAddTask {
   XCTAssertFalse([self didModifyTasksForPerson:self
