@@ -33,7 +33,8 @@ OK _At This Time_ the view has data, and it should But where should that come fr
   return _allDataController;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 /**
  Override point for customization after application launch.
  Actual Factual I did a few changes and I want to activate test
@@ -55,6 +56,37 @@ OK _At This Time_ the view has data, and it should But where should that come fr
   }
   
   return YES;
+}
+#pragma mark - Split view
+
+/**
+ Okay
+ I am not sure but I suspect that it might make sense to make the
+ UISplitViewController *
+ 
+ BUT what happens WHEN I check initial/valid app state and then tell PTVC to perform seque or do whatnot
+ SEE I don't need it to be the double safe protocol like from PVTC - AAMOF if I am holding it correctly 
+ 
+ */
+
+  //#pragma mark - Split view
+  // TODO: - implement UISplitViewController
+  // TODO: - implement Split View logic
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
+{
+  if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
+      {
+    /*
+     OK 'secondaryViewController' is *UINavigationController and its topView *KVMapViewController
+     I should set some class / factory methods to setup the view
+     
+     ## Look at the Tricorder Implementation ##
+     */
+      // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+    return YES;
+      } else {
+        return NO;
+      }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -85,27 +117,6 @@ OK _At This Time_ the view has data, and it should But where should that come fr
     NSLog(@"App NOT terminated correctly");
   }
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-#pragma mark - Split view
-// TODO: - implement UISplitViewController
-//#pragma mark - Split view
-// TODO: - implement Split View logic
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
-{
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
-    {
-/*
- OK 'secondaryViewController' is *UINavigationController and its topView *KVMapViewController
- I should set some class / factory methods to setup the view
- 
- ## Look at the Tricorder Implementation ##
- */
-        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-        return YES;
-    } else {
-        return NO;
-    }
 }
 
 @end
