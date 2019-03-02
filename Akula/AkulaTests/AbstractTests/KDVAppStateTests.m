@@ -14,16 +14,32 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "AppDelegate.h"
 #import "KDVApplicationDataController.h"
 
-@interface KVAbstractControllerTests : XCTestCase
-@property (strong, nonatomic)id<UIApplicationDelegate> SUT;
-@property (strong, nonatomic)KVPrimeTableViewController *TVC;
+/**
+Rather than look at this as a 'Jive' Level Controller let's think of it as a
+ "Nifty" addition.
+*/
+
+@interface KDVSplitCon : UISplitViewController
 
 @end
 
-@implementation KVAbstractControllerTests
+@implementation KDVSplitCon
+
+@end
+
+@interface KDVAppStateTests : XCTestCase
+@property (strong, nonatomic)id<UIApplicationDelegate> SUT;
+@property (strong, nonatomic)KVPrimeTableViewController *TVC;
+
+@property (strong, nonatomic)KDVSplitCon *niftyCon;
+
+@end
+
+@implementation KDVAppStateTests
 
 @synthesize SUT = _SUT;
 @synthesize TVC = _TVC;
+@synthesize niftyCon = _niftyCon;
 
 - (void)setUp {
   [super setUp];
@@ -43,8 +59,10 @@ This test Asserts that the KDVAbstractDataController inits with the correct stat
 #pragma mark - THIS IS _HELLA_ IMPORTANT
 
 - (void)testAkulaAppDelegate {
-//  id<UIApplicationDelegate> appDel = [[UIApplication sharedApplication]delegate];
-  
+/**
+ id<UIApplicationDelegate> appDel = [[UIApplication sharedApplication]delegate];
+ Ok AppDel isa UISplitViewControllerDelegate
+  */
   XCTAssert([[self SUT] isKindOfClass:[AppDelegate class]]);
   XCTAssertNotNil([[self SUT] window]);
   
