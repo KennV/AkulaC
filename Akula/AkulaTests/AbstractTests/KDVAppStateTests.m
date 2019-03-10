@@ -27,7 +27,7 @@ Rather than look at this as a 'Jive' Level Controller let's think of it as a
 
 @end
 
-@interface KDVAppStateTests : XCTestCase
+@interface KDVAppStateTests : XCTestCase <UISplitViewControllerDelegate>
 @property (strong, nonatomic)id<UIApplicationDelegate> SUT;
 @property (strong, nonatomic)KVPrimeTableViewController *TVC;
 
@@ -43,6 +43,7 @@ Rather than look at this as a 'Jive' Level Controller let's think of it as a
 
 - (void)setUp {
   [super setUp];
+  [[self niftyCon]setDelegate:self];
   [self setSUT:[[UIApplication sharedApplication]delegate]];
   [self setTVC:[[KVPrimeTableViewController alloc]init]];
 }
