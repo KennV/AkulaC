@@ -53,6 +53,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 */
 @property (strong, nonatomic) KVTasksDataController *TDC;
 
+@property (strong, nonatomic) KVPerson* CurrentPerson;
+
 // so for expediancy I made a cheap CLUT without the table or dict even
 @property (weak,nonatomic)UIColor* baseColor00;
 @property (weak,nonatomic)UIColor* baseColor01;
@@ -106,6 +108,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @synthesize hilightTextColor = _hilightTextColor;
 @synthesize specialTextColor = _specialTextColor;
 
+@synthesize CurrentPerson = _CurrentPerson;
 
 #pragma mark - DataSource
 /**
@@ -190,8 +193,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)insertNewPerson:(id)sender {
   // reload here
   [[self tableView]reloadData];
-
-  [self.PDC.delegate willAddPersonInDelegate:self];
+  [[[self PDC]delegate]willAddPersonInDelegate:self];
 
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
@@ -204,14 +206,14 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
     
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
 
     [mapView setPDC:[self PDC]];
 
-    [mapView setCurrentEntity:object];
+    [mapView setCurrentEntity:[self CurrentPerson]];
 
   }
 }
@@ -219,6 +221,15 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 #pragma mark - Table View
 
 //TODO: - Need a fuckin  Current Person!
+//
+-(KVPerson *)CurrentPerson {
+  NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+  KVPerson *p = self.PDC.getAllEntities[indexPath.row];
+  return (p);
+//
+  
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   NSInteger secCount = 1;
@@ -353,7 +364,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   
   NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
     //  [self updateEntityLocation:([p location])];//
-  
+    //TODO: RS Setup
+   BOOL j = [[self PDC]didSaveEntities];
 }
 
 - (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {

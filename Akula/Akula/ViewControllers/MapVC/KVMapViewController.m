@@ -95,9 +95,9 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 #pragma mark BUGFIX: NEW VUE
 
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
-  //TODO: MAKE A SELECTION BOUNCE BACK TO THE MAP
+  
   if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
-//    NSLog(@"Deli Powa");
+    NSLog(@"Deli Powa");
   }
 }
 
