@@ -502,6 +502,17 @@ setupInMemoryCoordinator {
    */
   
 }
+/**
+#pragma mark - BITCHTESTS
+OK- For Some INCREDIBLY AWESOME REASON I had this test suite NOT in the build. The Result Being that my test coverage was in the 47% range. Not nice at all and with this class active it is on the order of <=:95% (95.1 to be precise) This is significant for two reasons
+• Coverage like that is hard to buy
+	Seriously. I mean there are a lot of class and factory functions that I cannot test and could trap against I suppose but in general when this app misbehaves I am fairly confident that I know the offending function or at least where it starts
+• the protocol is working correctly;
+	This is KEY like Hardcore - No Joke Key As Fuck. I must be able to send sensible messages back to my controller, rather the one that owns my current instance and send it a request, moreover I might need to get a BOOL back from it saying that a save or a transaction was complete.
+
+Thus; I should assume - given my working "best practices" that the code which made me take it out of _Test Build is in the commented out sections above OR right at the bottom IDK.
+*/
+
 
 #pragma mark - ProtocolTests
 /**
@@ -544,7 +555,7 @@ setupInMemoryCoordinator {
 }
 // OOOh xcode just added this b/c I added it _elsewhere_
 - (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
-//  <#code#>
+//  See Active Solution
 }
 
 - (void)testAddTask {

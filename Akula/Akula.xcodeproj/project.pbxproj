@@ -23,6 +23,7 @@
 		3854FED820D32B95006BEFA5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3854FED720D32B95006BEFA5 /* CoreLocation.framework */; };
 		385A9A37210A8ACE009551C3 /* KVPinItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 385A9A36210A8ACE009551C3 /* KVPinItem.m */; };
 		38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3866264E200BB89900D38E5B /* KDVApplicationDataController.m */; };
+		3868551B223B64F300536CC7 /* KVAkulaDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 384FF278205C42C100386F57 /* KVAkulaDataControllerTests.m */; };
 		3886195F20E7E52000E2AAAD /* KVEntitiesDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886195A20E7E52000E2AAAD /* KVEntitiesDataController.m */; };
 		3886196020E7E52000E2AAAD /* KVItemsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886195D20E7E52000E2AAAD /* KVItemsDataController.m */; };
 		38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A52671201129EE00F969C3 /* KVMapViewController.m */; };
@@ -559,6 +560,7 @@
 				3854229220D305A4004558F1 /* Akula.xcdatamodeld in Sources */,
 				3804E37A205D58C10050C664 /* AkulaTests.m in Sources */,
 				38C4FDA621B2660E005B7630 /* KVAbstractControllerTests.m in Sources */,
+				3868551B223B64F300536CC7 /* KVAkulaDataControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
