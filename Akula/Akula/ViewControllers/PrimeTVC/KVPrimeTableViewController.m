@@ -213,15 +213,18 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([[segue identifier] isEqualToString:@"showDetail"]) {
+ 
+  if ([[segue identifier] isEqualToString:@"showDetail"])  {
 //    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 //    KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
-    
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
-    // FIXME: _ALWAYS_USE_PDC_ in Map View
+// FIXME: _ALWAYS_USE_PDC_ in Map View
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
     [mapView setCurrentEntity:[self CurrentPerson]];
+    
+  } else if ([[segue identifier] isEqualToString:@"showEULA"]) {
+    NSLog(@"Preparing Application For First Run");
   }
 }
 
