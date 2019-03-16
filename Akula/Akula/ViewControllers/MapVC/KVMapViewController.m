@@ -67,6 +67,18 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if (([[segue identifier] isEqualToString:@"ShowCameraView"])) {
+    NSLog(@"\nPreloading Camera View");
+  }
+/*
+CAN I REUSE THAT NAME showEULA -> gotoEULA
+*/
+  if (([[segue identifier] isEqualToString:@"showEULA"])) {
+    ;
+  }
+}
+
 #pragma mark - Managing the detail item
 /**
  my entity

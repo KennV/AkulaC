@@ -316,7 +316,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 #pragma mark - Map Functions
 
-#pragma mark Setup Location Manager
+#pragma mark - Setup Location Manager
 
 - (void)setupCLManager
 {
@@ -350,6 +350,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void) foundLocation {
   [[self LocationManager]stopUpdatingLocation];
 }
+#pragma mark - GUI Setup Logic.
+
 
 #pragma mark - CONFRMANCE === COMPLIANCE
 

@@ -18,6 +18,7 @@
 		383419F1200835A600F00957 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F0200835A600F00957 /* MapKit.framework */; };
 		383419F4200835B100F00957 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F2200835B100F00957 /* HealthKit.framework */; };
 		383419F5200835B100F00957 /* HealthKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383419F3200835B100F00957 /* HealthKitUI.framework */; };
+		384879A8223CD63C00ACED96 /* KVEULAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384879A6223CD63B00ACED96 /* KVEULAViewController.m */; };
 		38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */; };
 		3854229220D305A4004558F1 /* Akula.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38B34F86201191BE002A6897 /* Akula.xcdatamodeld */; };
 		3854FED820D32B95006BEFA5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3854FED720D32B95006BEFA5 /* CoreLocation.framework */; };
@@ -76,6 +77,8 @@
 		383419F0200835A600F00957 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		383419F2200835B100F00957 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		383419F3200835B100F00957 /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
+		384879A6223CD63B00ACED96 /* KVEULAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVEULAViewController.m; sourceTree = "<group>"; };
+		384879A7223CD63B00ACED96 /* KVEULAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVEULAViewController.h; sourceTree = "<group>"; };
 		384FF278205C42C100386F57 /* KVAkulaDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVAkulaDataControllerTests.m; sourceTree = "<group>"; };
 		38503D45200848FD00FC92D3 /* KDVAbstractDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVAbstractDataController.m; sourceTree = "<group>"; };
 		38503D46200848FD00FC92D3 /* KDVAbstractDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVAbstractDataController.h; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 		383419E12008326500F00957 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				384879A5223CD63B00ACED96 /* EULAViews */,
 				38BA6544223CCB2400A40CAC /* CameraView */,
 				38BA653D223CCB2400A40CAC /* ItemViews */,
 				38BA6536223CCB2400A40CAC /* PersonViews */,
@@ -266,6 +270,15 @@
 				384BC86A210592C5007DC8E7 /* AnnotationView */,
 			);
 			path = AcessoryViews;
+			sourceTree = "<group>";
+		};
+		384879A5223CD63B00ACED96 /* EULAViews */ = {
+			isa = PBXGroup;
+			children = (
+				384879A6223CD63B00ACED96 /* KVEULAViewController.m */,
+				384879A7223CD63B00ACED96 /* KVEULAViewController.h */,
+			);
+			path = EULAViews;
 			sourceTree = "<group>";
 		};
 		384BC86A210592C5007DC8E7 /* AnnotationView */ = {
@@ -632,6 +645,7 @@
 				38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */,
 				38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */,
 				3886195F20E7E52000E2AAAD /* KVEntitiesDataController.m in Sources */,
+				384879A8223CD63C00ACED96 /* KVEULAViewController.m in Sources */,
 				385A9A37210A8ACE009551C3 /* KVPinItem.m in Sources */,
 				38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */,
 				38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */,
