@@ -451,8 +451,8 @@
 		38BA6544223CCB2400A40CAC /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
-				38BA6545223CCB2400A40CAC /* KVCameraViewController.m */,
 				38BA6546223CCB2400A40CAC /* KVCameraViewController.h */,
+				38BA6545223CCB2400A40CAC /* KVCameraViewController.m */,
 			);
 			path = CameraView;
 			sourceTree = "<group>";
