@@ -43,7 +43,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 @interface KVPrimeTableViewController ()
 
-@property (strong,nonatomic)CLLocationManager *locationManager;
+@property (strong,nonatomic)CLLocationManager *LocationManager;
 /**
  Akula PersonDataController
 */
@@ -75,7 +75,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @property (weak,nonatomic)UIColor* specialTextColor;
 //I expect that these will also be refactored into sensible names
 // making this private here affects test lines:482…492
-
+@property (weak,nonatomic)KVPerson* CurrentPerson;
 @end
 
 @implementation KVPrimeTableViewController
@@ -84,7 +84,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @synthesize PDC =_PDC;
 @synthesize TDC =_TDC;
 
-@synthesize locationManager = _locationManager;
+@synthesize LocationManager = _LocationManager;
 // Them colors
 @synthesize baseColor00 = _baseColor00;
 @synthesize baseColor01 = _baseColor01;
@@ -106,7 +106,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @synthesize hilightTextColor = _hilightTextColor;
 @synthesize specialTextColor = _specialTextColor;
 
-
+@synthesize CurrentPerson = _CurrentPerson;
 #pragma mark - DataSource
 /**
  */
@@ -160,6 +160,14 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   return (_TDC);
 }
 
+  //TODO: - Need a fuckin  Current Person!
+
+-(KVPerson *)CurrentPerson {
+  NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
+  KVPerson* person = [[self PDC]getAllEntities][path.row];
+  return person;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   //see ALSO: Conformance is Compliance
@@ -182,7 +190,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Insert Person
 
@@ -207,21 +214,19 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
     
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
     // FIXME: _ALWAYS_USE_PDC_ in Map View
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
-    [mapView setCurrentEntity:object];
-
+    [mapView setCurrentEntity:[self CurrentPerson]];
   }
 }
 
 #pragma mark - Table View
 
-//TODO: - Need a fuckin  Current Person!
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   NSInteger secCount = 1;
   if (self.TDC) {
@@ -312,35 +317,35 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 - (void)setupCLManager
 {
-  if (!(_locationManager))
+  if (!(_LocationManager))
   {
-    _locationManager = [[CLLocationManager alloc]init];
+    _LocationManager = [[CLLocationManager alloc]init];
   }
-  [[self locationManager]setDelegate:(self)];
+  [[self LocationManager]setDelegate:(self)];
   [self setupCLAuthState];
   //
-  [[self locationManager]setDistanceFilter:kCLDistanceFilterNone];
-  [[self locationManager]setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
-  [[self locationManager]startUpdatingLocation];
+  [[self LocationManager]setDistanceFilter:kCLDistanceFilterNone];
+  [[self LocationManager]setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+  [[self LocationManager]startUpdatingLocation];
 }
 
 - (void)setupCLAuthState {
   if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-    [[self locationManager]requestAlwaysAuthorization];
+    [[self LocationManager]requestAlwaysAuthorization];
   }
 }
 //TODO: - Update Location
 
 - (void) findLocation {
   //
-  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  CLLocationCoordinate2D coordinate = [[[self LocationManager]location]coordinate];
   NSLog(@"location ==> Latitude %6f\t %6f ",coordinate.latitude, coordinate.longitude);
   [self foundLocation];
   
 }
 
 - (void) foundLocation {
-  [[self locationManager]stopUpdatingLocation];
+  [[self LocationManager]stopUpdatingLocation];
 }
 
 #pragma mark - CONFRMANCE === COMPLIANCE
@@ -356,7 +361,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 - (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
-  CLLocationCoordinate2D coordinate = [[[self locationManager]location]coordinate];
+  CLLocationCoordinate2D coordinate = [[[self LocationManager]location]coordinate];
   
   KVPerson *p = [[[self PDC]getAllEntities]firstObject];
   
