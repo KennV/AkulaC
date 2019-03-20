@@ -14,10 +14,24 @@ OK _At This Time_ the view has data, and it should But where should that come fr
 */
 
 #import "AppDelegate.h"
-//#import "KVPrimeTableViewController.h"
-//#import "KVMapViewController.h"
-////
-//#import "KVAkulaDataController.h"
+/**
+ Some Ill Shit First I need to know if I have accepted the EULA _Before_ location Management. Then I can do that in a PLIST prolly from here.
+ 
+ https://stackoverflow.com/questions/31203241/how-can-i-use-userdefaults-in-swift/31203348#31203348
+ 
+ In the View I can manually define a seque
+typedef enum : NSUInteger {
+  appHasRunSetup
+
+} propertyListKeys;
+
+@_z_interface NSUserDefaults ()
+{
+ 
+}
+
+@end
+ */
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 @property(readonly,nonatomic)KVAkulaDataController *allDataController;
