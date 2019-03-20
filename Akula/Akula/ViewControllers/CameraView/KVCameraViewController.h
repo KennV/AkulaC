@@ -3,6 +3,9 @@
 */
 #import <UIKit/UIKit.h>
 
-@interface KVCameraViewController : UIViewController
+#import "KVPersonDataController.h"
 
+@interface KVCameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property(weak,nonatomic)KVPerson* CurrentPerson;
+@property (strong, nonatomic) KVPersonDataController* PDC;
 @end

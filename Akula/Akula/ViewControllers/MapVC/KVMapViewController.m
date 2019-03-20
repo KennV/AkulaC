@@ -17,12 +17,15 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
  ~rather than build that I will continue to abstract this
  */
 #import "KVMapViewController.h"
+#import "KVCameraViewController.h"
 #import "KVPinItem.h"
 
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
 @property (strong, nonatomic) KVAkulaDataController *ADC;
+
+@property (weak, nonatomic)KVCameraViewController* KamView;
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -45,6 +48,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self setKamView:[[KVCameraViewController alloc]init]];
   if (!([[[self MapView]delegate] isEqual:(self)])) {
     [[self MapView]setDelegate:self];
     /**
@@ -58,6 +62,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 - (void)viewWillAppear:(BOOL)animated {
   [self configureView];
+
 }
 
 - (void)configureView {
@@ -70,6 +75,8 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if (([[segue identifier] isEqualToString:@"ShowCameraView"])) {
     NSLog(@"\nPreloading Camera View");
+    [[self KamView]setPDC:[[KVPersonDataController alloc]initAllUp]];
+    [[self KamView]setCurrentPerson:(KVPerson*)[self currentEntity]];
   }
 /*
 CAN I REUSE THAT NAME showEULA -> gotoEULA

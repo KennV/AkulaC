@@ -14,5 +14,15 @@ AND Speaking on Protocols what does a camera contoller actually do in Cocoa? I m
 @end
 
 @implementation KVCameraViewController 
+@synthesize CurrentPerson = _CurrentPerson;
+@synthesize PDC = _PDC;
 
+-(void)viewWillAppear:(BOOL)animated {
+//  [super viewDidLoad];
+
+}
+-(void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:true];
+  //OK i'm nil x nil here
+}
 @end
