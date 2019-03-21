@@ -110,7 +110,18 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 #pragma mark - DataSource
 /**
  */
-
+/**
+dont look to if:else
+look to if(n==True)
+if(n==False)
+more molecular, more modular
+*/
+/**
+Now Where the Rubber Meets the Road;
+AAMOF it is a refactoring and long awaited. I need the current visible TVueSection to be hte currentGuy OKizzily
+#BUUUT# then there are second and third order display / report effects
+CHIEFLY - UNSET 4 pin's title
+*/
 - (void)setupAppState; {
   
 }
