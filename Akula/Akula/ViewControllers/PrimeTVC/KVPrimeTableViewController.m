@@ -114,7 +114,16 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void)setupAppState; {
   
 }
-
+/**
+Additional to this I need to
+ keep the ADC Private
+ moave the person to another ivar
+ have person gen a qname
+ have pin exec a hexname
+And about 3 more for 7 - 10 -/+1 features
+#BEFORE ANY FUK'N INTEGRATION!??!??!#
+@MAD_AF
+*/
 - (void)setupDataSource; {
   [[self PDC]setMOC:([[self ADC]MOC])];
   [[self PDC]setDelegate:(self)];
@@ -122,12 +131,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[self TDC]setDelegate:(self)];
 }
 
+#pragma mark - GUI Setup Logic.
+
 /**
+ Okay, if the array is empty then the '+' button Should read setup
+ BOTH HERE AND -SetupMode in the MapView
+ 
  Set up the left/edit button the right/addPerson button
  */
 - (void)setupGUIState; {
   /**
-  
+  If this array is empty then this button should _at the very least_ be inactive
   */
   [[self navigationItem]setLeftBarButtonItem:[self editButtonItem]];
 
@@ -135,11 +149,17 @@ THEN after all of that I might want a protocol for this controller. Jeppers
   [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                 target:self
                                                 action:@selector(insertNewPerson:)];
+  /**
+  ALSO this should be a local addButton/RightBarButtonItem No, a Right_Side_BarButtonItem : RightBarButtonItem
+  THEN attach Similar Logic
+  */
   [[self navigationItem]setRightBarButtonItem:(addButton)];
   
   [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
   [[self MapViewController]setMA_Delegate:(self)];
-  
+  /**
+  LASTLY Call a Similar Setup on the Map View - either by Jive or Delegate, It just needs to do what tricorder:Swift does for setupButton and Jive
+  */
 }
 
 - (KVAkulaDataController *)ADC {
@@ -350,8 +370,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 - (void) foundLocation {
   [[self LocationManager]stopUpdatingLocation];
 }
-#pragma mark - GUI Setup Logic.
-
 
 #pragma mark - CONFRMANCE === COMPLIANCE
 
