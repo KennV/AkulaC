@@ -60,14 +60,26 @@ typedef enum : NSUInteger {
   
   KVPrimeTableViewController *masterNavigationController = [[splitViewController viewControllers] lastObject];
   
-  if ([masterNavigationController isKindOfClass:([KVPrimeTableViewController class])] &&
-      [masterNavigationController respondsToSelector:(@selector(setADC:))])
+  if ([masterNavigationController isKindOfClass:([KVPrimeTableViewController class])] && [masterNavigationController respondsToSelector:(@selector(setADC:))])
   {
+    /**
+     OKay what I want to do at this point is, launch a different detailView than the mapView if -
+     Well let's consider the predicates.
+     Is appHasRunSetup or such true?
+      AND
+     Is ADC empty?
+    */
+    //TODO: - Setup and Test UserDefaults
+    //FIXME : setupState
     masterNavigationController.MapViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    //FIXME: setupState
     [masterNavigationController setADC:[self allDataController]];
+    //TODO: Some More.
+    /**
+     Given the state of the TVC I need to have some private ivars to it and also binding it to the MapView. i.e. a LocationManager that I can use in a callBack w\o it being a global or a singleton. ALSO the ability for the map to easily differentiate between a Person* and an Item*\Person-Place-Thing* 
+    */
   }
-  
+  //This is to forstall some future setup & test features
+  [self appLogicChecks];
   return YES;
 }
 
@@ -104,7 +116,7 @@ typedef enum : NSUInteger {
 #pragma mark - Split view
 // TODO: - implement UISplitViewController
 //#pragma mark - Split view
-// TODO: - implement Split View logic
+
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
 {
     if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
@@ -122,4 +134,15 @@ typedef enum : NSUInteger {
     }
 }
 
+// TODO: - implement Split View logic
+
+- (void)appLogicChecks
+{
+  if ([[[self allDataController]getAllEntities]count]==0) {
+    NSLog(@"Application Contains No Entities");
+    NSLog(@"Performing Setup is advised");
+  } else {
+    NSLog(@"Application Contains %lu Entities",(unsigned long)[[[self allDataController]getAllEntities]count]);
+  }
+}
 @end
