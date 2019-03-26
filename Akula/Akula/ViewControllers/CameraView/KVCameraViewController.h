@@ -7,5 +7,7 @@
 
 @interface KVCameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property(weak,nonatomic)KVPerson* CurrentPerson;
-@property (strong, nonatomic) KVPersonDataController* PDC;
+@property (weak, nonatomic) KVPersonDataController* PDC;
+//last ditch - Ditch Witch Bitch?!?!
+- (id)initWithDataCon:(KVPersonDataController*)c Persron:(KVPerson*)p;
 @end
