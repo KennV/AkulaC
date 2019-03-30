@@ -35,6 +35,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "KVPrimeTableViewController.h"
+#import "KVCameraViewController.h"
+#import "KVPinItem.h"
 
 @interface KVMapViewController : UIViewController <MKMapViewDelegate>
 //
@@ -43,6 +45,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property(weak,nonatomic)KVPersonDataController *PDC;
 
 @property(strong,nonatomic)KVRootEntity *currentEntity;
+
+@property (strong, nonatomic)KVCameraViewController* CameraView;
 
 - (void)setupGUIState;
 @end

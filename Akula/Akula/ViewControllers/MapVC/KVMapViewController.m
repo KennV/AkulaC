@@ -17,15 +17,12 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
  ~rather than build that I will continue to abstract this
  */
 #import "KVMapViewController.h"
-#import "KVCameraViewController.h"
-#import "KVPinItem.h"
+
 
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
 @property (strong, nonatomic) KVAkulaDataController *ADC;
-
-@property (weak, nonatomic)KVCameraViewController* KamView;
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -48,7 +45,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self setKamView:[[KVCameraViewController alloc]init]];
+//  [self setCameraView:[[KVCameraViewController alloc]init]];
   if (!([[[self MapView]delegate] isEqual:(self)])) {
     [[self MapView]setDelegate:self];
     /**
@@ -57,6 +54,7 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
   }
   [self setupGUIState];
   [self setupMapView];
+//  [self setCameraView:[[KVCameraViewController alloc]initWithDataCon:(self.PDC) Persron:(KVPerson*)self.currentEntity]];
 
 }
 
@@ -70,13 +68,14 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
     [[self entityDescriptionLabel]setText:[[self currentEntity]description]];
     [self setupMapViewWith:[self currentEntity]];
   }
+  //CoreData: warning: Multiple NSEntityDescriptions claim the NSManagedObject subclass
+  // it does not happen here but it happens over there
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if (([[segue identifier] isEqualToString:@"ShowCameraView"])) {
-    NSLog(@"\nPreloading Camera View");
-    [[self KamView]setPDC:[[KVPersonDataController alloc]initAllUp]];
-    [[self KamView]setCurrentPerson:(KVPerson*)[self currentEntity]];
+    [[self CameraView]setTitle:(@"Camera")];
+    [self setupCameraScene];
   }
 /*
 CAN I REUSE THAT NAME showEULA -> gotoEULA
@@ -95,6 +94,7 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 - (void)setCurrentEntity:(KVRootEntity *)newEntity {
   if (_currentEntity != newEntity) {
     _currentEntity = newEntity;
+    [[self CameraView]setCurrentPerson:(KVPerson*)_currentEntity];
   }
   //Always ConfView on Set?
   [self configureView];
@@ -105,6 +105,13 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 - (void)setupGUIState; {
   self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
   self.navigationItem.leftItemsSupplementBackButton = YES;
+  self.CameraView = [[KVCameraViewController alloc]init];
+}
+
+- (void)setupCameraScene {
+  [[self CameraView]setPDC:[self PDC]];
+  KVPerson* p = (KVPerson*)[self currentEntity];
+  [[self CameraView]setCurrentPerson:p];
 }
 
 - (void)setupButtonsForApplicationState; {

@@ -25,6 +25,7 @@
 		385A9A37210A8ACE009551C3 /* KVPinItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 385A9A36210A8ACE009551C3 /* KVPinItem.m */; };
 		38662650200BB89900D38E5B /* KDVApplicationDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3866264E200BB89900D38E5B /* KDVApplicationDataController.m */; };
 		3868551B223B64F300536CC7 /* KVAkulaDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 384FF278205C42C100386F57 /* KVAkulaDataControllerTests.m */; };
+		387BE0AF2249E35500294599 /* KVCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387BE0AE2249E35500294599 /* KVCameraViewController.m */; };
 		3886195F20E7E52000E2AAAD /* KVEntitiesDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886195A20E7E52000E2AAAD /* KVEntitiesDataController.m */; };
 		3886196020E7E52000E2AAAD /* KVItemsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3886195D20E7E52000E2AAAD /* KVItemsDataController.m */; };
 		38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A52671201129EE00F969C3 /* KVMapViewController.m */; };
@@ -34,7 +35,6 @@
 		38BA6548223CCB2400A40CAC /* KVPersonEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BA653C223CCB2400A40CAC /* KVPersonEditorViewController.m */; };
 		38BA6549223CCB2400A40CAC /* KVItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BA6540223CCB2400A40CAC /* KVItemsTableViewController.m */; };
 		38BA654A223CCB2400A40CAC /* KVItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BA6543223CCB2400A40CAC /* KVItemsViewController.m */; };
-		38BA654B223CCB2400A40CAC /* KVCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BA6545223CCB2400A40CAC /* KVCameraViewController.m */; };
 		38C4FDA621B2660E005B7630 /* KVAbstractControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C4FDA521B2660E005B7630 /* KVAbstractControllerTests.m */; };
 		38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D788E920D96D4E007F2814 /* KVPersonDataController.m */; };
 		38D9A83021059FA4006446A9 /* KVTasksDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D9A82F21059FA4006446A9 /* KVTasksDataController.m */; };
@@ -87,6 +87,8 @@
 		385A9A36210A8ACE009551C3 /* KVPinItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVPinItem.m; sourceTree = "<group>"; };
 		3866264E200BB89900D38E5B /* KDVApplicationDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVApplicationDataController.m; sourceTree = "<group>"; };
 		3866264F200BB89900D38E5B /* KDVApplicationDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVApplicationDataController.h; sourceTree = "<group>"; };
+		387BE0AD2249E35500294599 /* KVCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVCameraViewController.h; sourceTree = "<group>"; };
+		387BE0AE2249E35500294599 /* KVCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVCameraViewController.m; sourceTree = "<group>"; };
 		3886195A20E7E52000E2AAAD /* KVEntitiesDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVEntitiesDataController.m; sourceTree = "<group>"; };
 		3886195B20E7E52000E2AAAD /* KVEntitiesDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVEntitiesDataController.h; sourceTree = "<group>"; };
 		3886195D20E7E52000E2AAAD /* KVItemsDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVItemsDataController.m; sourceTree = "<group>"; };
@@ -105,8 +107,6 @@
 		38BA6540223CCB2400A40CAC /* KVItemsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVItemsTableViewController.m; sourceTree = "<group>"; };
 		38BA6542223CCB2400A40CAC /* KVItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVItemsViewController.h; sourceTree = "<group>"; };
 		38BA6543223CCB2400A40CAC /* KVItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVItemsViewController.m; sourceTree = "<group>"; };
-		38BA6545223CCB2400A40CAC /* KVCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVCameraViewController.m; sourceTree = "<group>"; };
-		38BA6546223CCB2400A40CAC /* KVCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVCameraViewController.h; sourceTree = "<group>"; };
 		38C4FDA521B2660E005B7630 /* KVAbstractControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVAbstractControllerTests.m; sourceTree = "<group>"; };
 		38D788E920D96D4E007F2814 /* KVPersonDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVPersonDataController.m; sourceTree = "<group>"; };
 		38D788EA20D96D4E007F2814 /* KVPersonDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVPersonDataController.h; sourceTree = "<group>"; };
@@ -464,8 +464,8 @@
 		38BA6544223CCB2400A40CAC /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
-				38BA6546223CCB2400A40CAC /* KVCameraViewController.h */,
-				38BA6545223CCB2400A40CAC /* KVCameraViewController.m */,
+				387BE0AD2249E35500294599 /* KVCameraViewController.h */,
+				387BE0AE2249E35500294599 /* KVCameraViewController.m */,
 			);
 			path = CameraView;
 			sourceTree = "<group>";
@@ -641,13 +641,13 @@
 				3886196020E7E52000E2AAAD /* KVItemsDataController.m in Sources */,
 				38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */,
 				38BA6548223CCB2400A40CAC /* KVPersonEditorViewController.m in Sources */,
-				38BA654B223CCB2400A40CAC /* KVCameraViewController.m in Sources */,
 				38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */,
 				38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */,
 				3886195F20E7E52000E2AAAD /* KVEntitiesDataController.m in Sources */,
 				384879A8223CD63C00ACED96 /* KVEULAViewController.m in Sources */,
 				385A9A37210A8ACE009551C3 /* KVPinItem.m in Sources */,
 				38503D48200848FE00FC92D3 /* KDVAbstractDataController.m in Sources */,
+				387BE0AF2249E35500294599 /* KVCameraViewController.m in Sources */,
 				38F4F49A200C129B00762934 /* KVAkulaDataController.m in Sources */,
 				38BA654A223CCB2400A40CAC /* KVItemsViewController.m in Sources */,
 			);
