@@ -13,7 +13,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "Akula+CoreDataModel.h"
 #import "KVPersonDataController.h"
 
-@protocol MapViewActionsProtocol
+@protocol KVMapActions
 
 /**
  Currently these will be optional
@@ -23,9 +23,9 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  today it is not an issue but soon it will be.
  */
 
-- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli;
+- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli;
 
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<MapViewActionsProtocol>)delegate;
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KVMapActions>)delegate;
 @optional
 
 //- (void)willRunSetupFrom:(id<MapViewActionsProtocol>)deli;
@@ -40,7 +40,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController : UIViewController <MKMapViewDelegate>
 //
-@property(weak,nonatomic)id <MapViewActionsProtocol> MA_Delegate;
+@property(weak,nonatomic)id <KVMapActions> MA_Delegate;
 
 @property(weak,nonatomic)KVPersonDataController *PDC;
 

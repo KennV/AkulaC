@@ -10,10 +10,16 @@
 #import <UIKit/UIKit.h>
 #import "KVPersonDataController.h"
 
+@protocol KVCamViewData
+
+@end
+
 //NS_ASSUME_NONNULL_BEGIN
 
 @interface KVCameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property(strong,nonatomic)KVPerson* CurrentPerson;
+
+@property (weak, nonatomic) id <KVCamViewData> CamDataSource;
+@property (strong,nonatomic) KVPerson* CurrentPerson;
 @property (weak, nonatomic) KVPersonDataController* PDC;
 
 @end

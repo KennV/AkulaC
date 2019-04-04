@@ -15,14 +15,14 @@
 #import "KVTask+CoreDataClass.h"
 #import "KVItemsDataController.h"
 
-@protocol TasksDataProtocol
-- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli;
+@protocol KVTaskData
+- (BOOL)willAddTaskInDelegate:(id<KVTaskData>)deli;
 @optional
 
 @end
 
 @interface KVTasksDataController <T : KVTask*> : KVItemsDataController <T>
-@property(weak,nonatomic)id<TasksDataProtocol> delegate;
+@property(weak,nonatomic)id<KVTaskData> delegate;
 
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m;
 

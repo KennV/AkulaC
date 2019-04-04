@@ -392,7 +392,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
  ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
  
  */
-- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
+- (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
   CLLocationCoordinate2D coordinate = [[[self LocationManager]location]coordinate];
@@ -409,7 +409,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 
 }
 
-- (BOOL)willAddTaskInDelegate:(id<TasksDataProtocol>)deli {
+- (BOOL)willAddTaskInDelegate:(id<KVTaskData>)deli {
   // Actually this needs to be my current P*
   KVPerson* person = [[[self PDC]getAllEntities]firstObject];
   //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
@@ -430,7 +430,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   return (facts);
 }
 
-- (BOOL)didAddNewPersonFromDelegate:(id<MapViewActionsProtocol>)deli {
+- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli {
   
   BOOL result = nil;
   
@@ -448,7 +448,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   return (result);
 }
 
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<MapViewActionsProtocol>)delegate {
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KVMapActions>)delegate {
   BOOL facts = nil;
 //  if (!task) {
 //    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
@@ -466,7 +466,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
   return (facts);
 }
 
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli withPerson:(KVPerson *)p {
+- (BOOL)didChangePerson:(id<KVPersonData>)deli withPerson:(KVPerson *)p {
   BOOL st8 = FALSE;
   
   return (st8);

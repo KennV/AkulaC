@@ -24,6 +24,7 @@ THIS IS PROBLAMATIC B\C
 #import "KVCameraViewController.h"
 
 @interface KVCameraViewController()
+@property (weak, nonatomic) IBOutlet UILabel *miLabel;
 
 @end
 
@@ -32,6 +33,7 @@ THIS IS PROBLAMATIC B\C
 @synthesize CurrentPerson = _CurrentPerson;
 @synthesize PDC = _PDC;
 
+@synthesize miLabel = _miLabel;
 -(void)setCurrentPerson:(KVPerson *)p {
   if (_CurrentPerson != p) {
     _CurrentPerson = p;
@@ -51,9 +53,17 @@ THIS IS PROBLAMATIC B\C
 }
 - (void)configureView {
   if ([self CurrentPerson]) {
-    NSLog(@"Powa");
+//    NSLog(@"Powa");
+    [[self miLabel]setText:([[self CurrentPerson]firstName])];
   }
+//   [[self miLabel]setText:(@"Howdy")];
   
+  // Okay kinda lets try -
+//  if ([self miLabel]) {
+//    [[self miLabel]setText:[[self CurrentPerson]firstName]];
+//  } else {
+//    [[self miLabel]setText:(@"Howdy")];
+//  }
 }
 /*
 #pragma mark - Navigation

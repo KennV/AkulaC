@@ -16,7 +16,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #import "AppDelegate.h"
 
-@interface KVAkulaDataControllerTests : XCTestCase <PersonDataProtocol>
+@interface KVAkulaDataControllerTests : XCTestCase <KVPersonData>
 
 @property (strong, nonatomic)NSPersistentStoreCoordinator *inMemoryCoordinator;
 @property (strong, nonatomic)NSManagedObjectContext *testMOC;
@@ -532,7 +532,7 @@ Thus; I should assume - given my working "best practices" that the code which ma
 
  */
 
-- (BOOL)didChangePerson:(id<PersonDataProtocol>)deli
+- (BOOL)didChangePerson:(id<KVPersonData>)deli
              withPerson:(KVPerson *)p {
   BOOL result = FALSE;
 /**
@@ -545,7 +545,7 @@ Thus; I should assume - given my working "best practices" that the code which ma
    */
 }
 
-- (BOOL)didModifyTasksForPerson:(id<PersonDataProtocol>)deli
+- (BOOL)didModifyTasksForPerson:(id<KVPersonData>)deli
                    withTasksCon:(KVTasksDataController *)tkon
                          person:(KVPerson *)p {
   return FALSE;
@@ -554,7 +554,7 @@ Thus; I should assume - given my working "best practices" that the code which ma
    */
 }
 // OOOh xcode just added this b/c I added it _elsewhere_
-- (void)willAddPersonInDelegate:(id<PersonDataProtocol>)deli {
+- (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
 //  See Active Solution
 }
 
