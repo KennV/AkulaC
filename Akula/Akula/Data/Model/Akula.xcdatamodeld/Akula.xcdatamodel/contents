@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="KVAbstractEntity" representedClassName="KVAbstractEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <attribute name="dbID" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="incepDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="graphics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractGraphicsEntity" inverseName="owner" inverseEntity="KVAbstractGraphicsEntity" syncable="YES"/>
-        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractLocationEntity" inverseName="owner" inverseEntity="KVAbstractLocationEntity" syncable="YES"/>
-        <relationship name="physics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractPhysics" inverseName="owner" inverseEntity="KVAbstractPhysics" syncable="YES"/>
+        <attribute name="dbID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="incepDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="graphics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractGraphicsEntity" inverseName="owner" inverseEntity="KVAbstractGraphicsEntity"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractLocationEntity" inverseName="owner" inverseEntity="KVAbstractLocationEntity"/>
+        <relationship name="physics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractPhysics" inverseName="owner" inverseEntity="KVAbstractPhysics"/>
     </entity>
     <entity name="KVAbstractGraphicsEntity" representedClassName="KVAbstractGraphicsEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="caption" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="photoActual" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="photoFileName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="rating" attributeType="Integer 16" minValueString="0" maxValueString="100" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="graphics" inverseEntity="KVAbstractEntity" syncable="YES"/>
+        <attribute name="caption" attributeType="String" defaultValueString="unset"/>
+        <attribute name="photoActual" optional="YES" attributeType="Transformable"/>
+        <attribute name="photoFileName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="rating" attributeType="Integer 16" minValueString="0" maxValueString="100" defaultValueString="0" usesScalarValueType="NO"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="graphics" inverseEntity="KVAbstractEntity"/>
     </entity>
     <entity name="KVAbstractLocationEntity" representedClassName="KVAbstractLocationEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="altitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="heading" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="location" inverseEntity="KVAbstractEntity" syncable="YES"/>
+        <attribute name="altitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="heading" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="location" inverseEntity="KVAbstractEntity"/>
     </entity>
     <entity name="KVAbstractPhysics" representedClassName="KVAbstractPhysics" syncable="YES" codeGenerationType="class">
-        <attribute name="massKG" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="xLong" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="yWide" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zTall" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="physics" inverseEntity="KVAbstractEntity" syncable="YES"/>
+        <attribute name="massKG" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="xLong" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="yWide" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="zTall" attributeType="Float" minValueString="0" defaultValueString="0" usesScalarValueType="NO"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAbstractEntity" inverseName="physics" inverseEntity="KVAbstractEntity"/>
     </entity>
     <entity name="KVAppointment" representedClassName="KVAppointment" parentEntity="KVTask" syncable="YES" codeGenerationType="class">
-        <relationship name="invitees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointment" inverseEntity="KVPerson" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointmentsList" inverseEntity="KVPerson" syncable="YES"/>
+        <relationship name="invitees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointment" inverseEntity="KVPerson"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="appointmentsList" inverseEntity="KVPerson"/>
     </entity>
     <entity name="KVEntity" representedClassName="KVEntity" isAbstract="YES" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class"/>
     <entity name="KVEvent" representedClassName="KVEvent" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
-        <attribute name="duration" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="label" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="priority" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" attributeType="String" defaultValueString="unset" syncable="YES"/>
+        <attribute name="duration" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="label" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="priority" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString="unset"/>
     </entity>
     <entity name="KVItem" representedClassName="KVItem" isAbstract="YES" parentEntity="KVRootEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="cost" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="recieverID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="senderID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="skuID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="stateOfItem" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="tax" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="value" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="cost" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="recieverID" attributeType="String" defaultValueString="unset"/>
+        <attribute name="senderID" attributeType="String" defaultValueString="unset"/>
+        <attribute name="skuID" attributeType="String" defaultValueString="unset"/>
+        <attribute name="stateOfItem" attributeType="String" defaultValueString="unset"/>
+        <attribute name="tax" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="value" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
     </entity>
     <entity name="KVMedication" representedClassName="KVMedication" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
-        <attribute name="dailyFrequency" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="dosageMG" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="dosageString" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="duration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="productAltName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="productName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="timeNextIsDue" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="medsList" inverseEntity="KVPerson" syncable="YES"/>
+        <attribute name="dailyFrequency" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="dosageMG" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="dosageString" attributeType="String" defaultValueString="unset"/>
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="productAltName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="productName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="timeNextIsDue" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="medsList" inverseEntity="KVPerson"/>
     </entity>
     <entity name="KVMessage" representedClassName="KVMessage" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
-        <attribute name="fullDataString" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="hasAttachmentIfYes" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="shortLabel" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="summaryDataString" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <relationship name="messageOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageList" inverseEntity="KVPerson" syncable="YES"/>
-        <relationship name="messageReciever" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageRecipient" inverseEntity="KVPerson" syncable="YES"/>
+        <attribute name="fullDataString" attributeType="String" defaultValueString="unset"/>
+        <attribute name="hasAttachmentIfYes" attributeType="Boolean" usesScalarValueType="NO"/>
+        <attribute name="shortLabel" attributeType="String" defaultValueString="unset"/>
+        <attribute name="summaryDataString" attributeType="String" defaultValueString="unset"/>
+        <relationship name="messageOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageList" inverseEntity="KVPerson"/>
+        <relationship name="messageReciever" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="messageRecipient" inverseEntity="KVPerson"/>
     </entity>
     <entity name="KVPackage" representedClassName="KVPackage" parentEntity="KVMessage" syncable="YES" codeGenerationType="class">
-        <attribute name="shippingMassKG" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="xWidthM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="yDepthM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="zHeightM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shippingMassKG" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="xWidthM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="yDepthM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="zHeightM" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
     </entity>
     <entity name="KVPerson" representedClassName="KVPerson" parentEntity="KVEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="emailID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="firstName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="gender" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="lastName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="middleName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="phoneNumber" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="textID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <relationship name="appointment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="invitees" inverseEntity="KVAppointment" syncable="YES"/>
-        <relationship name="appointmentsList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="owner" inverseEntity="KVAppointment" syncable="YES"/>
-        <relationship name="medsList" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication" syncable="YES"/>
-        <relationship name="messageList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageOwner" inverseEntity="KVMessage" syncable="YES"/>
-        <relationship name="messageRecipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageReciever" inverseEntity="KVMessage" syncable="YES"/>
-        <relationship name="taskList" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask" syncable="YES"/>
+        <attribute name="emailID" attributeType="String" defaultValueString="unset"/>
+        <attribute name="firstName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="gender" attributeType="String" defaultValueString="unset"/>
+        <attribute name="lastName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="middleName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="phoneNumber" attributeType="String" defaultValueString="unset"/>
+        <attribute name="textID" attributeType="String" defaultValueString="unset"/>
+        <relationship name="appointment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="invitees" inverseEntity="KVAppointment"/>
+        <relationship name="appointmentsList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVAppointment" inverseName="owner" inverseEntity="KVAppointment"/>
+        <relationship name="medsList" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication"/>
+        <relationship name="messageList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageOwner" inverseEntity="KVMessage"/>
+        <relationship name="messageRecipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageReciever" inverseEntity="KVMessage"/>
+        <relationship name="taskList" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask"/>
     </entity>
     <entity name="KVRootEntity" representedClassName="KVRootEntity" isAbstract="YES" parentEntity="KVAbstractEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="hexID" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="qName" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <attribute name="status" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="type" attributeType="String" defaultValueString="unset" syncable="YES"/>
+        <attribute name="hexID" attributeType="String" defaultValueString="unset"/>
+        <attribute name="qName" attributeType="String" defaultValueString="unset"/>
+        <attribute name="status" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="type" attributeType="String" defaultValueString="unset"/>
     </entity>
     <entity name="KVTask" representedClassName="KVTask" parentEntity="KVItem" syncable="YES" codeGenerationType="class">
-        <attribute name="dueTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="duration" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="taskMemo" attributeType="String" defaultValueString="unset" syncable="YES"/>
-        <relationship name="taskOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="taskList" inverseEntity="KVPerson" syncable="YES"/>
+        <attribute name="dueTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="taskMemo" attributeType="String" defaultValueString="unset"/>
+        <relationship name="taskOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVPerson" inverseName="taskList" inverseEntity="KVPerson"/>
     </entity>
     <elements>
         <element name="KVAbstractEntity" positionX="-495" positionY="-2" width="128" height="118"/>
