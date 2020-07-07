@@ -77,6 +77,8 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   [[self navigationItem]setRightBarButtonItem:(addButton)];
   
   [self setMapViewController:(KVMapViewController *)[([[[self splitViewController] viewControllers] lastObject])topViewController]];
+  
+  [[self MapViewController]setTDC:(self.TDC)];
 
 }
 
@@ -144,6 +146,10 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   [[self tableView]selectRowAtIndexPath:indexPath
                                animated:true
                          scrollPosition:UITableViewScrollPositionTop];
+  if ([[self PDC]didSaveEntities] == false) {
+    NSLog(@"pony sauce");
+  }
+  
 }
 
 #pragma mark - Segues
@@ -166,16 +172,18 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  NSInteger secCount = 1;
-  if (self.TDC) {
-    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
-  }
+  NSInteger secCount = 3;
+//  if (self.TDC) {
+//    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
+//  }
   return secCount; // Should be two going on three
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   /*  SET THIS TO A SWITCH  */
+
+  
   if (section == 0) {
     return ([[[self PDC]getAllEntities]count]);
   } else if (section == 1) {
@@ -196,9 +204,15 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 //  return nil;
 //}
-
+// FIXME: OK I See them but cannot show tasks they init as root-entities
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  __unused NSArray* aArr = [NSArray arrayWithArray:[[self ADC]getAllEntities]];
+  __unused NSArray* tArr = [NSArray arrayWithArray:[[self TDC]getAllEntities]];
+  NSLog(@"%lu :: %lu",(unsigned long)aArr.count,(unsigned long)tArr.count);
+
+
   
   if ([indexPath section] == 0) {
     //
@@ -210,9 +224,12 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
     [[cell nameLabel]setText:fullName];
     [[cell captionLabel]setText:[[p incepDate]description]];
     return cell;
+    
   }
+  
   else if ([indexPath section] == 1)
   {
+    
     UITableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     KVTask *t = [[self TDC]getAllEntities][indexPath.row];
@@ -313,18 +330,18 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
   BOOL facts = nil;
   KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-
-  if ([task taskOwner] != person) {
-    [task setTaskOwner:person];
-  }
-  if ([[person taskList]containsObject:task]) {
-    facts = false;
-  } else {
-    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-    [[self TDC]didSaveEntities];
-    facts = true;
-  }
-  [[self TDC]didSaveEntities];
+//
+//  if ([task taskOwner] != person) {
+//    [task setTaskOwner:person];
+//  }
+//  if ([[person taskList]containsObject:task]) {
+//    facts = false;
+//  } else {
+//    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+//    [[self TDC]didSaveEntities];
+//    facts = true;
+//  }
+//  [[self TDC]didSaveEntities];
   return (facts);
 }
 
@@ -351,16 +368,16 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 //  if (!task) {
 //    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
 //  }
-  [[self TDC]didSaveEntities];
-  if ([task taskOwner] != person) {
-    [task setTaskOwner:person];
-  }
-  if ([[person taskList]containsObject:task]) {
-    facts = false;
-  } else {
-    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-    facts = true;
-  }
+//  [[self TDC]didSaveEntities];
+//  if ([task taskOwner] != person) {
+//    [task setTaskOwner:person];
+//  }
+//  if ([[person taskList]containsObject:task]) {
+//    facts = false;
+//  } else {
+//    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
+//    facts = true;
+//  }
   return (facts);
 }
 
@@ -369,5 +386,18 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   
   return (st8);
 }
+- (void)didlAddTaskFrom:(id)sender {
+  // Actually this needs to be my current P*
+//  KVTask *task =
+//  [[self TDC]]
+  [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+//  [[self TDC]didSaveEntities];
+  
+  if ([[self TDC]didSaveEntities] == false) {
+    NSLog(@"Lawn Loaves");
+  }
+//  return (false);
+}
+
 
 @end

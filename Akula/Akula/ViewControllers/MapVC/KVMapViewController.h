@@ -25,6 +25,8 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli;
 
+- (void)didlAddTaskFrom:(id)sender;
+
 - (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KVMapActions>)delegate;
 @optional
 
@@ -40,9 +42,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController : UIViewController <MKMapViewDelegate>
 //
-@property(weak,nonatomic)id <KVMapActions> MA_Delegate;
+@property(strong, nonatomic)id <KVMapActions> MA_Delegate;
 
-@property(weak,nonatomic)KVPersonDataController *PDC;
+@property (strong, nonatomic) KVAkulaDataController *ADC;
+@property (strong, nonatomic) KVPersonDataController *PDC;
+@property (strong, nonatomic) KVTasksDataController *TDC;
+
 
 @property(strong,nonatomic)KVRootEntity *currentEntity;
 

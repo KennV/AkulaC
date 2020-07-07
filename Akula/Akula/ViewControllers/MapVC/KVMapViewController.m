@@ -26,7 +26,7 @@ Yay I got suckered into Swift/SwiftUI and liked it less than I did before it see
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
-@property (strong, nonatomic) KVAkulaDataController *ADC;
+
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -41,6 +41,7 @@ Yay I got suckered into Swift/SwiftUI and liked it less than I did before it see
 
 @implementation KVMapViewController
 @synthesize ADC = _ADC;
+@synthesize TDC = _TDC;
 @synthesize currentEntity = _currentEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
@@ -130,12 +131,10 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 }
 
 - (IBAction)addTaskForPerson:(UIBarButtonItem *)sender {
-  NSLog(@"Jeli Powa");
-/**
- Ok a good way to test this, A better way to test It?
+//  NSLog(@"Jeli Powa");
+  
+  [[self MA_Delegate]didlAddTaskFrom:self];
  
- KVRootEntity *p = (KVPerson * )self.currentEntity;
- */
 }
 
 #pragma mark - Improved
