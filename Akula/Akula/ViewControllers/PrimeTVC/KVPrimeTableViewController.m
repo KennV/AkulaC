@@ -53,7 +53,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 */
 @property (strong, nonatomic) KVTasksDataController *TDC;
 
-// so for expediancy I made a cheap CLUT without the table or dict even
+/* so for expediancy I made a cheap CLUT without the table or dict even */
 @property (weak,nonatomic)UIColor* baseColor00;
 @property (weak,nonatomic)UIColor* baseColor01;
 @property (weak,nonatomic)UIColor* baseColor02;
@@ -73,8 +73,8 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @property (weak,nonatomic)UIColor* baseTextColor;
 @property (weak,nonatomic)UIColor* hilightTextColor;
 @property (weak,nonatomic)UIColor* specialTextColor;
-//I expect that these will also be refactored into sensible names
-// making this private here affects test lines:482…492
+/* I expect that these will also be refactored into sensible names
+  making this private here affects test lines:482…492 */
 @property (weak,nonatomic)KVPerson* CurrentPerson;
 @end
 
@@ -85,7 +85,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @synthesize TDC =_TDC;
 
 @synthesize LocationManager = _LocationManager;
-// Them colors
+/* Them colors  */
 @synthesize baseColor00 = _baseColor00;
 @synthesize baseColor01 = _baseColor01;
 @synthesize baseColor02 = _baseColor02;
@@ -123,6 +123,7 @@ AAMOF it is a refactoring and long awaited. I need the current visible TVueSecti
 CHIEFLY - UNSET 4 pin's title
 */
 - (void)setupAppState; {
+//  [self ]
   
 }
 /**
@@ -166,8 +167,8 @@ And about 3 more for 7 - 10 -/+1 features
   */
   [[self navigationItem]setRightBarButtonItem:(addButton)];
   
-  [self setMapViewController:(KVMapViewController *)[[[[self splitViewController]viewControllers] lastObject] topViewController]];
-  [[self MapViewController]setMA_Delegate:(self)];
+  [self setMapViewController:(KVMapViewController *)[([[[self splitViewController]viewControllers] lastObject])topViewController]];
+//  [[self MapViewController]setMA_Delegate:(self)];
   /**
   LASTLY Call a Similar Setup on the Map View - either by Jive or Delegate, It just needs to do what tricorder:Swift does for setupButton and Jive
   */
@@ -175,23 +176,20 @@ And about 3 more for 7 - 10 -/+1 features
 
 - (KVAkulaDataController *)ADC {
   if (!(_ADC)) _ADC = [[KVAkulaDataController alloc]initAllUp];
-  
   return _ADC;
 }
 
 - (KVPersonDataController *)PDC {
   if (!(_PDC)) _PDC = [[KVPersonDataController alloc]initAllUp];
-  
   return (_PDC);
 }
 
 - (KVTasksDataController *)TDC {
   if (!(_TDC)) _TDC = [[KVTasksDataController alloc]initAllUp];
-  
   return (_TDC);
 }
 
-  //TODO: - Need a fuckin  Current Person!
+  /*TODO: - Need a fuckin  Current Person!  */
 
 -(KVPerson *)CurrentPerson {
   NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
@@ -201,6 +199,7 @@ And about 3 more for 7 - 10 -/+1 features
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+//  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   //see ALSO: Conformance is Compliance
   [[self MapViewController]setMA_Delegate:self];
   
@@ -209,11 +208,10 @@ And about 3 more for 7 - 10 -/+1 features
   [self setupCLManager];
   
   [self setupGUIState];
-  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
+  [self setClearsSelectionOnViewWillAppear:([[self splitViewController]isCollapsed])];
   [super viewWillAppear:animated];
 }
 
@@ -235,10 +233,12 @@ And about 3 more for 7 - 10 -/+1 features
   [self willAddPersonInDelegate:self];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
-  [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
 
-  [[self tableView]selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionTop];
-
+  [[self tableView]selectRowAtIndexPath:indexPath
+                               animated:true
+                         scrollPosition:UITableViewScrollPositionTop];
 }
 
 #pragma mark - Segues
@@ -252,6 +252,7 @@ And about 3 more for 7 - 10 -/+1 features
 // FIXME: _ALWAYS_USE_PDC_ in Map View
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
+    
     [mapView setCurrentEntity:[self CurrentPerson]];
     
   } else if ([[segue identifier] isEqualToString:@"showEULA"]) {
@@ -270,7 +271,7 @@ And about 3 more for 7 - 10 -/+1 features
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
+  /*  SET THIS TO A SWITCH  */
   if (section == 0) {
     return ([[[self PDC]getAllEntities]count]);
   } else if (section == 1) {
@@ -279,7 +280,7 @@ And about 3 more for 7 - 10 -/+1 features
   return (0);
 
 }
-//FIXME: - Make a correct Custom Cell
+/*  FIXME: - Make a correct Custom Cell */
 /**
  Phase 01, make the logic to add the cell then reaf the "Cell" to "personCell" and "taskCell" then make these in the GUI
  Phase 02, add the logical stubs for these and the section headers footers and
@@ -290,24 +291,27 @@ And about 3 more for 7 - 10 -/+1 features
   
   if ([indexPath section] == 0) {
     //
-    UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
-    
+    UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell"
+                                                             forIndexPath:indexPath];
+
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
-    /** Always set the MapView's entity to the current one
+    /**
+     Always set the MapView's entity to the current one
      */
-    [[self MapViewController]setCurrentEntity:p];
-    NSString *t1 = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
-    [[pCell textLabel]setText:t1];
+//    [[self MapViewController]setCurrentEntity:p];
+    [[pCell textLabel]setText:([[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]])];
     
     return pCell;
-  } else if ([indexPath section] == 1)
+  }
+  else if ([indexPath section] == 1)
   {
     UITableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     KVTask *t = [[self TDC]getAllEntities][indexPath.row];
     tCell.textLabel.text = [[t incepDate]description];
     return tCell;
-  }  else if ([indexPath section] == 2) {
+  }
+  else if ([indexPath section] == 2) {
     return (nil);
   }
   return (nil);
@@ -320,16 +324,10 @@ And about 3 more for 7 - 10 -/+1 features
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    id deletrix = [[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)];
 
-    if (deletrix != nil) {
-      //NSLog(@"Deleting %@ at index %ld", [deletrix description],(long)indexPath.row);
-      [[self PDC]deleteEntity:(deletrix)];
-      
-    } else {
-      NSLog(@"Error trying to delete Nil-Item");
-    }
+      [[self PDC]deleteEntity:([[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)])];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
     if ([indexPath row] >= 0) {
       /**
        FIXME: - Select Row?
@@ -368,7 +366,7 @@ And about 3 more for 7 - 10 -/+1 features
     [[self LocationManager]requestAlwaysAuthorization];
   }
 }
-//TODO: - Update Location
+/*  TODO: - Update Location */
 
 - (void) findLocation {
   //
@@ -442,7 +440,7 @@ Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli`
 
   result = [[self PDC]didSaveEntities];
 //  [[self tableView]reloadData];
-  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
+//  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
   [[self tableView]reloadData];
   
   return (result);

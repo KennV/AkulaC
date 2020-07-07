@@ -49,5 +49,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property (strong, nonatomic)KVCameraViewController* CameraView;
 
 - (void)setupGUIState;
+- (void)setCurrentEntity:(KVRootEntity *)newEntity;
 @end
 
