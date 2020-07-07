@@ -9,37 +9,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 */
 
-/**
-Okay this is where the rubber meets the road.
-
-- I have an NSMutableArray of objects
-- This needs to be an NSArray of RootEntities or better
- - Non Mutable
-
- 
-Hella trippy
-• I thought I had a bug,
-• Worse YET I don't have a save() routine in here so I can't tell if I am writing to a real db. B\C I am not even working with a db in this state of the template.
-
-*thus* the next step is to write a save function
-
-I NEED +Colors and effects, {See Accesessory Views Folder}
- 
-isVisibleIfYes(Bool)
-
-Different Types of controllers for sections
-number of sections
- (* OIC *)
- sectionCount. { %KVCDataCon%:getAllEntities.count}
-
-THEN after all of that I might want a protocol for this controller. Jeppers
-
-*/
-
 #import "KVAkulaDataController.h"
 #import "KVTasksDataController.h"
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
+#import "KDVPersonViewCell.h"
 
 @interface KVPrimeTableViewController ()
 
@@ -52,53 +26,19 @@ THEN after all of that I might want a protocol for this controller. Jeppers
  Akula TaskDataController
 */
 @property (strong, nonatomic) KVTasksDataController *TDC;
-
-/* so for expediancy I made a cheap CLUT without the table or dict even */
-
-/* I expect that these will also be refactored into sensible names
-  making this private here affects test lines:482…492 */
 @property (weak,nonatomic)KVPerson* CurrentPerson;
+//20200707
+@property (weak,nonatomic)KDVPersonViewCell *pCell;
 @end
 
 @implementation KVPrimeTableViewController
-
 @synthesize ADC =_ADC;
 @synthesize PDC =_PDC;
 @synthesize TDC =_TDC;
-
 @synthesize LocationManager = _LocationManager;
-/* Them colors  */
-
 @synthesize CurrentPerson = _CurrentPerson;
-#pragma mark - DataSource
-/**
- */
-/**
-dont look to if:else
-look to if(n==True)
-if(n==False)
-more molecular, more modular
-*/
-/**
-Now Where the Rubber Meets the Road;
-AAMOF it is a refactoring and long awaited. I need the current visible TVueSection to be hte currentGuy OKizzily
-#BUUUT# then there are second and third order display / report effects
-CHIEFLY - UNSET 4 pin's title
-*/
-- (void)setupAppState; {
-//  [self ]
-  
-}
-/**
-Additional to this I need to
- keep the ADC Private
- moave the person to another ivar
- have person gen a qname
- have pin exec a hexname
-And about 3 more for 7 - 10 -/+1 features
-#BEFORE ANY FUK'N INTEGRATION!??!??!#
-@MAD_AF
-*/
+#pragma mark -
+
 - (void)setupDataSource; {
   [[self PDC]setMOC:([[self ADC]MOC])];
   [[self PDC]setDelegate:(self)];
@@ -107,13 +47,22 @@ And about 3 more for 7 - 10 -/+1 features
 }
 
 #pragma mark - GUI Setup Logic.
-// FIXME: Make interface work in light and dark mode
 /**
- Okay, if the array is empty then the '+' button Should read setup
- BOTH HERE AND -SetupMode in the MapView
+
+20200707@1200
+okay
+OKAY
+ Part of this sweep is clearing out shitty old comments. that and organizing the code with more structure and the modules more closely coupled (by location - for understanding)
+ THE Larger part is surfacing Bugs and UnImplemented Features
+  like the table headers I can do is swift but in here are missing
+ THE LARGEST PART Is Scoping and Intra-Process-Comms
+and it seems strange but I think that this and the map are more closely coupled thatn it would appear at first and tath is good
+THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN!
  
- Set up the left/edit button the right/addPerson button
+ But beyond the first two screens you are just dealing to a *RootEntity or whatnot and maybe a weak pointer to that objects Controller
  */
+
+
 - (void)setupGUIState; {
   /**
   If this array is empty then this button should _at the very least_ be inactive
@@ -124,17 +73,11 @@ And about 3 more for 7 - 10 -/+1 features
   [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                 target:self
                                                 action:@selector(insertNewPerson:)];
-  /**
-  ALSO this should be a local addButton/RightBarButtonItem No, a Right_Side_BarButtonItem : RightBarButtonItem
-  THEN attach Similar Logic
-  */
+  
   [[self navigationItem]setRightBarButtonItem:(addButton)];
   
-  [self setMapViewController:(KVMapViewController *)[([[[self splitViewController]viewControllers] lastObject])topViewController]];
-//  [[self MapViewController]setMA_Delegate:(self)];
-  /**
-  LASTLY Call a Similar Setup on the Map View - either by Jive or Delegate, It just needs to do what tricorder:Swift does for setupButton and Jive
-  */
+  [self setMapViewController:(KVMapViewController *)[([[[self splitViewController] viewControllers] lastObject])topViewController]];
+
 }
 
 - (KVAkulaDataController *)ADC {
@@ -157,12 +100,16 @@ And about 3 more for 7 - 10 -/+1 features
   NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
   KVPerson* person = [[self PDC]getAllEntities][path.row];
   return person;
+  // TODO: Logic what if it is not selected?
+  // If !cp : [[[self PDC]getAllEntities]first]
+  // AND if BOTH are nil then make one
+  //  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
+  // or run setup()
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-//  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
-  //see ALSO: Conformance is Compliance
+
   [[self MapViewController]setMA_Delegate:self];
   
   [self setupDataSource];
@@ -185,13 +132,9 @@ And about 3 more for 7 - 10 -/+1 features
 #pragma mark - Insert Person
 
 - (void)insertNewPerson:(id)sender {
-  // reload here
+  
   [[self tableView]reloadData];
-  /**
-  if ([self didAddNewPersonFromDelegate:self]) {
-  This will error here because of the number of rows in the VC is Invalid / Inconsistant
-  }
-  */
+  
   [self willAddPersonInDelegate:self];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
@@ -208,10 +151,8 @@ And about 3 more for 7 - 10 -/+1 features
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  
   if ([[segue identifier] isEqualToString:@"showDetail"])  {
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    KVRootEntity *object = [[self ADC]getAllEntities][indexPath.row];
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
-// FIXME: _ALWAYS_USE_PDC_ in Map View
+
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
     
@@ -225,12 +166,13 @@ And about 3 more for 7 - 10 -/+1 features
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  NSInteger secCount = 2;
+  NSInteger secCount = 1;
   if (self.TDC) {
     secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
   }
-  return secCount; // Should be three
+  return secCount; // Should be two going on three
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   /*  SET THIS TO A SWITCH  */
@@ -242,29 +184,32 @@ And about 3 more for 7 - 10 -/+1 features
   return (0);
 
 }
-/*  FIXME: - Make a correct Custom Cell */
+
 /**
- Phase 01, make the logic to add the cell then reaf the "Cell" to "personCell" and "taskCell" then make these in the GUI
+ Phase 01, make the logic to add the cell then refactor the "Cell" to "personCell" and "taskCell" then make these in the GUI - (Made a custom Cell)
  Phase 02, add the logical stubs for these and the section headers footers and
  Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
- 
- */
+*/
+
+// FIXME: IMPLEMENT viewForHeaderInSection DELEGATEƒ
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//  return nil;
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   if ([indexPath section] == 0) {
     //
-    UITableViewCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"personCell"
+    KDVPersonViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"personCell"
                                                              forIndexPath:indexPath];
-
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
-    /**
-     Always set the MapView's entity to the current one
-     */
-//    [[self MapViewController]setCurrentEntity:p];
-    [[pCell textLabel]setText:([[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]])];
-    
-    return pCell;
+
+    NSString *fullName = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
+    [[cell nameLabel]setText:fullName];
+    [[cell captionLabel]setText:[[p incepDate]description]];
+    return cell;
   }
   else if ([indexPath section] == 1)
   {
@@ -345,14 +290,6 @@ And about 3 more for 7 - 10 -/+1 features
 
 #pragma mark - CONFRMANCE === COMPLIANCE
 
-/*
- Actually by stubbing out these two fairly useless callbacks I am able to get a lot of extra work done
- There will be a branch to sort of explore what I can really do with a callback versus what I can do with a block
- 
-Or optionally as a non-optional protocol what can I do `didAddNewPersonFor:deli` is a great example And I wrote this definfition before writing the declaration and tested it before using it
- ~ in theory it shoult not affect my coverage (it went from practical 59 to practical 56) because this new code is wrapped in results. I am testing the behavior
- 
- */
 - (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
