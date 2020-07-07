@@ -15,6 +15,10 @@ FIRST OF ALL, the map view centers somplace 00.00,00.00 and it renders at the co
 ~hell there are obviusly other items but I have recently moved development back onto the phone and it is better.
 OKAY before I make a nav controller I need to decide what gets pitched up to there and part of it would be the behavior of the detail view which is currently this but should be better utilized as one of MANY possible segues.
  ~rather than build that I will continue to abstract this
+
+20200707@1030
+Yay I got suckered into Swift/SwiftUI and liked it less than I did before it seems to bee too much like a fun and easy way to build uninspired apps and SO I started to clone this in SwiftUI and didn't like it, so I was going to re-do it in Modern-ObjC but that was still all CopyPasta from my own work. So I took the most RECENT BITCH-FIX build and merged it into master. Then forked that out to 01-020 which is this. I do NOT have a buglist or a TODO for it and these need to be in place hella soon
+
  */
 #import "KVMapViewController.h"
 
@@ -45,13 +49,11 @@ OKAY before I make a nav controller I need to decide what gets pitched up to the
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-//  [self setCameraView:[[KVCameraViewController alloc]init]];
+  [self setCameraView:[[KVCameraViewController alloc]init]];
   if (!([[[self MapView]delegate] isEqual:(self)])) {
     [[self MapView]setDelegate:self];
-    /**
-     It is set in the XIB but it makes sense to failsafe it here
-     */
   }
+  
   [self setupGUIState];
   [self setupMapView];
 //  [self setCameraView:[[KVCameraViewController alloc]initWithDataCon:(self.PDC) Persron:(KVPerson*)self.currentEntity]];

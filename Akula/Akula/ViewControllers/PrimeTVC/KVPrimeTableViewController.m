@@ -54,25 +54,7 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 @property (strong, nonatomic) KVTasksDataController *TDC;
 
 /* so for expediancy I made a cheap CLUT without the table or dict even */
-@property (weak,nonatomic)UIColor* baseColor00;
-@property (weak,nonatomic)UIColor* baseColor01;
-@property (weak,nonatomic)UIColor* baseColor02;
-@property (weak,nonatomic)UIColor* baseColor03;
 
-@property (weak,nonatomic)UIColor* tableSectionColor;
-@property (weak,nonatomic)UIColor* tableBackgroundColor;
-@property (weak,nonatomic)UIColor* tableAltBackgroundColor;
-@property (weak,nonatomic)UIColor* tableSectionTextColor;
-
-@property (weak,nonatomic)UIColor* buttonBaseColor;
-@property (weak,nonatomic)UIColor* buttonSelectedColor;
-@property (weak,nonatomic)UIColor* buttonTextColor;
-@property (weak,nonatomic)UIColor* buttonTextAltColor;
-
-@property (weak,nonatomic)UIColor* altTextColor;
-@property (weak,nonatomic)UIColor* baseTextColor;
-@property (weak,nonatomic)UIColor* hilightTextColor;
-@property (weak,nonatomic)UIColor* specialTextColor;
 /* I expect that these will also be refactored into sensible names
   making this private here affects test lines:482…492 */
 @property (weak,nonatomic)KVPerson* CurrentPerson;
@@ -86,25 +68,6 @@ THEN after all of that I might want a protocol for this controller. Jeppers
 
 @synthesize LocationManager = _LocationManager;
 /* Them colors  */
-@synthesize baseColor00 = _baseColor00;
-@synthesize baseColor01 = _baseColor01;
-@synthesize baseColor02 = _baseColor02;
-@synthesize baseColor03 = _baseColor03;
-
-@synthesize tableSectionColor = _tableSectionColor;
-@synthesize tableBackgroundColor = _tableBackgroundColor;
-@synthesize tableAltBackgroundColor = _tableAltBackgroundColor;
-@synthesize tableSectionTextColor = _tableSectionTextColor;
-
-@synthesize buttonBaseColor = _buttonBaseColor;
-@synthesize buttonSelectedColor = _buttonSelectedColor;
-@synthesize buttonTextColor = _buttonTextColor;
-@synthesize buttonTextAltColor = _buttonTextAltColor;
-
-@synthesize altTextColor = _altTextColor;
-@synthesize baseTextColor = _baseTextColor;
-@synthesize hilightTextColor = _hilightTextColor;
-@synthesize specialTextColor = _specialTextColor;
 
 @synthesize CurrentPerson = _CurrentPerson;
 #pragma mark - DataSource
@@ -144,7 +107,7 @@ And about 3 more for 7 - 10 -/+1 features
 }
 
 #pragma mark - GUI Setup Logic.
-
+// FIXME: Make interface work in light and dark mode
 /**
  Okay, if the array is empty then the '+' button Should read setup
  BOTH HERE AND -SetupMode in the MapView
@@ -189,8 +152,7 @@ And about 3 more for 7 - 10 -/+1 features
   return (_TDC);
 }
 
-  /*TODO: - Need a fuckin  Current Person!  */
-
+// FIXME: ¿Is CP S.P.O.T.?
 -(KVPerson *)CurrentPerson {
   NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
   KVPerson* person = [[self PDC]getAllEntities][path.row];
@@ -263,7 +225,7 @@ And about 3 more for 7 - 10 -/+1 features
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  NSInteger secCount = 1;
+  NSInteger secCount = 2;
   if (self.TDC) {
     secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
   }
@@ -287,7 +249,8 @@ And about 3 more for 7 - 10 -/+1 features
  Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
  
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   if ([indexPath section] == 0) {
     //
