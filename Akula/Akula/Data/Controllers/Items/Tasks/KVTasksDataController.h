@@ -16,7 +16,7 @@
 #import "KVItemsDataController.h"
 
 @protocol KVTaskData
-- (BOOL)willAddTaskInDelegate:(id<KVTaskData>)deli;
+- (BOOL)didAddTaskInDelegate:(id<KVTaskData>)sender;
 @optional
 
 @end

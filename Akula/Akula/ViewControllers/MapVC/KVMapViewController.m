@@ -125,16 +125,14 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
   //TODO: MAKE A SELECTION BOUNCE BACK TO THE MAP
+//  [[self MA_Delegate]]
   if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
 //    NSLog(@"Deli Powa");
   }
 }
 
 - (IBAction)addTaskForPerson:(UIBarButtonItem *)sender {
-//  NSLog(@"Jeli Powa");
-  
-  [[self MA_Delegate]didlAddTaskFrom:self];
- 
+  [[self MA_Delegate]didAddTaskFrom:self];
 }
 
 #pragma mark - Improved

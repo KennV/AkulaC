@@ -38,7 +38,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @synthesize LocationManager = _LocationManager;
 @synthesize CurrentPerson = _CurrentPerson;
 #pragma mark -
-
+// TODO: Test & Verify
 - (void)setupDataSource; {
   [[self PDC]setMOC:([[self ADC]MOC])];
   [[self PDC]setDelegate:(self)];
@@ -48,7 +48,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 #pragma mark - GUI Setup Logic.
 /**
-
 20200707@1200
 okay
 OKAY
@@ -198,7 +197,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
  Phase 02, add the logical stubs for these and the section headers footers and
  Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
 */
-
+#pragma mark -
 // FIXME: IMPLEMENT viewForHeaderInSection DELEGATEƒ
 //
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -242,7 +241,8 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   return (nil);
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   // Return NO if you do not want the specified item to be editable.
   return YES;
 }
@@ -268,12 +268,9 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   }
 }
 
-#pragma mark - Map Functions
-
 #pragma mark - Setup Location Manager
 
-- (void)setupCLManager
-{
+- (void)setupCLManager{
   if (!(_LocationManager))
   {
     _LocationManager = [[CLLocationManager alloc]init];
@@ -291,6 +288,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
     [[self LocationManager]requestAlwaysAuthorization];
   }
 }
+
 /*  TODO: - Update Location */
 
 - (void) findLocation {
@@ -305,8 +303,11 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   [[self LocationManager]stopUpdatingLocation];
 }
 
+
+
 #pragma mark - CONFRMANCE === COMPLIANCE
 
+// NOTE: Active
 - (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
@@ -320,83 +321,46 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   [self foundLocation];
   
   NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
-  //  [self updateEntityLocation:([p location])];//
-
 }
-
-- (BOOL)willAddTaskInDelegate:(id<KVTaskData>)deli {
-  // Actually this needs to be my current P*
-  KVPerson* person = [[[self PDC]getAllEntities]firstObject];
-  //KVRootEntity *object = self.ADC.getAllEntities[indexPath.row];
-  BOOL facts = nil;
-  KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-//
-//  if ([task taskOwner] != person) {
-//    [task setTaskOwner:person];
-//  }
-//  if ([[person taskList]containsObject:task]) {
-//    facts = false;
-//  } else {
-//    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-//    [[self TDC]didSaveEntities];
-//    facts = true;
-//  }
-//  [[self TDC]didSaveEntities];
-  return (facts);
-}
-
-- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli {
-  
-  BOOL result = nil;
-  
-  [self findLocation];//
-  
-  [self willAddPersonInDelegate:self];
-//  [[self MapViewController]setCurrentEntity:p];
-//  __unused KVAbstractLocationEntity *tmpZ = [p location];
-
-  result = [[self PDC]didSaveEntities];
-//  [[self tableView]reloadData];
-//  [[self MapViewController]setCurrentEntity:[[[self PDC]getAllEntities]firstObject]];
-  [[self tableView]reloadData];
-  
-  return (result);
-}
-
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KVMapActions>)delegate {
-  BOOL facts = nil;
-//  if (!task) {
-//    KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-//  }
-//  [[self TDC]didSaveEntities];
-//  if ([task taskOwner] != person) {
-//    [task setTaskOwner:person];
-//  }
-//  if ([[person taskList]containsObject:task]) {
-//    facts = false;
-//  } else {
-//    [person setTaskList:([NSSet setWithSet:[[person taskList]setByAddingObject:task]])];
-//    facts = true;
-//  }
-  return (facts);
-}
-
-- (BOOL)didChangePerson:(id<KVPersonData>)deli withPerson:(KVPerson *)p {
-  BOOL st8 = FALSE;
-  
-  return (st8);
-}
-- (void)didlAddTaskFrom:(id)sender {
-  // Actually this needs to be my current P*
-//  KVTask *task =
-//  [[self TDC]]
+// TODO: compare this init-chain to Person Line #310
+- (void)didAddTaskFrom:(id)sender {
+//THIS APPEARS TO BE THE ACTIVE ONE from MA_Deli
   [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-//  [[self TDC]didSaveEntities];
-  
+
   if ([[self TDC]didSaveEntities] == false) {
     NSLog(@"Lawn Loaves");
   }
-//  return (false);
+
+}
+
+- (BOOL)didAddTaskInDelegate:(id<KVTaskData>)sender {
+
+  __unused KVPerson* person = [[[self PDC]getAllEntities]firstObject];
+
+  BOOL facts = nil;
+  __unused KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+
+  return (facts);
+}
+// TODO: Streamline and Verify
+- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli {
+  [self willAddPersonInDelegate:self];
+  [[self tableView]reloadData];
+  return ([[self PDC]didSaveEntities]);
+}
+
+- (BOOL)didAddTask:(KVTask*)task
+                To:(KVPerson*)person
+              From:(id<KVMapActions>)delegate {
+  BOOL facts = nil;
+  return (facts);
+}
+
+- (BOOL)didChangePerson:(id<KVPersonData>)deli
+             withPerson:(KVPerson *)p {
+  BOOL st8 = false;
+  
+  return (st8);
 }
 
 
