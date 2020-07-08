@@ -30,7 +30,6 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
 */
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m {
 
-  
 //  if (m == nil) {
 //     m = [self MOC];
 //   }
@@ -47,5 +46,25 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
   
 //  return nil;
 }
-
+- (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m withPerson:(KVPerson*)p {
+  
+  KVTask* t = (KVTask *)[[KVTask  alloc]initWithContext:m];
+  
+  [t setTaskMemo:(@"Edit-Me")];
+  [t setTax:([NSNumber numberWithFloat:(0.00)])];
+  [t setCost:([NSNumber numberWithFloat:(0.00)])];
+  [t setType:(@"Edit-Me")];
+  [t setQName:(@"Edit-Me")];
+  [t setSkuID:(@"Edit-Me")];
+//  [t set]
+  
+  
+  
+  [t setIncepDate:[NSDate date]];
+  [t setDbID:[NSUUID  UUID]];
+  
+  [t setTaskOwner:p];
+//  p.taskList.
+  return t;
+}
 @end

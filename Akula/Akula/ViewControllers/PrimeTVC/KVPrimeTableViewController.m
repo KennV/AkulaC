@@ -346,23 +346,22 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
 }
 // TODO: compare this init-chain to Person Line #310
-- (void)didAddTaskFrom:(id)sender {
-//THIS APPEARS TO BE THE ACTIVE ONE from MA_Deli
-  [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
+- (void)didAddTaskFrom:(id<KVTaskData>)sender {
 
-  if ([[self TDC]didSaveEntities] == false) {
+  [[self TDC]makeNewTaskInMOC:([[self TDC]MOC])
+                   withPerson:[self currentPerson]];
+  
+  if ([[self TDC]didSaveEntities] != true) {
+//  Do I Hit this BP Y/N
     NSLog(@"Lawn Loaves");
   }
+  [[self tableView]reloadData];
 
 }
 
 - (BOOL)didAddTaskInDelegate:(id<KVTaskData>)sender {
 
-  __unused KVPerson* person = [[[self PDC]getAllEntities]firstObject];
-
   BOOL facts = nil;
-  __unused KVTask *task = [[self TDC]makeNewTaskInMOC:[[self TDC]MOC]];
-
   return (facts);
 }
 // TODO: Streamline and Verify

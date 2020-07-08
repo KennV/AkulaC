@@ -132,8 +132,8 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 #pragma mark - Improved
 
 - (void)setupMapView {
-  [[self MapView]setMapType:MKMapTypeStandard];
-//  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
+//  [[self MapView]setMapType:MKMapTypeStandard];
+  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(false)];
   [[self MapView]setShowsCompass:(false)];
   [[self MapView]setShowsPointsOfInterest:(true)];

@@ -26,10 +26,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (BOOL)didAddNewPersonFromDelegate:(id<KDVMapDataProtocol>)deli;
 
-- (void)didAddTaskFrom:(id)sender;
+- (void)didAddTaskFrom:(id<KVTaskData>)sender;
 
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KDVMapDataProtocol>)delegate;
 @optional
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KDVMapDataProtocol>)delegate;
 -(void)willRunSetupFrom:(id<KDVMapDataProtocol>)deli;
 
 @end
