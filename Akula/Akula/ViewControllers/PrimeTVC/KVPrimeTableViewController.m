@@ -26,7 +26,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  Akula TaskDataController
 */
 @property (strong, nonatomic) KVTasksDataController *TDC;
-@property (weak,nonatomic)KVPerson* CurrentPerson;
+@property (weak,nonatomic)KVPerson* currentPerson;
 //20200707
 @property (weak,nonatomic)KDVPersonViewCell *pCell;
 @end
@@ -36,7 +36,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @synthesize PDC =_PDC;
 @synthesize TDC =_TDC;
 @synthesize LocationManager = _LocationManager;
-@synthesize CurrentPerson = _CurrentPerson;
+@synthesize currentPerson = _currentPerson;
 #pragma mark -
 // TODO: Test & Verify
 - (void)setupDataSource; {
@@ -97,7 +97,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 }
 
 // FIXME: ¿Is CP S.P.O.T.?
--(KVPerson *)CurrentPerson {
+- (KVPerson *)currentPerson {
   NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
   KVPerson* person = [[self PDC]getAllEntities][path.row];
   return person;
@@ -161,7 +161,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
     [mapView setPDC:[self PDC]];
     [mapView setMA_Delegate:(self)];
     
-    [mapView setCurrentEntity:[self CurrentPerson]];
+    [mapView setCurrentEntity:[self currentPerson]];
     
   } else if ([[segue identifier] isEqualToString:@"showEULA"]) {
     NSLog(@"Preparing Application For First Run");
@@ -174,22 +174,19 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   NSInteger secCount = 3;
 //  if (self.TDC) {
 //    secCount++; // HEY I NEED A TASK's CELL (in the XIB) But you still wire thse UP FIRST
-//  }
-  return secCount; // Should be two going on three
+// Should be two going on three
+//}
+  return secCount; //
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   /*  SET THIS TO A SWITCH  */
-
-  
   if (section == 0) {
     return ([[[self PDC]getAllEntities]count]);
   } else if (section == 1) {
     return ([[[self TDC]getAllEntities]count]);
   }
   return (0);
-
 }
 
 /**
@@ -200,9 +197,35 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 #pragma mark -
 // FIXME: IMPLEMENT viewForHeaderInSection DELEGATEƒ
 //
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//  return nil;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+  UIView *hedVue = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, (self.tableView.visibleSize.width), 0))];
+  UILabel *secLabel = [[UILabel alloc]initWithFrame:(CGRectMake(10, 10, (self.tableView.visibleSize.width), 21))];
+  UIButton * secButton = [[UIButton alloc]initWithFrame:(CGRectMake(80, 10, 88, 21))];
+
+  [secLabel setBackgroundColor:(UIColor.clearColor)];
+  [secLabel setTextColor:(UIColor.yellowColor)];
+  [[secButton titleLabel]setTextColor:(UIColor.blackColor)];
+
+  switch (section) {
+    case 0:
+      [secLabel setText:(@"Person")];
+      [secButton setTitle:(@"person--") forState:(UIControlStateNormal)];
+      break;
+      
+    case 1:
+      [secLabel setText:(@"task")];
+      [secButton setTitle:(@"task") forState:(UIControlStateNormal)];
+//      [secButton addTarget:(self) action:(NSSelectorFromString(@"jive:")) forControlEvents:UIControlEventTouchDown];
+    default:
+      return nil;
+      break;
+  }
+  [hedVue addSubview:(secButton)];
+  [hedVue addSubview:(secLabel)];
+  return hedVue;
+  
+}
 // FIXME: OK I See them but cannot show tasks they init as root-entities
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -241,13 +264,13 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   return (nil);
 }
 
-- (BOOL)tableView:(UITableView *)tableView
-canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   // Return NO if you do not want the specified item to be editable.
   return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
 
       [[self PDC]deleteEntity:([[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)])];
