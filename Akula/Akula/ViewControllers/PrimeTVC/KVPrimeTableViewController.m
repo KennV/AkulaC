@@ -26,7 +26,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  Akula TaskDataController
 */
 @property (strong, nonatomic) KVTasksDataController *TDC;
-@property (weak,nonatomic)KVPerson* currentPerson;
+@property (weak,nonatomic)KVPerson* selectedPerson;
 //20200707
 @property (weak,nonatomic)KDVPersonViewCell *pCell;
 @end
@@ -36,7 +36,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @synthesize PDC =_PDC;
 @synthesize TDC =_TDC;
 @synthesize LocationManager = _LocationManager;
-@synthesize currentPerson = _currentPerson;
+@synthesize selectedPerson = _selectedPerson;
 #pragma mark -
 // TODO: Test & Verify
 - (void)setupDataSource; {
@@ -51,15 +51,26 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 20200707@1200
 okay
 OKAY
- Part of this sweep is clearing out shitty old comments. that and organizing the code with more structure and the modules more closely coupled (by location - for understanding)
- THE Larger part is surfacing Bugs and UnImplemented Features
-  like the table headers I can do is swift but in here are missing
- THE LARGEST PART Is Scoping and Intra-Process-Comms
+Part of this sweep is clearing out shitty old comments. that and organizing the code with more structure and the modules more closely coupled (by location - for understanding)
+THE Larger part is surfacing Bugs and UnImplemented Features
+like the table headers I can do is swift but in here are missing
+THE LARGEST PART Is Scoping and Intra-Process-Comms
 and it seems strange but I think that this and the map are more closely coupled thatn it would appear at first and tath is good
 THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN!
- 
- But beyond the first two screens you are just dealing to a *RootEntity or whatnot and maybe a weak pointer to that objects Controller
- */
+
+But beyond the first two screens you are just dealing to a *RootEntity or whatnot and maybe a weak pointer to that objects Controller
+
+20200708@1730
+I am so tempted to fork it, actually I am doing a great and focused job at surfacing and killing the bugs in the first two screens
+The fact that under sim & hw tests the second table did not show up even after breakpoints and logging showed that the suspected *tasks were being created adn saved. and even today they didn't show up until they did. (*after a reboot*) I cannot rely on the FALSE logic of Correlation as Causation However I am wicked pissed if it is so obvious. Chiefly because it is a zero-cost-fix that I can't disprove - - That is unless the .nib and derived can ever be proven to be sane. ANOTHER THING
+FOR EXAMPLE! I added a custom cell yesterday, and I will do two or three or 15 tomorrow. IDK, I do know that an interface day is coming AND having fretted over the layout. And I worked it finessed it like I knew how and where it was going to break. Part of that comes from remembering when Interface Builder was a seperate app. And after the base two milestone bugs for today were surfaced and extinguished I had a fuckton of errors and warnings about auto-layout and whatnot. So I found the vue and added an internal constraint for aspectRatio 4:3 and then went from there with letting the system decide the correct cell height and errata.
+
+ A CORRECT BRANCH
+ (*and I will not *)
+Would include massive changes to the UI I want the PVTC to be hidden by default and drive the first two screems I want a debugger button that doesn't stop the app but let's me inspect an Entity in real time
+
+
+*/
 
 
 - (void)setupGUIState; {
@@ -96,16 +107,15 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
   return (_TDC);
 }
 
-// FIXME: ¿Is CP S.P.O.T.?
-- (KVPerson *)currentPerson {
+- (KVPerson *)selectedPerson {
+  // OK So here is an insight. If I make a change in the selected obj on map (unimplemented) I need to have that bounce back to here
   NSIndexPath* path = [[self tableView]indexPathForSelectedRow];
   KVPerson* person = [[self PDC]getAllEntities][path.row];
   return person;
-  // TODO: Logic what if it is not selected?
-  // If !cp : [[[self PDC]getAllEntities]first]
-  // AND if BOTH are nil then make one
-  //  [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
-  // or run setup()
+  /**
+  Thurr Furr
+  If Selected No Selected Object let me ask for PDC.IsEmpty etc…
+  */
 }
 
 - (void)viewDidLoad {
@@ -161,7 +171,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
     [mapView setPDC:[self PDC]];
     [mapView setKVMapDataSrc:(self)];
     
-    [mapView setCurrentEntity:[self currentPerson]];
+    [mapView setCurrentEntity:[self selectedPerson]];
     
   } else if ([[segue identifier] isEqualToString:@"showEULA"]) {
     NSLog(@"Preparing Application For First Run");
@@ -326,9 +336,19 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   [[self LocationManager]stopUpdatingLocation];
 }
 
-
-
 #pragma mark - CONFRMANCE === COMPLIANCE
+/**
+SO WITH the top two coming from the EntityDC interface()
+THEN the Intra Application Communcation (IAC) is view::view and the data is view::>dc OR dc::>dc
+Intra Application Data (IAD) is the dc::>dc comms and dc::>vc is IAC (un)surprisingly the protocol points the wrong way
+
+Protocol Ethics
+THE First Setp is to have all of these dataKhans producing and saving the entity types. That is not hard. As a matter of fact that is in the nature how they are seperated. But that is just about all that I want a DC protocol to do MAYBE but it's an early and end lifecycle thing 'MAYBE' set up a strong link to a dataSrc. So Constructors and LIGHT Mutators should be the norm in this.
+See I can and *do* enjoy class methods, Hell I can make these DCs +BlinkyEntity or some initAllUp:withBells:withWhistles and that is NOT off of the table HOWEVER what happens when I compose these so that I am no longer relying or depending or even asking VC::VC Delegates to know where that shit comes FROM. And as I saw in a refactor it is prefectly acceptable to return nil on these functions.
+NVM I will advance the Initializer Projections. Actually having been done this before that ain't so bad
+What comes next is the behavior of these entities. literally 6-12 likes of code that cache the olde state set the new one and queue it for writing Piece of Cake.
+*/
+
 
 // NOTE: Active
 - (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
@@ -349,7 +369,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)didAddTaskFrom:(id<KVTaskData>)sender {
 
   [[self TDC]makeNewTaskInMOC:([[self TDC]MOC])
-                   withPerson:[self currentPerson]];
+                   withPerson:[self selectedPerson]];
   
   if ([[self TDC]didSaveEntities] != true) {
 //  Do I Hit this BP Y/N
