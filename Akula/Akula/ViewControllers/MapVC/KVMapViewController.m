@@ -11,22 +11,17 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 /**
 A Few things are missing in here
 
-FIRST OF ALL, the map view centers somplace 00.00,00.00 and it renders at the correct place so that is one to FUCKING FIX YESTERDAY
-~hell there are obviusly other items but I have recently moved development back onto the phone and it is better.
-OKAY before I make a nav controller I need to decide what gets pitched up to there and part of it would be the behavior of the detail view which is currently this but should be better utilized as one of MANY possible segues.
- ~rather than build that I will continue to abstract this
-
 20200707@1030
 Yay I got suckered into Swift/SwiftUI and liked it less than I did before it seems to bee too much like a fun and easy way to build uninspired apps and SO I started to clone this in SwiftUI and didn't like it, so I was going to re-do it in Modern-ObjC but that was still all CopyPasta from my own work. So I took the most RECENT BITCH-FIX build and merged it into master. Then forked that out to 01-020 which is this. I do NOT have a buglist or a TODO for it and these need to be in place hella soon
-
+20200708@1430
+WELL That Was a Sprint and I just refactored the Protocol/Delegate to reflect a better appreciation of reality. (*and that old-ass-adage that 75% of programming is choosing the right names*)
+So While I am not using SwiftUI I do Like the Idea of being able to bang out interfaces And the level of refactoring niceness is NOICE
  */
 #import "KVMapViewController.h"
-
 
 @interface KVMapViewController ()
 
 - (void)setupButtonsForApplicationState;
-
 
 @property(weak,nonatomic)IBOutlet UILabel *entityDescriptionLabel;
 
@@ -37,7 +32,6 @@ Yay I got suckered into Swift/SwiftUI and liked it less than I did before it see
 @property (weak, nonatomic) IBOutlet UIToolbar *ToolBar;
 
 @end
-
 
 @implementation KVMapViewController
 @synthesize ADC = _ADC;
@@ -117,7 +111,7 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
   [[self CameraView]setCurrentPerson:p];
 }
 
-- (void)setupButtonsForApplicationState; {
+- (void)setupButtonsForApplicationState {
 
 }
 
@@ -126,13 +120,13 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 - (IBAction)addPerson:(UIBarButtonItem *)sender {
   //TODO: MAKE A SELECTION BOUNCE BACK TO THE MAP
 //  [[self MA_Delegate]]
-  if ([[self MA_Delegate]didAddNewPersonFromDelegate:[self MA_Delegate]]) {
+  if ([[self KVMapDataSrc]didAddNewPersonFromDelegate:[self KVMapDataSrc]]) {
 //    NSLog(@"Deli Powa");
   }
 }
 
 - (IBAction)addTaskForPerson:(UIBarButtonItem *)sender {
-  [[self MA_Delegate]didAddTaskFrom:self];
+  [[self KVMapDataSrc]didAddTaskFrom:self];
 }
 
 #pragma mark - Improved
@@ -179,7 +173,7 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
   NSArray *allItems = [allDataCon getAllEntities];
 
   for (KVRootEntity *e in allItems) {
-    
+//    ¿SHOULD I MAKE A pinItems[KVPinItem]???
     if ([e isMemberOfClass:[KVPerson class]]) {
       KVAbstractLocationEntity * l = e.location;
       CLLocationCoordinate2D loc2D = CLLocationCoordinate2DMake(l.latitude.doubleValue, l.longitude.doubleValue);

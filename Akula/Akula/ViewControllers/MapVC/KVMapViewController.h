@@ -13,24 +13,24 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "Akula+CoreDataModel.h"
 #import "KVPersonDataController.h"
 
-@protocol KVMapActions
+@protocol KDVMapDataProtocol
 
 /**
- Currently these will be optional
- I STRONGLY SUSPECT that I will be implementing these in the actual controller for person; Or that somehow, and likely quite obvious; I will be a delegate of a delegate in this
- _Theory-WIse_ what it is, is that I have all of the basic db-like functions {actual or swift-proto's} but that is not what the application is. It is the actual behavior of these things. AND I certainly do not want to be doing these here. Rather I should be hitting them off in the ClassController [20180619@1100]
- OK I have a nice and tidy API here that is actually implemented in the parent controller and it will be shunted over to the Nav controller when this level of matutrity is warrented, but that is not the point at this time. the actual thing is that _future_chain_ meand that didAddNewPerson… MUST be a PDC.delegate and I must conform to it
- today it is not an issue but soon it will be.
+ 
+ AHAHAHAHAHAH
+ JustChange The Name To KDVMapDataProtocol
+ AANNDDDDD
+ Use it to supply these Arrays
+ 
  */
 
-- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli;
+- (BOOL)didAddNewPersonFromDelegate:(id<KDVMapDataProtocol>)deli;
 
 - (void)didAddTaskFrom:(id)sender;
 
-- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KVMapActions>)delegate;
+- (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KDVMapDataProtocol>)delegate;
 @optional
-
-//- (void)willRunSetupFrom:(id<MapViewActionsProtocol>)deli;
+-(void)willRunSetupFrom:(id<KDVMapDataProtocol>)deli;
 
 @end
 
@@ -42,12 +42,10 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 @interface KVMapViewController : UIViewController <MKMapViewDelegate>
 //
-@property(strong, nonatomic)id <KVMapActions> MA_Delegate;
-
+@property(strong, nonatomic)id <KDVMapDataProtocol> KVMapDataSrc;
 @property (strong, nonatomic) KVAkulaDataController *ADC;
 @property (strong, nonatomic) KVPersonDataController *PDC;
 @property (strong, nonatomic) KVTasksDataController *TDC;
-
 
 @property(strong,nonatomic)KVRootEntity *currentEntity;
 
@@ -55,5 +53,6 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (void)setupGUIState;
 - (void)setCurrentEntity:(KVRootEntity *)newEntity;
+
 @end
 

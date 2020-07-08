@@ -270,7 +270,6 @@
 		383419F62008372300F00957 /* PrimeTVC */ = {
 			isa = PBXGroup;
 			children = (
-				381E616124B4E334003CD83F /* personCell */,
 				38A5267420112A1C00F969C3 /* KVPrimeTableViewController.h */,
 				38A5267320112A1C00F969C3 /* KVPrimeTableViewController.m */,
 			);
@@ -280,6 +279,7 @@
 		383419F82008374D00F00957 /* AcessoryViews */ = {
 			isa = PBXGroup;
 			children = (
+				381E616124B4E334003CD83F /* personCell */,
 				384BC86A210592C5007DC8E7 /* AnnotationView */,
 			);
 			path = AcessoryViews;

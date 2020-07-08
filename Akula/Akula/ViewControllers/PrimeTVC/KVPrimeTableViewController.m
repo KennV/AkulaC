@@ -111,7 +111,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  [[self MapViewController]setMA_Delegate:self];
+  [[self MapViewController]setKVMapDataSrc:self];
   
   [self setupDataSource];
   
@@ -159,7 +159,7 @@ THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN
     KVMapViewController *mapView = (KVMapViewController *)[[segue destinationViewController] topViewController];
 
     [mapView setPDC:[self PDC]];
-    [mapView setMA_Delegate:(self)];
+    [mapView setKVMapDataSrc:(self)];
     
     [mapView setCurrentEntity:[self currentPerson]];
     
@@ -366,7 +366,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   return (facts);
 }
 // TODO: Streamline and Verify
-- (BOOL)didAddNewPersonFromDelegate:(id<KVMapActions>)deli {
+- (BOOL)didAddNewPersonFromDelegate:(id<KDVMapDataProtocol>)deli {
   [self willAddPersonInDelegate:self];
   [[self tableView]reloadData];
   return ([[self PDC]didSaveEntities]);
@@ -374,7 +374,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (BOOL)didAddTask:(KVTask*)task
                 To:(KVPerson*)person
-              From:(id<KVMapActions>)delegate {
+              From:(id<KDVMapDataProtocol>)delegate {
   BOOL facts = nil;
   return (facts);
 }
