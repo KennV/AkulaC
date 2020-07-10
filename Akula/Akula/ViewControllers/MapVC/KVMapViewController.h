@@ -26,7 +26,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 
 - (BOOL)didAddNewPersonFromDelegate:(id<KDVMapDataProtocol>)deli;
 
-- (void)didAddTaskFrom:(id<KVTaskData>)sender;
+- (void)didAddTaskFrom:(id)sender;
 
 @optional
 - (BOOL)didAddTask:(KVTask*)task To:(KVPerson*)person From:(id<KDVMapDataProtocol>)delegate;
@@ -47,12 +47,12 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property (strong, nonatomic) KVPersonDataController *PDC;
 @property (strong, nonatomic) KVTasksDataController *TDC;
 
-@property(strong,nonatomic)KVRootEntity *currentEntity;
+@property(strong,nonatomic)KVRootEntity *KVMapViewEntity;
 
 @property (strong, nonatomic)KVCameraViewController* CameraView;
 
 - (void)setupGUIState;
-- (void)setCurrentEntity:(KVRootEntity *)newEntity;
+- (void)setKVMapViewEntity:(KVRootEntity *)newEntity;
 
 @end
 

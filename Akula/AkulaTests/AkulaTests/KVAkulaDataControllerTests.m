@@ -582,7 +582,7 @@ DO I have these properly documented
 //  XCTAssertNotNil(self.)
   XCTAssertNotNil([self TDC]);
   XCTAssertNotNil([[self PDC]makeNewPersonInMOC:nil]);
-  XCTAssertNotNil([[self TDC]makeNewTaskInMOC:[[self TDC]MOC]]);
+//  XCTAssertNotNil([[self TDC]makeNewTaskInMOC:[[self TDC]MOC]]);
 //  XCTAssertNotNil([[self TDC]makeNewTaskInMOC]);
   //
 //  XCTAssertEqual((@"KVTask"), [[self TDC]entityClassName]);

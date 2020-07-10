@@ -143,9 +143,7 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
 #pragma mark - Insert Person
 
 - (void)insertNewPerson:(id)sender {
-  
-  [[self tableView]reloadData];
-  
+
   [self willAddPersonInDelegate:self];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
@@ -156,10 +154,11 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
                                animated:true
                          scrollPosition:UITableViewScrollPositionTop];
   if ([[self PDC]didSaveEntities] == false) {
-    NSLog(@"pony sauce");
+    NSLog(@"You should Break on this error? Or just not test it");
   }
-  
+  [[self tableView]reloadData];
 }
+
 
 #pragma mark - Segues
 
@@ -171,7 +170,7 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
     [mapView setPDC:[self PDC]];
     [mapView setKVMapDataSrc:(self)];
     
-    [mapView setCurrentEntity:[self selectedPerson]];
+    [mapView setKVMapViewEntity:[self selectedPerson]];
     
   } else if ([[segue identifier] isEqualToString:@"showEULA"]) {
     NSLog(@"Preparing Application For First Run");
@@ -204,52 +203,53 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
  Phase 02, add the logical stubs for these and the section headers footers and
  Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
 */
-#pragma mark -
-// FIXME: IMPLEMENT viewForHeaderInSection DELEGATEƒ
-//
+#pragma mark - Table Updates
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-
-  UIView *hedVue = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, (self.tableView.visibleSize.width), 0))];
-  UILabel *secLabel = [[UILabel alloc]initWithFrame:(CGRectMake(10, 10, (self.tableView.visibleSize.width), 21))];
-  UIButton * secButton = [[UIButton alloc]initWithFrame:(CGRectMake(80, 10, 88, 21))];
-
-  [secLabel setBackgroundColor:(UIColor.clearColor)];
-  [secLabel setTextColor:(UIColor.yellowColor)];
-  [[secButton titleLabel]setTextColor:(UIColor.blackColor)];
+  UIView *hedVue = [[UIView alloc]initWithFrame:(CGRectMake(0, 0  , (self.tableView.visibleSize.width), 0))];
+  UIButton * secButton = [[UIButton alloc]initWithFrame:(CGRectMake( 0, 0, 128, 22))];
+  [hedVue setBackgroundColor:UIColor.grayColor];
+  [[secButton titleLabel]setTextColor:(UIColor.blueColor)];
 
   switch (section) {
-    case 0:
-      [secLabel setText:(@"Person")];
-      [secButton setTitle:(@"person--") forState:(UIControlStateNormal)];
+      case 0:
+      [secButton setTitle:(@"Person +") forState:(UIControlStateNormal)];
+//      [secButton setImage:[UIImage imageNamed:@"image.png"] forState:UIControlStateNormal];
+      [secButton addTarget:self action:@selector(insertNewPerson:) forControlEvents:UIControlEventTouchUpInside];
+
       break;
-      
     case 1:
-      [secLabel setText:(@"task")];
-      [secButton setTitle:(@"task") forState:(UIControlStateNormal)];
-//      [secButton addTarget:(self) action:(NSSelectorFromString(@"jive:")) forControlEvents:UIControlEventTouchDown];
+//      [secLabel setText:(@"task")];
+      //didAddTaskFrom:
+      [secButton setTitle:(@"Task +") forState:(UIControlStateNormal)];
+      [secButton addTarget:self action:@selector(didAddTaskFrom:) forControlEvents:UIControlEventTouchUpInside];
+
+      break;
+    case 2:
+//    [secLabel setText:(@"Event")];
+    [secButton setTitle:(@"Event +") forState:(UIControlStateNormal)];
+    break;
+      
     default:
-      return nil;
       break;
   }
   [hedVue addSubview:(secButton)];
-  [hedVue addSubview:(secLabel)];
+//  [hedVue addSubview:(secLabel)];
   return hedVue;
-  
+
 }
-// FIXME: OK I See them but cannot show tasks they init as root-entities
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+  UIView *nilVue = [[UIView alloc]initWithFrame:(CGRectMake(0, 0  , (self.tableView.visibleSize.width), 0))];
+  
+  return nilVue;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  __unused NSArray* aArr = [NSArray arrayWithArray:[[self ADC]getAllEntities]];
-  __unused NSArray* tArr = [NSArray arrayWithArray:[[self TDC]getAllEntities]];
-  NSLog(@"%lu :: %lu",(unsigned long)aArr.count,(unsigned long)tArr.count);
-
-
-  
   if ([indexPath section] == 0) {
-    //
-    KDVPersonViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"personCell"
-                                                             forIndexPath:indexPath];
+
+    KDVPersonViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
 
     NSString *fullName = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
@@ -261,15 +261,21 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
   
   else if ([indexPath section] == 1)
   {
-    
     UITableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-    
+
     KVTask *t = [[self TDC]getAllEntities][indexPath.row];
+
+    [[tCell textLabel]setTextColor:(UIColor.cyanColor)];
     tCell.textLabel.text = [[t incepDate]description];
     return tCell;
   }
   else if ([indexPath section] == 2) {
-    return (nil);
+    UITableViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
+
+    KVTask *t = [[self TDC]getAllEntities][indexPath.row];
+    mCell.textLabel.text = [[t incepDate]description];
+    return mCell;
+
   }
   return (nil);
 }

@@ -49,7 +49,8 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m withPerson:(KVPerson*)p {
   
   KVTask* t = (KVTask *)[[KVTask  alloc]initWithContext:m];
-  
+//  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:(@"KVPerson") inManagedObjectContext:m];
+
   [t setTaskMemo:(@"Edit-Me")];
   [t setTax:([NSNumber numberWithFloat:(0.00)])];
   [t setCost:([NSNumber numberWithFloat:(0.00)])];

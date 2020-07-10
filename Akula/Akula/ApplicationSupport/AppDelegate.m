@@ -119,7 +119,7 @@ typedef enum : NSUInteger {
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
 {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] currentEntity] == nil))
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[KVMapViewController class]] && ([(KVMapViewController *)[(UINavigationController *)secondaryViewController topViewController] KVMapViewEntity] == nil))
     {
 /*
  OK 'secondaryViewController' is *UINavigationController and its topView *KVMapViewController
@@ -142,7 +142,7 @@ typedef enum : NSUInteger {
     NSLog(@"Application Contains No Entities");
     NSLog(@"Performing Setup is advised");
   } else {
-    NSLog(@"Application Contains %lu Entities",(unsigned long)[[[self allDataController]getAllEntities]count]);
+//    NSLog(@"Application Contains %lu Entities",(unsigned long)[[[self allDataController]getAllEntities]count]);
   }
 }
 @end

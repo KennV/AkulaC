@@ -36,7 +36,7 @@ So While I am not using SwiftUI I do Like the Idea of being able to bang out int
 @implementation KVMapViewController
 @synthesize ADC = _ADC;
 @synthesize TDC = _TDC;
-@synthesize currentEntity = _currentEntity;
+@synthesize KVMapViewEntity = _KVMapViewEntity;
 @synthesize entityDescriptionLabel = _entityDescriptionLabel;
 @synthesize MapView = _MapView;
 @synthesize PinItem = _PinItem;
@@ -61,9 +61,9 @@ So While I am not using SwiftUI I do Like the Idea of being able to bang out int
 }
 
 - (void)configureView {
-  if ([self currentEntity]) {
-    [[self entityDescriptionLabel]setText:[[self currentEntity]description]];
-    [self setupMapViewWith:[self currentEntity]];
+  if ([self KVMapViewEntity]) {
+    [[self entityDescriptionLabel]setText:[[self KVMapViewEntity]description]];
+    [self setupMapViewWith:[self KVMapViewEntity]];
   }
   //CoreData: warning: Multiple NSEntityDescriptions claim the NSManagedObject subclass
   // it does not happen here but it happens over there
@@ -88,10 +88,10 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 
  @param newEntity KVRootEntity
 */
-- (void)setCurrentEntity:(KVRootEntity *)newEntity {
-  if (_currentEntity != newEntity) {
-    _currentEntity = newEntity;
-    [[self CameraView]setCurrentPerson:(KVPerson*)_currentEntity];
+- (void)setKVMapViewEntity:(KVRootEntity *)newEntity {
+  if (_KVMapViewEntity != newEntity) {
+    _KVMapViewEntity = newEntity;
+    [[self CameraView]setCurrentPerson:(KVPerson*)_KVMapViewEntity];
   }
   //Always ConfView on Set?
   [self configureView];
@@ -107,7 +107,7 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 
 - (void)setupCameraScene {
   [[self CameraView]setPDC:[self PDC]];
-  KVPerson* p = (KVPerson*)[self currentEntity];
+  KVPerson* p = (KVPerson*)[self KVMapViewEntity];
   [[self CameraView]setCurrentPerson:p];
 }
 
@@ -132,8 +132,8 @@ CAN I REUSE THAT NAME showEULA -> gotoEULA
 #pragma mark - Improved
 
 - (void)setupMapView {
-//  [[self MapView]setMapType:MKMapTypeStandard];
-  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
+  [[self MapView]setMapType:MKMapTypeStandard];
+//  [[self MapView]setMapType:MKMapTypeHybrid]; //was MKMapTypeStandard
   [[self MapView]setShowsBuildings:(false)];
   [[self MapView]setShowsCompass:(false)];
   [[self MapView]setShowsPointsOfInterest:(true)];
