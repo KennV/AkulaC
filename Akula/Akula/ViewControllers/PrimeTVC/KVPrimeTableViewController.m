@@ -13,7 +13,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #import "KVTasksDataController.h"
 #import "KVPrimeTableViewController.h"
 #import "KVMapViewController.h"
-#import "KDVPersonViewCell.h"
+#import "KDVBasicViewCell.h"
 
 @interface KVPrimeTableViewController ()
 
@@ -28,7 +28,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 @property (strong, nonatomic) KVTasksDataController *TDC;
 @property (weak,nonatomic)KVPerson* selectedPerson;
 //20200707
-@property (weak,nonatomic)KDVPersonViewCell *pCell;
+@property (weak,nonatomic)KDVBasicViewCell *pCell;
 @end
 
 @implementation KVPrimeTableViewController
@@ -249,10 +249,10 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([indexPath section] == 0) {
 
-    KDVPersonViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
+    KDVBasicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"personCell" forIndexPath:indexPath];
     KVPerson *p = [[self PDC]getAllEntities][indexPath.row];
 
-    NSString *fullName = [[[p lastName]stringByAppendingString:(@" , ")]stringByAppendingString:[p firstName]];
+    NSString *fullName = [[[p firstName]stringByAppendingString:(@" , ")]stringByAppendingString:[p lastName]];
     [[cell nameLabel]setText:fullName];
     [[cell captionLabel]setText:[[p incepDate]description]];
     return cell;
@@ -261,16 +261,17 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
   
   else if ([indexPath section] == 1)
   {
-    UITableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    KDVBasicViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
 
     KVTask *t = [[self TDC]getAllEntities][indexPath.row];
-
-    [[tCell textLabel]setTextColor:(UIColor.cyanColor)];
-    tCell.textLabel.text = [[t incepDate]description];
+//    [[tCell nameLabel]setTextColor:(UIColor.cyanColor)];
+//    [[tCell captionLabel]setTextColor:(UIColor.greenColor)];
+    [[tCell nameLabel]setText:([[t taskOwner]firstName])];
+    [[tCell captionLabel]setText:([t taskMemo])];
     return tCell;
   }
   else if ([indexPath section] == 2) {
-    UITableViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
+    KDVBasicViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
 
     KVTask *t = [[self TDC]getAllEntities][indexPath.row];
     mCell.textLabel.text = [[t incepDate]description];

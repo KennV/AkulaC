@@ -6,9 +6,9 @@
 //  Copyright © 2020 Kenn Villegas. All rights reserved.
 //
 
-#import "KDVPersonViewCell.h"
+#import "KDVBasicViewCell.h"
 
-@implementation KDVPersonViewCell
+@implementation KDVBasicViewCell
 @synthesize thumbnailImage = _thumbnailImage;
 @synthesize nameLabel = _nameLabel;
 @synthesize captionLabel = _captionLabel;

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KDVPersonViewCell : UITableViewCell
+@interface KDVBasicViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3804E37A205D58C10050C664 /* AkulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419C72008322A00F00957 /* AkulaTests.m */; };
-		381E616424B4E334003CD83F /* KDVPersonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381E616324B4E334003CD83F /* KDVPersonViewCell.m */; };
+		381E616424B4E334003CD83F /* KDVBasicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 381E616324B4E334003CD83F /* KDVBasicViewCell.m */; };
 		383419AD2008322A00F00957 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 383419AC2008322A00F00957 /* AppDelegate.m */; };
 		383419B62008322A00F00957 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383419B42008322A00F00957 /* Main.storyboard */; };
 		383419B82008322A00F00957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383419B72008322A00F00957 /* Assets.xcassets */; };
@@ -60,8 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		381E616224B4E334003CD83F /* KDVPersonViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVPersonViewCell.h; sourceTree = "<group>"; };
-		381E616324B4E334003CD83F /* KDVPersonViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVPersonViewCell.m; sourceTree = "<group>"; };
+		381E616224B4E334003CD83F /* KDVBasicViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDVBasicViewCell.h; sourceTree = "<group>"; };
+		381E616324B4E334003CD83F /* KDVBasicViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDVBasicViewCell.m; sourceTree = "<group>"; };
 		383419A82008322A00F00957 /* Akula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Akula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		383419AB2008322A00F00957 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		383419AC2008322A00F00957 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -149,13 +149,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		381E616124B4E334003CD83F /* personCell */ = {
+		381E616124B4E334003CD83F /* KDVBasicViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				381E616224B4E334003CD83F /* KDVPersonViewCell.h */,
-				381E616324B4E334003CD83F /* KDVPersonViewCell.m */,
+				381E616224B4E334003CD83F /* KDVBasicViewCell.h */,
+				381E616324B4E334003CD83F /* KDVBasicViewCell.m */,
 			);
-			path = personCell;
+			path = KDVBasicViewCell;
 			sourceTree = "<group>";
 		};
 		3834199F2008322A00F00957 = {
@@ -279,7 +279,7 @@
 		383419F82008374D00F00957 /* AcessoryViews */ = {
 			isa = PBXGroup;
 			children = (
-				381E616124B4E334003CD83F /* personCell */,
+				381E616124B4E334003CD83F /* KDVBasicViewCell */,
 				384BC86A210592C5007DC8E7 /* AnnotationView */,
 			);
 			path = AcessoryViews;
@@ -653,7 +653,7 @@
 				38BA6547223CCB2400A40CAC /* KVPersonTableViewController.m in Sources */,
 				3886196020E7E52000E2AAAD /* KVItemsDataController.m in Sources */,
 				38A52672201129EE00F969C3 /* KVMapViewController.m in Sources */,
-				381E616424B4E334003CD83F /* KDVPersonViewCell.m in Sources */,
+				381E616424B4E334003CD83F /* KDVBasicViewCell.m in Sources */,
 				38BA6548223CCB2400A40CAC /* KVPersonEditorViewController.m in Sources */,
 				38A5267520112A1C00F969C3 /* KVPrimeTableViewController.m in Sources */,
 				38D788EB20D96D4E007F2814 /* KVPersonDataController.m in Sources */,
