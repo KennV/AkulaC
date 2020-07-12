@@ -6,7 +6,6 @@
  Copyright © 2018 Kenn Villegas. All rights reserved.
 This Software, Including its source code, binaries and indermediate derived libraies, objects and data are Propery of Kenneth D. Villegas and are not licensed for Free or Open Source usage. Nor Licensed to be extended by any third party or sub licensee contrator nor entity regardless of any contractural claims otherwise.
 This Remains The Intellectual Property of Kenneth D. Villegas as owner with all Inherent rights reserved under law maintained by Kenneth D. Villegas
-
 */
 
 #import "KVAkulaDataController.h"
@@ -49,29 +48,11 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
 #pragma mark - GUI Setup Logic.
 /**
 20200707@1200
-okay
-OKAY
-Part of this sweep is clearing out shitty old comments. that and organizing the code with more structure and the modules more closely coupled (by location - for understanding)
-THE Larger part is surfacing Bugs and UnImplemented Features
-like the table headers I can do is swift but in here are missing
-THE LARGEST PART Is Scoping and Intra-Process-Comms
-and it seems strange but I think that this and the map are more closely coupled thatn it would appear at first and tath is good
-THE Map and the TVC can both be on the screen at the same time ¡READ THAT AGAIN!
-
-But beyond the first two screens you are just dealing to a *RootEntity or whatnot and maybe a weak pointer to that objects Controller
-
-20200708@1730
-I am so tempted to fork it, actually I am doing a great and focused job at surfacing and killing the bugs in the first two screens
-The fact that under sim & hw tests the second table did not show up even after breakpoints and logging showed that the suspected *tasks were being created adn saved. and even today they didn't show up until they did. (*after a reboot*) I cannot rely on the FALSE logic of Correlation as Causation However I am wicked pissed if it is so obvious. Chiefly because it is a zero-cost-fix that I can't disprove - - That is unless the .nib and derived can ever be proven to be sane. ANOTHER THING
-FOR EXAMPLE! I added a custom cell yesterday, and I will do two or three or 15 tomorrow. IDK, I do know that an interface day is coming AND having fretted over the layout. And I worked it finessed it like I knew how and where it was going to break. Part of that comes from remembering when Interface Builder was a seperate app. And after the base two milestone bugs for today were surfaced and extinguished I had a fuckton of errors and warnings about auto-layout and whatnot. So I found the vue and added an internal constraint for aspectRatio 4:3 and then went from there with letting the system decide the correct cell height and errata.
 
  A CORRECT BRANCH
  (*and I will not *)
 Would include massive changes to the UI I want the PVTC to be hidden by default and drive the first two screems I want a debugger button that doesn't stop the app but let's me inspect an Entity in real time
-
-
 */
-
 
 - (void)setupGUIState; {
   /**
@@ -116,6 +97,7 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
   Thurr Furr
   If Selected No Selected Object let me ask for PDC.IsEmpty etc…
   */
+  // TODO: if [person] isEmpty.true then push to setup seque!!!
 }
 
 - (void)viewDidLoad {
@@ -199,9 +181,7 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
 }
 
 /**
- Phase 01, make the logic to add the cell then refactor the "Cell" to "personCell" and "taskCell" then make these in the GUI - (Made a custom Cell)
- Phase 02, add the logical stubs for these and the section headers footers and
- Phase 03, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
+ Phase 01, Make a getAllEntities that ONLY GETS Tasks For Selected Person!!!
 */
 #pragma mark - Table Updates
 
@@ -258,7 +238,15 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
     return cell;
     
   }
-  
+  // TODO: This should show Tasks for selectedPerson
+  /*
+  20200712@0830
+  Took an array accessor error yesterday. not the kind that really bugged me but it does make me think about objects, memory, retain release and all of that low level beauty and complexity that Swift and CocoaARC hide. Imagine if I had to have all of that newVar.retain oldVar.release return(newVar) types of pattersn
+   AND Do Not think that it isn'e going on Just the same in swift. BC all types of <T> are fully Objects. and when we make a struct it is Just a struct of objects that are bing slapped around by reference anyway again with the ARC hidden.
+   It is not that much overhead to have to deal with knowing what my data is and how deep in memeory it is. - - IF I DIDN'T KNOW THIS - - Debugging it would have been a huge PITA
+   The Fix is to have the task be a _cascading delete in the .XCDataModel
+   AND then when I delete the selectep Person from the table I set the .taskList:(nil)
+   */
   else if ([indexPath section] == 1)
   {
     KDVBasicViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
@@ -286,13 +274,14 @@ Would include massive changes to the UI I want the PVTC to be hidden by default 
   return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-
-      [[self PDC]deleteEntity:([[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)])];
+    KVPerson *p = [[[self PDC]getAllEntities]objectAtIndex:(indexPath.row)];
+      [p setTaskList:(nil)]; // Or Else I will crash like a bitch
+      [[self PDC]deleteEntity:p];
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    
+  [[self tableView]reloadData];
     if ([indexPath row] >= 0) {
       /**
        FIXME: - Select Row?
@@ -306,6 +295,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
   }
+  
 }
 
 #pragma mark - Setup Location Manager
@@ -353,11 +343,9 @@ Protocol Ethics
 THE First Setp is to have all of these dataKhans producing and saving the entity types. That is not hard. As a matter of fact that is in the nature how they are seperated. But that is just about all that I want a DC protocol to do MAYBE but it's an early and end lifecycle thing 'MAYBE' set up a strong link to a dataSrc. So Constructors and LIGHT Mutators should be the norm in this.
 See I can and *do* enjoy class methods, Hell I can make these DCs +BlinkyEntity or some initAllUp:withBells:withWhistles and that is NOT off of the table HOWEVER what happens when I compose these so that I am no longer relying or depending or even asking VC::VC Delegates to know where that shit comes FROM. And as I saw in a refactor it is prefectly acceptable to return nil on these functions.
 NVM I will advance the Initializer Projections. Actually having been done this before that ain't so bad
-What comes next is the behavior of these entities. literally 6-12 likes of code that cache the olde state set the new one and queue it for writing Piece of Cake.
+What comes next is the behavior of these entities. literally 6-12 likes of code that cache the old state set the new one and queue it for writing Piece of Cake.
 */
 
-
-// NOTE: Active
 - (void)willAddPersonInDelegate:(id<KVPersonData>)deli {
   [[self PDC]makeNewPersonInMOC:([[self PDC]MOC])];
   [self findLocation];
@@ -372,12 +360,16 @@ What comes next is the behavior of these entities. literally 6-12 likes of code 
   
   NSLog(@"%@ : %@ ",p.location.latitude.description, p.location.longitude.description);
 }
-// TODO: compare this init-chain to Person Line #310
-- (void)didAddTaskFrom:(id<KVTaskData>)sender {
 
+- (void)didAddTaskFrom:(id<KVTaskData>)sender {
+//KVPerson *p = [[[self PDC]getAllEntities]firstObject];
+  
+  if ([[[self PDC]getAllEntities]count] == 0) {
+    [self willAddPersonInDelegate:self];
+  }
+  
   [[self TDC]makeNewTaskInMOC:([[self TDC]MOC])
                    withPerson:[self selectedPerson]];
-  
   if ([[self TDC]didSaveEntities] != true) {
 //  Do I Hit this BP Y/N
     NSLog(@"Lawn Loaves");
@@ -391,7 +383,7 @@ What comes next is the behavior of these entities. literally 6-12 likes of code 
   BOOL facts = nil;
   return (facts);
 }
-// TODO: Streamline and Verify
+
 - (BOOL)didAddNewPersonFromDelegate:(id<KDVMapDataProtocol>)deli {
   [self willAddPersonInDelegate:self];
   [[self tableView]reloadData];

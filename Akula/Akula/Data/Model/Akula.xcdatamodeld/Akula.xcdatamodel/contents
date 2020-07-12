@@ -88,7 +88,7 @@
         <relationship name="medsList" toMany="YES" deletionRule="Nullify" destinationEntity="KVMedication" inverseName="patient" inverseEntity="KVMedication"/>
         <relationship name="messageList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageOwner" inverseEntity="KVMessage"/>
         <relationship name="messageRecipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="KVMessage" inverseName="messageReciever" inverseEntity="KVMessage"/>
-        <relationship name="taskList" toMany="YES" deletionRule="Nullify" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask"/>
+        <relationship name="taskList" toMany="YES" deletionRule="Cascade" destinationEntity="KVTask" inverseName="taskOwner" inverseEntity="KVTask"/>
     </entity>
     <entity name="KVRootEntity" representedClassName="KVRootEntity" isAbstract="YES" parentEntity="KVAbstractEntity" syncable="YES" codeGenerationType="class">
         <attribute name="hexID" attributeType="String" defaultValueString="unset"/>
