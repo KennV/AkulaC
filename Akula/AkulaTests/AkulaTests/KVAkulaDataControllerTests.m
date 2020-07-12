@@ -581,15 +581,18 @@ DO I have these properly documented
 - (void)testZOner {
 //  XCTAssertNotNil(self.)
   XCTAssertNotNil([self TDC]);
-  XCTAssertNotNil([[self PDC]makeNewPersonInMOC:nil]);
-//  XCTAssertNotNil([[self TDC]makeNewTaskInMOC:[[self TDC]MOC]]);
-//  XCTAssertNotNil([[self TDC]makeNewTaskInMOC]);
-  //
-//  XCTAssertEqual((@"KVTask"), [[self TDC]entityClassName]);
-  
-//  KVPerson * p = [[self PDC]makeNewPersonInMOC:[[self SUT]MOC]];
-//  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:<#(nonnull NSString *)#> inManagedObjectContext:<#(nonnull NSManagedObjectContext *)#>]
+  KVPerson * pOner = [[self PDC]makeNewPersonInMOC:nil];
+  XCTAssertNotNil(pOner , @"Mars Needs Poontang");
+  [pOner addTaskListObject:([[self TDC]makeNewTaskInMOC:(self.TDC.MOC)])];// withPerson:pOner]];
+//  KVTask * tOner = [[self TDC]makeNewTaskInMOC:(nil) withPerson:(pOner)];
+//  XCTAssertNil(tOner , @"Hey");
+
 }
+//
+- (void)testReIGNITOR {
+  
+}
+
 /**
 If I had to wire it down on what is so different today
  The abstract class is more abstract. It is encouraging because I did not change any lines of test() and from what I was seeing in the debugger was a fully formed entity. I guess that _IS_ the difference, not one test threw. AND I know what the next ones that will fail are

@@ -53,7 +53,7 @@ This Remains The Intellectual Property of Kenneth D. Villegas as owner with all 
  (*and I will not *)
 Would include massive changes to the UI I want the PVTC to be hidden by default and drive the first two screems I want a debugger button that doesn't stop the app but let's me inspect an Entity in real time
 */
-
+// FIXME: Add Events Type and Complete initializer chain
 - (void)setupGUIState; {
   /**
   If this array is empty then this button should _at the very least_ be inactive

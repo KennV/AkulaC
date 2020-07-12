@@ -24,6 +24,6 @@
 @interface KVTasksDataController <T : KVTask*> : KVItemsDataController <T>
 @property(weak,nonatomic)id<KVTaskData> delegate;
 
-//- (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m;
+- (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m;
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m withPerson:(id)p;
 @end

@@ -12,8 +12,16 @@
 @synthesize delegate = _delegate;
 
 
-- (instancetype)initAllUp {
-  return ([self initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVTask"]);
+//- (instancetype)initAllUp {
+//
+
+-(id)initAllUp  {
+  // there is a reason I cant use this as an instanstancetype
+  if (!(self = [super initWithAppName:(@"Akula") databaseName:@"Akula.sqlite" className:@"KVTask"])) {
+    return (nil);
+  }
+  return(self);
+
 }
 - (KVTask*)makeOLDNewTaskInMOC:(NSManagedObjectContext*)m {
   KVTask *t =  (KVTask *)([self makeNewEntityInMOC:m]);
@@ -30,9 +38,7 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
 */
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m {
 
-//  if (m == nil) {
-//     m = [self MOC];
-//   }
+  
    KVTask* entity = (KVTask *)[[KVTask  alloc]initWithContext:m];
   
    [entity setIncepDate:[NSDate date]];
@@ -47,9 +53,10 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
 //  return nil;
 }
 - (KVTask*)makeNewTaskInMOC:(NSManagedObjectContext*)m withPerson:(KVPerson*)p {
-  
+//  if (m == nil) {
+    m = [self MOC];
+//  }
   KVTask* t = (KVTask *)[[KVTask  alloc]initWithContext:m];
-//  KVTask * t = [NSEntityDescription insertNewObjectForEntityForName:(@"KVPerson") inManagedObjectContext:m];
 
   [t setTaskMemo:(@"Edit-Me")];
   [t setTax:([NSNumber numberWithFloat:(0.00)])];
@@ -57,14 +64,11 @@ ALSO NEED TO FIX: Some autolayout issues in the .nib
   [t setType:(@"Edit-Me")];
   [t setQName:(@"Edit-Me")];
   [t setSkuID:(@"Edit-Me")];
-//  [t set]
-  
-  
-  
+
   [t setIncepDate:[NSDate date]];
   [t setDbID:[NSUUID  UUID]];
-  
   [t setTaskOwner:p];
+  [[p taskList]setByAddingObject:t];
 //  p.taskList.
   return t;
 }
